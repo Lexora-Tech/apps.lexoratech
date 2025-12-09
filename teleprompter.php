@@ -6,7 +6,7 @@
     <title>PromptFlow Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/teleprmpter.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
         <div class="modal-box glass-card">
             <div class="modal-icon"><i class="fas fa-trash-alt"></i></div>
             <h2>Clear Script?</h2>
-            <p>This action cannot be undone.</p>
+            <p>This Action Cannot Be Undone.</p>
             <div class="modal-actions">
                 <button id="cancelClear" class="btn-ghost">Cancel</button>
                 <button id="confirmClear" class="btn-danger">Delete Everything</button>
@@ -33,11 +33,17 @@
         
         <aside class="sidebar glass-card">
             <div class="brand">
-                <div class="logo-box"><i class="fas fa-bolt"></i></div>
-                <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
+                <a href="dashboard.html" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
+                    <div class="logo-box"><i class="fas fa-bolt"></i></div>
+                    <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
+                </a>
             </div>
 
             <div class="scroll-area">
+                
+                <a href="index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
+                    <i class="fas fa-chevron-left"></i> Back To Dashboard
+                </a>
                 
                 <div class="section-title">PLAYBACK</div>
                 
@@ -168,6 +174,6 @@
 
     <div class="toast-container"></div>
 
-    <script src="app.js"></script>
+    <script src="./js/teleprompter.js"></script>
 </body>
 </html>
