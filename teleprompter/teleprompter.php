@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../teleprompter/css/teleprompter.css">
     <!-- logo css -->
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/logo/logo.png"/>
+    <link rel="icon" href="../assets/logo/logo.png" />
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 
             <div class="scroll-area">
 
-                <a href="index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
+                <a href="../index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
                     <i class="fas fa-chevron-left"></i> Back To Dashboard
                 </a>
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <!-- logo css -->
-   <link rel="shortcut icon" type="image/x-icon" href="../assets/logo/logo.png"/>
+   <link rel="icon" href="assets/logo/logo.png" />
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                 <a href="#" class="nav-link" data-tooltip="Settings">
                     <i class="fas fa-cog"></i>
                 </a>
-                <div class="user-avatar">PL</div>
+                <div class="user-avatar">LT</div>
             </nav>
         </aside>
 
@@ -65,7 +65,7 @@
                     <div class="line"></div>
                 </div>
 
-                <a href="../teleprompter/teleprompter.php" class="hero-card">
+                <a href="teleprompter/teleprompter.php" class="hero-card">
                     <div class="hero-bg"></div>
                     <div class="hero-content">
                         <div class="hero-top">
