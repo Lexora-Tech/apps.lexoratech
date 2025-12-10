@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PromptFlow Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/teleprmpter.css">
+    <link rel="stylesheet" href="../teleprompter/css/teleprompter.css">
+    <!-- logo css -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/logo/logo.png"/>
 </head>
+
 <body>
 
     <div class="bg-gradient"></div>
@@ -30,7 +34,7 @@
     </div>
 
     <div class="app-layout">
-        
+
         <aside class="sidebar glass-card">
             <div class="brand">
                 <a href="dashboard.html" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
@@ -40,13 +44,13 @@
             </div>
 
             <div class="scroll-area">
-                
+
                 <a href="index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
                     <i class="fas fa-chevron-left"></i> Back To Dashboard
                 </a>
-                
+
                 <div class="section-title">PLAYBACK</div>
-                
+
                 <div class="control-group">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-tachometer-alt"></i> Speed</span>
@@ -159,7 +163,7 @@
         <video id="webcamFeed" autoplay playsinline muted class="hidden"></video>
 
         <div id="scrollingText" class="text-content"></div>
-        
+
         <div class="hud glass-hud">
             <button id="closeHud" class="hud-icon"><i class="fas fa-times"></i></button>
             <div class="hud-sep"></div>
@@ -174,6 +178,7 @@
 
     <div class="toast-container"></div>
 
-    <script src="./js/teleprompter.js"></script>
+    <script src="../teleprompter/js/teleprompter.js"></script>
 </body>
+
 </html>

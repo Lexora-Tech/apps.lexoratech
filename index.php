@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
+    <!-- logo css -->
+   <link rel="shortcut icon" type="image/x-icon" href="../assets/logo/logo.png"/>
 </head>
+
 <body>
 
     <div class="background-grid"></div>
     <div class="ambient-glow"></div>
 
     <div class="app-shell">
-        
+
         <aside class="sidebar">
             <div class="logo-container">
                 <div class="logo-box"><i class="fas fa-bolt"></i></div>
             </div>
-            
+
             <nav class="nav-stack">
                 <a href="#" class="nav-link active" data-tooltip="Home">
                     <i class="fas fa-home"></i>
@@ -39,7 +43,7 @@
         </aside>
 
         <main class="main-content">
-            
+
             <header class="glass-header">
                 <div class="header-left">
                     <h1 class="page-title">Service Hub</h1>
@@ -55,13 +59,13 @@
             </header>
 
             <div class="content-wrapper">
-                
+
                 <div class="section-header">
                     <span class="label">PRIMARY TOOL</span>
                     <div class="line"></div>
                 </div>
 
-                <a href="teleprompter.php" class="hero-card">
+                <a href="../teleprompter/teleprompter.php" class="hero-card">
                     <div class="hero-bg"></div>
                     <div class="hero-content">
                         <div class="hero-top">
@@ -84,7 +88,7 @@
                 </div>
 
                 <div class="grid-layout">
-                    
+
                     <div class="tool-card locked">
                         <div class="card-glow blue"></div>
                         <div class="tool-header">
@@ -126,4 +130,5 @@
 
     <script src="./js/index.js"></script>
 </body>
+
 </html>
