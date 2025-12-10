@@ -37,7 +37,7 @@
 
         <aside class="sidebar glass-card">
             <div class="brand">
-                <a href="dashboard.html" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
+                <a href="../index.php" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
                     <div class="logo-box"><i class="fas fa-bolt"></i></div>
                     <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
                 </a>
