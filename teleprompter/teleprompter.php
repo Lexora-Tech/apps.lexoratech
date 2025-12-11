@@ -3,12 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PromptFlow Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../teleprompter/css/teleprompter.css">
-    <!-- logo css -->
     <link rel="icon" href="../assets/logo/logo.png" />
 </head>
 
@@ -16,6 +15,15 @@
 
     <div class="bg-gradient"></div>
     <div class="bg-noise"></div>
+
+    <header class="mobile-header">
+        <div class="brand-mobile">
+            <i class="fas fa-bolt"></i> PromptFlow
+        </div>
+        <button id="mobileMenuBtn" class="icon-btn">
+            <i class="fas fa-sliders-h"></i>
+        </button>
+    </header>
 
     <div id="countdown" class="countdown-layer hidden">
         <div id="countNum">3</div>
@@ -35,8 +43,13 @@
 
     <div class="app-layout">
 
-        <aside class="sidebar glass-card">
-            <div class="brand">
+        <aside class="sidebar glass-card" id="sidebar">
+
+            <button id="closeSidebar" class="close-sidebar-btn hidden-desktop">
+                <i class="fas fa-times"></i> Close Settings
+            </button>
+
+            <div class="brand hidden-mobile">
                 <a href="../index.php" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
                     <div class="logo-box"><i class="fas fa-bolt"></i></div>
                     <span>PromptFlow <span class="badge-pro">STUDIO</span></span>

@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     outline: none;
+    -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
 }
 
 body {
@@ -58,13 +59,8 @@ body {
 }
 
 @keyframes bgPulse {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.1);
-    }
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
 }
 
 /* LAYOUT */
@@ -73,6 +69,26 @@ body {
     height: 100vh;
     padding: 16px;
     gap: 16px;
+}
+
+/* MOBILE HEADER (Hidden on Desktop) */
+.mobile-header {
+    display: none;
+    height: 60px;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(20, 20, 20, 0.9);
+    border-bottom: 1px solid var(--glass-border);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
+}
+.brand-mobile {
+    font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;
+}
+.icon-btn {
+    background: transparent; border: 1px solid var(--glass-border); color: white;
+    width: 36px; height: 36px; border-radius: 8px; font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
 }
 
 /* SIDEBAR */
@@ -90,7 +106,16 @@ body {
     padding: 24px;
     display: flex;
     flex-direction: column;
-    z-index: 10;
+    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile Sidebar Close Button */
+.close-sidebar-btn {
+    display: none;
+    width: 100%; padding: 12px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    border-radius: 8px; font-weight: 600; cursor: pointer;
 }
 
 .brand {
@@ -260,7 +285,6 @@ input[type="color"] {
     -webkit-appearance: none;
     border: none;
     width: 110%;
-    /* Make larger to hide borders */
     height: 110%;
     margin: -2px;
     padding: 0;
@@ -483,7 +507,7 @@ textarea::placeholder {
     transition: 0.3s;
 }
 
-.prompter-layer:hover .glass-hud {
+.prompter-layer:hover .glass-hud, .glass-hud.mobile-visible {
     opacity: 1;
 }
 
@@ -539,19 +563,9 @@ textarea::placeholder {
 }
 
 @keyframes popIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    80% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .toast-container {
@@ -579,27 +593,15 @@ textarea::placeholder {
     min-width: 250px;
 }
 
-.toast i {
-    color: var(--accent);
-}
+.toast i { color: var(--accent); }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+    to { opacity: 0; transform: translateY(-10px); }
 }
 
 .modal-overlay {
@@ -661,29 +663,6 @@ textarea::placeholder {
     cursor: pointer;
 }
 
-@media(max-width: 768px) {
-    .app-layout {
-        flex-direction: column;
-        padding: 0;
-    }
-
-    .sidebar {
-        width: 100%;
-        border-radius: 0;
-        border: none;
-        border-bottom: 1px solid var(--glass-border);
-        padding: 15px;
-    }
-
-    .scroll-area {
-        display: none;
-    }
-
-    .editor-area {
-        height: 100vh;
-    }
-}
-
 #webcamFeed {
     position: absolute;
     top: 0;
@@ -706,4 +685,61 @@ textarea::placeholder {
     border-color: var(--danger);
     color: var(--danger);
     box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column;
+        padding: 0;
+        height: calc(100vh - 60px); /* Adjust for header */
+        margin-top: 60px;
+    }
+
+    /* Mobile Header */
+    .mobile-header { display: flex; }
+
+    /* Sidebar as Mobile Drawer */
+    .sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: 85%;
+        max-width: 300px;
+        transform: translateX(-100%);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+        padding-top: 20px;
+        z-index: 2000;
+    }
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .close-sidebar-btn { display: block; }
+    .hidden-mobile { display: none; }
+    .hidden-desktop { display: block; }
+
+    /* Editor Area */
+    .editor-area {
+        height: 100%;
+        padding: 10px;
+    }
+    textarea {
+        padding: 15px;
+        font-size: 1.1rem; /* Better for reading on phone */
+    }
+
+    /* Prompter HUD on Mobile */
+    .glass-hud {
+        width: 90%;
+        padding: 10px 15px;
+        bottom: 20px;
+        opacity: 1; /* Always visible on mobile touch */
+    }
+    
+    .toast-container {
+        top: 70px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+    }
 }

@@ -21,7 +21,6 @@ const dom = {
 
     // Groups
     segBtns: document.querySelectorAll('.seg-btn'),
-    // REMOVED: colorBtns
 
     // Actions
     mirrorBtn: document.getElementById('mirrorBtn'),
@@ -30,6 +29,11 @@ const dom = {
     resetBtn: document.getElementById('resetBtn'),
     cameraBtn: document.getElementById('cameraBtn'),
     voiceBtn: document.getElementById('voiceBtn'),
+
+    // Mobile Specific
+    mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+    closeSidebarBtn: document.getElementById('closeSidebar'),
+    sidebar: document.getElementById('sidebar'),
 
     // New Color Picker Inputs
     textColorPicker: document.getElementById('textColorPicker'),
@@ -47,6 +51,7 @@ const dom = {
     playHud: document.getElementById('playHud'),
     closeHud: document.getElementById('closeHud'),
     voiceIndicator: document.getElementById('voiceIndicator'),
+    glassHud: document.querySelector('.glass-hud'), // Grab the whole HUD
 
     // Misc
     saveText: document.getElementById('saveText'),
@@ -56,6 +61,29 @@ const dom = {
     cancelClear: document.getElementById('cancelClear'),
     toastContainer: document.querySelector('.toast-container')
 };
+
+// --- MOBILE MENU LOGIC ---
+if (dom.mobileMenuBtn) {
+    dom.mobileMenuBtn.addEventListener('click', () => {
+        dom.sidebar.classList.add('mobile-open');
+    });
+}
+
+if (dom.closeSidebarBtn) {
+    dom.closeSidebarBtn.addEventListener('click', () => {
+        dom.sidebar.classList.remove('mobile-open');
+    });
+}
+
+// Close sidebar when tapping outside (optional polish)
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && 
+        dom.sidebar.classList.contains('mobile-open') && 
+        !dom.sidebar.contains(e.target) && 
+        !dom.mobileMenuBtn.contains(e.target)) {
+        dom.sidebar.classList.remove('mobile-open');
+    }
+});
 
 function loadSavedData() {
     const savedContent = localStorage.getItem('pf_content');
@@ -182,6 +210,9 @@ function updateStats() {
 
 // --- LAUNCH SEQUENCE ---
 dom.startBtn.addEventListener('click', () => {
+    // If mobile sidebar is open, close it
+    dom.sidebar.classList.remove('mobile-open');
+
     dom.scrollText.innerText = dom.editor.value;
     dom.scrollText.style.fontFamily = state.fontFamily;
     dom.scrollText.style.width = state.margin + '%';
@@ -222,6 +253,14 @@ function launchPrompter() {
 
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
 }
+
+// Mobile tap to toggle HUD visibility
+dom.prompter.addEventListener('click', (e) => {
+    // Ignore clicks on the HUD itself
+    if (e.target.closest('.glass-hud')) return;
+    
+    dom.glassHud.classList.toggle('mobile-visible');
+});
 
 dom.closeHud.addEventListener('click', () => {
     stopScroll();
@@ -265,7 +304,12 @@ dom.cameraBtn.addEventListener('click', async () => {
     }
     try {
         dom.cameraBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        localStream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+                facingMode: "user" // Prefer front camera on mobile
+            }, 
+            audio: false 
+        });
         dom.webcamVideo.srcObject = localStream;
         dom.webcamVideo.classList.remove('hidden');
         dom.prompter.classList.add('camera-active');
@@ -397,5 +441,4 @@ function showToast(title, msg) {
 }
 
 loadSavedData();
-
 
