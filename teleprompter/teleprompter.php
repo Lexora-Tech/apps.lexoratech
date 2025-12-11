@@ -50,7 +50,7 @@
             </button>
 
             <div class="brand hidden-mobile">
-                <a href="dashboard.html" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
+                <a href="" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
                     <div class="logo-box"><i class="fas fa-bolt"></i></div>
                     <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
                 </a>
@@ -58,7 +58,7 @@
 
             <div class="scroll-area">
 
-                <a href="dashboard.html" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
+                <a href="../index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
                     <i class="fas fa-chevron-left"></i> Back To Dashboard
                 </a>
 
@@ -156,7 +156,7 @@
                     <a href="https://buymeacoffee.com" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
                         <i class="fas fa-coffee"></i> Coffee
                     </a>
-                    <a href="mailto:support@lexoratech.com" class="btn-glass" style="text-decoration:none;">
+                    <a href="../teleprompter/suggestion.php" class="btn-glass" style="text-decoration:none;">
                         <i class="fas fa-lightbulb"></i> Suggest
                     </a>
                 </div>
