@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="./css/suggestion.css">
     <link rel="icon" href="../assets/logo/logo.png" />
 </head>
+
 <body>
 
     <div class="grid-bg"></div>
@@ -17,13 +19,14 @@
     <header class="mobile-header">
         <a href="../teleprompter/teleprompter.php" class="back-btn"><i class="fas fa-chevron-left"></i> Back</a>
         <span class="page-title">Feedback</span>
-        <div class="placeholder"></div> </header>
+        <div class="placeholder"></div>
+    </header>
 
     <div class="app-shell">
-        
+
         <aside class="sidebar">
-            <a href="" class="logo-box">
-                <i class="fas fa-bolt"></i>
+            <a href="" class="logo-box" style="background: transparent; box-shadow: none;">
+                <img src="../assets/logo/logo2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
             </a>
             <nav class="nav-stack">
                 <a href="../index.php" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-th-large"></i></a>
@@ -33,16 +36,16 @@
         </aside>
 
         <main class="content-area">
-            
+
             <div class="form-wrapper">
-                
+
                 <div class="header-section">
                     <h1>Submit Feedback</h1>
                     <p>Help us build the best version of Lexora. Found a bug or have a feature request?</p>
                 </div>
 
                 <form id="feedbackForm" class="pro-form">
-                    
+
                     <div class="form-section">
                         <label class="label">Feedback Type</label>
                         <div class="grid-select">
@@ -122,4 +125,5 @@
 
     <script src="./js/suggestion.js"></script>
 </body>
+
 </html>

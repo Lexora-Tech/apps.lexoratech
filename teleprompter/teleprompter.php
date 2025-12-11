@@ -18,7 +18,7 @@
 
     <header class="mobile-header">
         <div class="brand-mobile">
-            <i class="fas fa-bolt"></i> PromptFlow
+            <img src="../assets/logo/logo2.png" alt="Logo" style="height: 28px; width: auto; border-radius: 4px;"> PromptFlow
         </div>
         <button id="mobileMenuBtn" class="icon-btn">
             <i class="fas fa-sliders-h"></i>
@@ -51,7 +51,9 @@
 
             <div class="brand hidden-mobile">
                 <a href="" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
-                    <div class="logo-box"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-box" style="box-shadow: none; background: transparent;">
+                        <img src="../assets/logo/logo2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                    </div>
                     <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
                 </a>
             </div>

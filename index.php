@@ -8,8 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
-    <!-- logo css -->
-   <link rel="icon" href="assets/logo/logo.png" />
+    <link rel="icon" href="assets/logo/logo.png" />
+
+    <style>
+        /* ADDED: Hide search bar on mobile screens */
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -21,7 +29,9 @@
 
         <aside class="sidebar">
             <div class="logo-container">
-                <div class="logo-box"><i class="fas fa-bolt"></i></div>
+                <div class="logo-box" style="background: transparent; box-shadow: none;">
+                    <img src="./assets/logo/logo2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                </div>
             </div>
 
             <nav class="nav-stack">
@@ -46,7 +56,7 @@
 
             <header class="glass-header">
                 <div class="header-left">
-                    <h1 class="page-title">Service Hub</h1>
+                    <h1 class="page-title">Lexora Workspace</h1>
                 </div>
                 <div class="header-right">
                     <div class="search-bar">
