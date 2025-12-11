@@ -1,14 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const synth = window.speechSynthesis;
+    
+    // --- FORCE STOP GHOST AUDIO ON LOAD ---
+    if (synth.speaking) {
+        synth.cancel();
+    }
+
     let voices = [];
     let currentUtterance = null;
     let progressInterval = null;
     
     // Timer Variables
     let startTime = 0;
-    let elapsedPausedTime = 0; // Tracks how long we've been paused
-    let pauseStartTime = 0;    // When the pause started
+    let elapsedPausedTime = 0;
+    let pauseStartTime = 0;
     let estimatedDuration = 0;
     let isPlaying = false;
     let isPaused = false;
@@ -17,15 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
         textInput: document.getElementById('textInput'),
         langSelect: document.getElementById('langSelect'),
         voiceSelect: document.getElementById('voiceSelect'),
-        
         rateRange: document.getElementById('rateRange'),
         pitchRange: document.getElementById('pitchRange'),
         volRange: document.getElementById('volRange'),
-        
         rateValue: document.getElementById('rateValue'),
         pitchValue: document.getElementById('pitchValue'),
         volValue: document.getElementById('volValue'),
-        
         generateBtn: document.getElementById('generateBtn'),
         downloadBtn: document.getElementById('downloadBtn'),
         playPauseBtn: document.getElementById('playPauseBtn'),
@@ -33,20 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTextBtn: document.getElementById('clearTextBtn'),
         mobileMenuBtn: document.getElementById('mobileMenuBtn'),
         sidebar: document.getElementById('sidebar'),
-        
         charCount: document.getElementById('charCount'),
         estTime: document.getElementById('estTime'),
         statusText: document.getElementById('statusText'),
         statusDot: document.querySelector('.status-dot'),
-        
         visualizer: document.getElementById('visualizer'),
         progressBar: document.getElementById('progressBar'),
         currentTimeText: document.getElementById('currentTime'),
         totalTimeText: document.getElementById('totalTime')
     };
 
-    // --- 1. SETUP & VOICES ---
-
+    // --- 1. SETUP ---
     function loadVoices() {
         voices = synth.getVoices();
         filterVoices(); 
@@ -56,24 +56,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const langFilter = dom.langSelect.value;
         dom.voiceSelect.innerHTML = '';
 
-        const filtered = voices.filter(v => {
-            if (langFilter === 'all') return true;
-            return v.lang.startsWith(langFilter);
-        });
+        let filtered = voices.filter(v => v.lang.toLowerCase().includes(langFilter.toLowerCase()));
 
         if (filtered.length === 0) {
-            dom.voiceSelect.innerHTML = '<option disabled>No voices found</option>';
-            return;
-        }
-
-        filtered.forEach(voice => {
             const option = document.createElement('option');
-            const name = voice.name.replace('Microsoft', '').replace('Google', '').trim();
-            option.textContent = `${name} (${voice.lang})`;
-            option.setAttribute('data-name', voice.name);
+            option.textContent = "Preview unavailable (Export works!)";
+            option.disabled = true;
+            option.setAttribute('data-lang', langFilter); 
             dom.voiceSelect.appendChild(option);
-        });
-        dom.voiceSelect.selectedIndex = 0;
+            
+            const fallback = document.createElement('option');
+            fallback.textContent = "Use System Default";
+            fallback.value = "default";
+            fallback.setAttribute('data-lang', langFilter);
+            dom.voiceSelect.appendChild(fallback);
+        } else {
+            filtered.forEach(voice => {
+                const option = document.createElement('option');
+                const name = voice.name.replace('Microsoft', '').replace('Google', '').trim();
+                option.textContent = name;
+                option.setAttribute('data-name', voice.name);
+                option.setAttribute('data-lang', voice.lang);
+                dom.voiceSelect.appendChild(option);
+            });
+            dom.voiceSelect.selectedIndex = 0;
+        }
     }
 
     loadVoices();
@@ -83,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     dom.langSelect.addEventListener('change', filterVoices);
 
-    // Mobile Menu
     if (dom.mobileMenuBtn) {
         dom.mobileMenuBtn.addEventListener('click', () => {
             dom.sidebar.classList.toggle('open');
@@ -93,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 2. STATS ---
-
     dom.textInput.addEventListener('input', updateStats);
     dom.rateRange.addEventListener('input', (e) => {
         dom.rateValue.innerText = e.target.value + 'x';
@@ -125,8 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopSpeaking();
     });
 
-    // --- 3. PREVIEW LOGIC ---
-
+    // --- 3. PREVIEW ---
     dom.generateBtn.addEventListener('click', () => startPreview(true));
     dom.playPauseBtn.addEventListener('click', togglePlay);
     dom.stopBtn.addEventListener('click', stopSpeaking);
@@ -139,15 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentUtterance = new SpeechSynthesisUtterance(text);
         
-        const selectedName = dom.voiceSelect.selectedOptions[0]?.getAttribute('data-name');
-        const voice = voices.find(v => v.name === selectedName);
-        if (voice) currentUtterance.voice = voice;
+        const selectedOption = dom.voiceSelect.selectedOptions[0];
+        const selectedName = selectedOption?.getAttribute('data-name');
+        
+        if (selectedName) {
+            const voice = voices.find(v => v.name === selectedName);
+            if (voice) currentUtterance.voice = voice;
+        }
         
         currentUtterance.rate = parseFloat(dom.rateRange.value);
         currentUtterance.pitch = parseFloat(dom.pitchRange.value);
         currentUtterance.volume = parseFloat(dom.volRange.value);
 
-        // Calc duration in ms
         const words = text.trim().split(/\s+/).length;
         estimatedDuration = (words / 2.5) / currentUtterance.rate * 1000;
 
@@ -165,27 +172,21 @@ document.addEventListener('DOMContentLoaded', () => {
             dom.progressBar.style.width = '100%';
             dom.currentTimeText.innerText = dom.totalTimeText.innerText;
         };
+        
+        currentUtterance.onerror = () => { resetState(); };
 
         synth.speak(currentUtterance);
     }
 
     function togglePlay() {
-        if (!synth.speaking) {
-            startPreview(true);
-            return;
-        }
+        if (!synth.speaking) { startPreview(true); return; }
         
         if (synth.paused) {
-            // RESUMING
             synth.resume();
             isPaused = false;
-            // Add the time we spent paused to the offset
-            if (pauseStartTime > 0) {
-                elapsedPausedTime += (Date.now() - pauseStartTime);
-            }
+            if (pauseStartTime > 0) elapsedPausedTime += (Date.now() - pauseStartTime);
             updateUI(true);
         } else {
-            // PAUSING
             synth.pause();
             isPaused = true;
             pauseStartTime = Date.now();
@@ -209,23 +210,16 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.currentTimeText.innerText = '00:00';
     }
 
-    // --- 4. PROGRESS LOOP ---
+    // --- 4. PROGRESS ---
     function startProgressLoop() {
         if (progressInterval) clearInterval(progressInterval);
-        
         progressInterval = setInterval(() => {
-            // If stopped or paused, do NOT update lines/time
             if (!isPlaying || isPaused) return;
-
             const now = Date.now();
-            // Effective time elapsed = (Current Time - Start Time) - (Total Time spent paused)
             const effectiveElapsed = now - startTime - elapsedPausedTime;
-            
             const percentage = Math.min((effectiveElapsed / estimatedDuration) * 100, 100);
-            
             dom.progressBar.style.width = `${percentage}%`;
             dom.currentTimeText.innerText = formatTime(effectiveElapsed / 1000);
-
         }, 50);
     }
 
@@ -233,21 +227,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressInterval) clearInterval(progressInterval);
     }
 
-    // --- 5. UI UPDATES ---
+    // --- 5. UI ---
     function updateUI(active, paused = false) {
         if (active) {
             dom.statusText.innerText = "Generating Audio...";
             dom.statusDot.classList.add('busy');
             dom.visualizer.classList.remove('hidden');
-            dom.visualizer.classList.add('playing'); // Animate lines
+            dom.visualizer.classList.add('playing');
             dom.playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
         } else {
             if (paused) {
                 dom.statusText.innerText = "Paused";
                 dom.statusDot.classList.remove('busy');
-                // Don't hide visualizer, but stop animation
                 dom.visualizer.classList.remove('hidden');
-                dom.visualizer.classList.remove('playing'); // Stop lines
+                dom.visualizer.classList.remove('playing');
                 dom.playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             } else {
                 dom.statusText.innerText = "Ready to Generate";
@@ -264,6 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = dom.textInput.value.trim();
         if (!text) { showToast("No Text", "Canvas is empty."); return; }
 
+        const selectedOption = dom.voiceSelect.selectedOptions[0];
+        let exportLang = selectedOption ? selectedOption.getAttribute('data-lang') : dom.langSelect.value;
+        if (!exportLang) exportLang = dom.langSelect.value;
+
         const originalBtn = dom.downloadBtn.innerHTML;
         dom.downloadBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Exporting...';
         dom.downloadBtn.disabled = true;
@@ -272,17 +269,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('download.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: text })
+                body: JSON.stringify({ 
+                    text: text, 
+                    lang: exportLang
+                })
             });
             
-            if(!response.ok) throw new Error("Server Error");
+            const contentType = response.headers.get("content-type");
+            if (!response.ok || (contentType && contentType.includes("application/json"))) {
+                throw new Error("Server Failed");
+            }
             
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = url;
-            a.download = `voicegen_export_${Date.now()}.mp3`;
+            a.download = `voicegen_${exportLang}_${Date.now()}.mp3`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
@@ -306,3 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => t.remove(), 3000);
     }
 });
+
+// --- FORCE STOP ON EXIT ---
+window.addEventListener('beforeunload', () => {
+    window.speechSynthesis.cancel();
+});
+

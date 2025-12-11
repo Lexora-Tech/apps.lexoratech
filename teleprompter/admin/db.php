@@ -1,9 +1,16 @@
 <?php
 // db.php
+
 $host = 'localhost';
+$db = 'magaqmco_lexora_apps';
+$user = 'magaqmco_lexora';
+$pass = 'Lexora12345@#';
+
+
+/* $host = 'localhost';
 $db = 'lexora_apps';
 $user = 'root';
-$pass = 'JapL050514';
+$pass = 'JapL050514'; */
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -12,4 +19,3 @@ if ($conn->connect_error) {
     header('Content-Type: application/json');
     die(json_encode(["message" => "Database connection failed: " . $conn->connect_error]));
 }
-?>
