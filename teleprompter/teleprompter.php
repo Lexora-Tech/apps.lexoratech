@@ -7,7 +7,7 @@
     <title>PromptFlow Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../teleprompter/css/teleprompter.css">
+    <link rel="stylesheet" href="./css/teleprompter.css">
     <link rel="icon" href="../assets/logo/logo.png" />
 </head>
 
@@ -50,7 +50,7 @@
             </button>
 
             <div class="brand hidden-mobile">
-                <a href="../index.php" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
+                <a href="dashboard.html" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:inherit; width: 100%;">
                     <div class="logo-box"><i class="fas fa-bolt"></i></div>
                     <span>PromptFlow <span class="badge-pro">STUDIO</span></span>
                 </a>
@@ -58,7 +58,7 @@
 
             <div class="scroll-area">
 
-                <a href="../index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
+                <a href="dashboard.html" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
                     <i class="fas fa-chevron-left"></i> Back To Dashboard
                 </a>
 
@@ -149,6 +149,18 @@
                 <button id="resetBtn" class="btn-glass" style="margin-top: 10px;">
                     <i class="fas fa-eraser"></i> Clear Script
                 </button>
+
+                <div class="divider"></div>
+                <div class="section-title">SUPPORT</div>
+                <div class="grid-2">
+                    <a href="https://buymeacoffee.com" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
+                        <i class="fas fa-coffee"></i> Coffee
+                    </a>
+                    <a href="mailto:support@lexoratech.com" class="btn-glass" style="text-decoration:none;">
+                        <i class="fas fa-lightbulb"></i> Suggest
+                    </a>
+                </div>
+
             </div>
 
             <button id="startBtn" class="btn-primary-glow">
@@ -175,23 +187,33 @@
     <div id="prompter" class="prompter-layer hidden">
         <video id="webcamFeed" autoplay playsinline muted class="hidden"></video>
 
+        <div id="liveCaption">Listening...</div>
+
         <div id="scrollingText" class="text-content"></div>
 
         <div class="hud glass-hud">
             <button id="closeHud" class="hud-icon"><i class="fas fa-times"></i></button>
             <div class="hud-sep"></div>
+
+            <button id="restartHud" class="hud-icon" title="Restart from Beginning">
+                <i class="fas fa-undo"></i>
+            </button>
+
             <button id="playHud" class="hud-main-icon"><i class="fas fa-pause"></i></button>
+
             <div class="hud-sep"></div>
+
             <div id="voiceIndicator" class="hidden" style="color:#ef4444; margin-right:10px;">
                 <i class="fas fa-microphone-alt fa-pulse"></i>
             </div>
+
             <input type="range" id="hudSpeed" min="1" max="10">
         </div>
     </div>
 
     <div class="toast-container"></div>
 
-    <script src="../teleprompter/js/teleprompter.js"></script>
+    <script src="./js/teleprompter.js"></script>
 </body>
 
 </html>
