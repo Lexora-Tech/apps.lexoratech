@@ -93,11 +93,24 @@
                 </a>
 
                 <div class="section-header">
-                    <span class="label">UPCOMING SUITE</span>
+                    <span class="label">CREATIVE SUITE</span>
                     <div class="line"></div>
                 </div>
 
                 <div class="grid-layout">
+
+                    <a href="voicegen/voicegen.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow pink"></div>
+                        <div class="tool-header">
+                            <div class="app-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
+                            <div class="status-chip live" style="background: rgba(236, 72, 153, 0.1); border-color: rgba(236, 72, 153, 0.3); color: #ec4899;">
+                                <span class="dot" style="background: #ec4899; box-shadow: 0 0 5px #ec4899;"></span> Live
+                            </div>
+                        </div>
+                        <h3>VoiceGen AI</h3>
+                        <p>Neural text-to-speech generation.</p>
+                        <button class="notify-btn" style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899;">Launch Tool</button>
+                    </a>
 
                     <div class="tool-card locked">
                         <div class="card-glow blue"></div>
@@ -107,17 +120,6 @@
                         </div>
                         <h3>Lexora PDF</h3>
                         <p>Merge, split, and secure documents.</p>
-                        <button class="notify-btn">Notify Me</button>
-                    </div>
-
-                    <div class="tool-card locked">
-                        <div class="card-glow pink"></div>
-                        <div class="tool-header">
-                            <div class="app-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
-                            <div class="status-chip upcoming">Q1</div>
-                        </div>
-                        <h3>VoiceGen AI</h3>
-                        <p>Neural text-to-speech generation.</p>
                         <button class="notify-btn">Notify Me</button>
                     </div>
 
@@ -142,3 +144,4 @@
 </body>
 
 </html>
+
