@@ -109,7 +109,10 @@
                         </div>
                         <h3>VoiceGen AI</h3>
                         <p>Neural text-to-speech generation.</p>
-                        <button class="notify-btn" style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899;">Launch Tool</button>
+                        
+                        <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center; transition: background 0.3s;">
+                            Launch Tool
+                        </div>
                     </a>
 
                     <div class="tool-card locked">
@@ -144,4 +147,3 @@
 </body>
 
 </html>
-
