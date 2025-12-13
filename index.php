@@ -7,9 +7,7 @@
     <title>Lexora Workspace</title>
 
     <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech in English, Sinhala, and Tamil.">
-
     <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech sinhala, text to speech tamil, content creator tools, Lexora apps">
-
     <link rel="canonical" href="https://apps.lexoratech.com/" />
 
     <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
@@ -22,8 +20,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
-
-
 
     <style>
         /* ADDED: Hide search bar on mobile screens */
@@ -74,7 +70,13 @@
                 <a href="#" class="nav-link" data-tooltip="Analytics">
                     <i class="fas fa-chart-line"></i>
                 </a>
+                
                 <div class="nav-spacer"></div>
+
+                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Return to Website" target="_blank">
+                    <i class="fas fa-globe"></i>
+                </a>
+
                 <a href="#" class="nav-link" data-tooltip="Settings">
                     <i class="fas fa-cog"></i>
                 </a>
@@ -114,9 +116,9 @@
                         </div>
 
                         <div class="hero-text">
-    <h2>PromptFlow Studio</h2>
-    <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control (Voice Tracking)</strong>, Reality Mode, and mirror casting for professional presentations.</p>
-</div>
+                            <h2>PromptFlow Studio</h2>
+                            <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control (Voice Tracking)</strong>, Reality Mode, and mirror casting for professional presentations.</p>
+                        </div>
 
                         <div class="hero-footer">
                             <span class="btn-action">Launch Studio <i class="fas fa-arrow-right"></i></span>
