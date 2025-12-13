@@ -166,7 +166,7 @@
                 <div class="divider"></div>
                 <div class="section-title">SUPPORT</div>
                 <div class="grid-2">
-                    <a href="https://buymeacoffee.com" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
+                    <a href="https://buymeacoffee.com/lexoratech" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
                         <i class="fas fa-coffee"></i> Coffee
                     </a>
                     <a href="../teleprompter/suggestion.php" class="btn-glass" style="text-decoration:none;">
