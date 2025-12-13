@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PromptFlow Studio</title>
+    <title>PromptFlow Studio | Free Voice-Activated Teleprompter Online</title>
+    
+    <meta name="description" content="Professional free online teleprompter with voice tracking (voice scrolling), mirror mode, and reality mode. No login required. Best for YouTubers and presenters.">
+    
+    <meta name="keywords" content="voice activated teleprompter, free autocue online, teleprompter with mirror mode, browser teleprompter, PromptFlow Studio">
+    
+    <link rel="canonical" href="https://apps.lexoratech.com/teleprompter/teleprompter.php" />
+    
+    <meta property="og:title" content="PromptFlow Studio - Voice Activated Teleprompter">
+    <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo2.png">
+    <meta property="og:url" content="https://apps.lexoratech.com/teleprompter/teleprompter.php">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">

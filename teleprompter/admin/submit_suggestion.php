@@ -8,7 +8,7 @@ header("Access-Control-Allow-Methods: POST");
 
 // 2. Include Database
 // Since this file is in the same folder as db.php, we just include it directly
-include_once 'db.php';
+include_once './includes/db.php';
 
 // 3. Get the raw POST data (JSON)
 $input = file_get_contents("php://input");

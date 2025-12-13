@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /teleprompter/admin/
+Disallow: /teleprompter/includes/
+
+Sitemap: https://apps.lexoratech.com/sitemap.xml

@@ -5,10 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace</title>
+
+    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech in English, Sinhala, and Tamil.">
+
+    <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech sinhala, text to speech tamil, content creator tools, Lexora apps">
+
+    <link rel="canonical" href="https://apps.lexoratech.com/" />
+
+    <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
+    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter and AI Voice Generator.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
+    <meta property="og:url" content="https://apps.lexoratech.com/">
+    <meta property="og:type" content="website">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
+
+
 
     <style>
         /* ADDED: Hide search bar on mobile screens */
@@ -18,6 +33,21 @@
             }
         }
     </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Lexora Apps Suite",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -82,10 +112,12 @@
                             <div class="app-icon main-icon"><i class="fas fa-stream"></i></div>
                             <div class="status-chip live"><span class="dot"></span> Live</div>
                         </div>
+
                         <div class="hero-text">
-                            <h2>PromptFlow Studio</h2>
-                            <p>Professional teleprompter suite. Featuring Reality Mode, Voice Control, and mirror casting.</p>
-                        </div>
+    <h2>PromptFlow Studio</h2>
+    <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control (Voice Tracking)</strong>, Reality Mode, and mirror casting for professional presentations.</p>
+</div>
+
                         <div class="hero-footer">
                             <span class="btn-action">Launch Studio <i class="fas fa-arrow-right"></i></span>
                         </div>
@@ -109,7 +141,7 @@
                         </div>
                         <h3>VoiceGen AI</h3>
                         <p>Neural text-to-speech generation.</p>
-                        
+
                         <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center; transition: background 0.3s;">
                             Launch Tool
                         </div>

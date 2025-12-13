@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoiceGen AI | Lexora</title>
+    <title>VoiceGen AI | Free Text to Speech (English, Sinhala, Tamil)</title>
+    
+    <meta name="description" content="Convert text to lifelike speech instantly. Free AI voice generator supporting English, Sinhala, Tamil, and more. Download MP3 audio for your videos.">
+    
+    <meta name="keywords" content="sinhala text to speech, tamil text to speech, ai voice generator free, download tts mp3, VoiceGen AI">
+    
+    <link rel="canonical" href="https://apps.lexoratech.com/voicegen/voicegen.php" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/voicegen.css">
@@ -70,7 +76,7 @@
                         
                         <div class="voice-note">
                             <i class="fas fa-info-circle"></i> 
-                            Note: Downloads Use The Standard Cloud Voice For The Selected Language. Preview Voices Are Local Only.
+                            Supports English, <strong>Sinhala</strong>, <strong>Tamil</strong>, and more.
                         </div>
                     </div>
 
