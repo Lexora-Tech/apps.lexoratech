@@ -61,25 +61,12 @@
             </div>
 
             <nav class="nav-stack">
-                <a href="#" class="nav-link active" data-tooltip="Home">
-                    <i class="fas fa-home"></i>
-                </a>
-                <a href="#" class="nav-link" data-tooltip="Projects">
-                    <i class="fas fa-folder"></i>
-                </a>
-                <a href="#" class="nav-link" data-tooltip="Analytics">
-                    <i class="fas fa-chart-line"></i>
-                </a>
-                
+                <a href="#" class="nav-link active" data-tooltip="Home"><i class="fas fa-home"></i></a>
+                <a href="#" class="nav-link" data-tooltip="Projects"><i class="fas fa-folder"></i></a>
+                <a href="#" class="nav-link" data-tooltip="Analytics"><i class="fas fa-chart-line"></i></a>
                 <div class="nav-spacer"></div>
-
-                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Return to Website" target="_blank">
-                    <i class="fas fa-globe"></i>
-                </a>
-
-                <a href="#" class="nav-link" data-tooltip="Settings">
-                    <i class="fas fa-cog"></i>
-                </a>
+                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Return to Website" target="_blank"><i class="fas fa-globe"></i></a>
+                <a href="#" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i></a>
                 <div class="user-avatar">LT</div>
             </nav>
         </aside>
@@ -114,12 +101,10 @@
                             <div class="app-icon main-icon"><i class="fas fa-stream"></i></div>
                             <div class="status-chip live"><span class="dot"></span> Live</div>
                         </div>
-
                         <div class="hero-text">
                             <h2>PromptFlow Studio</h2>
-                            <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control (Voice Tracking)</strong>, Reality Mode, and mirror casting for professional presentations.</p>
+                            <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control</strong>, Reality Mode, and mirror casting.</p>
                         </div>
-
                         <div class="hero-footer">
                             <span class="btn-action">Launch Studio <i class="fas fa-arrow-right"></i></span>
                         </div>
@@ -143,10 +128,33 @@
                         </div>
                         <h3>VoiceGen AI</h3>
                         <p>Neural text-to-speech generation.</p>
+                        <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                    </a>
 
-                        <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center; transition: background 0.3s;">
-                            Launch Tool
+                    <a href="thumbgrab/thumbgrab.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #ef4444, transparent);"></div>
+                        <div class="tool-header">
+                            <div class="app-icon" style="color: #ef4444; background: rgba(239, 68, 68, 0.1);"><i class="fab fa-youtube"></i></div>
+                            <div class="status-chip live" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
+                                <span class="dot" style="background: #ef4444; box-shadow: 0 0 5px #ef4444;"></span> Live
+                            </div>
                         </div>
+                        <h3>ThumbGrab</h3>
+                        <p>Download high-res YouTube thumbnails.</p>
+                         <div style="background: rgba(239, 68, 68, 0.2); color: white; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                    </a>
+
+                    <a href="qrcodegen/qrcodegen.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #10b981, transparent);"></div>
+                        <div class="tool-header">
+                            <div class="app-icon" style="color: #10b981; background: rgba(16, 185, 129, 0.1);"><i class="fas fa-qrcode"></i></div>
+                            <div class="status-chip live" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
+                                <span class="dot" style="background: #10b981; box-shadow: 0 0 5px #10b981;"></span> Live
+                            </div>
+                        </div>
+                        <h3>LinkVault</h3>
+                        <p>Instant QR code generator.</p>
+                         <div style="background: rgba(16, 185, 129, 0.2); color: white; border: 1px solid #10b981; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
                     <div class="tool-card locked">
