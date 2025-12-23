@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace</title>
 
-    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech in English, Sinhala, and Tamil.">
-    <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech sinhala, text to speech tamil, content creator tools, Lexora apps">
+    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech.">
+    <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech, youtube thumbnail downloader, qr code generator, Lexora apps">
     <link rel="canonical" href="https://apps.lexoratech.com/" />
 
     <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
-    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter and AI Voice Generator.">
+    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter, AI Voice Generator, and more.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
     <meta property="og:url" content="https://apps.lexoratech.com/">
     <meta property="og:type" content="website">
@@ -22,11 +22,68 @@
     <link rel="icon" href="assets/logo/logo.png" />
 
     <style>
-        /* ADDED: Hide search bar on mobile screens */
+        /* 1. Hide search bar on mobile */
         @media (max-width: 768px) {
             .search-bar {
                 display: none !important;
             }
+        }
+
+        /* 2. Custom Dark Scrollbar (Fixes the white line issue) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f11;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 3. Sidebar Divider */
+        .nav-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60%;
+            margin: 10px auto;
+        }
+
+
+        /* 1. Hide search bar on mobile */
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none !important;
+            }
+        }
+
+        /* 2. HIDE SCROLLBAR COMPLETELY (But keep scrolling functional) */
+        /* For Chrome, Safari, and Opera */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* For Firefox, IE, and Edge */
+        html,
+        body {
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        /* 3. Sidebar Divider */
+        .nav-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60%;
+            margin: 10px auto;
         }
     </style>
 
@@ -61,12 +118,27 @@
             </div>
 
             <nav class="nav-stack">
-                <a href="#" class="nav-link active" data-tooltip="Home"><i class="fas fa-home"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Projects"><i class="fas fa-folder"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Analytics"><i class="fas fa-chart-line"></i></a>
+                <a href="#" class="nav-link active" data-tooltip="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="#" class="nav-link" data-tooltip="Projects">
+                    <i class="fas fa-folder"></i>
+                </a>
+                <a href="#" class="nav-link" data-tooltip="Analytics">
+                    <i class="fas fa-chart-line"></i>
+                </a>
+
                 <div class="nav-spacer"></div>
-                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Return to Website" target="_blank"><i class="fas fa-globe"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i></a>
+
+                <a href="#" class="nav-link" data-tooltip="Settings">
+                    <i class="fas fa-cog"></i>
+                </a>
+
+                <div class="nav-divider"></div>
+                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Back to Website" target="_blank" style="color: #ec4899;">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+
                 <div class="user-avatar">LT</div>
             </nav>
         </aside>
@@ -141,7 +213,7 @@
                         </div>
                         <h3>ThumbGrab</h3>
                         <p>Download high-res YouTube thumbnails.</p>
-                         <div style="background: rgba(239, 68, 68, 0.2); color: white; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                        <div style="background: rgba(239, 68, 68, 0.2); color: white; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
                     <a href="qrcodegen/qrcodegen.php" class="tool-card" style="text-decoration: none; color: inherit;">
@@ -154,7 +226,7 @@
                         </div>
                         <h3>LinkVault</h3>
                         <p>Instant QR code generator.</p>
-                         <div style="background: rgba(16, 185, 129, 0.2); color: white; border: 1px solid #10b981; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                        <div style="background: rgba(16, 185, 129, 0.2); color: white; border: 1px solid #10b981; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
                     <div class="tool-card locked">

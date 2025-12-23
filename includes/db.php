@@ -1,16 +1,16 @@
 <?php
 // db.php
 
-$host = 'localhost';
+/* $host = 'localhost';
 $db = 'magaqmco_lexora_apps';
 $user = 'magaqmco_lexora';
-$pass = 'Lexora12345@#';
+$pass = 'Lexora12345@#'; */
 
 
-/* $host = 'localhost';
+$host = 'localhost';
 $db = 'lexora_apps';
 $user = 'root';
-$pass = 'JapL050514'; */
+$pass = 'JapL050514';
 
 $conn = new mysqli($host, $user, $pass, $db);
 
