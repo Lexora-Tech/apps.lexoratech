@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThumbGrab | YouTube Thumbnail Downloader</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../assets/logo/logo.png" />
 
@@ -64,19 +64,36 @@
             background: rgba(5, 5, 5, 0.8);
         }
 
+        /* UPDATED BACK BUTTON STYLE */
         .back-link {
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
         }
 
         .back-link:hover {
             color: #fff;
-            transform: translateX(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .back-link i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover i {
+            transform: translateX(-3px);
         }
 
         .logo {
@@ -608,7 +625,7 @@
 
     <header class="top-nav">
         <a href="../index.php" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Workspace
+            <i class="fas fa-arrow-left"></i> <span>Back To Workspace</span>
         </a>
         <div class="logo"><i class="fab fa-youtube"></i> ThumbGrab</div>
     </header>

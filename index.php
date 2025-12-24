@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace</title>
 
-    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech.">
-    <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech, youtube thumbnail downloader, qr code generator, Lexora apps">
+    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting, VoiceGen for neural text-to-speech, and ChromaPick for color extraction.">
+    <meta name="keywords" content="free teleprompter online, AI voice generator, color picker, palette generator, youtube thumbnail downloader, qr code generator, Lexora apps">
     <link rel="canonical" href="https://apps.lexoratech.com/" />
 
     <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
-    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter, AI Voice Generator, and more.">
+    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter, AI Voice Generator, Color Picker, and more.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
     <meta property="og:url" content="https://apps.lexoratech.com/">
     <meta property="og:type" content="website">
@@ -22,40 +22,6 @@
     <link rel="icon" href="assets/logo/logo.png" />
 
     <style>
-        /* 1. Hide search bar on mobile */
-        @media (max-width: 768px) {
-            .search-bar {
-                display: none !important;
-            }
-        }
-
-        /* 2. Custom Dark Scrollbar (Fixes the white line issue) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0f0f11;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* 3. Sidebar Divider */
-        .nav-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            width: 60%;
-            margin: 10px auto;
-        }
-
-
         /* 1. Hide search bar on mobile */
         @media (max-width: 768px) {
             .search-bar {
@@ -199,7 +165,7 @@
                             </div>
                         </div>
                         <h3>VoiceGen AI</h3>
-                        <p>Neural text-to-speech generation.</p>
+                        <p>Neural Text-To-Speech Generation.</p>
                         <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
@@ -212,7 +178,7 @@
                             </div>
                         </div>
                         <h3>ThumbGrab</h3>
-                        <p>Download high-res YouTube thumbnails.</p>
+                        <p>Download High-Res YouTube Thumbnails.</p>
                         <div style="background: rgba(239, 68, 68, 0.2); color: white; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
@@ -225,8 +191,21 @@
                             </div>
                         </div>
                         <h3>LinkVault</h3>
-                        <p>Instant QR code generator.</p>
+                        <p>Instant QR Code Generator.</p>
                         <div style="background: rgba(16, 185, 129, 0.2); color: white; border: 1px solid #10b981; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                    </a>
+
+                    <a href="chromapick/chromapick.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #6366f1, transparent);"></div>
+                        <div class="tool-header">
+                            <div class="app-icon" style="color: #6366f1; background: rgba(99, 102, 241, 0.1);"><i class="fas fa-eye-dropper"></i></div>
+                            <div class="status-chip live" style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.3); color: #6366f1;">
+                                <span class="dot" style="background: #6366f1; box-shadow: 0 0 5px #6366f1;"></span> Live
+                            </div>
+                        </div>
+                        <h3>ChromaPick</h3>
+                        <p>Advanced Image Color Picker.</p>
+                        <div style="background: rgba(99, 102, 241, 0.2); color: white; border: 1px solid #6366f1; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
                     <div class="tool-card locked">
@@ -236,7 +215,7 @@
                             <div class="status-chip upcoming">Q1</div>
                         </div>
                         <h3>Lexora PDF</h3>
-                        <p>Merge, split, and secure documents.</p>
+                        <p>Merge, Split, and Secure Documents.</p>
                         <button class="notify-btn">Notify Me</button>
                     </div>
 
@@ -247,7 +226,7 @@
                             <div class="status-chip upcoming">Q2</div>
                         </div>
                         <h3>PixelPerfect</h3>
-                        <p>AI image upscaling engine.</p>
+                        <p>AI Image Upscaling Engine.</p>
                         <button class="notify-btn">Notify Me</button>
                     </div>
 
