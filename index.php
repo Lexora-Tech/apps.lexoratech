@@ -221,16 +221,16 @@
                         <div style="background: rgba(59, 130, 246, 0.2); color: white; border: 1px solid #3b82f6; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
-                    <a href="pixelperfect/pixelperfect.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                    <a href="securepass/securepass.php" class="tool-card" style="text-decoration: none; color: inherit;">
                         <div class="card-glow" style="background: linear-gradient(90deg, transparent, #eab308, transparent);"></div>
                         <div class="tool-header">
-                            <div class="app-icon" style="color: #eab308; background: rgba(234, 179, 8, 0.1);"><i class="fas fa-magic"></i></div>
+                            <div class="app-icon" style="color: #eab308; background: rgba(234, 179, 8, 0.1);"><i class="fas fa-shield-alt"></i></div>
                             <div class="status-chip live" style="background: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.3); color: #eab308;">
                                 <span class="dot" style="background: #eab308; box-shadow: 0 0 5px #eab308;"></span> Live
                             </div>
                         </div>
-                        <h3>PixelPerfect</h3>
-                        <p>AI Image Upscaling Engine.</p>
+                        <h3>SecurePass</h3>
+                        <p>Enterprise Password Generator.</p>
                         <div style="background: rgba(234, 179, 8, 0.2); color: white; border: 1px solid #eab308; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
