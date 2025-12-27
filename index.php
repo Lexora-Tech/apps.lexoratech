@@ -208,27 +208,31 @@
                         <div style="background: rgba(99, 102, 241, 0.2); color: white; border: 1px solid #6366f1; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
 
-                    <div class="tool-card locked">
-                        <div class="card-glow blue"></div>
+                    <a href="lexorapdf/lexorapdf.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #3b82f6, transparent);"></div>
                         <div class="tool-header">
-                            <div class="app-icon icon-blue"><i class="fas fa-file-pdf"></i></div>
-                            <div class="status-chip upcoming">Q1</div>
+                            <div class="app-icon" style="color: #3b82f6; background: rgba(59, 130, 246, 0.1);"><i class="fas fa-file-pdf"></i></div>
+                            <div class="status-chip live" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: #3b82f6;">
+                                <span class="dot" style="background: #3b82f6; box-shadow: 0 0 5px #3b82f6;"></span> Live
+                            </div>
                         </div>
                         <h3>Lexora PDF</h3>
-                        <p>Merge, Split, and Secure Documents.</p>
-                        <button class="notify-btn">Notify Me</button>
-                    </div>
+                        <p>Merge, Split, and Compress PDFs.</p>
+                        <div style="background: rgba(59, 130, 246, 0.2); color: white; border: 1px solid #3b82f6; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                    </a>
 
-                    <div class="tool-card locked">
-                        <div class="card-glow gold"></div>
+                    <a href="pixelperfect/pixelperfect.php" class="tool-card" style="text-decoration: none; color: inherit;">
+                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #eab308, transparent);"></div>
                         <div class="tool-header">
-                            <div class="app-icon icon-gold"><i class="fas fa-image"></i></div>
-                            <div class="status-chip upcoming">Q2</div>
+                            <div class="app-icon" style="color: #eab308; background: rgba(234, 179, 8, 0.1);"><i class="fas fa-magic"></i></div>
+                            <div class="status-chip live" style="background: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.3); color: #eab308;">
+                                <span class="dot" style="background: #eab308; box-shadow: 0 0 5px #eab308;"></span> Live
+                            </div>
                         </div>
                         <h3>PixelPerfect</h3>
                         <p>AI Image Upscaling Engine.</p>
-                        <button class="notify-btn">Notify Me</button>
-                    </div>
+                        <div style="background: rgba(234, 179, 8, 0.2); color: white; border: 1px solid #eab308; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
+                    </a>
 
                 </div>
 

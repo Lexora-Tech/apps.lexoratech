@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ChromaPick | Professional Color Studio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -23,9 +23,55 @@
 
     <div class="app-shell">
 
+        <main class="main-area" id="mainDropZone">
+
+            <div class="viewport" id="viewport">
+
+                <div class="placeholder-msg" id="placeholderMsg">
+                    <div class="icon-box"><i class="fas fa-image"></i></div>
+                    <p class="desktop-msg">Drop Image or Paste (Ctrl+V)</p>
+                    <p class="mobile-msg">Tap to Open Image</p>
+                </div>
+
+                <div class="transform-layer" id="transformLayer">
+                    <canvas id="imageCanvas"></canvas>
+                </div>
+
+                <div id="magnifier" class="magnifier hidden">
+                    <div class="crosshair"></div>
+                    <div class="pixel-val" id="loupeVal">#FFF</div>
+                </div>
+
+            </div>
+
+            <div class="toolbar-float">
+                <div class="tool-group">
+                    <button id="toolPan" class="active" title="Pan Tool"><i class="fas fa-hand-paper"></i></button>
+                    <button id="toolPick" title="Eyedropper"><i class="fas fa-eye-dropper"></i></button>
+                </div>
+                <div class="divider"></div>
+                <div class="tool-group">
+                    <button id="zoomOut"><i class="fas fa-minus"></i></button>
+                    <span id="zoomLevel">100%</span>
+                    <button id="zoomIn"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="divider"></div>
+                <div class="tool-group">
+                    <button id="fitScreen"><i class="fas fa-compress-arrows-alt"></i></button>
+                    <button id="uploadTrigger"><i class="fas fa-folder-open"></i></button>
+                </div>
+            </div>
+
+        </main>
+
         <aside class="sidebar">
-            <div class="brand">
-                <i class="fas fa-eye-dropper"></i> ChromaPick <span class="badge">ULTIMATE</span>
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fas fa-eye-dropper"></i> ChromaPick <span class="badge">PRO</span>
+                </div>
+                <a href="../index.php" class="back-link-icon">
+                    <i class="fas fa-times"></i>
+                </a>
             </div>
 
             <a href="../index.php" class="back-link">
@@ -112,45 +158,6 @@
             </div>
         </aside>
 
-        <main class="main-area" id="mainDropZone">
-
-            <div class="viewport" id="viewport">
-
-                <div class="placeholder-msg" id="placeholderMsg">
-                    <div class="icon-box"><i class="fas fa-image"></i></div>
-                    <p>Drop Image or Paste (Ctrl+V)</p>
-                </div>
-
-                <div class="transform-layer" id="transformLayer">
-                    <canvas id="imageCanvas"></canvas>
-                </div>
-
-                <div id="magnifier" class="magnifier hidden">
-                    <div class="crosshair"></div>
-                    <div class="pixel-val" id="loupeVal">#FFF</div>
-                </div>
-
-            </div>
-
-            <div class="toolbar-float">
-                <div class="tool-group">
-                    <button id="toolPan" class="active" title="Pan Tool (Space)"><i class="fas fa-hand-paper"></i></button>
-                    <button id="toolPick" title="Eyedropper (I)"><i class="fas fa-eye-dropper"></i></button>
-                </div>
-                <div class="divider"></div>
-                <div class="tool-group">
-                    <button id="zoomOut"><i class="fas fa-minus"></i></button>
-                    <span id="zoomLevel">100%</span>
-                    <button id="zoomIn"><i class="fas fa-plus"></i></button>
-                </div>
-                <div class="divider"></div>
-                <div class="tool-group">
-                    <button id="fitScreen"><i class="fas fa-compress-arrows-alt"></i> </button>
-                    <button id="uploadTrigger"><i class="fas fa-folder-open"></i></button>
-                </div>
-            </div>
-
-        </main>
     </div>
 
     <script src="./js/chromapick.js"></script>

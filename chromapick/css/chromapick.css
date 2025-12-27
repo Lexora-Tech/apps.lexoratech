@@ -23,12 +23,18 @@ body {
     height: 100vh;
     overflow: hidden;
     user-select: none;
-    /* Important for dragging */
+}
+
+/* --- APP SHELL (Desktop Default) --- */
+.app-shell {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
 }
 
 /* SIDEBAR */
 .sidebar {
-    width: 320px;
+    width: 340px;
     background: var(--bg-sidebar);
     border-right: 1px solid var(--border);
     display: flex;
@@ -36,6 +42,14 @@ body {
     padding: 25px;
     z-index: 20;
     box-shadow: 10px 0 40px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .brand {
@@ -46,7 +60,6 @@ body {
     align-items: center;
     gap: 10px;
     color: #fff;
-    margin-bottom: 20px;
 }
 
 .brand i {
@@ -84,6 +97,12 @@ body {
 .back-link:hover {
     color: #fff;
     border-color: var(--accent);
+}
+
+.back-link-icon {
+    display: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
 }
 
 .scroll-controls {
@@ -131,18 +150,22 @@ body {
     gap: 5px;
 }
 
-.icon-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
+.icon-btn,
+.tool-btn {
     cursor: pointer;
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid var(--border);
+}
+
+.icon-btn {
+    background: transparent;
+    color: var(--text-muted);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
     font-size: 0.75rem;
 }
 
@@ -155,17 +178,11 @@ body {
 .tool-btn {
     width: 100%;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     color: #fff;
     padding: 10px;
     border-radius: 6px;
-    cursor: pointer;
     font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 8px;
-    transition: 0.2s;
 }
 
 .tool-btn:hover {
@@ -326,14 +343,12 @@ body {
     z-index: 2;
 }
 
-/* FIX: Empty State Styling */
 .empty-state {
     grid-column: span 5;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
-    /* Fixed height for better vertical centering */
     text-align: center;
     color: var(--text-muted);
     font-size: 0.75rem;
@@ -344,12 +359,7 @@ body {
     border: 1px dashed var(--border);
 }
 
-/* --- MAIN CANVAS AREA (Updated) --- */
-.app-shell {
-    display: flex;
-    height: 100vh;
-}
-
+/* --- MAIN CANVAS AREA --- */
 .main-area {
     flex: 1;
     position: relative;
@@ -364,27 +374,25 @@ body {
     background: rgba(99, 102, 241, 0.05);
 }
 
-/* The Viewport clips the content */
 .viewport {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
     cursor: grab;
-    /* Default to Pan tool */
+    touch-action: none;
+    /* Prevent scroll on canvas */
 }
 
 .viewport.picking {
     cursor: crosshair;
 }
 
-/* The Transform Layer handles Zoom/Pan */
 .transform-layer {
     position: absolute;
     top: 0;
     left: 0;
     transform-origin: 0 0;
-    /* Matrix calculations handle origin */
     will-change: transform;
 }
 
@@ -392,14 +400,12 @@ canvas {
     display: block;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     image-rendering: auto;
-    /* Default smooth */
 }
 
 canvas.pixelated {
     image-rendering: pixelated;
 }
 
-/* Used when zoomed in > 100% */
 canvas.grayscale {
     filter: grayscale(100%);
 }
@@ -418,6 +424,10 @@ canvas.grayscale {
     font-size: 3rem;
     margin-bottom: 10px;
     color: #333;
+}
+
+.mobile-msg {
+    display: none;
 }
 
 /* LOUPE */
@@ -462,7 +472,6 @@ canvas.grayscale {
 .toolbar-float {
     position: absolute;
     bottom: 50px;
-    /* FIX: Increased bottom margin */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(20, 20, 22, 0.9);
@@ -522,7 +531,7 @@ canvas.grayscale {
     text-align: center;
 }
 
-/* TOAST NOTIFICATION - PURPLE STYLE */
+/* TOAST */
 .toast-container {
     position: fixed;
     top: 20px;
@@ -536,7 +545,6 @@ canvas.grayscale {
 .toast {
     background: rgba(20, 20, 22, 0.95);
     backdrop-filter: blur(10px);
-    /* Purple Border */
     border: 1px solid rgba(168, 85, 247, 0.4);
     color: #fff;
     padding: 12px 20px;
@@ -544,7 +552,6 @@ canvas.grayscale {
     display: flex;
     align-items: center;
     gap: 12px;
-    /* Purple Glow Shadow */
     box-shadow: 0 10px 40px rgba(147, 51, 234, 0.2);
     animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     font-size: 0.9rem;
@@ -553,7 +560,6 @@ canvas.grayscale {
 }
 
 .toast i {
-    /* Light Purple Icon */
     color: #d8b4fe;
     font-size: 1.1rem;
     filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
@@ -572,5 +578,110 @@ canvas.grayscale {
     to {
         transform: translateX(0);
         opacity: 1;
+    }
+}
+
+/* ================================================= */
+/* MOBILE RESPONSIVE STYLES (Max-Width: 900px)       */
+/* ================================================= */
+@media (max-width: 900px) {
+    body {
+        height: auto;
+        overflow: hidden;
+    }
+
+    /* Lock scroll to app-shell */
+
+    .app-shell {
+        flex-direction: column;
+        height: 100vh;
+        /* Full viewport height */
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* 1. Main Canvas Area (Top Part) */
+    .main-area {
+        order: 1;
+        width: 100%;
+        height: 55vh;
+        /* Top 55% for Canvas */
+        flex-shrink: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* 2. Sidebar / Controls (Bottom Part) */
+    .sidebar {
+        order: 2;
+        width: 100%;
+        height: 45vh;
+        /* Bottom 45% for Controls */
+        border-right: none;
+        padding: 20px;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .back-link {
+        display: none;
+    }
+
+    /* Hide large back link */
+    .sidebar-header {
+        margin-bottom: 15px;
+    }
+
+    .back-link-icon {
+        display: block;
+    }
+
+    /* Show icon only */
+
+    /* Adjust Toolbars */
+    .toolbar-float {
+        bottom: 20px;
+        /* Closer to bottom of main area */
+        width: 90%;
+        max-width: 400px;
+        padding: 6px 15px;
+        justify-content: space-around;
+    }
+
+    .toolbar-float button {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    /* Adjust Messages */
+    .desktop-msg {
+        display: none;
+    }
+
+    .mobile-msg {
+        display: block;
+        font-weight: 600;
+        color: #666;
+    }
+
+    /* Fix Magnifier Position on Mobile */
+    /* It will be offset via JS, but we ensure it fits */
+    .magnifier {
+        width: 90px;
+        height: 90px;
+        border-width: 2px;
+    }
+
+    /* Toast positioning */
+    .toast-container {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        align-items: center;
+    }
+
+    .toast {
+        width: 100%;
+        min-width: auto;
+        justify-content: center;
     }
 }

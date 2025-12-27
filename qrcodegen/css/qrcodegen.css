@@ -52,6 +52,19 @@ body {
     z-index: 10;
 }
 
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mobile-menu-icon {
+    display: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
 .brand {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.5rem;
@@ -60,7 +73,6 @@ body {
     align-items: center;
     gap: 10px;
     color: #fff;
-    margin-bottom: 20px;
 }
 
 .brand i {
@@ -408,7 +420,7 @@ input:checked+.slider:before {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 100;
+    z-index: 2000;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -455,25 +467,91 @@ input:checked+.slider:before {
     }
 }
 
+/* ================================================= */
+/* MOBILE RESPONSIVE STYLES (Max-Width: 900px)       */
+/* ================================================= */
 @media (max-width: 900px) {
+
+    /* 1. Main Layout: Switch from Row to Column */
     .app-shell {
         flex-direction: column;
         height: auto;
-        overflow: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+
+    /* 2. REORDER: Preview First, Controls Second */
+    .main-area {
+        order: 1;
+        padding: 20px;
+        min-height: auto;
+        background: none;
     }
 
     .sidebar {
+        order: 2;
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+        padding: 20px;
+        height: auto;
     }
 
-    .main-area {
-        padding: 60px 20px;
-        min-height: 500px;
-    }
-
+    /* 3. Sticky Preview Card */
     .preview-card {
         width: 100%;
+        max-width: 350px;
+        /* Limit width */
+        padding: 20px;
+        margin: 0 auto;
+        border-radius: 16px;
+        /* Sticky positioning for better UX */
+        position: sticky;
+        top: 10px;
+        z-index: 50;
+    }
+
+    .card-header {
+        margin-bottom: 15px;
+    }
+
+    .qr-canvas-wrapper {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* 4. Controls Adjustment */
+    .sidebar-header {
+        display: none;
+    }
+
+    /* Hide brand in controls on mobile to save space */
+    .back-link {
+        display: none;
+    }
+
+    /* Hide back link in controls */
+
+    .scroll-controls {
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    /* 5. Touch Targets */
+    input[type=range]::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+        margin-top: -8px;
+    }
+
+    .btn-primary {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    /* Adjust input grid */
+    .grid-2 {
+        gap: 15px;
     }
 }
+

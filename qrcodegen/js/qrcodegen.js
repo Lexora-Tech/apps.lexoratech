@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- ELEMENTS ---
     const qrCanvas = document.getElementById('qrCanvas');
     const qrText = document.getElementById('qrText');
-    
+
     // Config
     const errCor = document.getElementById('errCor');
     const marginInput = document.getElementById('marginInput');
     const marginVal = document.getElementById('marginVal');
-    
+
     // Style
     const dotsStyle = document.getElementById('dotsStyle');
     const cornerStyle = document.getElementById('cornerStyle');
-    
+
     // Color & Gradient
     const colorFg = document.getElementById('colorFg');
     const colorBg = document.getElementById('colorBg');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileName = document.getElementById('fileName');
     const logoSize = document.getElementById('logoSize');
     const logoMargin = document.getElementById('logoMargin');
-    
+
     // Download
     const sizeInput = document.getElementById('sizeInput');
     const sizeVal = document.getElementById('sizeVal');
@@ -38,41 +38,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let uploadedLogo = "";
 
+    // Handle Mobile Screen Size for initial Render
+    const isMobile = window.innerWidth <= 600;
+    const initialSize = isMobile ? 200 : 300;
+
     // --- INIT QR ENGINE ---
     const qrCode = new QRCodeStyling({
-        width: 300,
-        height: 300,
-        type: "svg", // Render as SVG for crispness in preview
+        width: initialSize,
+        height: initialSize,
+        type: "svg", // Render as SVG for crispness
         data: "https://lexoratech.com",
         image: "",
         margin: 0,
-        qrOptions: {
-            errorCorrectionLevel: 'H' // Default High for logos
-        },
-        dotsOptions: {
-            color: "#10b981",
-            type: "extra-rounded"
-        },
-        backgroundOptions: {
-            color: "#ffffff",
-        },
+        qrOptions: { errorCorrectionLevel: 'H' },
+        dotsOptions: { color: "#10b981", type: "extra-rounded" },
+        backgroundOptions: { color: "#ffffff" },
         imageOptions: {
             crossOrigin: "anonymous",
             margin: 5,
-            imageSize: 0.4, // Initial size
-            hideBackgroundDots: true // Clears dots behind logo
+            imageSize: 0.4,
+            hideBackgroundDots: true
         },
-        cornersSquareOptions: {
-            color: "#10b981",
-            type: "extra-rounded"
-        }
+        cornersSquareOptions: { color: "#10b981", type: "extra-rounded" }
     });
 
     qrCode.append(qrCanvas);
 
     // --- LOGIC: GRADIENT TOGGLE ---
     useGradient.addEventListener('change', () => {
-        if(useGradient.checked) {
+        if (useGradient.checked) {
             solidColorRow.classList.add('hidden');
             gradColorRow.classList.remove('hidden');
             gradTypeRow.classList.remove('hidden');
@@ -88,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateQR = () => {
         const text = qrText.value || "https://lexoratech.com";
         const margin = parseInt(marginInput.value);
-        
+
         // Build Dots Options
         let dotsConfig = {
             type: dotsStyle.value,
@@ -111,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         qrCode.update({
             data: text,
             margin: margin,
-            qrOptions: { 
-                errorCorrectionLevel: errCor.value 
+            qrOptions: {
+                errorCorrectionLevel: errCor.value
             },
             dotsOptions: dotsConfig,
             cornersSquareOptions: {
@@ -121,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             cornersDotOptions: {
                 color: useGradient.checked ? gradStart.value : colorFg.value,
-                type: cornerStyle.value === 'square' ? 'square' : 'dot' 
+                type: cornerStyle.value === 'square' ? 'square' : 'dot'
             },
             backgroundOptions: {
                 color: colorBg.value
@@ -136,11 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- EVENT LISTENERS ---
-    
+
     // Live Text & Config
     const inputs = [
-        qrText, dotsStyle, cornerStyle, errCor, 
-        colorFg, colorBg, 
+        qrText, dotsStyle, cornerStyle, errCor,
+        colorFg, colorBg,
         gradStart, gradEnd, gradType,
         logoSize, logoMargin
     ];
@@ -158,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Logo Upload
-    logoInput.addEventListener('change', function() {
+    logoInput.addEventListener('change', function () {
         const file = this.files[0];
         if (file) {
             fileName.textContent = file.name;
@@ -172,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- DOWNLOAD LOGIC (HIGH QUALITY) ---
+    // --- DOWNLOAD LOGIC ---
     downloadBtn.addEventListener('click', async () => {
         const format = dlFormat.value;
         const size = parseInt(sizeInput.value);
@@ -180,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
         downloadBtn.disabled = true;
-        
+
         // 1. Upscale for download
         qrCode.update({ width: size, height: size });
-        
+
         // 2. Download
         try {
             await qrCode.download({ name: name, extension: format });
@@ -194,13 +188,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 3. Reset preview size
-        qrCode.update({ width: 300, height: 300 });
+        const resetSize = window.innerWidth <= 600 ? 200 : 300;
+        qrCode.update({ width: resetSize, height: resetSize });
+
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadBtn.disabled = false;
     });
 
     // --- UTILS ---
-    function showToast(msg, type='success') {
+    function showToast(msg, type = 'success') {
         const box = document.getElementById('toastBox');
         const div = document.createElement('div');
         div.className = 'toast';

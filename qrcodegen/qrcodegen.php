@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LinkVault | Pro QR Generator</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -22,8 +22,11 @@
     <div class="app-shell">
 
         <aside class="sidebar">
-            <div class="brand">
-                <i class="fas fa-qrcode"></i> LinkVault <span class="badge">ULTIMATE</span>
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fas fa-qrcode"></i> LinkVault <span class="badge">ULTIMATE</span>
+                </div>
+                <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
             </div>
 
             <a href="../index.php" class="back-link">
@@ -176,4 +179,3 @@
 </body>
 
 </html>
-
