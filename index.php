@@ -4,31 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lexora Workspace</title>
+    <title>Lexora Workspace - Professional Productivity Suite</title>
 
-    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting and VoiceGen for neural text-to-speech in English, Sinhala, and Tamil.">
-    <meta name="keywords" content="free teleprompter online, AI voice generator, text to speech sinhala, text to speech tamil, content creator tools, Lexora apps">
+    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting, VoiceGen for neural text-to-speech, and ChromaPick for color extraction.">
+    <meta name="keywords" content="free teleprompter online, AI voice generator, color picker, palette generator, youtube thumbnail downloader, qr code generator, Lexora apps">
     <link rel="canonical" href="https://apps.lexoratech.com/" />
 
     <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
-    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter and AI Voice Generator.">
+    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter, AI Voice Generator, Color Picker, and more.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
     <meta property="og:url" content="https://apps.lexoratech.com/">
     <meta property="og:type" content="website">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
-
-    <style>
-        /* ADDED: Hide search bar on mobile screens */
-        @media (max-width: 768px) {
-            .search-bar {
-                display: none !important;
-            }
-        }
-    </style>
 
     <script type="application/ld+json">
         {
@@ -44,142 +37,590 @@
             }
         }
     </script>
+
+    <style>
+        /* Mobile Specific Overrides */
+        @media (max-width: 768px) {
+
+            /* 1. Fix Header Alignment */
+            /* Pushes the title/search to the right so it doesn't sit under the fixed button */
+            .header-left {
+                padding-left: 60px !important;
+                padding-top: 10px !important;
+            }
+
+            /* 2. Fix Toggle Covering Sidebar Logo */
+            /* Ensure Sidebar is ALWAYS on top of the toggle button */
+            #sidebar {
+                z-index: 9999 !important;
+            }
+
+            /* Ensure the sidebar background is solid black/dark so button doesn't show through */
+            .sidebar-content {
+                background-color: #0a0a0a !important;
+                backdrop-filter: none !important;
+                /* Remove glass effect if it causes transparency issues on overlap */
+            }
+
+            /* Lower the toggle button z-index so it stays behind the sidebar */
+            #mobileMenuToggle {
+                z-index: 999 !important;
+            }
+
+            /* Adjust top header padding for cleaner mobile look */
+            .top-header {
+                padding: 1rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="background-grid"></div>
-    <div class="ambient-glow"></div>
+    <div class="background-wrapper">
+        <div class="mesh-gradient"></div>
+        <div class="grid-overlay"></div>
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+    </div>
 
-    <div class="app-shell">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" >
+        <i class="fas fa-bars"></i>
+    </button>
 
-        <aside class="sidebar">
-            <div class="logo-container">
-                <div class="logo-box" style="background: transparent; box-shadow: none;">
-                    <img src="./assets/logo/logo2.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+    <div class="app-container">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="logo-container" style="margin-left: 70px; margin-top: -14px;">
+                        <img src="./assets/logo/logo2.png" alt="Lexora Logo" class="logo-img">
+                        <div class="logo-glow"></div>
+                    </div>
+                    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu" style="margin-top: -14px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item active" data-tooltip="Dashboard">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span class="nav-label">Dashboard</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                    <a href="#" class="nav-item" data-tooltip="Projects">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <span class="nav-label">Projects</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                    <a href="#" class="nav-item" data-tooltip="Analytics">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <span class="nav-label">Analytics</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                    <a href="#" class="nav-item" data-tooltip="Team">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="nav-label">Team</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                </nav>
+
+                <div class="sidebar-spacer"></div>
+
+                <div class="sidebar-footer">
+                    <a href="#" class="nav-item" data-tooltip="Settings">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="nav-label">Settings</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                    <div class="divider-line"></div>
+                    <a href="https://lexoratech.com" class="nav-item external-link" data-tooltip="Visit Website" target="_blank">
+                        <div class="nav-icon-wrapper">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <span class="nav-label">Website</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <span>LT</span>
+                            <div class="avatar-ring"></div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Lexora</span>
+                            <span class="user-role">Admin</span>
+                        </div>
+                        <i class="fas fa-chevron-right user-arrow"></i>
+                    </div>
                 </div>
             </div>
-
-            <nav class="nav-stack">
-                <a href="#" class="nav-link active" data-tooltip="Home"><i class="fas fa-home"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Projects"><i class="fas fa-folder"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Analytics"><i class="fas fa-chart-line"></i></a>
-                <div class="nav-spacer"></div>
-                <a href="https://lexoratech.com" class="nav-link" data-tooltip="Return to Website" target="_blank"><i class="fas fa-globe"></i></a>
-                <a href="#" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i></a>
-                <div class="user-avatar">LT</div>
-            </nav>
         </aside>
 
-        <main class="main-content">
+        <main class="main-area">
 
-            <header class="glass-header">
-                <div class="header-left">
-                    <h1 class="page-title">Lexora Workspace</h1>
-                </div>
-                <div class="header-right">
-                    <div class="search-bar">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Find tool...">
-                        <span class="kbd">/</span>
+            <header class="top-header">
+                <div class="header-glass"></div>
+                <div class="header-content">
+                    <div class="header-left">
+                        <div class="breadcrumb">
+                            <span class="breadcrumb-item">Home</span>
+                            <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                            <span class="breadcrumb-item active">Workspace</span>
+                        </div>
+                        <h1 class="workspace-title">Lexora Workspace</h1>
                     </div>
-                    <button class="icon-btn notification"><i class="fas fa-bell"></i></button>
+                    <div class="header-right">
+                        <div class="search-wrapper">
+                            <div class="search-container">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="searchInput" placeholder="Search tools..." class="search-input" autocomplete="off">
+                                <kbd class="shortcut-key">/</kbd>
+                            </div>
+                        </div>
+                        <button class="header-btn" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <div class="btn-glow"></div>
+                        </button>
+                        <button class="header-btn" aria-label="Help">
+                            <i class="fas fa-question-circle"></i>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
                 </div>
             </header>
 
-            <div class="content-wrapper">
+            <div class="content-area">
 
-                <div class="section-header">
-                    <span class="label">PRIMARY TOOL</span>
-                    <div class="line"></div>
-                </div>
-
-                <a href="teleprompter/teleprompter.php" class="hero-card">
-                    <div class="hero-bg"></div>
-                    <div class="hero-content">
-                        <div class="hero-top">
-                            <div class="app-icon main-icon"><i class="fas fa-stream"></i></div>
-                            <div class="status-chip live"><span class="dot"></span> Live</div>
-                        </div>
-                        <div class="hero-text">
-                            <h2>PromptFlow Studio</h2>
-                            <p>The ultimate <strong>free online teleprompter</strong>. Featuring <strong>Voice Control</strong>, Reality Mode, and mirror casting.</p>
-                        </div>
-                        <div class="hero-footer">
-                            <span class="btn-action">Launch Studio <i class="fas fa-arrow-right"></i></span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="section-header">
-                    <span class="label">CREATIVE SUITE</span>
-                    <div class="line"></div>
-                </div>
-
-                <div class="grid-layout">
-
-                    <a href="voicegen/voicegen.php" class="tool-card" style="text-decoration: none; color: inherit;">
-                        <div class="card-glow pink"></div>
-                        <div class="tool-header">
-                            <div class="app-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
-                            <div class="status-chip live" style="background: rgba(236, 72, 153, 0.1); border-color: rgba(236, 72, 153, 0.3); color: #ec4899;">
-                                <span class="dot" style="background: #ec4899; box-shadow: 0 0 5px #ec4899;"></span> Live
+                <section class="featured-section">
+                    <a href="teleprompter/teleprompter.php" class="featured-card">
+                        <div class="featured-mesh"></div>
+                        <div class="featured-grid"></div>
+                        <div class="featured-content">
+                            <div class="featured-left">
+                                <div class="featured-header">
+                                    <div class="featured-badge">
+                                        <span class="badge-dot"></span>
+                                        <span>Featured Tool</span>
+                                    </div>
+                                    <div class="status-badge status-live">
+                                        <span class="status-dot"></span>
+                                        <span>Live</span>
+                                    </div>
+                                </div>
+                                <div class="featured-body">
+                                    <h3 class="featured-title">PromptFlow Studio</h3>
+                                    <p class="featured-description">
+                                        Professional teleprompting with <span class="highlight">voice control</span>,
+                                        reality mode, and mirror casting. Trusted by <span class="highlight">10,000+ creators</span>.
+                                    </p>
+                                    <div class="featured-stats">
+                                        <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-value">10K+</span>
+                                                <span class="stat-label">Active Users</span>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-value">4.9</span>
+                                                <span class="stat-label">Rating</span>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-icon">
+                                                <i class="fas fa-bolt"></i>
+                                            </div>
+                                            <div class="stat-content">
+                                                <span class="stat-value">Free</span>
+                                                <span class="stat-label">Forever</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="featured-action">
+                                    <button class="action-btn">
+                                        <span>Launch Studio</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                        <div class="btn-shimmer"></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="featured-right">
+                                <div class="featured-icon-display">
+                                    <div class="icon-circle"></div>
+                                    <div class="icon-main">
+                                        <i class="fas fa-stream"></i>
+                                    </div>
+                                    <div class="icon-float icon-1">
+                                        <i class="fas fa-microphone"></i>
+                                    </div>
+                                    <div class="icon-float icon-2">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="icon-float icon-3">
+                                        <i class="fas fa-desktop"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h3>VoiceGen AI</h3>
-                        <p>Neural text-to-speech generation.</p>
-                        <div style="background: rgba(236, 72, 153, 0.2); color: white; border: 1px solid #ec4899; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
                     </a>
+                </section>
 
-                    <a href="thumbgrab/thumbgrab.php" class="tool-card" style="text-decoration: none; color: inherit;">
-                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #ef4444, transparent);"></div>
-                        <div class="tool-header">
-                            <div class="app-icon" style="color: #ef4444; background: rgba(239, 68, 68, 0.1);"><i class="fab fa-youtube"></i></div>
-                            <div class="status-chip live" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
-                                <span class="dot" style="background: #ef4444; box-shadow: 0 0 5px #ef4444;"></span> Live
-                            </div>
+                <section class="tools-section">
+                    <div class="section-header">
+                        <div class="section-title-group">
+                            <h2 class="section-title">Creative Suite</h2>
+                            <span class="section-subtitle">Professional tools for creators</span>
                         </div>
-                        <h3>ThumbGrab</h3>
-                        <p>Download high-res YouTube thumbnails.</p>
-                         <div style="background: rgba(239, 68, 68, 0.2); color: white; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
-                    </a>
-
-                    <a href="qrcodegen/qrcodegen.php" class="tool-card" style="text-decoration: none; color: inherit;">
-                        <div class="card-glow" style="background: linear-gradient(90deg, transparent, #10b981, transparent);"></div>
-                        <div class="tool-header">
-                            <div class="app-icon" style="color: #10b981; background: rgba(16, 185, 129, 0.1);"><i class="fas fa-qrcode"></i></div>
-                            <div class="status-chip live" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
-                                <span class="dot" style="background: #10b981; box-shadow: 0 0 5px #10b981;"></span> Live
-                            </div>
-                        </div>
-                        <h3>LinkVault</h3>
-                        <p>Instant QR code generator.</p>
-                         <div style="background: rgba(16, 185, 129, 0.2); color: white; border: 1px solid #10b981; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top:15px; width: 100%; text-align: center;">Launch Tool</div>
-                    </a>
-
-                    <div class="tool-card locked">
-                        <div class="card-glow blue"></div>
-                        <div class="tool-header">
-                            <div class="app-icon icon-blue"><i class="fas fa-file-pdf"></i></div>
-                            <div class="status-chip upcoming">Q1</div>
-                        </div>
-                        <h3>Lexora PDF</h3>
-                        <p>Merge, split, and secure documents.</p>
-                        <button class="notify-btn">Notify Me</button>
+                        <div class="section-badge">9 Tools</div>
                     </div>
 
-                    <div class="tool-card locked">
-                        <div class="card-glow gold"></div>
-                        <div class="tool-header">
-                            <div class="app-icon icon-gold"><i class="fas fa-image"></i></div>
-                            <div class="status-chip upcoming">Q2</div>
-                        </div>
-                        <h3>PixelPerfect</h3>
-                        <p>AI image upscaling engine.</p>
-                        <button class="notify-btn">Notify Me</button>
-                    </div>
+                    <div class="tools-grid">
 
-                </div>
+                        <a href="voicegen/voicegen.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon pink-gradient">
+                                        <i class="fas fa-microphone-lines"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live pink-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">VoiceGen AI</h3>
+                                <p class="tool-description">Neural text-to-speech with multiple voices and languages for professional content.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">AI Powered</span>
+                                    <span class="tag">Multi-Language</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn pink-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh pink-mesh"></div>
+                        </a>
+
+                        <a href="thumbgrab/thumbgrab.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon red-gradient">
+                                        <i class="fab fa-youtube"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live red-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">ThumbGrab</h3>
+                                <p class="tool-description">Download high-resolution YouTube thumbnails instantly in multiple formats.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">HD Quality</span>
+                                    <span class="tag">Instant</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn red-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh red-mesh"></div>
+                        </a>
+
+                        <a href="qrcodegen/qrcodegen.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon green-gradient">
+                                        <i class="fas fa-qrcode"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live green-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">LinkVault</h3>
+                                <p class="tool-description">Generate custom QR codes with logo embedding and color customization.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Customizable</span>
+                                    <span class="tag">SVG Export</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn green-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh green-mesh"></div>
+                        </a>
+
+                        <a href="chromapick/chromapick.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon indigo-gradient">
+                                        <i class="fas fa-eye-dropper"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live indigo-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">ChromaPick</h3>
+                                <p class="tool-description">Extract color palettes from images with hex, RGB, and HSL formats.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Color Theory</span>
+                                    <span class="tag">Palette Gen</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn indigo-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh indigo-mesh"></div>
+                        </a>
+
+                        <a href="lexorapdf/lexorapdf.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon blue-gradient">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live blue-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">Lexora PDF</h3>
+                                <p class="tool-description">Merge, split, compress, and convert PDFs with enterprise-grade security.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Secure</span>
+                                    <span class="tag">Fast</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn blue-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh blue-mesh"></div>
+                        </a>
+
+                        <a href="securepass/securepass.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon yellow-gradient">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live yellow-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">SecurePass</h3>
+                                <p class="tool-description">Generate cryptographically secure passwords with custom complexity rules.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">256-bit</span>
+                                    <span class="tag">Zero-Log</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn yellow-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh yellow-mesh"></div>
+                        </a>
+
+                        <a href="socialmock/socialmock.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon cyan-gradient">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live cyan-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">SocialMock</h3>
+                                <p class="tool-description">Create realistic social media post mockups for Twitter, Instagram, and LinkedIn.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Design</span>
+                                    <span class="tag">Marketing</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn cyan-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh cyan-mesh"></div>
+                        </a>
+
+                        <a href="focusflow/focusflow.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon violet-gradient">
+                                        <i class="fas fa-headphones"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live violet-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">FocusFlow</h3>
+                                <p class="tool-description">Ambient noise generator and Pomodoro timer for deep work sessions.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Productivity</span>
+                                    <span class="tag">Wellness</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn violet-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh violet-mesh"></div>
+                        </a>
+
+                        <a href="quickconvert/quickconvert.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon orange-gradient">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live orange-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">QuickConvert</h3>
+                                <p class="tool-description">Universal unit and currency converter with real-time exchange rates.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Utility</span>
+                                    <span class="tag">Travel</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn orange-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh orange-mesh"></div>
+                        </a>
+
+                    </div>
+                </section>
 
             </div>
         </main>
