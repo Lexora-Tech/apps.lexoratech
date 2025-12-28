@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lexora Workspace - Professional Productivity Suite</title>
+    <title>Lexora Workspace | World's First Free All-in-One Creator Suite</title>
+    <meta name="description" content="The only free operating system for creators. Access 10+ pro tools: Voice-Activated Teleprompter, Neural TTS, 4K Thumbnail Downloader, and PDF Editor. No login required.">
+    <meta name="keywords" content="free creator tools, online productivity suite, all in one seo tools, free teleprompter, ai voice generator, youtube thumbnail downloader, pdf editor online, Lexora apps">
+    <meta property="og:title" content="Lexora Workspace - Stop Switching Tabs. Create Everything Here.">
 
     <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting, VoiceGen for neural text-to-speech, and ChromaPick for color extraction.">
     <meta name="keywords" content="free teleprompter online, AI voice generator, color picker, palette generator, youtube thumbnail downloader, qr code generator, Lexora apps">
@@ -85,7 +88,7 @@
         <div class="gradient-sphere sphere-3"></div>
     </div>
 
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" >
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <i class="fas fa-bars"></i>
     </button>
 
