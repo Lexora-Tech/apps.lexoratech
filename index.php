@@ -85,7 +85,7 @@
         <div class="gradient-sphere sphere-3"></div>
     </div>
 
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" >
         <i class="fas fa-bars"></i>
     </button>
 
@@ -95,11 +95,11 @@
             <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
             <div class="sidebar-content">
                 <div class="sidebar-header">
-                    <div class="logo-container">
+                    <div class="logo-container" style="margin-left: 70px; margin-top: -14px;">
                         <img src="./assets/logo/logo2.png" alt="Lexora Logo" class="logo-img">
                         <div class="logo-glow"></div>
                     </div>
-                    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+                    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu" style="margin-top: -14px;">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
