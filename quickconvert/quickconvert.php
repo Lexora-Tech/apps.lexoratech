@@ -34,44 +34,91 @@
                 <div class="brand-icon"><i class="fas fa-exchange-alt"></i></div>
                 <div class="brand-text">
                     <h1>QuickConvert</h1>
-                    <span>v1.0.0</span>
+                    <span>v1.5.0</span>
                 </div>
             </div>
 
             <nav class="nav-menu">
-                <div class="nav-label">CATEGORIES</div>
-                
+                <div class="nav-label">EVERYDAY</div>
                 <button class="nav-item active" data-tab="currency">
                     <span class="icon-box"><i class="fas fa-coins"></i></span>
                     <span class="text">Currency</span>
                 </button>
-                
-                <button class="nav-item" data-tab="length">
-                    <span class="icon-box"><i class="fas fa-ruler-combined"></i></span>
-                    <span class="text">Length</span>
+                <button class="nav-item" data-tab="cooking">
+                    <span class="icon-box"><i class="fas fa-utensils"></i></span>
+                    <span class="text">Cooking</span>
                 </button>
-                
-                <button class="nav-item" data-tab="weight">
-                    <span class="icon-box"><i class="fas fa-weight-hanging"></i></span>
-                    <span class="text">Weight</span>
-                </button>
-                
                 <button class="nav-item" data-tab="temp">
                     <span class="icon-box"><i class="fas fa-temperature-high"></i></span>
                     <span class="text">Temperature</span>
                 </button>
+                <button class="nav-item" data-tab="time">
+                    <span class="icon-box"><i class="fas fa-clock"></i></span>
+                    <span class="text">Time</span>
+                </button>
 
+                <div class="nav-label">PHYSICS</div>
+                <button class="nav-item" data-tab="length">
+                    <span class="icon-box"><i class="fas fa-ruler-combined"></i></span>
+                    <span class="text">Length</span>
+                </button>
+                <button class="nav-item" data-tab="weight">
+                    <span class="icon-box"><i class="fas fa-weight-hanging"></i></span>
+                    <span class="text">Weight</span>
+                </button>
+                <button class="nav-item" data-tab="force">
+                    <span class="icon-box"><i class="fas fa-meteor"></i></span>
+                    <span class="text">Force</span>
+                </button>
+                <button class="nav-item" data-tab="accel">
+                    <span class="icon-box"><i class="fas fa-rocket"></i></span>
+                    <span class="text">Acceleration</span>
+                </button>
+
+                <div class="nav-label">ENGINEERING</div>
+                <button class="nav-item" data-tab="speed">
+                    <span class="icon-box"><i class="fas fa-tachometer-alt"></i></span>
+                    <span class="text">Speed</span>
+                </button>
+                <button class="nav-item" data-tab="fuel">
+                    <span class="icon-box"><i class="fas fa-gas-pump"></i></span>
+                    <span class="text">Fuel MPG</span>
+                </button>
+                <button class="nav-item" data-tab="pressure">
+                    <span class="icon-box"><i class="fas fa-compress-arrows-alt"></i></span>
+                    <span class="text">Pressure</span>
+                </button>
+                <button class="nav-item" data-tab="torque">
+                    <span class="icon-box"><i class="fas fa-wrench"></i></span>
+                    <span class="text">Torque</span>
+                </button>
+                <button class="nav-item" data-tab="energy">
+                    <span class="icon-box"><i class="fas fa-bolt"></i></span>
+                    <span class="text">Energy</span>
+                </button>
+                <button class="nav-item" data-tab="power">
+                    <span class="icon-box"><i class="fas fa-plug"></i></span>
+                    <span class="text">Power</span>
+                </button>
+
+                <div class="nav-label">OTHER</div>
+                <button class="nav-item" data-tab="area">
+                    <span class="icon-box"><i class="fas fa-chart-area"></i></span>
+                    <span class="text">Area</span>
+                </button>
+                <button class="nav-item" data-tab="volume">
+                    <span class="icon-box"><i class="fas fa-cube"></i></span>
+                    <span class="text">Volume</span>
+                </button>
+                <button class="nav-item" data-tab="angle">
+                    <span class="icon-box"><i class="fas fa-drafting-compass"></i></span>
+                    <span class="text">Angle</span>
+                </button>
                 <button class="nav-item" data-tab="data">
                     <span class="icon-box"><i class="fas fa-hdd"></i></span>
-                    <span class="text">Data Storage</span>
+                    <span class="text">Storage</span>
                 </button>
             </nav>
-
-            <div class="sidebar-footer">
-                <a href="../index.php" class="btn-secondary hidden-desktop">
-                    <i class="fas fa-chevron-left"></i> Back to Dashboard
-                </a>
-            </div>
         </aside>
 
         <main class="main-content">
