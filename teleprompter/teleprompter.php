@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PromptFlow Studio | Free Voice-Activated Teleprompter Online</title>
-    
+    <title>PromptFlow Studio | Lexora Workspace</title>
+    <meta name="description" content="The world's smartest online teleprompter. Features voice-scrolling (listen mode), mirror/flip for beam splitters, and reality mode. 100% Free, privacy-focused, no app install needed.">
+    <meta name="keywords" content="voice activated teleprompter online, free autocue with voice recognition, mirror mode teleprompter, laptop teleprompter software, virtual teleprompter for zoom">
+
     <meta name="description" content="Professional free online teleprompter with voice tracking (voice scrolling), mirror mode, and reality mode. No login required. Best for YouTubers and presenters.">
-    
+
     <meta name="keywords" content="voice activated teleprompter, free autocue online, teleprompter with mirror mode, browser teleprompter, PromptFlow Studio">
-    
+
     <link rel="canonical" href="https://apps.lexoratech.com/teleprompter/teleprompter.php" />
-    
+
     <meta property="og:title" content="PromptFlow Studio - Voice Activated Teleprompter">
     <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo2.png">
