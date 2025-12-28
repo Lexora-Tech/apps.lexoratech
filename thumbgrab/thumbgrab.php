@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThumbGrab | YouTube Thumbnail Downloader</title>
+    <title>ThumbGrab | 4K YouTube Thumbnail Downloader (Max Resolution)</title>
+<meta name="description" content="Extract and download full HD (1080p) and 4K YouTube thumbnails instantly. Get the original high-quality cover art from any video URL. No watermark.">
+<meta name="keywords" content="youtube thumbnail downloader 4k, save youtube thumbnail hd, get youtube video cover image, extract youtube thumbnail high quality, 1280x720 thumbnail grabber">
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

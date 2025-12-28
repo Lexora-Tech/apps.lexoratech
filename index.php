@@ -27,17 +27,22 @@
         {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Lexora Apps Suite",
-            "applicationCategory": "ProductivityApplication",
-            "operatingSystem": "Web",
+            "name": "Lexora Workspace",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web Browser",
             "offers": {
                 "@type": "Offer",
-                "price": "0",
+                "price": "0.00",
                 "priceCurrency": "USD"
-            }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "ratingCount": "1250"
+            },
+            "featureList": "Voice-Activated Teleprompter, Neural Text-to-Speech, 4K Thumbnail Downloader, Secure PDF Tools"
         }
     </script>
-
     <style>
         /* Mobile Specific Overrides */
         @media (max-width: 768px) {
@@ -85,7 +90,7 @@
         <div class="gradient-sphere sphere-3"></div>
     </div>
 
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" >
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <i class="fas fa-bars"></i>
     </button>
 

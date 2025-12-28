@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LinkVault | Pro QR Generator</title>
+    <title>LinkVault | Free Custom QR Code Generator with Logo (SVG/Vector)</title>
+<meta name="description" content="Create permanent, scannable QR codes with your brand logo, custom colors, and gradients. Export in SVG, PNG, or WEBP. Professional grade & privacy-first.">
+<meta name="keywords" content="qr code generator with logo, free custom qr code creator, vector qr code generator svg, branded qr code maker, wifi qr code generator">
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,9 +31,9 @@
                 <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
             </div>
 
-            <a href="../index.php" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back To Workspace
-            </a>
+            <a href="../index.php" class="back-link" title="Return to Lexora OS">
+    <i class="fas fa-th-large"></i> Back to Creator OS
+</a>
 
             <div class="scroll-controls">
 

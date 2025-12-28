@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ChromaPick | Professional Color Studio</title>
+    <title>ChromaPick | Free Image Color Picker & Palette Generator (HEX/RGB/HSL)</title>
+<meta name="description" content="Extract colors directly from images. Use the built-in eyedropper to get HEX, RGB, and HSL codes. Generate harmonic color palettes instantly. Privacy-first: Images never leave your browser.">
+<meta name="keywords" content="image color picker, hex code finder, color palette generator from image, get color from picture, css gradient generator, eyedropper tool online">
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -74,9 +76,9 @@
                 </a>
             </div>
 
-            <a href="../index.php" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back To Workspace
-            </a>
+            <a href="../index.php" class="back-link" title="Return to Lexora OS">
+    <i class="fas fa-th-large"></i> Back to Creator OS
+</a>
 
             <div class="scroll-controls">
 
