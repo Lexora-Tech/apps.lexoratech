@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoiceGen AI | Free Text to Speech (English, Sinhala, Tamil)</title>
-    
+    <title>VoiceGen AI | Lexora Workspace</title>
+    <meta name="description" content="Generate ultra-realistic AI voiceovers instantly. Supports English, Sinhala, Tamil, and 30+ languages. Unlimited MP3 downloads for YouTube and content creation.">
+    <meta name="keywords" content="free neural tts, realistic ai voice generator, sinhala text to speech ai, tamil text to speech, tiktok voice generator, download tts mp3 free">
+
     <meta name="description" content="Convert text to lifelike speech instantly. Free AI voice generator supporting English, Sinhala, Tamil, and more. Download MP3 audio for your videos.">
-    
+
     <meta name="keywords" content="sinhala text to speech, tamil text to speech, ai voice generator free, download tts mp3, VoiceGen AI">
-    
+
     <link rel="canonical" href="https://apps.lexoratech.com/voicegen/voicegen.php" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -73,9 +76,9 @@
                             </select>
                             <i class="fas fa-chevron-down arrow"></i>
                         </div>
-                        
+
                         <div class="voice-note">
-                            <i class="fas fa-info-circle"></i> 
+                            <i class="fas fa-info-circle"></i>
                             Supports English, <strong>Sinhala</strong>, <strong>Tamil</strong>, and more.
                         </div>
                     </div>
@@ -126,8 +129,14 @@
             <div class="text-area-wrapper">
                 <textarea id="textInput" placeholder="Enter Text Here... Select Language From Sidebar."></textarea>
                 <div id="visualizer" class="visualizer hidden">
-                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
                 </div>
             </div>
 
@@ -136,7 +145,9 @@
                 <button id="stopBtn" class="control-icon"><i class="fas fa-stop"></i></button>
                 <div class="track-info">
                     <span id="currentTime" class="track-time">00:00</span>
-                    <div class="progress-container"><div id="progressBar" class="progress-bar"></div></div>
+                    <div class="progress-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
                     <span id="totalTime" class="track-total">00:00</span>
                 </div>
             </div>
@@ -146,4 +157,5 @@
     <div class="toast-container"></div>
     <script src="./js/voicegen.js"></script>
 </body>
+
 </html>

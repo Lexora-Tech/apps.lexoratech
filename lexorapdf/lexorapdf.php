@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lexora PDF | Professional Suite</title>
+    <title>Lexora PDF | Secure PDF Editor: Merge, Split & Compress (Client-Side)</title>
+<meta name="description" content="Process PDFs directly in your browser without uploading files to a server. 100% private. Merge, split, rotate, and watermark PDFs securely and instantly.">
+<meta name="keywords" content="private pdf merger online, split pdf offline browser, client side pdf tools, secure pdf watermark, combine pdfs free no upload">
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,6 +23,7 @@
     </script>
     
     <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    
 </head>
 
 <body>
@@ -35,9 +38,9 @@
                 <i class="fas fa-file-pdf"></i> Lexora PDF <span class="badge">PRO</span>
             </div>
 
-            <a href="../index.php" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back To Workspace
-            </a>
+            <a href="../index.php" class="back-link" title="Return to Lexora OS">
+    <i class="fas fa-th-large"></i> Back to Creator OS
+</a>
 
             <div class="scroll-controls">
 

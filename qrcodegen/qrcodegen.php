@@ -29,9 +29,9 @@
                 <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
             </div>
 
-            <a href="../index.php" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back To Workspace
-            </a>
+            <a href="../index.php" class="back-link" title="Return to Lexora OS">
+    <i class="fas fa-th-large"></i> Back to Creator OS
+</a>
 
             <div class="scroll-controls">
 
