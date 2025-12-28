@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let binauralGain;
     let masterGain;
 
-    // YouTube Player
+    // YouTube
     let player;
     let ytReady = false;
 
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. YOUTUBE API ---
     window.onYouTubeIframeAPIReady = function () {
         player = new YT.Player('youtube-player-div', {
-            height: '0', width: '0',
-            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1 },
+            height: '200', width: '100%',
+            playerVars: { 'autoplay': 0, 'controls': 1, 'loop': 1 },
             events: { 'onReady': onPlayerReady }
         });
     };
@@ -114,10 +114,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoId = extractVideoID(url);
         if (videoId && ytReady) {
             player.loadVideoById(videoId);
-            player.pauseVideo(); // Wait for timer start
+            // Default to pause initially - user must start timer
+            player.pauseVideo();
             document.getElementById('ytControls').classList.remove('hidden');
         } else {
             alert("Invalid YouTube URL");
+        }
+    });
+
+    // Toggle Video Visibility
+    document.getElementById('ytVideoToggle').addEventListener('change', (e) => {
+        const container = document.getElementById('ytVideoContainer');
+        if (e.target.checked) {
+            container.classList.remove('hidden');
+        } else {
+            container.classList.add('hidden');
+        }
+    });
+
+    // Custom Play/Pause Control for YouTube
+    document.getElementById('ytPlayPauseBtn').addEventListener('click', () => {
+        const state = player.getPlayerState();
+        if (state === 1) { // Playing
+            player.pauseVideo();
+            document.getElementById('ytPlayPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+            player.playVideo();
+            document.getElementById('ytPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
         }
     });
 
@@ -167,8 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (slider.value > 0) ambientSounds[key].play();
             });
 
-            // Resume YouTube
-            if (ytReady && player.getPlayerState() !== 1) player.playVideo();
+            // Resume YouTube (if loaded)
+            if (ytReady && player.getVideoData()['video_id']) {
+                player.playVideo();
+                document.getElementById('ytPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
+            }
 
             timerInterval = setInterval(() => {
                 if (timeLeft > 0) {
@@ -184,9 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(timerInterval);
             startBtn.innerHTML = '<div class="play-icon"><i class="fas fa-play"></i></div><span>Resume</span>';
 
-            // Pause all audio
+            // Pause All Audio
             Object.values(ambientSounds).forEach(a => a.pause());
-            if (ytReady) player.pauseVideo();
+            if (ytReady) {
+                player.pauseVideo();
+                document.getElementById('ytPlayPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+            }
             toggleBinaural(false);
             document.getElementById('neuroToggle').checked = false;
         }
@@ -212,10 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ytReady) player.pauseVideo();
     }
 
-    // --- 4. EVENT LISTENERS ---
+    // --- 4. CONTROLS ---
     startBtn.addEventListener('click', toggleTimer);
     resetBtn.addEventListener('click', resetTimer);
     document.getElementById('skipBtn').addEventListener('click', finishSession);
+
+    // Custom Time
+    document.getElementById('setCustomTimeBtn').addEventListener('click', () => {
+        const val = document.getElementById('customTimeInput').value;
+        if (val > 0) {
+            timeLeft = val * 60;
+            totalTime = timeLeft;
+            updateDisplay();
+            document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
+        }
+    });
 
     document.querySelectorAll('.mode-pill').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -235,17 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDisplay();
             resetTimer();
         });
-    });
-
-    document.getElementById('neuroToggle').addEventListener('change', (e) => {
-        const controls = document.getElementById('neuroControls');
-        if (e.target.checked) {
-            controls.classList.remove('disabled');
-            toggleBinaural(true);
-        } else {
-            controls.classList.add('disabled');
-            toggleBinaural(false);
-        }
     });
 
     // Sliders & Toggles
@@ -274,6 +303,22 @@ document.addEventListener('DOMContentLoaded', () => {
             slider.value = slider.value > 0 ? 0 : 0.5;
             slider.dispatchEvent(new Event('input'));
         });
+    });
+
+    // Neuro Toggle
+    document.getElementById('neuroToggle').addEventListener('change', (e) => {
+        const controls = document.getElementById('neuroControls');
+        if (e.target.checked) {
+            controls.classList.remove('disabled');
+            toggleBinaural(true);
+        } else {
+            controls.classList.add('disabled');
+            toggleBinaural(false);
+        }
+    });
+
+    document.getElementById('zenModeBtn').addEventListener('click', () => {
+        document.body.classList.toggle('zen-mode');
     });
 
     // --- 5. VISUALIZER ---
