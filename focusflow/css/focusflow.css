@@ -1,14 +1,15 @@
 /* ========================================
-   FOCUSFLOW V9.0 STYLES
+   FOCUSFLOW V10 STYLES
    ======================================== */
 
 :root {
     --bg-deep: #050505;
-    --glass-bg: rgba(20, 20, 25, 0.8);
-    /* Slightly darker for better contrast */
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(20, 20, 25, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
     --primary-neon: #8b5cf6;
+    /* Violet */
     --secondary-neon: #06b6d4;
+    /* Cyan */
     --text-white: #ffffff;
     --text-muted: #94a3b8;
     --font-main: 'Outfit', sans-serif;
@@ -27,9 +28,10 @@ body {
     color: var(--text-white);
     min-height: 100vh;
     overflow-x: hidden;
+    perspective: 1000px;
 }
 
-/* --- DYNAMIC BACKGROUND --- */
+/* --- BACKGROUND --- */
 .aurora-bg {
     position: fixed;
     inset: 0;
@@ -191,7 +193,7 @@ body {
     flex: 1;
 }
 
-/* --- TIMER SECTION (LEFT) --- */
+/* --- TIMER SECTION --- */
 .timer-section {
     background: rgba(10, 10, 12, 0.4);
     border: 1px solid var(--glass-border);
@@ -200,11 +202,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    position: relative;
     padding: 2rem;
 }
 
-/* Timer Ring */
 .timer-wrapper {
     position: relative;
     margin-bottom: 2rem;
@@ -214,7 +214,6 @@ body {
 .progress-ring {
     transform: rotate(-90deg);
     pointer-events: none;
-    /* FIX: Makes sure clicks pass through to buttons */
 }
 
 .ring-bg {
@@ -283,7 +282,6 @@ body {
     letter-spacing: -2px;
 }
 
-/* Custom Time */
 .custom-time-row {
     display: flex;
     gap: 8px;
@@ -315,14 +313,14 @@ body {
     font-weight: 600;
 }
 
-/* Controls - FIX: High Z-Index to be clickable */
+/* CONTROLS */
 .main-controls {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 2rem;
     position: relative;
-    z-index: 10;
+    z-index: 20;
 }
 
 .control-btn {
@@ -350,10 +348,6 @@ body {
     box-shadow: 0 0 35px rgba(139, 92, 246, 0.6);
 }
 
-.control-btn.primary:active {
-    transform: scale(0.95);
-}
-
 .control-btn.secondary {
     width: 48px;
     height: 48px;
@@ -369,7 +363,6 @@ body {
     color: #fff;
 }
 
-/* Mode Pills */
 .modes-row {
     display: flex;
     gap: 8px;
@@ -377,8 +370,8 @@ body {
     padding: 5px;
     border-radius: 50px;
     margin-bottom: 20px;
-    z-index: 10;
     position: relative;
+    z-index: 10;
 }
 
 .mode-pill {
@@ -398,7 +391,7 @@ body {
     color: #fff;
 }
 
-/* YOUTUBE CARD */
+/* --- YOUTUBE CARD --- */
 .youtube-card {
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
@@ -412,18 +405,38 @@ body {
 
 .yt-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
+}
+
+.yt-title {
+    display: flex;
     gap: 8px;
+    align-items: center;
     font-weight: 600;
-    color: #ff0000;
-    margin-bottom: 10px;
+    color: #ff0033;
+}
+
+.yt-mini-vol {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.yt-mini-vol input {
+    width: 60px;
+    accent-color: #ff0033;
+    height: 3px;
 }
 
 /* Tabs */
 .yt-tabs {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     border-bottom: 1px solid var(--glass-border);
 }
 
@@ -442,13 +455,22 @@ body {
     border-bottom-color: var(--primary-neon);
 }
 
+.yt-tab-content {
+    display: none;
+}
+
+.yt-tab-content.active {
+    display: block;
+}
+
 .yt-input-group {
     display: flex;
     gap: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-#ytUrlInput {
+#ytMusicUrl,
+#ytVideoUrl {
     flex: 1;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--glass-border);
@@ -459,7 +481,7 @@ body {
     outline: none;
 }
 
-#ytLoadBtn {
+.yt-action-btn {
     background: var(--secondary-neon);
     border: none;
     padding: 0 12px;
@@ -467,20 +489,11 @@ body {
     cursor: pointer;
     font-weight: 600;
     color: #000;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.hint-text {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-left: 4px;
 }
 
 /* Player Wrapper */
 .yt-player-wrapper {
-    margin-top: 15px;
+    margin-top: 10px;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
@@ -491,57 +504,106 @@ body {
 #youtube-iframe {
     width: 100%;
     height: 100%;
-    min-height: 200px;
 }
 
-/* Music Mode: Hidden Video, Nice Cover */
+/* Audio Mode Styles */
+.music-mode {
+    height: 80px;
+}
+
 .music-mode #youtube-iframe {
     display: none;
 }
 
+/* Hide video in audio mode */
 .music-mode .music-cover {
     display: flex;
-    flex-direction: column;
+    height: 100%;
     align-items: center;
-    justify-content: center;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.05);
-    gap: 10px;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: radial-gradient(circle at center, #2e263d 0%, #15111d 100%);
     color: var(--text-muted);
     font-size: 0.9rem;
 }
 
-.music-mode .music-cover i {
-    font-size: 1.5rem;
-    color: var(--primary-neon);
-    animation: pulse 2s infinite;
+.yt-ctrl-overlay {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Video Mode: Visible Video */
+/* Video Mode Styles */
+.video-mode {
+    height: 200px;
+    aspect-ratio: 16/9;
+}
+
 .video-mode .music-cover {
     display: none;
 }
 
 .video-mode #youtube-iframe {
     display: block;
-    height: 200px;
+    height: 100%;
 }
 
-.yt-volume-row {
+/* Visualizer */
+.equalizer {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    color: var(--text-muted);
+    gap: 4px;
+    height: 20px;
+    align-items: flex-end;
 }
 
-.yt-volume-row input {
-    flex: 1;
-    accent-color: #ff0000;
-    height: 3px;
+.bar {
+    width: 4px;
+    background: var(--primary-neon);
+    height: 4px;
+    border-radius: 2px;
 }
 
-/* --- SIDEBAR SECTION (RIGHT) --- */
+/* Animation Class (Added by JS) */
+.bar.animating {
+    animation: eq 0.6s infinite ease-in-out alternate;
+}
+
+.bar:nth-child(1) {
+    animation-duration: 0.6s;
+}
+
+.bar:nth-child(2) {
+    animation-duration: 0.55s;
+}
+
+.bar:nth-child(3) {
+    animation-duration: 0.65s;
+}
+
+.bar:nth-child(4) {
+    animation-duration: 0.5s;
+}
+
+@keyframes eq {
+    0% {
+        height: 4px;
+        opacity: 0.5;
+    }
+
+    100% {
+        height: 20px;
+        opacity: 1;
+    }
+}
+
+/* --- SIDEBAR --- */
 .sidebar-section {
     display: flex;
     flex-direction: column;
@@ -638,16 +700,12 @@ input[type=range] {
     border-radius: 2px;
 }
 
-/* Mixer Controls */
+/* Mixer */
 .mixer-scroll {
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
     padding-right: 5px;
     scrollbar-width: none;
-}
-
-.mixer-scroll::-webkit-scrollbar {
-    display: none;
 }
 
 .sound-row {
@@ -749,7 +807,7 @@ input:checked+.slider:before {
     transform: translateX(18px);
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media (max-width: 1000px) {
     .main-grid {
         grid-template-columns: 1fr;
@@ -764,11 +822,7 @@ input:checked+.slider:before {
         margin-top: 20px;
     }
 
-    .timer-wrapper {
-        width: 260px;
-        height: 260px;
-    }
-
+    .timer-wrapper,
     .progress-ring {
         width: 260px;
         height: 260px;
@@ -783,13 +837,5 @@ input:checked+.slider:before {
 
     #timeDisplay {
         font-size: 3.5rem;
-    }
-
-    .app-container {
-        padding: 15px;
-    }
-
-    .youtube-card {
-        margin-top: 20px;
     }
 }
