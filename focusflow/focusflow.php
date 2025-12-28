@@ -21,206 +21,185 @@
         <div class="noise-overlay"></div>
     </div>
 
-    <div id="holoWrapper" class="holo-wrapper">
-        <div class="app-container">
+    <div class="app-container">
 
-            <header class="glass-header">
-                <a href="../index.php" class="modern-back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Dashboard</span>
-                </a>
-                <div class="brand">
-                    <div class="logo-glow"><i class="fas fa-brain"></i></div>
-                    <span class="brand-text">FocusFlow <span class="badge">V8.0</span></span>
+        <header class="glass-header">
+            <a href="../index.php" class="modern-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Dashboard</span>
+            </a>
+            <div class="brand">
+                <div class="logo-glow"><i class="fas fa-brain"></i></div>
+                <span class="brand-text">FocusFlow <span class="badge">V9.0</span></span>
+            </div>
+            <div class="header-actions">
+                <button id="zenModeBtn" class="icon-btn" title="Zen Mode"><i class="fas fa-expand"></i></button>
+            </div>
+        </header>
+
+        <main class="main-grid">
+
+            <section class="timer-section">
+
+                <div class="timer-wrapper">
+                    <svg class="progress-ring" width="320" height="320">
+                        <circle class="ring-bg" stroke-width="8" fill="transparent" r="140" cx="160" cy="160" />
+                        <circle class="ring-progress" id="timerProgress" stroke-width="8" fill="transparent" r="140" cx="160" cy="160" />
+                    </svg>
+
+                    <div class="timer-content">
+                        <div class="mode-label" id="modeLabel">⚡ Ready to Flow</div>
+                        <h1 id="timeDisplay">25:00</h1>
+
+                        <div class="custom-time-row">
+                            <input type="number" id="customTimeInput" placeholder="Min" min="1" max="180">
+                            <button id="setCustomTimeBtn">Set</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="header-actions">
-                    <button id="holoModeBtn" class="icon-btn" title="Holo Mode (3D View)"><i class="fas fa-cube"></i></button>
-                    <button id="zenModeBtn" class="icon-btn" title="Zen Mode"><i class="fas fa-expand"></i></button>
+
+                <div class="main-controls">
+                    <button id="resetBtn" class="control-btn secondary"><i class="fas fa-undo"></i></button>
+                    <button id="startBtn" class="control-btn primary">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <span>Start Flow</span>
+                    </button>
+                    <button id="skipBtn" class="control-btn secondary"><i class="fas fa-step-forward"></i></button>
                 </div>
-            </header>
 
-            <main class="main-grid">
+                <div class="modes-row">
+                    <button class="mode-pill active" data-mode="focus" data-time="25">Focus</button>
+                    <button class="mode-pill" data-mode="short" data-time="5">Short</button>
+                    <button class="mode-pill" data-mode="long" data-time="15">Long</button>
+                </div>
 
-                <section class="timer-section">
+                <div class="youtube-card">
+                    <div class="yt-header">
+                        <i class="fab fa-youtube"></i>
+                        <span>Media Player</span>
+                    </div>
 
-                    <div class="timer-wrapper">
-                        <div class="glow-ring"></div>
-                        <svg class="progress-ring" width="320" height="320">
-                            <circle class="ring-bg" stroke-width="8" fill="transparent" r="140" cx="160" cy="160" />
-                            <circle class="ring-progress" id="timerProgress" stroke-width="8" fill="transparent" r="140" cx="160" cy="160" />
-                        </svg>
+                    <div class="yt-tabs">
+                        <button class="yt-tab active" data-target="music">🎵 Background Music</button>
+                        <button class="yt-tab" data-target="video">📺 Video Stream</button>
+                    </div>
 
-                        <div class="timer-content">
-                            <div class="mode-label" id="modeLabel">⚡ Ready to Flow</div>
-                            <h1 id="timeDisplay">25:00</h1>
+                    <div class="yt-input-group">
+                        <input type="text" id="ytUrlInput" placeholder="Paste YouTube Link Here...">
+                        <button id="ytLoadBtn"><i class="fas fa-play"></i> Load</button>
+                    </div>
 
-                            <div class="custom-time-row">
-                                <input type="number" id="customTimeInput" placeholder="Min" min="1" max="180">
-                                <button id="setCustomTimeBtn">Set</button>
-                            </div>
+                    <div id="ytPlayerWrapper" class="yt-player-wrapper music-mode">
+                        <div id="youtube-iframe"></div>
+                        <div class="music-cover">
+                            <i class="fas fa-music"></i>
+                            <span>Audio Playing in Background</span>
                         </div>
                     </div>
 
-                    <div class="main-controls">
-                        <button id="resetBtn" class="control-btn secondary"><i class="fas fa-undo"></i></button>
-                        <button id="startBtn" class="control-btn primary">
-                            <div class="play-icon"><i class="fas fa-play"></i></div>
-                            <span>Start Flow</span>
-                        </button>
-                        <button id="skipBtn" class="control-btn secondary"><i class="fas fa-step-forward"></i></button>
+                    <div class="yt-volume-row">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" id="ytVolume" min="0" max="100" value="50">
+                    </div>
+                </div>
+
+            </section>
+
+            <aside class="sidebar-section">
+
+                <div class="panel-card neuro-panel">
+                    <div class="panel-header">
+                        <div class="ph-left">
+                            <i class="fas fa-wave-square"></i>
+                            <div>
+                                <h3>Neuro-Engine</h3>
+                                <p class="sub-text">Binaural Beats</p>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="neuroToggle">
+                            <span class="slider"></span>
+                        </label>
                     </div>
 
-                    <div class="modes-row">
-                        <button class="mode-pill active" data-mode="focus" data-time="25">Focus</button>
-                        <button class="mode-pill" data-mode="short" data-time="5">Short</button>
-                        <button class="mode-pill" data-mode="long" data-time="15">Long</button>
+                    <div class="neuro-controls disabled" id="neuroControls">
+                        <div class="wave-selector">
+                            <button class="wave-btn active" data-hz="40">Gamma</button>
+                            <button class="wave-btn" data-hz="14">Beta</button>
+                            <button class="wave-btn" data-hz="8">Alpha</button>
+                            <button class="wave-btn" data-hz="4">Theta</button>
+                        </div>
+                        <div class="slider-row">
+                            <i class="fas fa-brain"></i>
+                            <input type="range" id="neuroVolume" min="0" max="0.3" step="0.01" value="0.1">
+                        </div>
                     </div>
+                </div>
 
-                    <div class="youtube-card">
-                        <div class="yt-header">
-                            <i class="fab fa-youtube"></i>
-                            <span>Media Stream</span>
-                        </div>
-
-                        <div class="yt-tabs">
-                            <button class="yt-tab active" data-tab="music">Background Music</button>
-                            <button class="yt-tab" data-tab="video">Video Stream</button>
-                        </div>
-
-                        <div class="yt-tab-content active" id="tab-music">
-                            <div class="yt-input-group">
-                                <input type="text" id="ytMusicUrl" placeholder="Paste Music Link (Hidden Player)">
-                                <button id="loadMusicBtn" class="yt-action-btn"><i class="fas fa-music"></i> Load</button>
-                            </div>
-                            <p class="hint-text">Audio plays in background. Great for Lofi/Beats.</p>
-                        </div>
-
-                        <div class="yt-tab-content" id="tab-video">
-                            <div class="yt-input-group">
-                                <input type="text" id="ytVideoUrl" placeholder="Paste Video Link (Visible)">
-                                <button id="loadVideoBtn" class="yt-action-btn"><i class="fas fa-video"></i> Load</button>
-                            </div>
-                            <p class="hint-text">Video player stays visible. Good for Study With Me.</p>
-                        </div>
-
-                        <div id="ytPlayerContainer" class="yt-player-container hidden">
-                            <div id="youtube-iframe"></div>
-                        </div>
-
-                        <div class="yt-controls hidden" id="ytControls">
-                            <button id="ytPlayPauseBtn" class="yt-ctrl-btn"><i class="fas fa-play"></i></button>
-                            <div class="yt-vol-slider">
-                                <i class="fas fa-volume-down"></i>
-                                <input type="range" id="ytVolume" min="0" max="100" value="50">
-                            </div>
+                <div class="panel-card mixer-panel">
+                    <div class="panel-header">
+                        <div class="ph-left">
+                            <i class="fas fa-sliders-h"></i>
+                            <h3>Soundscapes</h3>
                         </div>
                     </div>
 
-                </section>
-
-                <aside class="sidebar-section">
-
-                    <div class="panel-card neuro-panel">
-                        <div class="panel-header">
-                            <div class="ph-left">
-                                <i class="fas fa-wave-square"></i>
-                                <div>
-                                    <h3>Neuro-Engine</h3>
-                                    <p class="sub-text">Binaural Beats</p>
-                                </div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" id="neuroToggle">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="neuro-controls disabled" id="neuroControls">
-                            <div class="wave-selector">
-                                <button class="wave-btn active" data-hz="40">Gamma</button>
-                                <button class="wave-btn" data-hz="14">Beta</button>
-                                <button class="wave-btn" data-hz="8">Alpha</button>
-                                <button class="wave-btn" data-hz="4">Theta</button>
-                            </div>
-                            <div class="slider-row">
-                                <i class="fas fa-brain"></i>
-                                <input type="range" id="neuroVolume" min="0" max="0.3" step="0.01" value="0.1">
+                    <div class="mixer-scroll">
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="relax"><i class="fas fa-spa"></i></button>
+                            <div class="vol-control">
+                                <span>Serenity</span>
+                                <input type="range" class="amb-slider" data-sound="relax" min="0" max="1" step="0.05" value="0">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="panel-card mixer-panel">
-                        <div class="panel-header">
-                            <div class="ph-left">
-                                <i class="fas fa-sliders-h"></i>
-                                <h3>Soundscapes</h3>
-                            </div>
-                            <div class="spatial-toggle">
-                                <span class="badge-4d">4D Audio</span>
-                                <label class="switch-sm">
-                                    <input type="checkbox" id="spatialToggle">
-                                    <span class="slider"></span>
-                                </label>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="rain"><i class="fas fa-cloud-showers-heavy"></i></button>
+                            <div class="vol-control">
+                                <span>Heavy Rain</span>
+                                <input type="range" class="amb-slider" data-sound="rain" min="0" max="1" step="0.05" value="0">
                             </div>
                         </div>
-
-                        <div class="mixer-scroll">
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="relax"><i class="fas fa-spa"></i></button>
-                                <div class="vol-control">
-                                    <span>Serenity</span>
-                                    <input type="range" class="amb-slider" data-sound="relax" min="0" max="1" step="0.05" value="0">
-                                </div>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="fire"><i class="fas fa-fire"></i></button>
+                            <div class="vol-control">
+                                <span>Fireplace</span>
+                                <input type="range" class="amb-slider" data-sound="fire" min="0" max="1" step="0.05" value="0">
                             </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="rain"><i class="fas fa-cloud-showers-heavy"></i></button>
-                                <div class="vol-control">
-                                    <span>Heavy Rain</span>
-                                    <input type="range" class="amb-slider" data-sound="rain" min="0" max="1" step="0.05" value="0">
-                                </div>
+                        </div>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="night"><i class="fas fa-moon"></i></button>
+                            <div class="vol-control">
+                                <span>Night Crickets</span>
+                                <input type="range" class="amb-slider" data-sound="night" min="0" max="1" step="0.05" value="0">
                             </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="fire"><i class="fas fa-fire"></i></button>
-                                <div class="vol-control">
-                                    <span>Fireplace</span>
-                                    <input type="range" class="amb-slider" data-sound="fire" min="0" max="1" step="0.05" value="0">
-                                </div>
+                        </div>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="library"><i class="fas fa-book"></i></button>
+                            <div class="vol-control">
+                                <span>Library</span>
+                                <input type="range" class="amb-slider" data-sound="library" min="0" max="1" step="0.05" value="0">
                             </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="night"><i class="fas fa-moon"></i></button>
-                                <div class="vol-control">
-                                    <span>Night Crickets</span>
-                                    <input type="range" class="amb-slider" data-sound="night" min="0" max="1" step="0.05" value="0">
-                                </div>
+                        </div>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="keyboard"><i class="fas fa-keyboard"></i></button>
+                            <div class="vol-control">
+                                <span>Keyboard</span>
+                                <input type="range" class="amb-slider" data-sound="keyboard" min="0" max="1" step="0.05" value="0">
                             </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="library"><i class="fas fa-book"></i></button>
-                                <div class="vol-control">
-                                    <span>Library</span>
-                                    <input type="range" class="amb-slider" data-sound="library" min="0" max="1" step="0.05" value="0">
-                                </div>
-                            </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="keyboard"><i class="fas fa-keyboard"></i></button>
-                                <div class="vol-control">
-                                    <span>Keyboard</span>
-                                    <input type="range" class="amb-slider" data-sound="keyboard" min="0" max="1" step="0.05" value="0">
-                                </div>
-                            </div>
-                            <div class="sound-row">
-                                <button class="sound-icon" data-sound="white"><i class="fas fa-wind"></i></button>
-                                <div class="vol-control">
-                                    <span>Brown Noise</span>
-                                    <input type="range" class="amb-slider" data-sound="white" min="0" max="1" step="0.05" value="0">
-                                </div>
+                        </div>
+                        <div class="sound-row">
+                            <button class="sound-icon" data-sound="white"><i class="fas fa-wind"></i></button>
+                            <div class="vol-control">
+                                <span>Brown Noise</span>
+                                <input type="range" class="amb-slider" data-sound="white" min="0" max="1" step="0.05" value="0">
                             </div>
                         </div>
                     </div>
+                </div>
 
-                </aside>
+            </aside>
 
-            </main>
-        </div>
+        </main>
     </div>
 
     <audio id="audio-relax" loop crossorigin="anonymous" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3"></audio>

@@ -1,15 +1,14 @@
 /* ========================================
-   FOCUSFLOW V8.0 STYLES
+   FOCUSFLOW V9.0 STYLES
    ======================================== */
 
 :root {
     --bg-deep: #050505;
-    --glass-bg: rgba(20, 20, 25, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(20, 20, 25, 0.8);
+    /* Slightly darker for better contrast */
+    --glass-border: rgba(255, 255, 255, 0.1);
     --primary-neon: #8b5cf6;
-    /* Violet */
     --secondary-neon: #06b6d4;
-    /* Cyan */
     --text-white: #ffffff;
     --text-muted: #94a3b8;
     --font-main: 'Outfit', sans-serif;
@@ -28,22 +27,6 @@ body {
     color: var(--text-white);
     min-height: 100vh;
     overflow-x: hidden;
-    perspective: 1000px;
-    /* For Holo Mode */
-}
-
-/* --- HOLO MODE --- */
-.holo-wrapper {
-    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-style: preserve-3d;
-}
-
-body.holo-mode .holo-wrapper {
-    transform: rotateX(5deg) scale(0.95);
-}
-
-body.holo-mode .app-container {
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 /* --- DYNAMIC BACKGROUND --- */
@@ -230,6 +213,8 @@ body.holo-mode .app-container {
 
 .progress-ring {
     transform: rotate(-90deg);
+    pointer-events: none;
+    /* FIX: Makes sure clicks pass through to buttons */
 }
 
 .ring-bg {
@@ -251,6 +236,7 @@ body.holo-mode .app-container {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
     animation: pulse 4s infinite ease-in-out;
+    pointer-events: none;
 }
 
 @keyframes pulse {
@@ -274,6 +260,7 @@ body.holo-mode .app-container {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+    pointer-events: auto;
 }
 
 .mode-label {
@@ -302,6 +289,8 @@ body.holo-mode .app-container {
     gap: 8px;
     justify-content: center;
     margin-top: 5px;
+    position: relative;
+    z-index: 10;
 }
 
 #customTimeInput {
@@ -326,12 +315,14 @@ body.holo-mode .app-container {
     font-weight: 600;
 }
 
-/* Controls */
+/* Controls - FIX: High Z-Index to be clickable */
 .main-controls {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .control-btn {
@@ -386,6 +377,8 @@ body.holo-mode .app-container {
     padding: 5px;
     border-radius: 50px;
     margin-bottom: 20px;
+    z-index: 10;
+    position: relative;
 }
 
 .mode-pill {
@@ -413,6 +406,8 @@ body.holo-mode .app-container {
     border-radius: 16px;
     padding: 15px;
     margin-top: auto;
+    position: relative;
+    z-index: 10;
 }
 
 .yt-header {
@@ -447,23 +442,13 @@ body.holo-mode .app-container {
     border-bottom-color: var(--primary-neon);
 }
 
-/* Tab Content */
-.yt-tab-content {
-    display: none;
-}
-
-.yt-tab-content.active {
-    display: block;
-}
-
 .yt-input-group {
     display: flex;
     gap: 8px;
     margin-bottom: 8px;
 }
 
-#ytMusicUrl,
-#ytVideoUrl {
+#ytUrlInput {
     flex: 1;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--glass-border);
@@ -474,7 +459,7 @@ body.holo-mode .app-container {
     outline: none;
 }
 
-.yt-action-btn {
+#ytLoadBtn {
     background: var(--secondary-neon);
     border: none;
     padding: 0 12px;
@@ -493,49 +478,67 @@ body.holo-mode .app-container {
     margin-left: 4px;
 }
 
-.yt-player-container {
+/* Player Wrapper */
+.yt-player-wrapper {
     margin-top: 15px;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
-}
-
-.yt-player-container.hidden {
-    height: 0;
-    opacity: 0;
-    pointer-events: none;
-    margin: 0;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
 #youtube-iframe {
     width: 100%;
-    aspect-ratio: 16/9;
+    height: 100%;
+    min-height: 200px;
 }
 
-.yt-controls {
+/* Music Mode: Hidden Video, Nice Cover */
+.music-mode #youtube-iframe {
+    display: none;
+}
+
+.music-mode .music-cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.music-mode .music-cover i {
+    font-size: 1.5rem;
+    color: var(--primary-neon);
+    animation: pulse 2s infinite;
+}
+
+/* Video Mode: Visible Video */
+.video-mode .music-cover {
+    display: none;
+}
+
+.video-mode #youtube-iframe {
+    display: block;
+    height: 200px;
+}
+
+.yt-volume-row {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px;
-    border-radius: 8px;
-}
-
-.yt-ctrl-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.yt-vol-slider {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     color: var(--text-muted);
+}
+
+.yt-volume-row input {
+    flex: 1;
+    accent-color: #ff0000;
+    height: 3px;
 }
 
 /* --- SIDEBAR SECTION (RIGHT) --- */
@@ -704,16 +707,14 @@ input[type=range] {
 }
 
 /* Switch */
-.switch,
-.switch-sm {
+.switch {
     position: relative;
     display: inline-block;
     width: 40px;
     height: 22px;
 }
 
-.switch input,
-.switch-sm input {
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -746,11 +747,6 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(18px);
-}
-
-/* HELPERS */
-.hidden {
-    display: none !important;
 }
 
 /* MOBILE RESPONSIVE */

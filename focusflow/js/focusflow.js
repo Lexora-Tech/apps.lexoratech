@@ -1,21 +1,59 @@
+// --- GLOBAL YOUTUBE API READY FUNCTION ---
+// This must be outside DOMContentLoaded to be accessible by the API
+var player;
+var ytPlayerReady = false;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-iframe', {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+            'autoplay': 0,
+            'controls': 1,
+            'rel': 0,
+            'fs': 0,
+            'iv_load_policy': 3
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onError': onPlayerError
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    ytPlayerReady = true;
+    console.log("YouTube Player Ready");
+}
+
+function onPlayerError(event) {
+    console.log("YouTube Player Error: ", event.data);
+    alert("Could not load video. Please check the URL.");
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- VARIABLES ---
     let timerInterval;
     let timeLeft = 25 * 60;
     let totalTime = 25 * 60;
-    let isRunning = false;
+    let isTimerRunning = false;
+    let currentYtMode = 'music'; // 'music' or 'video'
 
-    // Web Audio API (Guaranteed Sound)
+    // Audio Context
     let audioCtx;
     let binauralOsc1, binauralOsc2, binauralGain;
-    let masterGain;
 
-    // YouTube
-    let player;
-    let ytReady = false;
+    // Elements
+    const timeDisplay = document.getElementById('timeDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const ringProgress = document.getElementById('timerProgress');
+    const modeLabel = document.getElementById('modeLabel');
+    const alarmSound = document.getElementById('audio-alarm');
 
-    // Ambient Elements
+    // Ambient Sounds
     const ambientSounds = {
         relax: document.getElementById('audio-relax'),
         rain: document.getElementById('audio-rain'),
@@ -25,17 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         keyboard: document.getElementById('audio-keyboard'),
         white: document.getElementById('audio-white')
     };
-    const alarmSound = document.getElementById('audio-alarm');
 
-    // DOM Elements
-    const timeDisplay = document.getElementById('timeDisplay');
-    const startBtn = document.getElementById('startBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const skipBtn = document.getElementById('skipBtn');
-    const ringProgress = document.getElementById('timerProgress');
-    const modeLabel = document.getElementById('modeLabel');
-
-    // --- 1. TIMER & DISPLAY LOGIC ---
+    // --- 1. TIMER DISPLAY ---
     const r = ringProgress.r.baseVal.value;
     const c = 2 * Math.PI * r;
     ringProgress.style.strokeDasharray = `${c} ${c}`;
@@ -58,24 +87,43 @@ document.addEventListener('DOMContentLoaded', () => {
         setProgress(p);
     }
 
-    // --- 2. START/PAUSE LOGIC (CRUCIAL FIX) ---
+    // --- 2. AUDIO UNLOCKER ---
+    function unlockAudioContext() {
+        if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    // --- 3. TIMER LOGIC ---
+    startBtn.addEventListener('click', () => {
+        unlockAudioContext(); // IMPORTANT: Resume Audio Context on Click
+
+        if (isTimerRunning) {
+            pauseTimer();
+        } else {
+            startTimer();
+        }
+    });
+
     function startTimer() {
-        if (isRunning) return;
-
-        // Fix: Wake up AudioContext on user interaction
-        initAudioEngine();
-
-        isRunning = true;
+        if (isTimerRunning) return;
+        isTimerRunning = true;
         startBtn.innerHTML = '<div class="play-icon"><i class="fas fa-pause"></i></div><span>Pause</span>';
 
-        // Resume Ambient
+        // Play Ambient
         Object.keys(ambientSounds).forEach(key => {
             const slider = document.querySelector(`.amb-slider[data-sound="${key}"]`);
             if (slider.value > 0) ambientSounds[key].play().catch(e => console.log(e));
         });
 
-        // Resume YouTube
-        if (ytReady && player.getPlayerState() === 2) player.playVideo();
+        // Play YouTube
+        if (ytPlayerReady && player.getVideoData().video_id) {
+            player.playVideo();
+        }
 
         timerInterval = setInterval(() => {
             if (timeLeft > 0) {
@@ -88,115 +136,131 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function pauseTimer() {
-        isRunning = false;
+        isTimerRunning = false;
         clearInterval(timerInterval);
         startBtn.innerHTML = '<div class="play-icon"><i class="fas fa-play"></i></div><span>Resume</span>';
 
-        // Pause Audio
+        // Pause all audio
         Object.values(ambientSounds).forEach(a => a.pause());
-        if (ytReady && player.getPlayerState() === 1) player.pauseVideo();
+        if (ytPlayerReady) player.pauseVideo();
 
         // Stop Binaural
-        toggleBinaural(false);
+        stopBinaural();
         document.getElementById('neuroToggle').checked = false;
     }
 
     function finishSession() {
         pauseTimer();
         alarmSound.play();
-        alert("Session Complete! Take a break.");
+        alert("Session Complete!");
         resetTimer();
     }
 
     function resetTimer() {
         pauseTimer();
         const activeBtn = document.querySelector('.mode-pill.active');
-        timeLeft = parseInt(activeBtn.dataset.time) * 60;
+        if (activeBtn) {
+            timeLeft = parseInt(activeBtn.dataset.time) * 60;
+        } else {
+            // keep custom time if set
+            timeLeft = totalTime;
+        }
         totalTime = timeLeft;
         startBtn.innerHTML = '<div class="play-icon"><i class="fas fa-play"></i></div><span>Start Flow</span>';
         setProgress(0);
         updateDisplay();
     }
 
-    // --- 3. CUSTOM TIME LOGIC (FIXED) ---
+    resetBtn.addEventListener('click', resetTimer);
+    skipBtn.addEventListener('click', finishSession);
+
+    // --- 4. CUSTOM TIME ---
     document.getElementById('setCustomTimeBtn').addEventListener('click', () => {
         const val = parseInt(document.getElementById('customTimeInput').value);
         if (val > 0) {
             pauseTimer();
-            // Deselect presets
             document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
-
-            // Set Time
             timeLeft = val * 60;
             totalTime = timeLeft;
-            modeLabel.innerText = `⏱️ Custom (${val}m)`;
-
+            modeLabel.innerText = `⏱️ Custom ${val}m`;
             updateDisplay();
+            // Reset Progress Ring Visual
+            setProgress(0);
             startBtn.innerHTML = '<div class="play-icon"><i class="fas fa-play"></i></div><span>Start Flow</span>';
         }
     });
 
-    // --- 4. YOUTUBE LOGIC (DUAL MODE) ---
-    window.onYouTubeIframeAPIReady = function () {
-        player = new YT.Player('youtube-iframe', {
-            height: '100%', width: '100%',
-            playerVars: { 'autoplay': 0, 'controls': 1, 'loop': 1 },
-            events: { 'onReady': onPlayerReady }
+    document.querySelectorAll('.mode-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            timeLeft = parseInt(btn.dataset.time) * 60;
+            totalTime = timeLeft;
+
+            if (btn.dataset.mode === 'focus') modeLabel.innerText = '⚡ Deep Focus';
+            else modeLabel.innerText = '🍵 Recharge';
+
+            updateDisplay();
+            resetTimer();
         });
-    };
+    });
 
-    function onPlayerReady(event) { ytReady = true; }
+    // --- 5. YOUTUBE LOGIC ---
+    function extractVideoID(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
 
-    function loadYouTube(url, isVideo) {
-        const videoId = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
-        if (videoId && videoId[2].length === 11 && ytReady) {
-            player.loadVideoById(videoId[2]);
-            player.pauseVideo(); // Wait for timer start
-            document.getElementById('ytControls').classList.remove('hidden');
+    document.getElementById('ytLoadBtn').addEventListener('click', () => {
+        const url = document.getElementById('ytUrlInput').value;
+        const id = extractVideoID(url);
 
-            const container = document.getElementById('ytPlayerContainer');
-            if (isVideo) {
-                container.classList.remove('hidden'); // Show video
+        if (id && ytPlayerReady) {
+            player.loadVideoById(id);
+            // We pause immediately so it starts only when timer starts
+            player.pauseVideo();
+
+            // Handle display mode
+            const container = document.getElementById('ytPlayerWrapper');
+            if (currentYtMode === 'music') {
+                container.classList.add('music-mode');
+                container.classList.remove('video-mode');
             } else {
-                container.classList.add('hidden'); // Hide video (Audio only)
+                container.classList.remove('music-mode');
+                container.classList.add('video-mode');
             }
         } else {
             alert("Invalid YouTube URL");
         }
-    }
-
-    document.getElementById('loadMusicBtn').addEventListener('click', () => {
-        loadYouTube(document.getElementById('ytMusicUrl').value, false);
     });
 
-    document.getElementById('loadVideoBtn').addEventListener('click', () => {
-        loadYouTube(document.getElementById('ytVideoUrl').value, true);
-    });
-
-    // Tabs Logic
     document.querySelectorAll('.yt-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.yt-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.yt-tab-content').forEach(c => c.classList.remove('active'));
-
             tab.classList.add('active');
-            document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+            currentYtMode = tab.dataset.target;
+
+            // If already loaded, switch view immediately
+            const container = document.getElementById('ytPlayerWrapper');
+            if (currentYtMode === 'music') {
+                container.classList.add('music-mode');
+                container.classList.remove('video-mode');
+            } else {
+                container.classList.remove('music-mode');
+                container.classList.add('video-mode');
+            }
         });
     });
 
-    // --- 5. AUDIO ENGINE ---
-    function initAudioEngine() {
-        if (!audioCtx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext();
-            masterGain = audioCtx.createGain();
-            masterGain.connect(audioCtx.destination);
-        }
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
+    document.getElementById('ytVolume').addEventListener('input', (e) => {
+        if (ytPlayerReady) player.setVolume(e.target.value);
+    });
 
+    // --- 6. AUDIO & BINAURAL ---
     function toggleBinaural(enable) {
-        initAudioEngine();
+        unlockAudioContext();
+
         if (enable) {
             const freq = 200;
             const beat = parseInt(document.querySelector('.wave-btn.active').dataset.hz);
@@ -218,82 +282,51 @@ document.addEventListener('DOMContentLoaded', () => {
             binauralOsc1.start();
             binauralOsc2.start();
         } else {
-            if (binauralOsc1) {
-                binauralOsc1.stop();
-                binauralOsc2.stop();
-            }
+            stopBinaural();
         }
     }
 
-    // --- LISTENERS ---
-    startBtn.addEventListener('click', () => isRunning ? pauseTimer() : startTimer());
-    resetBtn.addEventListener('click', resetTimer);
-    skipBtn.addEventListener('click', finishSession);
+    function stopBinaural() {
+        if (binauralOsc1) {
+            try {
+                binauralOsc1.stop();
+                binauralOsc2.stop();
+            } catch (e) { } // Ignore if already stopped
+        }
+    }
 
-    document.querySelectorAll('.mode-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            timeLeft = parseInt(btn.dataset.time) * 60;
-            totalTime = timeLeft;
-            updateDisplay();
-            resetTimer();
-        });
-    });
-
-    // Neuro Toggle
     document.getElementById('neuroToggle').addEventListener('change', (e) => {
         const controls = document.getElementById('neuroControls');
         if (e.target.checked) {
             controls.classList.remove('disabled');
-            if (isRunning) toggleBinaural(true);
+            if (isTimerRunning) toggleBinaural(true);
         } else {
             controls.classList.add('disabled');
             toggleBinaural(false);
         }
     });
 
-    // Sliders
+    // Ambient Sliders
     document.querySelectorAll('.amb-slider').forEach(slider => {
         slider.addEventListener('input', (e) => {
             const key = e.target.dataset.sound;
             const audio = ambientSounds[key];
-            const icon = document.querySelector(`.sound-icon[data-sound="${key}"]`);
             audio.volume = e.target.value;
+            const icon = document.querySelector(`.sound-icon[data-sound="${key}"]`);
 
-            if (isRunning && e.target.value > 0 && audio.paused) {
-                initAudioEngine();
-                audio.play();
+            if (e.target.value > 0) {
                 icon.classList.add('playing');
-            } else if (e.target.value == 0) {
-                audio.pause();
+                if (isTimerRunning && audio.paused) {
+                    unlockAudioContext();
+                    audio.play();
+                }
+            } else {
                 icon.classList.remove('playing');
+                audio.pause();
             }
         });
-    });
-
-    // Icon Toggle
-    document.querySelectorAll('.sound-icon').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const key = btn.dataset.sound;
-            const slider = document.querySelector(`.amb-slider[data-sound="${key}"]`);
-            slider.value = slider.value > 0 ? 0 : 0.5;
-            slider.dispatchEvent(new Event('input'));
-        });
-    });
-
-    // Holo Mode
-    document.getElementById('holoModeBtn').addEventListener('click', () => {
-        document.body.classList.toggle('holo-mode');
-    });
-
-    document.getElementById('zenModeBtn').addEventListener('click', () => {
-        document.body.classList.toggle('zen-mode');
-        document.querySelector('.sidebar-section').style.opacity = document.body.classList.contains('zen-mode') ? '0' : '1';
     });
 
     // Init
     updateDisplay();
 });
-
-
