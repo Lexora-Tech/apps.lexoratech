@@ -24,13 +24,13 @@
     <div class="app-container">
 
         <header class="glass-header">
-            <a href="../index.php" class="back-btn">
-                <i class="fas fa-chevron-left"></i>
+            <a href="../index.php" class="modern-back-btn">
+                <i class="fas fa-arrow-left"></i>
                 <span>Dashboard</span>
             </a>
             <div class="brand">
                 <div class="logo-glow"><i class="fas fa-brain"></i></div>
-                <span class="brand-text">FocusFlow <span class="badge">V5.0</span></span>
+                <span class="brand-text">FocusFlow <span class="badge">V6.0</span></span>
             </div>
             <div class="header-actions">
                 <button id="zenModeBtn" class="icon-btn" title="Zen Mode"><i class="fas fa-expand"></i></button>
@@ -70,55 +70,41 @@
                     <button class="mode-pill" data-mode="long" data-time="15">Long Break</button>
                 </div>
 
-                <div class="youtube-section">
-                    <div class="yt-header">
-                        <i class="fab fa-youtube"></i>
-                        <span>YouTube Audio Stream</span>
-                    </div>
-                    <div class="yt-input-row">
-                        <input type="text" id="ytUrlInput" placeholder="Paste YouTube URL (e.g. Lofi Girl)">
-                        <button id="ytLoadBtn">Load</button>
-                    </div>
-                    <div class="yt-controls hidden" id="ytControls">
-                        <div class="yt-status"><span class="live-dot"></span> Streaming Audio</div>
-                        <div class="yt-vol-wrapper">
-                            <i class="fas fa-volume-up"></i>
-                            <input type="range" id="ytVolume" min="0" max="100" value="50">
-                        </div>
-                    </div>
-                    <div id="youtube-player-div" class="hidden-player"></div>
+                <div class="custom-time-row">
+                    <input type="number" id="customTimeInput" placeholder="Custom (min)" min="1" max="120">
+                    <button id="setCustomTimeBtn">Set</button>
                 </div>
 
             </section>
 
             <aside class="sidebar-section">
 
-                <div class="panel-card neuro-panel">
+                <div class="panel-card youtube-panel">
                     <div class="panel-header">
                         <div class="ph-left">
-                            <i class="fas fa-wave-square"></i>
-                            <div>
-                                <h3>Neuro-Engine</h3>
-                                <p class="sub-text">Binaural Frequencies</p>
-                            </div>
+                            <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                            <h3>YouTube Stream</h3>
                         </div>
-                        <label class="switch">
-                            <input type="checkbox" id="neuroToggle">
+                        <label class="switch-sm" title="Toggle Video Visibility">
+                            <input type="checkbox" id="ytVideoToggle">
                             <span class="slider"></span>
                         </label>
                     </div>
 
-                    <div class="neuro-controls disabled" id="neuroControls">
-                        <div class="wave-selector">
-                            <button class="wave-btn active" data-hz="40" title="Focus">Gamma</button>
-                            <button class="wave-btn" data-hz="14" title="Active">Beta</button>
-                            <button class="wave-btn" data-hz="8" title="Relax">Alpha</button>
-                            <button class="wave-btn" data-hz="4" title="Sleep">Theta</button>
-                        </div>
-                        <div class="slider-row">
+                    <div class="yt-input-group">
+                        <input type="text" id="ytUrlInput" placeholder="Paste YouTube Link (e.g. Lofi Girl)">
+                        <button id="ytLoadBtn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+
+                    <div id="ytVideoContainer" class="video-wrapper hidden">
+                        <div id="youtube-player-div"></div>
+                    </div>
+
+                    <div class="yt-controls hidden" id="ytControls">
+                        <button id="ytPlayPauseBtn" class="yt-ctrl-btn"><i class="fas fa-play"></i></button>
+                        <div class="yt-vol-slider">
                             <i class="fas fa-volume-down"></i>
-                            <input type="range" id="neuroVolume" min="0" max="0.3" step="0.01" value="0.1">
-                            <i class="fas fa-volume-up"></i>
+                            <input type="range" id="ytVolume" min="0" max="100" value="50">
                         </div>
                     </div>
                 </div>
@@ -191,9 +177,34 @@
                     </div>
                 </div>
 
-                <div class="panel-card visualizer-panel">
-                    <canvas id="flowVisualizer"></canvas>
-                    <div class="vis-label">Flow State Visualizer</div>
+                <div class="panel-card neuro-panel">
+                    <div class="panel-header">
+                        <div class="ph-left">
+                            <i class="fas fa-wave-square"></i>
+                            <div>
+                                <h3>Neuro-Engine</h3>
+                                <p class="sub-text">Binaural Frequencies</p>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="neuroToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="neuro-controls disabled" id="neuroControls">
+                        <div class="wave-selector">
+                            <button class="wave-btn active" data-hz="40" title="Focus">Gamma</button>
+                            <button class="wave-btn" data-hz="14" title="Active">Beta</button>
+                            <button class="wave-btn" data-hz="8" title="Relax">Alpha</button>
+                            <button class="wave-btn" data-hz="4" title="Sleep">Theta</button>
+                        </div>
+                        <div class="slider-row">
+                            <i class="fas fa-volume-down"></i>
+                            <input type="range" id="neuroVolume" min="0" max="0.3" step="0.01" value="0.1">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                    </div>
                 </div>
 
             </aside>
