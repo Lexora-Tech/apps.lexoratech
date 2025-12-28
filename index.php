@@ -37,6 +37,42 @@
             }
         }
     </script>
+
+    <style>
+        /* Mobile Specific Overrides */
+        @media (max-width: 768px) {
+
+            /* 1. Fix Header Alignment */
+            /* Pushes the title/search to the right so it doesn't sit under the fixed button */
+            .header-left {
+                padding-left: 60px !important;
+                padding-top: 10px !important;
+            }
+
+            /* 2. Fix Toggle Covering Sidebar Logo */
+            /* Ensure Sidebar is ALWAYS on top of the toggle button */
+            #sidebar {
+                z-index: 9999 !important;
+            }
+
+            /* Ensure the sidebar background is solid black/dark so button doesn't show through */
+            .sidebar-content {
+                background-color: #0a0a0a !important;
+                backdrop-filter: none !important;
+                /* Remove glass effect if it causes transparency issues on overlap */
+            }
+
+            /* Lower the toggle button z-index so it stays behind the sidebar */
+            #mobileMenuToggle {
+                z-index: 999 !important;
+            }
+
+            /* Adjust top header padding for cleaner mobile look */
+            .top-header {
+                padding: 1rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -144,7 +180,6 @@
                             <span class="breadcrumb-item active">Workspace</span>
                         </div>
                         <h1 class="workspace-title">Lexora Workspace</h1>
-                        <span class="workspace-subtitle">9 powerful tools at your fingertips</span>
                     </div>
                     <div class="header-right">
                         <div class="search-wrapper">
