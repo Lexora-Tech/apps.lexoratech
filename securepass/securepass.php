@@ -13,6 +13,43 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        .back-workspace-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .back-workspace-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-workspace-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-workspace-btn:hover i {
+            transform: translateX(-3px);
+        }
+    </style>
 </head>
 
 <body>
@@ -37,6 +74,7 @@
             <button id="mobileMenuBtn" class="icon-btn-ghost">
                 <i class="fas fa-bars"></i>
             </button>
+
         </header>
 
         <aside class="sidebar" id="sidebar">
@@ -48,6 +86,7 @@
                 <button id="closeSidebarBtn" class="close-btn-mobile">
                     <i class="fas fa-times"></i>
                 </button>
+
             </div>
 
             <div class="sidebar-content">
@@ -126,6 +165,10 @@
                     <input type="checkbox" id="chkAutoCopy">
                     <span class="toggle-slider yellow"></span>
                 </label>
+
+                <a href="../index.php" class="back-workspace-btn">
+                    <i class="fas fa-arrow-left"></i> Back To Workspace
+                </a>
             </div>
         </aside>
 
