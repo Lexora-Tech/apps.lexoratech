@@ -1859,3 +1859,163 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* --- ADD THESE TO THE BOTTOM OF index.css --- */
+
+/* Purple Theme (CodeFormat) */
+.purple-gradient {
+    background: linear-gradient(135deg, #a855f7, #9333ea);
+}
+
+.purple-status {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+}
+
+.purple-btn {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+}
+
+.tool-card:hover .purple-btn {
+    background: rgba(168, 85, 247, 0.2);
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
+}
+
+.purple-mesh {
+    background: radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.3) 0px, transparent 60%);
+}
+
+/* Teal Theme (ImgOptim) */
+.teal-gradient {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+}
+
+.teal-status {
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: #14b8a6;
+}
+
+.teal-btn {
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: #14b8a6;
+}
+
+.tool-card:hover .teal-btn {
+    background: rgba(20, 184, 166, 0.2);
+    box-shadow: 0 4px 16px rgba(20, 184, 166, 0.3);
+}
+
+.teal-mesh {
+    background: radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.3) 0px, transparent 60%);
+}
+
+/* Orange Theme (DiffChecker) */
+.orange-gradient {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.orange-status {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: #f97316;
+}
+
+.orange-btn {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: #f97316;
+}
+
+.tool-card:hover .orange-btn {
+    background: rgba(249, 115, 22, 0.2);
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+}
+
+.orange-mesh {
+    background: radial-gradient(at 100% 0%, rgba(249, 115, 22, 0.3) 0px, transparent 60%);
+}
+
+/* --- NEW THEMES (SocialMock, FocusFlow, QuickConvert) --- */
+
+/* Cyan Theme (SocialMock) */
+.cyan-gradient {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.cyan-status {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: #06b6d4;
+}
+
+.cyan-btn {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: #06b6d4;
+}
+
+.tool-card:hover .cyan-btn {
+    background: rgba(6, 182, 212, 0.2);
+    box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
+}
+
+.cyan-mesh {
+    background: radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.3) 0px, transparent 60%);
+}
+
+/* Violet Theme (FocusFlow) */
+.violet-gradient {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.violet-status {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #8b5cf6;
+}
+
+.violet-btn {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #8b5cf6;
+}
+
+.tool-card:hover .violet-btn {
+    background: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+.violet-mesh {
+    background: radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.3) 0px, transparent 60%);
+}
+
+/* Orange Theme (QuickConvert) */
+.orange-gradient {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.orange-status {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: #f97316;
+}
+
+.orange-btn {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: #f97316;
+}
+
+.tool-card:hover .orange-btn {
+    background: rgba(249, 115, 22, 0.2);
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+}
+
+.orange-mesh {
+    background: radial-gradient(at 100% 0%, rgba(249, 115, 22, 0.3) 0px, transparent 60%);
+}

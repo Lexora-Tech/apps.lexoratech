@@ -144,7 +144,7 @@
                             <span class="breadcrumb-item active">Workspace</span>
                         </div>
                         <h1 class="workspace-title">Lexora Workspace</h1>
-                       <!--  <span class="workspace-subtitle">6 powerful tools at your fingertips</span> -->
+                        <span class="workspace-subtitle">9 powerful tools at your fingertips</span>
                     </div>
                     <div class="header-right">
                         <div class="search-wrapper">
@@ -156,7 +156,6 @@
                         </div>
                         <button class="header-btn" aria-label="Notifications">
                             <i class="fas fa-bell"></i>
-                            <!-- <span class="notification-badge">3</span> -->
                             <div class="btn-glow"></div>
                         </button>
                         <button class="header-btn" aria-label="Help">
@@ -256,7 +255,7 @@
                             <h2 class="section-title">Creative Suite</h2>
                             <span class="section-subtitle">Professional tools for creators</span>
                         </div>
-                        <div class="section-badge">6 Tools</div>
+                        <div class="section-badge">9 Tools</div>
                     </div>
 
                     <div class="tools-grid">
@@ -475,7 +474,114 @@
                                 </button>
                             </div>
                             <div class="card-mesh yellow-mesh"></div>
-                            
+                        </a>
+
+                        <a href="socialmock/socialmock.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon cyan-gradient">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live cyan-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">SocialMock</h3>
+                                <p class="tool-description">Create realistic social media post mockups for Twitter, Instagram, and LinkedIn.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Design</span>
+                                    <span class="tag">Marketing</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn cyan-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh cyan-mesh"></div>
+                        </a>
+
+                        <a href="focusflow/focusflow.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon violet-gradient">
+                                        <i class="fas fa-headphones"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live violet-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">FocusFlow</h3>
+                                <p class="tool-description">Ambient noise generator and Pomodoro timer for deep work sessions.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Productivity</span>
+                                    <span class="tag">Wellness</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn violet-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh violet-mesh"></div>
+                        </a>
+
+                        <a href="quickconvert/quickconvert.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon orange-gradient">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                        <span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live orange-status">
+                                    <span class="status-dot"></span>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">QuickConvert</h3>
+                                <p class="tool-description">Universal unit and currency converter with real-time exchange rates.</p>
+                                <div class="tool-tags">
+                                    <span class="tag">Utility</span>
+                                    <span class="tag">Travel</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn orange-btn">
+                                    <span>Launch Tool</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-mesh orange-mesh"></div>
                         </a>
 
                     </div>
