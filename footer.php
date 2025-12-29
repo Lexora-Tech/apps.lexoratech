@@ -34,10 +34,10 @@
 
 <footer class="lexora-footer">
     <div class="footer-links">
-        <a href="/about.php">About Us</a>
-        <a href="/contact.php">Contact</a>
-        <a href="/privacy.php">Privacy Policy</a>
-        <a href="/terms.php">Terms of Service</a>
+        <a href="./about.php">About Us</a>
+        <a href="./contact.php">Contact</a>
+        <a href="./privacy.php">Privacy Policy</a>
+        <a href="./terms.php">Terms of Service</a>
     </div>
     <div class="copyright">
         &copy; <?php echo date("Y"); ?> Lexora Workspace. All rights reserved.
