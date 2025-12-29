@@ -104,28 +104,28 @@
                 </div>
 
                 <nav class="nav-menu">
-                    <a href="#" class="nav-item active" data-tooltip="Dashboard">
+                    <a href="index.php" class="nav-item active" data-tooltip="Dashboard">
                         <div class="nav-icon-wrapper">
                             <i class="fas fa-th-large"></i>
                         </div>
                         <span class="nav-label">Dashboard</span>
                         <div class="nav-glow"></div>
                     </a>
-                    <a href="#" class="nav-item" data-tooltip="Projects">
+                    <a href="projects.php" class="nav-item" data-tooltip="Projects">
                         <div class="nav-icon-wrapper">
                             <i class="fas fa-folder-open"></i>
                         </div>
                         <span class="nav-label">Projects</span>
                         <div class="nav-glow"></div>
                     </a>
-                    <a href="#" class="nav-item" data-tooltip="Analytics">
+                    <a href="analytics.php" class="nav-item" data-tooltip="Analytics">
                         <div class="nav-icon-wrapper">
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <span class="nav-label">Analytics</span>
                         <div class="nav-glow"></div>
                     </a>
-                    <a href="#" class="nav-item" data-tooltip="Team">
+                    <a href="team.php" class="nav-item" data-tooltip="Team">
                         <div class="nav-icon-wrapper">
                             <i class="fas fa-users"></i>
                         </div>
@@ -137,7 +137,7 @@
                 <div class="sidebar-spacer"></div>
 
                 <div class="sidebar-footer">
-                    <a href="#" class="nav-item" data-tooltip="Settings">
+                    <a href="settings.php" class="nav-item" data-tooltip="Settings">
                         <div class="nav-icon-wrapper">
                             <i class="fas fa-cog"></i>
                         </div>
