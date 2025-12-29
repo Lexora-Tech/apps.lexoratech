@@ -7,13 +7,6 @@
     <title>PromptFlow Studio | Lexora Workspace</title>
     <meta name="description" content="The world's smartest online teleprompter. Features voice-scrolling (listen mode), mirror/flip for beam splitters, and reality mode. 100% Free, privacy-focused, no app install needed.">
     <meta name="keywords" content="voice activated teleprompter online, free autocue with voice recognition, mirror mode teleprompter, laptop teleprompter software, virtual teleprompter for zoom">
-
-    <meta name="description" content="Professional free online teleprompter with voice tracking (voice scrolling), mirror mode, and reality mode. No login required. Best for YouTubers and presenters.">
-
-    <meta name="keywords" content="voice activated teleprompter, free autocue online, teleprompter with mirror mode, browser teleprompter, PromptFlow Studio">
-
-    <link rel="canonical" href="https://apps.lexoratech.com/teleprompter/teleprompter.php" />
-
     <meta property="og:title" content="PromptFlow Studio - Voice Activated Teleprompter">
     <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo2.png">
@@ -22,73 +15,102 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">
     <link rel="icon" href="../assets/logo/logo.png" />
-    <style>
-    /* SEO Content Section Styles */
-    .seo-content-wrapper {
-        position: relative;
-        background: #f9fafb; /* Light background for contrast */
-        color: #1f2937;
-        padding: 60px 20px;
-        z-index: 10;
-        border-top: 1px solid #e5e7eb;
-        font-family: 'Inter', sans-serif;
-    }
     
-    .seo-container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    
+    <style>
+        /* --- MODAL STYLES --- */
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0;
+        }
+        
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
 
-    .seo-content-wrapper h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #111827;
-    }
+        .help-body { padding: 30px; line-height: 1.7; }
+        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
+        .help-body h3 { color: #60a5fa; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .help-body p { color: #9ca3af; margin-bottom: 1rem; }
+        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #9ca3af; }
+        .help-body li { margin-bottom: 0.5rem; }
+        
+        .modal-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .modal-faq-question {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    .seo-content-wrapper h3 {
-        font-size: 1.25rem;
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-        color: #374151;
-        font-weight: 600;
-    }
+        .help-modal-content::-webkit-scrollbar { width: 8px; }
+        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 
-    .seo-content-wrapper p {
-        line-height: 1.7;
-        margin-bottom: 1rem;
-        color: #4b5563;
-    }
+        /* --- TOUR WELCOME MODAL --- */
+        #tourWelcomeModal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            z-index: 99999; display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        #tourWelcomeModal.show { opacity: 1; pointer-events: all; }
+        
+        .tour-card {
+            background: #111; border: 1px solid rgba(255,255,255,0.15);
+            padding: 40px; border-radius: 20px; text-align: center; max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .tour-icon { font-size: 3rem; color: #60a5fa; margin-bottom: 20px; }
+        .tour-card h2 { color: #fff; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif; }
+        .tour-card p { color: #9ca3af; margin-bottom: 30px; line-height: 1.6; }
+        
+        .tour-actions { display: flex; gap: 15px; justify-content: center; }
+        .btn-start-tour {
+            background: #2563eb; color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .btn-start-tour:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .btn-skip-tour {
+            background: transparent; color: #9ca3af; border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-skip-tour:hover { border-color: #fff; color: #fff; }
 
-    .seo-content-wrapper ul {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
-    }
-
-    .seo-content-wrapper li {
-        margin-bottom: 0.5rem;
-        color: #4b5563;
-    }
-
-    /* FAQ Style */
-    .faq-item {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        margin-bottom: 1rem;
-    }
-    .faq-question {
-        font-weight: 700;
-        color: #111;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    /* Ensure body scrolls */
-    body {
-        overflow-y: auto !important; /* Forces scrollbar to appear */
-    }
-</style>
+        /* Driver.js Customization */
+        .driver-popover.driverjs-theme {
+            background-color: #1f2937; color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+        .driver-popover.driverjs-theme .driver-popover-title { color: #60a5fa; font-size: 1.1rem; }
+        .driver-popover.driverjs-theme .driver-popover-description { color: #d1d5db; font-size: 0.95rem; }
+        .driver-popover.driverjs-theme button {
+            background-color: #2563eb; color: #fff; border-radius: 6px; text-shadow: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -121,6 +143,47 @@
         </div>
     </div>
 
+    <div id="helpModal" class="modal-overlay hidden" style="z-index: 2000;">
+        <div class="modal-box glass-card help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="help-body">
+                <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser.</p>
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak.</li>
+                    <li><strong>Mirror Mode:</strong> Flip text horizontally (X) or vertically (Y) for beam-splitter glass.</li>
+                </ul>
+                <h3>How to Use</h3>
+                <ol>
+                    <li><strong>Paste Script:</strong> Copy your text into the main editor area.</li>
+                    <li><strong>Adjust Settings:</strong> Use the sidebar to set Font Size, Speed, and Margin.</li>
+                    <li><strong>Select Mode:</strong> Click "Voice" for AI scrolling or stay on Manual.</li>
+                    <li><strong>Start:</strong> Click the "START (3s)" button.</li>
+                </ol>
+                <button id="restartTourBtn" class="btn-glass" style="width:100%; margin-top:20px; justify-content:center; color:#60a5fa; border-color:#60a5fa;">
+                    <i class="fas fa-play-circle"></i> Replay Interactive Tour
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="tourWelcomeModal">
+        <div class="tour-card">
+            <div class="tour-icon"><i class="fas fa-rocket"></i></div>
+            <h2>Welcome to PromptFlow!</h2>
+            <p>It looks like you're new here. Would you like a quick 30-second tour of the features?</p>
+            <div class="tour-actions">
+                <button id="startTour" class="btn-start-tour">Yes, Start Tour</button>
+                <button id="skipTour" class="btn-skip-tour">No, Thanks</button>
+            </div>
+        </div>
+    </div>
+
     <div class="app-layout">
 
         <aside class="sidebar glass-card" id="sidebar">
@@ -146,7 +209,7 @@
 
                 <div class="section-title">PLAYBACK</div>
 
-                <div class="control-group">
+                <div class="control-group" id="tour-speed">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-tachometer-alt"></i> Speed</span>
                         <span id="speedVal" class="val-tag">3</span>
@@ -158,7 +221,7 @@
 
                 <div class="section-title">TYPOGRAPHY</div>
 
-                <div class="control-group">
+                <div class="control-group" id="tour-font">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-text-height"></i> Size</span>
                         <span id="fontVal" class="val-tag">60px</span>
@@ -234,6 +297,11 @@
 
                 <div class="divider"></div>
                 <div class="section-title">SUPPORT</div>
+                
+                <button id="helpBtn" class="btn-glass" style="width:100%; margin-bottom: 10px; border-color: rgba(255,255,255,0.3); color: white;">
+                    <i class="fas fa-question-circle"></i> How to Use?
+                </button>
+
                 <div class="grid-2">
                     <a href="https://buymeacoffee.com/lexoratech" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
                         <i class="fas fa-coffee"></i> Coffee
@@ -242,19 +310,20 @@
                         <i class="fas fa-lightbulb"></i> Suggest
                     </a>
                 </div>
+                
                 <div class="divider"></div>
-<div class="section-title">LEGAL</div>
-<div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
-    <a href="/privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
-    </a>
-    <a href="/terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
-    </a>
-    <a href="/contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
-    </a>
-</div>
+                <div class="section-title">LEGAL</div>
+                <div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
+                    <a href="../privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
+                    </a>
+                    <a href="../terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
+                    </a>
+                    <a href="../contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
+                    </a>
+                </div>
 
             </div>
 
@@ -281,72 +350,123 @@
 
     <div id="prompter" class="prompter-layer hidden">
         <video id="webcamFeed" autoplay playsinline muted class="hidden"></video>
-
         <div id="liveCaption">Listening...</div>
-
         <div id="scrollingText" class="text-content"></div>
 
         <div class="hud glass-hud">
             <button id="closeHud" class="hud-icon"><i class="fas fa-times"></i></button>
             <div class="hud-sep"></div>
-
             <button id="restartHud" class="hud-icon" title="Restart from Beginning">
                 <i class="fas fa-undo"></i>
             </button>
-
             <button id="playHud" class="hud-main-icon"><i class="fas fa-pause"></i></button>
-
             <div class="hud-sep"></div>
-
             <div id="voiceIndicator" class="hidden" style="color:#ef4444; margin-right:10px;">
                 <i class="fas fa-microphone-alt fa-pulse"></i>
             </div>
-
             <input type="range" id="hudSpeed" min="1" max="10">
         </div>
     </div>
 
     <div class="toast-container"></div>
 
-    <section class="seo-content-wrapper">
-    <div class="seo-container">
-        <h2>Free Voice-Activated Online Teleprompter</h2>
-        <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser. Unlike traditional autocue software, our tool utilizes advanced speech recognition to listen to your voice and scroll the script automatically as you speak.</p>
-
-        <h3>Key Features</h3>
-        <ul>
-            <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak. No manual speed adjustment needed.</li>
-            <li><strong>Mirror Mode:</strong> Instantly flip text horizontally (X-axis) or vertically (Y-axis) for use with professional beam-splitter glass kits.</li>
-            <li><strong>Reality Mode:</strong> Overlay your script onto your webcam feed to maintain eye contact with your audience while reading.</li>
-            <li><strong>Privacy First:</strong> Your scripts and camera feed are processed locally in your browser. Nothing is sent to a server.</li>
-        </ul>
-
-        <h3>How to Use This Teleprompter</h3>
-        <p>Getting started is easy and requires no login:</p>
-        <ol>
-            <li><strong>Paste Your Script:</strong> Copy your text into the editor area.</li>
-            <li><strong>Adjust Settings:</strong> Use the sidebar to change font size, margin, and scroll speed.</li>
-            <li><strong>Select Mode:</strong> Choose "Voice" for AI scrolling or "Manual" for continuous scroll.</li>
-            <li><strong>Start Presenting:</strong> Click the "Start" button. You will get a 3-second countdown before the prompt begins.</li>
-        </ol>
-
-        <h3>Frequently Asked Questions</h3>
-        <div class="faq-item">
-            <span class="faq-question">Is this teleprompter really free?</span>
-            Yes, PromptFlow Studio is 100% free for everyone. There are no watermarks, time limits, or premium subscriptions.
-        </div>
-        <div class="faq-item">
-            <span class="faq-question">Does it work offline?</span>
-            Yes! Once the page is loaded, you can disconnect from the internet, and the tool will continue to function perfectly.
-        </div>
-        <div class="faq-item">
-            <span class="faq-question">What devices are supported?</span>
-            It works on desktop (Chrome, Edge, Firefox, Safari) and mobile devices. For the best Voice Tracking experience, we recommend using Google Chrome.
-        </div>
-    </div>
-</section>
-
     <script src="./js/teleprompter.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // -- Help Modal Logic --
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+            const restartTourBtn = document.getElementById('restartTourBtn');
+
+            if(helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
+
+            // -- Tour / Onboarding Logic --
+            const tourModal = document.getElementById('tourWelcomeModal');
+            const startTourBtn = document.getElementById('startTour');
+            const skipTourBtn = document.getElementById('skipTour');
+
+            // Define Driver.js Tour
+            const driver = window.driver.js.driver;
+            const tour = driver({
+                showProgress: true,
+                animate: true,
+                popoverClass: 'driverjs-theme',
+                steps: [
+                    { 
+                        element: '#editor', 
+                        popover: { 
+                            title: 'The Script Area', 
+                            description: 'Paste or type your script here. It saves automatically.' 
+                        } 
+                    },
+                    { 
+                        element: '#tour-speed', 
+                        popover: { 
+                            title: 'Adjust Speed', 
+                            description: 'Control how fast the text scrolls in manual mode.' 
+                        } 
+                    },
+                    { 
+                        element: '#voiceBtn', 
+                        popover: { 
+                            title: 'AI Voice Tracking', 
+                            description: 'Activate this to have the text scroll automatically as you speak!' 
+                        } 
+                    },
+                    { 
+                        element: '#cameraBtn', 
+                        popover: { 
+                            title: 'Reality Mode', 
+                            description: 'Overlays the script on top of your webcam feed.' 
+                        } 
+                    },
+                    { 
+                        element: '#startBtn', 
+                        popover: { 
+                            title: 'Launch', 
+                            description: 'Click here to start the teleprompter full-screen mode.' 
+                        } 
+                    }
+                ]
+            });
+
+            // Check LocalStorage
+            if (!localStorage.getItem('lexora_prompter_tour_seen')) {
+                // Show welcome modal after 1 second
+                setTimeout(() => {
+                    tourModal.classList.add('show');
+                }, 1000);
+            }
+
+            // Handle Buttons
+            startTourBtn.addEventListener('click', () => {
+                tourModal.classList.remove('show');
+                localStorage.setItem('lexora_prompter_tour_seen', 'true');
+                tour.drive();
+            });
+
+            skipTourBtn.addEventListener('click', () => {
+                tourModal.classList.remove('show');
+                localStorage.setItem('lexora_prompter_tour_seen', 'true');
+            });
+
+            // Allow restarting from Help Menu
+            if(restartTourBtn) {
+                restartTourBtn.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                    tour.drive();
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

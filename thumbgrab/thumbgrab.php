@@ -38,6 +38,125 @@
             overflow-x: hidden;
         }
 
+        /* --- HELP MODAL STYLES --- */
+        #helpModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        #helpModal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0;
+            position: relative;
+            font-family: 'Outfit', sans-serif;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .help-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
+        .help-body h3 { color: #ef4444; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
+        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
+        .help-body li { margin-bottom: 0.5rem; }
+        
+        .modal-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .modal-faq-question {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .help-modal-content::-webkit-scrollbar { width: 8px; }
+        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        /* Help Button Style */
+        .help-trigger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            margin-bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .help-trigger:hover { background: rgba(239, 68, 68, 0.2); transform: translateY(-1px); color: #fff; }
+
+        /* Legal Footer */
+        .legal-footer {
+            width: 100%;
+            margin-top: auto;
+            padding: 30px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .legal-footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .legal-footer a:hover { color: #fff; }
+
         .ambient-glow {
             position: fixed;
             top: -20%;
@@ -140,7 +259,7 @@
         .hero-desc {
             color: var(--text-muted);
             font-size: 1.1rem;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         /* SEARCH */
@@ -618,6 +737,46 @@
 
     <div id="toastBox" class="toast-container"></div>
 
+    <div id="helpModal" class="hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="help-body">
+                <p>ThumbGrab is the simplest way to extract high-resolution thumbnails from any YouTube video. It retrieves all available sizes (Max, High, Standard) instantly.</p>
+
+                <h3>How to Download</h3>
+                <ol>
+                    <li><strong>Paste Link:</strong> Copy the URL of the YouTube video (e.g., youtube.com/watch?v=...) and paste it into the search box.</li>
+                    <li><strong>Fetch:</strong> Click the "Fetch" button to retrieve the thumbnails.</li>
+                    <li><strong>Preview:</strong> Click on any thumbnail image to view it in full screen.</li>
+                    <li><strong>Download:</strong> Use the "Download" or "PNG" buttons to save the image to your device.</li>
+                </ol>
+
+                <h3>Features</h3>
+                <ul>
+                    <li><strong>Max Resolution:</strong> Get the elusive 1920x1080 (HD) thumbnail if available.</li>
+                    <li><strong>Format Conversion:</strong> Download thumbnails as standard JPG or convert them to PNG on the fly.</li>
+                    <li><strong>History:</strong> Your recent grabs are saved locally so you can revisit them later.</li>
+                </ul>
+
+                <h3>Frequently Asked Questions</h3>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Is this legal?</span>
+                    Yes. Thumbnails are public metadata associated with YouTube videos. This tool simply makes it easier to access that public URL.
+                </div>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Why is Max Res sometimes unavailable?</span>
+                    Not all videos have a 1080p thumbnail uploaded by the creator. If it's missing, we show the next best quality.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="imageModal" class="modal">
         <i class="fas fa-times modal-close" id="modalClose"></i>
         <img id="modalImg" src="" alt="Full Preview">
@@ -635,6 +794,10 @@
         <div class="hero-section">
             <h1>Unlock Full Resolution.</h1>
             <p class="hero-desc">Extract standard and max-definition thumbnails instantly.</p>
+
+            <button id="helpBtn" class="help-trigger">
+                <i class="fas fa-question-circle"></i> User Guide
+            </button>
 
             <div class="search-container">
                 <div class="search-box">
@@ -706,9 +869,48 @@
             </div>
         </div>
 
+        <footer class="legal-footer">
+            <a href="../privacy.php">
+                <i class="fas fa-shield-alt"></i> Privacy Policy
+            </a>
+            <a href="../terms.php">
+                <i class="fas fa-file-contract"></i> Terms of Service
+            </a>
+            <a href="../contact.php">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+        </footer>
+
     </main>
 
     <script src="./js/thumbgrab.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if(helpBtn && helpModal) {
+                // Open Modal
+                helpBtn.addEventListener('click', () => {
+                    helpModal.classList.remove('hidden');
+                });
+
+                // Close Button
+                closeHelp.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                });
+
+                // Close on Outside Click
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) {
+                        helpModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
