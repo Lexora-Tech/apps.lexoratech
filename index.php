@@ -5,16 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace | World's First Free All-in-One Creator Suite</title>
-    <meta name="description" content="The only free operating system for creators. Access 10+ pro tools: Voice-Activated Teleprompter, Neural TTS, 4K Thumbnail Downloader, and PDF Editor. No login required.">
-    <meta name="keywords" content="free creator tools, online productivity suite, all in one seo tools, free teleprompter, ai voice generator, youtube thumbnail downloader, pdf editor online, Lexora apps">
+    <meta name="description" content="The only free operating system for creators. Access 12+ pro tools including Image Compressor, Code Formatter, Diff Checker, Teleprompter, and AI Voice.">
+    <meta name="keywords" content="free creator tools, image compressor, code formatter, diff checker, teleprompter, ai voice generator, Lexora apps">
     <meta property="og:title" content="Lexora Workspace - Stop Switching Tabs. Create Everything Here.">
-
-    <meta name="description" content="Access free professional productivity tools. Use PromptFlow for voice-controlled teleprompting, VoiceGen for neural text-to-speech, and ChromaPick for color extraction.">
-    <meta name="keywords" content="free teleprompter online, AI voice generator, color picker, palette generator, youtube thumbnail downloader, qr code generator, Lexora apps">
-    <link rel="canonical" href="https://apps.lexoratech.com/" />
-
-    <meta property="og:title" content="Lexora Apps - Professional Creative Suite">
-    <meta property="og:description" content="Free tools for creators: Voice-activated Teleprompter, AI Voice Generator, Color Picker, and more.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
     <meta property="og:url" content="https://apps.lexoratech.com/">
     <meta property="og:type" content="website">
@@ -23,62 +16,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
 
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Lexora Workspace",
-            "applicationCategory": "MultimediaApplication",
-            "operatingSystem": "Web Browser",
-            "offers": {
-                "@type": "Offer",
-                "price": "0.00",
-                "priceCurrency": "USD"
-            },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "ratingCount": "1250"
-            },
-            "featureList": "Voice-Activated Teleprompter, Neural Text-to-Speech, 4K Thumbnail Downloader, Secure PDF Tools"
-        }
-    </script>
     <style>
-        /* Mobile Specific Overrides */
+        /* --- Mobile Specific Overrides --- */
         @media (max-width: 768px) {
-
-            /* 1. Fix Header Alignment */
-            /* Pushes the title/search to the right so it doesn't sit under the fixed button */
             .header-left {
                 padding-left: 60px !important;
                 padding-top: 10px !important;
             }
 
-            /* 2. Fix Toggle Covering Sidebar Logo */
-            /* Ensure Sidebar is ALWAYS on top of the toggle button */
             #sidebar {
                 z-index: 9999 !important;
             }
 
-            /* Ensure the sidebar background is solid black/dark so button doesn't show through */
             .sidebar-content {
                 background-color: #0a0a0a !important;
                 backdrop-filter: none !important;
-                /* Remove glass effect if it causes transparency issues on overlap */
             }
 
-            /* Lower the toggle button z-index so it stays behind the sidebar */
             #mobileMenuToggle {
                 z-index: 999 !important;
             }
 
-            /* Adjust top header padding for cleaner mobile look */
             .top-header {
                 padding: 1rem !important;
             }
+        }
+
+        /* --- NEW LIME THEME (For DiffCheck) --- */
+        .lime-gradient {
+            background: linear-gradient(135deg, #84cc16, #65a30d);
+        }
+
+        .lime-status {
+            background: rgba(132, 204, 22, 0.1);
+            border-color: rgba(132, 204, 22, 0.3);
+            color: #84cc16;
+        }
+
+        .lime-btn {
+            background: rgba(132, 204, 22, 0.1);
+            border-color: rgba(132, 204, 22, 0.3);
+            color: #84cc16;
+        }
+
+        .tool-card:hover .lime-btn {
+            background: rgba(132, 204, 22, 0.2);
+            box-shadow: 0 4px 16px rgba(132, 204, 22, 0.3);
+        }
+
+        .lime-mesh {
+            background: radial-gradient(at 100% 0%, rgba(132, 204, 22, 0.3) 0px, transparent 60%);
         }
     </style>
 </head>
@@ -298,7 +289,7 @@
                             <h2 class="section-title">Creative Suite</h2>
                             <span class="section-subtitle">Professional tools for creators</span>
                         </div>
-                        <div class="section-badge">9 Tools</div>
+                        <div class="section-badge">12 Tools</div>
                     </div>
 
                     <div class="tools-grid">
@@ -312,29 +303,20 @@
                                         <i class="fas fa-microphone-lines"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live pink-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">VoiceGen AI</h3>
                                 <p class="tool-description">Neural text-to-speech with multiple voices and languages for professional content.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">AI Powered</span>
-                                    <span class="tag">Multi-Language</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">AI Powered</span><span class="tag">Multi-Language</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn pink-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn pink-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh pink-mesh"></div>
                         </a>
@@ -348,29 +330,20 @@
                                         <i class="fab fa-youtube"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live red-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">ThumbGrab</h3>
                                 <p class="tool-description">Download high-resolution YouTube thumbnails instantly in multiple formats.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">HD Quality</span>
-                                    <span class="tag">Instant</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">HD Quality</span><span class="tag">Instant</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn red-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn red-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh red-mesh"></div>
                         </a>
@@ -384,29 +357,20 @@
                                         <i class="fas fa-qrcode"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live green-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">LinkVault</h3>
                                 <p class="tool-description">Generate custom QR codes with logo embedding and color customization.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Customizable</span>
-                                    <span class="tag">SVG Export</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Customizable</span><span class="tag">SVG Export</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn green-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn green-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh green-mesh"></div>
                         </a>
@@ -420,29 +384,20 @@
                                         <i class="fas fa-eye-dropper"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live indigo-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">ChromaPick</h3>
                                 <p class="tool-description">Extract color palettes from images with hex, RGB, and HSL formats.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Color Theory</span>
-                                    <span class="tag">Palette Gen</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Color Theory</span><span class="tag">Palette Gen</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn indigo-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn indigo-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh indigo-mesh"></div>
                         </a>
@@ -456,29 +411,20 @@
                                         <i class="fas fa-file-pdf"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live blue-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">Lexora PDF</h3>
                                 <p class="tool-description">Merge, split, compress, and convert PDFs with enterprise-grade security.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Secure</span>
-                                    <span class="tag">Fast</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Secure</span><span class="tag">Fast</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn blue-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn blue-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh blue-mesh"></div>
                         </a>
@@ -492,29 +438,20 @@
                                         <i class="fas fa-shield-alt"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live yellow-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">SecurePass</h3>
                                 <p class="tool-description">Generate cryptographically secure passwords with custom complexity rules.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">256-bit</span>
-                                    <span class="tag">Zero-Log</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">256-bit</span><span class="tag">Zero-Log</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn yellow-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn yellow-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh yellow-mesh"></div>
                         </a>
@@ -528,29 +465,20 @@
                                         <i class="fas fa-layer-group"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live cyan-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">SocialMock</h3>
                                 <p class="tool-description">Create realistic social media post mockups for Twitter, Instagram, and LinkedIn.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Design</span>
-                                    <span class="tag">Marketing</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Design</span><span class="tag">Marketing</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn cyan-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn cyan-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh cyan-mesh"></div>
                         </a>
@@ -564,29 +492,20 @@
                                         <i class="fas fa-headphones"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live violet-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">FocusFlow</h3>
                                 <p class="tool-description">Ambient noise generator and Pomodoro timer for deep work sessions.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Productivity</span>
-                                    <span class="tag">Wellness</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Productivity</span><span class="tag">Wellness</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn violet-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn violet-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh violet-mesh"></div>
                         </a>
@@ -600,31 +519,103 @@
                                         <i class="fas fa-exchange-alt"></i>
                                     </div>
                                     <div class="icon-particles">
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
-                                        <span class="particle"></span>
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
                                     </div>
                                 </div>
                                 <div class="status-badge status-live orange-status">
-                                    <span class="status-dot"></span>
-                                    <span>Live</span>
+                                    <span class="status-dot"></span><span>Live</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">QuickConvert</h3>
                                 <p class="tool-description">Universal unit and currency converter with real-time exchange rates.</p>
-                                <div class="tool-tags">
-                                    <span class="tag">Utility</span>
-                                    <span class="tag">Travel</span>
-                                </div>
+                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Travel</span></div>
                             </div>
                             <div class="card-footer">
-                                <button class="launch-btn orange-btn">
-                                    <span>Launch Tool</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                                <button class="launch-btn orange-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
                             </div>
                             <div class="card-mesh orange-mesh"></div>
+                        </a>
+
+                        <a href="imgoptim/imgoptim.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon teal-gradient">
+                                        <i class="fas fa-compress-arrows-alt"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live teal-status">
+                                    <span class="status-dot"></span><span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">ImgOptim</h3>
+                                <p class="tool-description">Smart image compression for JPG, PNG, and WebP without quality loss.</p>
+                                <div class="tool-tags"><span class="tag">Optimization</span><span class="tag">Web Vitals</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn teal-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh teal-mesh"></div>
+                        </a>
+
+                        <a href="codeformat/codeformat.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon purple-gradient">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live purple-status">
+                                    <span class="status-dot"></span><span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">CodeFormat</h3>
+                                <p class="tool-description">Beautify and validate JSON, HTML, CSS, and JS code instantly.</p>
+                                <div class="tool-tags"><span class="tag">Developer</span><span class="tag">Syntax</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn purple-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh purple-mesh"></div>
+                        </a>
+
+                        <a href="diffcheck/diffcheck.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon lime-gradient">
+                                        <i class="fas fa-not-equal"></i>
+                                    </div>
+                                    <div class="icon-particles">
+                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+                                    </div>
+                                </div>
+                                <div class="status-badge status-live lime-status">
+                                    <span class="status-dot"></span><span>Live</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">DiffCheck</h3>
+                                <p class="tool-description">Compare text files and code snippets to highlight differences instantly.</p>
+                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Dev Tool</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn lime-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh lime-mesh"></div>
                         </a>
 
                     </div>
