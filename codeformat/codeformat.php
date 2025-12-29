@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CodeFormat | Ultimate Dev Environment</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,9 +16,15 @@
     <link rel="stylesheet" href="css/codeformat.css">
 
     <style>
-        /* --- HELP MODAL STYLES --- */
+        /* --- CORE RESPONSIVE STYLES --- */
         
-        /* Fixed: Explicitly define the overlay position and display */
+        /* Ensure Sidebar Flex Layout works without inline styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HELP MODAL STYLES --- */
         #helpModal {
             position: fixed;
             top: 0;
@@ -30,13 +36,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* Very high z-index to sit on top of everything */
+            z-index: 9999;
             opacity: 1;
             transition: opacity 0.3s ease;
             pointer-events: auto;
         }
 
-        /* Hide state */
         #helpModal.hidden {
             opacity: 0;
             pointer-events: none;
@@ -70,11 +75,7 @@
             z-index: 10;
         }
 
-        .help-body {
-            padding: 30px;
-            line-height: 1.7;
-        }
-
+        .help-body { padding: 30px; line-height: 1.7; }
         .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
         .help-body h3 { color: #60a5fa; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
         .help-body p { color: #9ca3af; margin-bottom: 1rem; }
@@ -117,6 +118,99 @@
             transition: all 0.2s;
         }
         .sidebar-btn-help:hover { background: rgba(59, 130, 246, 0.2); }
+
+        /* --- MOBILE OPTIMIZATIONS --- */
+        @media (max-width: 768px) {
+            
+            /* Sidebar becomes a slide-out drawer */
+            aside.sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                bottom: 0;
+                width: 85%;
+                max-width: 320px;
+                z-index: 1000;
+                background: #0f172a; /* Match app dark theme */
+                transition: transform 0.3s ease-in-out;
+                border-right: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            aside.sidebar.open {
+                transform: translateX(100%);
+            }
+
+            /* Overlay for sidebar */
+            .sidebar-overlay {
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6);
+                z-index: 990;
+                display: none;
+                backdrop-filter: blur(2px);
+            }
+            .sidebar-overlay.active { display: block; }
+
+            /* Toolbar Stacking */
+            .toolbar {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .toolbar-left {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 5px;
+            }
+
+            /* Hide filename on very small screens if needed, or truncate */
+            .current-file-info {
+                max-width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .toolbar-right {
+                width: 100%;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .toolbar-center {
+                width: 100%;
+                order: 3;
+                justify-content: center;
+                margin-top: 5px;
+            }
+
+            /* Make mode buttons full width */
+            .mode-toggles { width: 100%; display: flex; }
+            .mode-btn { flex: 1; justify-content: center; }
+
+            /* Hide text labels on action buttons to save space */
+            .btn-text { display: none; }
+            
+            /* Increase select box size for touch */
+            .lang-selector select {
+                padding: 8px;
+                font-size: 1rem;
+            }
+
+            /* Stack split container vertically on mobile if needed */
+            /* Or rely on view toggle buttons. Ensuring height is correct: */
+            .split-container {
+                height: calc(100vh - 220px); /* Adjust for taller toolbar */
+            }
+            
+            /* Ensure editor fills width */
+            .editor-pane, .preview-pane {
+                width: 100% !important;
+            }
+        }
     </style>
 </head>
 
@@ -134,33 +228,13 @@
             </div>
             
             <div class="help-body">
-                <p>CodeFormat is a lightweight, browser-based development environment. It combines a powerful code editor with intelligent formatting engines (Prettier & SQL Formatter) to clean up your code instantly.</p>
-
-                <h3>Key Features</h3>
-                <ul>
-                    <li><strong>Smart Formatting:</strong> Automatically beautify HTML, CSS, JavaScript, PHP, SQL, and more with one click.</li>
-                    <li><strong>Live Preview:</strong> Use the "Split" or "View" modes to render HTML/CSS code in real-time.</li>
-                    <li><strong>Multi-File Support:</strong> Create and switch between multiple files within a single session.</li>
-                    <li><strong>Local Privacy:</strong> Your code is processed and stored locally in your browser. Nothing is sent to a server.</li>
-                </ul>
-
+                <p>CodeFormat is a lightweight, browser-based development environment. It combines a powerful code editor with intelligent formatting engines.</p>
                 <h3>How to Use</h3>
                 <ol>
-                    <li><strong>Create File:</strong> Click the "+" icon in the sidebar to start a new file. The extension (e.g., .js, .html) sets the language.</li>
-                    <li><strong>Write Code:</strong> Type your code in the main editor pane.</li>
-                    <li><strong>Format:</strong> Click the "Format" (Magic Wand) button in the toolbar to tidy up indentation and syntax.</li>
-                    <li><strong>Preview:</strong> For HTML/CSS, click "Split" to see the live output side-by-side.</li>
+                    <li><strong>Create File:</strong> Click the "+" icon in the sidebar.</li>
+                    <li><strong>Write Code:</strong> Type in the main editor.</li>
+                    <li><strong>Format:</strong> Click the "Magic Wand" icon.</li>
                 </ol>
-
-                <h3>Common Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Does this work offline?</span>
-                    Yes. Once the page is loaded, you can disconnect from the internet and continue coding.
-                </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">How do I save my work?</span>
-                    Files are auto-saved to your browser's local storage. You can also click the "Download" button to save the file to your computer.
-                </div>
             </div>
         </div>
     </div>
@@ -169,7 +243,7 @@
 
         <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
-        <aside class="sidebar" id="sidebar" style="display:flex; flex-direction:column;">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
                     <i class="fas fa-code-branch"></i>
@@ -361,27 +435,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Help Modal Logic
             const helpBtn = document.getElementById('helpBtn');
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
             if(helpBtn && helpModal) {
-                // Open Modal
-                helpBtn.addEventListener('click', () => {
-                    helpModal.classList.remove('hidden');
-                });
-
-                // Close Button
-                closeHelp.addEventListener('click', () => {
-                    helpModal.classList.add('hidden');
-                });
-
-                // Close on Outside Click
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
                 helpModal.addEventListener('click', (e) => {
-                    if (e.target === helpModal) {
-                        helpModal.classList.add('hidden');
-                    }
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
                 });
+            }
+
+            // Mobile Menu Logic (Ensures menu works even if JS file fails)
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (mobileMenuBtn && sidebar) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                    if(overlay) overlay.classList.toggle('active');
+                });
+
+                if(overlay) {
+                    overlay.addEventListener('click', () => {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                    });
+                }
             }
         });
     </script>
