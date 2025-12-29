@@ -22,6 +22,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">
     <link rel="icon" href="../assets/logo/logo.png" />
+    <style>
+    /* SEO Content Section Styles */
+    .seo-content-wrapper {
+        position: relative;
+        background: #f9fafb; /* Light background for contrast */
+        color: #1f2937;
+        padding: 60px 20px;
+        z-index: 10;
+        border-top: 1px solid #e5e7eb;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .seo-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .seo-content-wrapper h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #111827;
+    }
+
+    .seo-content-wrapper h3 {
+        font-size: 1.25rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: #374151;
+        font-weight: 600;
+    }
+
+    .seo-content-wrapper p {
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        color: #4b5563;
+    }
+
+    .seo-content-wrapper ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .seo-content-wrapper li {
+        margin-bottom: 0.5rem;
+        color: #4b5563;
+    }
+
+    /* FAQ Style */
+    .faq-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
+    }
+    .faq-question {
+        font-weight: 700;
+        color: #111;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    /* Ensure body scrolls */
+    body {
+        overflow-y: auto !important; /* Forces scrollbar to appear */
+    }
+</style>
 </head>
 
 <body>
@@ -175,6 +242,19 @@
                         <i class="fas fa-lightbulb"></i> Suggest
                     </a>
                 </div>
+                <div class="divider"></div>
+<div class="section-title">LEGAL</div>
+<div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
+    <a href="/privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
+    </a>
+    <a href="/terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
+    </a>
+    <a href="/contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
+    </a>
+</div>
 
             </div>
 
@@ -227,6 +307,44 @@
     </div>
 
     <div class="toast-container"></div>
+
+    <section class="seo-content-wrapper">
+    <div class="seo-container">
+        <h2>Free Voice-Activated Online Teleprompter</h2>
+        <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser. Unlike traditional autocue software, our tool utilizes advanced speech recognition to listen to your voice and scroll the script automatically as you speak.</p>
+
+        <h3>Key Features</h3>
+        <ul>
+            <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak. No manual speed adjustment needed.</li>
+            <li><strong>Mirror Mode:</strong> Instantly flip text horizontally (X-axis) or vertically (Y-axis) for use with professional beam-splitter glass kits.</li>
+            <li><strong>Reality Mode:</strong> Overlay your script onto your webcam feed to maintain eye contact with your audience while reading.</li>
+            <li><strong>Privacy First:</strong> Your scripts and camera feed are processed locally in your browser. Nothing is sent to a server.</li>
+        </ul>
+
+        <h3>How to Use This Teleprompter</h3>
+        <p>Getting started is easy and requires no login:</p>
+        <ol>
+            <li><strong>Paste Your Script:</strong> Copy your text into the editor area.</li>
+            <li><strong>Adjust Settings:</strong> Use the sidebar to change font size, margin, and scroll speed.</li>
+            <li><strong>Select Mode:</strong> Choose "Voice" for AI scrolling or "Manual" for continuous scroll.</li>
+            <li><strong>Start Presenting:</strong> Click the "Start" button. You will get a 3-second countdown before the prompt begins.</li>
+        </ol>
+
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+            <span class="faq-question">Is this teleprompter really free?</span>
+            Yes, PromptFlow Studio is 100% free for everyone. There are no watermarks, time limits, or premium subscriptions.
+        </div>
+        <div class="faq-item">
+            <span class="faq-question">Does it work offline?</span>
+            Yes! Once the page is loaded, you can disconnect from the internet, and the tool will continue to function perfectly.
+        </div>
+        <div class="faq-item">
+            <span class="faq-question">What devices are supported?</span>
+            It works on desktop (Chrome, Edge, Firefox, Safari) and mobile devices. For the best Voice Tracking experience, we recommend using Google Chrome.
+        </div>
+    </div>
+</section>
 
     <script src="./js/teleprompter.js"></script>
 </body>

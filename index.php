@@ -621,9 +621,11 @@
                     </div>
                 </section>
 
-            </div>
+            </div> <?php include 'footer.php'; ?>
         </main>
     </div>
+
+   
 
     <script src="./js/index.js"></script>
 </body>
