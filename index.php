@@ -72,7 +72,6 @@
             background: radial-gradient(at 100% 0%, rgba(132, 204, 22, 0.3) 0px, transparent 60%);
         }
     </style>
-    <script src="https://pl28357598.effectivegatecpm.com/92/15/53/92155325e6b71c57689bc126eb8dfc49.js"></script>
 </head>
 
 <body>
@@ -145,7 +144,6 @@
                         <span class="nav-label">Settings</span>
                         <div class="nav-glow"></div>
                     </a>
-                    <a href="https://www.effectivegatecpm.com/v51paj2e6?key=23b6aa40fb6ab5a8a07b3d763c89171c">SmartLink</a>
                     <div class="divider-line"></div>
                     <a href="https://lexoratech.com" class="nav-item external-link" data-tooltip="Visit Website" target="_blank">
                         <div class="nav-icon-wrapper">
