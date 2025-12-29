@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialMock | Free Fake Tweet & Instagram Post Generator (No Watermark)</title>
-<meta name="description" content="Create realistic social media mockups for Twitter (X), Instagram, Facebook, and TikTok. Customize verified badges, metrics, and dark mode. Download high-res PNGs for free.">
-<meta name="keywords" content="fake tweet generator, instagram post mockup free, fake social media post maker, twitter mockup generator, tiktok interface mockup, social media simulator">
+    <meta name="description" content="Create realistic social media mockups for Twitter (X), Instagram, Facebook, and TikTok. Customize verified badges, metrics, and dark mode. Download high-res PNGs for free.">
+    <meta name="keywords" content="fake tweet generator, instagram post mockup free, fake social media post maker, twitter mockup generator, tiktok interface mockup, social media simulator">
     <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,9 +14,173 @@
     <link rel="stylesheet" href="./css/socialmock.css">
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <style>
+        /* --- HELP MODAL STYLES --- */
+        #helpModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        #helpModal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .help-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
+        .help-body h3 { color: #06b6d4; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
+        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
+        .help-body li { margin-bottom: 0.5rem; }
+        
+        .modal-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .modal-faq-question {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .help-modal-content::-webkit-scrollbar { width: 8px; }
+        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        /* Sidebar Button Style */
+        .sidebar-btn-help {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(6, 182, 212, 0.1); /* Cyan tint */
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #06b6d4;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-btn-help:hover { background: rgba(6, 182, 212, 0.2); transform: translateY(-1px); }
+
+        /* Legal Links */
+        .legal-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .legal-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .legal-links a:hover { color: #fff; }
+    </style>
 </head>
 
 <body>
+
+    <div id="helpModal" class="hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="help-body">
+                <p>SocialMock allows you to generate realistic social media posts for presentations, marketing, or fun. Support for Twitter, Instagram, LinkedIn, Facebook, and TikTok interfaces is included.</p>
+
+                <h3>How to Create a Mockup</h3>
+                <ol>
+                    <li><strong>Choose Platform:</strong> Select an icon (Twitter, Instagram, etc.) at the top of the sidebar.</li>
+                    <li><strong>Profile Info:</strong> Upload a profile picture, set the display name, and choose a verified badge (Blue/Gold/Gray).</li>
+                    <li><strong>Content:</strong> Type your post text and upload images. You can also apply filters like "Grayscale" or "Vivid".</li>
+                    <li><strong>Metrics:</strong> Edit the Like, Comment, and Share counts. Use the "Randomize" button for quick results.</li>
+                    <li><strong>Download:</strong> Click "Export PNG" to save the high-resolution image to your device.</li>
+                </ol>
+
+                <h3>Advanced Features</h3>
+                <ul>
+                    <li><strong>Dark Mode:</strong> Toggle the "Dark Mode" switch to see how your post looks in a night theme.</li>
+                    <li><strong>Story Ring:</strong> Add a colorful ring around the profile picture to simulate an active story.</li>
+                    <li><strong>Watermark:</strong> The watermark is enabled by default but can be toggled off for free in the settings.</li>
+                </ul>
+
+                <h3>Frequently Asked Questions</h3>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Is the watermark really free to remove?</span>
+                    Yes! Just toggle the "Watermark" switch in the Settings panel to remove it.
+                </div>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Can I use my own images?</span>
+                    Absolutely. SocialMock runs entirely in your browser, so any image you upload stays private on your computer.
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="background-wrapper">
         <div class="mesh-gradient"></div>
@@ -46,6 +210,11 @@
             </div>
 
             <div class="scrollable-content">
+                
+                <button id="helpBtn" class="sidebar-btn-help">
+                    <i class="fas fa-question-circle"></i> How to Use?
+                </button>
+
                 <div class="control-section">
                     <label class="section-label">Platform</label>
                     <div class="platform-grid">
@@ -176,6 +345,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="legal-links">
+                    <a href="../privacy.php">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="../terms.php">
+                        <i class="fas fa-file-contract"></i> Terms of Service
+                    </a>
+                    <a href="../contact.php">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                </div>
+
             </div>
 
             <div class="mobile-action-bar mobile-only">
@@ -332,6 +514,33 @@
     </div>
 
     <script src="./js/socialmock.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if(helpBtn && helpModal) {
+                // Open Modal
+                helpBtn.addEventListener('click', () => {
+                    helpModal.classList.remove('hidden');
+                });
+
+                // Close Button
+                closeHelp.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                });
+
+                // Close on Outside Click
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) {
+                        helpModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

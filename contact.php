@@ -26,15 +26,15 @@
     <nav class="glass-nav">
         <div class="nav-container">
             <a href="index.php" class="brand">
-                <!-- <div class="logo-box"><i class="fas fa-cube"></i></div> -->
-                <span>Lexora Workspace</span>
+                <div class="logo-box"><i class="fas fa-cube"></i></div>
+                <span>Lexora</span>
             </a>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="nav-links" id="navLinks">
                 <a href="about.php">About</a>
                 <a href="#channels">Channels</a>
                 <a href="#faq">FAQ</a>
-                <a href="index.php" class="btn-launch">Launch Workspace</a>
+                <a href="index.php" class="btn-launch">Launch App</a>
             </div>
         </div>
     </nav>
@@ -142,9 +142,9 @@
             <div class="footer-grid">
                 <div class="footer-col brand-col">
                     <div class="footer-logo">
-                        <img src="assets/logo/logo2.png" alt=""> Lexora Tech
+                        <img src="assets/logo/logo2.png" alt=""> Lexora
                     </div>
-                    <p>Engineering Freedom For The Modern Web.</p>
+                    <p>Engineering freedom for the modern web.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Product</h4>
@@ -156,12 +156,12 @@
                     <h4>Company</h4>
                     <a href="about.php">About</a>
                     <a href="#">Careers</a>
-                    <a href="contact.php">Contact</a>
+                    <a href="#">Contact</a>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
-                    <a href="privacy.php">Privacy</a>
-                    <a href="terms.php">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
                 </div>
             </div>
             <div class="footer-bottom">
