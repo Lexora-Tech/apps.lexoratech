@@ -15,7 +15,7 @@
     <a href="index.php" class="back">← Back to Dashboard</a>
     <h1>Contact Us</h1>
     <p>We'd love to hear from you! For support, feedback, or business inquiries:</p>
-    <p><strong>Email:</strong> <a href="mailto:support@apps.lexoratech.com">support@lexoratech.com</a></p>
+    <p><strong>Email:</strong> <a href="mailto:support@apps.lexoratech.com">support@apps.lexoratech.com</a></p>
     <p><strong>Response Time:</strong> We usually reply within 24-48 hours.</p>
 </body>
 </html>

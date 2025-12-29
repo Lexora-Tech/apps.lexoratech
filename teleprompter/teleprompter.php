@@ -7,13 +7,6 @@
     <title>PromptFlow Studio | Lexora Workspace</title>
     <meta name="description" content="The world's smartest online teleprompter. Features voice-scrolling (listen mode), mirror/flip for beam splitters, and reality mode. 100% Free, privacy-focused, no app install needed.">
     <meta name="keywords" content="voice activated teleprompter online, free autocue with voice recognition, mirror mode teleprompter, laptop teleprompter software, virtual teleprompter for zoom">
-
-    <meta name="description" content="Professional free online teleprompter with voice tracking (voice scrolling), mirror mode, and reality mode. No login required. Best for YouTubers and presenters.">
-
-    <meta name="keywords" content="voice activated teleprompter, free autocue online, teleprompter with mirror mode, browser teleprompter, PromptFlow Studio">
-
-    <link rel="canonical" href="https://apps.lexoratech.com/teleprompter/teleprompter.php" />
-
     <meta property="og:title" content="PromptFlow Studio - Voice Activated Teleprompter">
     <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free.">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo2.png">
@@ -22,73 +15,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">
     <link rel="icon" href="../assets/logo/logo.png" />
-    <style>
-    /* SEO Content Section Styles */
-    .seo-content-wrapper {
-        position: relative;
-        background: #f9fafb; /* Light background for contrast */
-        color: #1f2937;
-        padding: 60px 20px;
-        z-index: 10;
-        border-top: 1px solid #e5e7eb;
-        font-family: 'Inter', sans-serif;
-    }
     
-    .seo-container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
+    <style>
+        /* --- NEW MODAL STYLES (For the Help Popup) --- */
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95); /* Darker background for readability */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0; /* padding handled by inner containers */
+        }
+        
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
 
-    .seo-content-wrapper h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #111827;
-    }
+        .help-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
 
-    .seo-content-wrapper h3 {
-        font-size: 1.25rem;
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-        color: #374151;
-        font-weight: 600;
-    }
+        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
+        .help-body h3 { color: #60a5fa; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .help-body p { color: #9ca3af; margin-bottom: 1rem; }
+        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #9ca3af; }
+        .help-body li { margin-bottom: 0.5rem; }
+        
+        /* FAQ Box Style inside Modal */
+        .modal-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .modal-faq-question {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    .seo-content-wrapper p {
-        line-height: 1.7;
-        margin-bottom: 1rem;
-        color: #4b5563;
-    }
-
-    .seo-content-wrapper ul {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
-    }
-
-    .seo-content-wrapper li {
-        margin-bottom: 0.5rem;
-        color: #4b5563;
-    }
-
-    /* FAQ Style */
-    .faq-item {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        margin-bottom: 1rem;
-    }
-    .faq-question {
-        font-weight: 700;
-        color: #111;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    /* Ensure body scrolls */
-    body {
-        overflow-y: auto !important; /* Forces scrollbar to appear */
-    }
-</style>
+        /* Scrollbar for Modal */
+        .help-modal-content::-webkit-scrollbar { width: 8px; }
+        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+    </style>
 </head>
 
 <body>
@@ -117,6 +101,46 @@
             <div class="modal-actions">
                 <button id="cancelClear" class="btn-ghost">Cancel</button>
                 <button id="confirmClear" class="btn-danger">Delete Everything</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden" style="z-index: 2000;">
+        <div class="modal-box glass-card help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="help-body">
+                <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser. It uses advanced speech recognition to listen to your voice and scroll the script automatically.</p>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak.</li>
+                    <li><strong>Mirror Mode:</strong> Flip text horizontally (X) or vertically (Y) for beam-splitter glass.</li>
+                    <li><strong>Reality Mode:</strong> Overlay script onto your webcam feed to maintain eye contact.</li>
+                </ul>
+
+                <h3>How to Use</h3>
+                <ol>
+                    <li><strong>Paste Script:</strong> Copy your text into the main editor area.</li>
+                    <li><strong>Adjust Settings:</strong> Use the sidebar to set Font Size, Speed, and Margin.</li>
+                    <li><strong>Select Mode:</strong> Click "Voice" for AI scrolling or stay on Manual.</li>
+                    <li><strong>Start:</strong> Click the "START (3s)" button to begin presentation.</li>
+                </ol>
+
+                <h3>Frequently Asked Questions</h3>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Is this tool free?</span>
+                    Yes, 100% free with no watermarks or time limits.
+                </div>
+                <div class="modal-faq-item">
+                    <span class="modal-faq-question">Does it work offline?</span>
+                    Yes! Once loaded, you can disconnect from the internet and it works perfectly.
+                </div>
             </div>
         </div>
     </div>
@@ -234,6 +258,11 @@
 
                 <div class="divider"></div>
                 <div class="section-title">SUPPORT</div>
+                
+                <button id="helpBtn" class="btn-glass" style="width:100%; margin-bottom: 10px; border-color: rgba(255,255,255,0.3); color: white;">
+                    <i class="fas fa-question-circle"></i> How to Use?
+                </button>
+
                 <div class="grid-2">
                     <a href="https://buymeacoffee.com/lexoratech" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
                         <i class="fas fa-coffee"></i> Coffee
@@ -242,19 +271,20 @@
                         <i class="fas fa-lightbulb"></i> Suggest
                     </a>
                 </div>
+                
                 <div class="divider"></div>
-<div class="section-title">LEGAL</div>
-<div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
-    <a href="/privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
-    </a>
-    <a href="/terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
-    </a>
-    <a href="/contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
-    </a>
-</div>
+                <div class="section-title">LEGAL</div>
+                <div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
+                    <a href="../privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
+                    </a>
+                    <a href="../terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
+                    </a>
+                    <a href="../contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
+                        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
+                    </a>
+                </div>
 
             </div>
 
@@ -281,72 +311,54 @@
 
     <div id="prompter" class="prompter-layer hidden">
         <video id="webcamFeed" autoplay playsinline muted class="hidden"></video>
-
         <div id="liveCaption">Listening...</div>
-
         <div id="scrollingText" class="text-content"></div>
 
         <div class="hud glass-hud">
             <button id="closeHud" class="hud-icon"><i class="fas fa-times"></i></button>
             <div class="hud-sep"></div>
-
             <button id="restartHud" class="hud-icon" title="Restart from Beginning">
                 <i class="fas fa-undo"></i>
             </button>
-
             <button id="playHud" class="hud-main-icon"><i class="fas fa-pause"></i></button>
-
             <div class="hud-sep"></div>
-
             <div id="voiceIndicator" class="hidden" style="color:#ef4444; margin-right:10px;">
                 <i class="fas fa-microphone-alt fa-pulse"></i>
             </div>
-
             <input type="range" id="hudSpeed" min="1" max="10">
         </div>
     </div>
 
     <div class="toast-container"></div>
 
-    <section class="seo-content-wrapper">
-    <div class="seo-container">
-        <h2>Free Voice-Activated Online Teleprompter</h2>
-        <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser. Unlike traditional autocue software, our tool utilizes advanced speech recognition to listen to your voice and scroll the script automatically as you speak.</p>
-
-        <h3>Key Features</h3>
-        <ul>
-            <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak. No manual speed adjustment needed.</li>
-            <li><strong>Mirror Mode:</strong> Instantly flip text horizontally (X-axis) or vertically (Y-axis) for use with professional beam-splitter glass kits.</li>
-            <li><strong>Reality Mode:</strong> Overlay your script onto your webcam feed to maintain eye contact with your audience while reading.</li>
-            <li><strong>Privacy First:</strong> Your scripts and camera feed are processed locally in your browser. Nothing is sent to a server.</li>
-        </ul>
-
-        <h3>How to Use This Teleprompter</h3>
-        <p>Getting started is easy and requires no login:</p>
-        <ol>
-            <li><strong>Paste Your Script:</strong> Copy your text into the editor area.</li>
-            <li><strong>Adjust Settings:</strong> Use the sidebar to change font size, margin, and scroll speed.</li>
-            <li><strong>Select Mode:</strong> Choose "Voice" for AI scrolling or "Manual" for continuous scroll.</li>
-            <li><strong>Start Presenting:</strong> Click the "Start" button. You will get a 3-second countdown before the prompt begins.</li>
-        </ol>
-
-        <h3>Frequently Asked Questions</h3>
-        <div class="faq-item">
-            <span class="faq-question">Is this teleprompter really free?</span>
-            Yes, PromptFlow Studio is 100% free for everyone. There are no watermarks, time limits, or premium subscriptions.
-        </div>
-        <div class="faq-item">
-            <span class="faq-question">Does it work offline?</span>
-            Yes! Once the page is loaded, you can disconnect from the internet, and the tool will continue to function perfectly.
-        </div>
-        <div class="faq-item">
-            <span class="faq-question">What devices are supported?</span>
-            It works on desktop (Chrome, Edge, Firefox, Safari) and mobile devices. For the best Voice Tracking experience, we recommend using Google Chrome.
-        </div>
-    </div>
-</section>
-
     <script src="./js/teleprompter.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if(helpBtn && helpModal) {
+                // Open Modal
+                helpBtn.addEventListener('click', () => {
+                    helpModal.classList.remove('hidden');
+                });
+
+                // Close Button
+                closeHelp.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                });
+
+                // Close on Outside Click
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) {
+                        helpModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
