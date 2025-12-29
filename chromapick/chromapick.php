@@ -15,6 +15,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+
     <style>
         /* --- HELP MODAL STYLES --- */
         .help-modal-content {
@@ -80,6 +83,49 @@
             z-index: 2000; opacity: 1; transition: opacity 0.3s ease;
         }
         .modal-overlay.hidden { opacity: 0; pointer-events: none; }
+
+        /* --- TOUR WELCOME MODAL STYLES --- */
+        #tourWelcomeModal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            z-index: 99999; display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        #tourWelcomeModal.show { opacity: 1; pointer-events: all; }
+        
+        .tour-card {
+            background: #1e1e24; border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px; border-radius: 20px; text-align: center; max-width: 450px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); font-family: 'Outfit', sans-serif;
+        }
+        .tour-icon { font-size: 3rem; color: #60a5fa; margin-bottom: 20px; }
+        .tour-card h2 { color: #fff; margin-bottom: 10px; font-weight: 700; font-size: 1.8rem; }
+        .tour-card p { color: #9ca3af; margin-bottom: 30px; line-height: 1.6; }
+        
+        .tour-actions { display: flex; gap: 15px; justify-content: center; }
+        .btn-start-tour {
+            background: #3b82f6; color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .btn-start-tour:hover { background: #2563eb; transform: translateY(-2px); }
+        .btn-skip-tour {
+            background: transparent; color: #9ca3af; border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-skip-tour:hover { border-color: #fff; color: #fff; }
+
+        /* Driver JS Theme */
+        .driver-popover.driverjs-theme {
+            background-color: #1e1e24; color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+        }
+        .driver-popover.driverjs-theme .driver-popover-title { color: #60a5fa; font-size: 1.2rem; font-weight: 600; }
+        .driver-popover.driverjs-theme .driver-popover-description { color: #d1d5db; line-height: 1.5; }
+        .driver-popover.driverjs-theme button {
+            background-color: #3b82f6; color: #fff; border-radius: 6px; text-shadow: none; border: none;
+        }
+        .driver-popover.driverjs-theme button:hover { background-color: #2563eb; }
     </style>
 </head>
 
@@ -89,6 +135,18 @@
     <div id="toastBox" class="toast-container"></div>
 
     <input type="file" id="globalFileInput" accept="image/*" style="display:none;">
+
+    <div id="tourWelcomeModal">
+        <div class="tour-card">
+            <div class="tour-icon"><i class="fas fa-palette"></i></div>
+            <h2>Welcome to ChromaPick!</h2>
+            <p>Ready to extract colors like a pro? Take a quick 30-second tour to learn how to use the Eyedropper and Harmonies.</p>
+            <div class="tour-actions">
+                <button id="startTour" class="btn-start-tour">Start Tour</button>
+                <button id="skipTour" class="btn-skip-tour">Skip</button>
+            </div>
+        </div>
+    </div>
 
     <div id="helpModal" class="modal-overlay hidden">
         <div class="modal-box glass-card help-modal-content">
@@ -100,33 +158,25 @@
             </div>
             
             <div class="help-body">
-                <p>Extracting precise colors from images has never been easier. ChromaPick is a browser-based tool designed for designers, developers, and artists who need to identify colors, generate palettes, and inspect pixels with pixel-perfect accuracy.</p>
+                <p>Extracting precise colors from images has never been easier. ChromaPick is a browser-based tool designed for designers, developers, and artists.</p>
 
                 <h3>Powerful Color Tools</h3>
                 <ul>
-                    <li><strong>Eyedropper Tool:</strong> Hover over any part of an image to see the color in real-time. Click to lock the color and copy its code.</li>
-                    <li><strong>Multi-Format Support:</strong> Get color codes in HEX (#FFFFFF), RGB (255, 255, 255), and HSL (0, 0%, 100%) formats instantly.</li>
-                    <li><strong>Harmonic Palettes:</strong> Automatically generate Complementary, Analogous, and Triadic color schemes based on your selected color.</li>
-                    <li><strong>Smart Extraction:</strong> Upload an image, and our algorithm will extract the dominant color palette for you to export as CSS or JSON.</li>
+                    <li><strong>Eyedropper Tool:</strong> Hover over any part of an image to see the color in real-time.</li>
+                    <li><strong>Multi-Format Support:</strong> Get HEX, RGB, and HSL codes instantly.</li>
+                    <li><strong>Harmonic Palettes:</strong> Automatically generate Complementary and Analogous schemes.</li>
                 </ul>
 
-                <h3>How to Extract Colors from an Image</h3>
+                <h3>How to Extract Colors</h3>
                 <ol>
-                    <li><strong>Upload or Drop:</strong> Drag and drop your image onto the canvas, or press Ctrl+V to paste an image from your clipboard.</li>
-                    <li><strong>Pick a Color:</strong> Select the "Eyedropper" tool from the toolbar and click anywhere on the image.</li>
-                    <li><strong>View Details:</strong> The sidebar will update with the color's HEX, RGB, and HSL values.</li>
-                    <li><strong>Export:</strong> Click the copy icon next to any value to copy it to your clipboard.</li>
+                    <li><strong>Upload or Drop:</strong> Drag your image onto the canvas.</li>
+                    <li><strong>Pick a Color:</strong> Select the "Eyedropper" tool and click the image.</li>
+                    <li><strong>Export:</strong> Click the copy icon next to any value.</li>
                 </ol>
 
-                <h3>Common Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Are my images uploaded to a server?</span>
-                    No. ChromaPick processes your images locally in your browser using the HTML5 Canvas API. Your photos never leave your device, ensuring 100% privacy.
-                </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Can I use this for CSS gradients?</span>
-                    Yes. You can pick multiple colors and use our "History" panel to build a collection of colors perfect for creating CSS gradients.
-                </div>
+                <button id="restartTourBtn" class="tool-btn" style="width:100%; margin-top:20px; justify-content:center; color:#60a5fa; border-color:#60a5fa; background:rgba(59,130,246,0.1);">
+                    <i class="fas fa-play-circle"></i> Replay Interactive Tour
+                </button>
             </div>
         </div>
     </div>
@@ -293,26 +343,95 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // -- Help Modal Logic --
             const helpBtn = document.getElementById('helpBtn');
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
+            const restartTourBtn = document.getElementById('restartTourBtn');
 
             if(helpBtn && helpModal) {
-                // Open Modal
-                helpBtn.addEventListener('click', () => {
-                    helpModal.classList.remove('hidden');
-                });
-
-                // Close Button
-                closeHelp.addEventListener('click', () => {
-                    helpModal.classList.add('hidden');
-                });
-
-                // Close on Outside Click
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
                 helpModal.addEventListener('click', (e) => {
-                    if (e.target === helpModal) {
-                        helpModal.classList.add('hidden');
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
+
+            // -- Tour / Onboarding Logic --
+            const tourModal = document.getElementById('tourWelcomeModal');
+            const startTourBtn = document.getElementById('startTour');
+            const skipTourBtn = document.getElementById('skipTour');
+
+            // Define Driver.js Tour
+            const driver = window.driver.js.driver;
+            const tour = driver({
+                showProgress: true,
+                animate: true,
+                popoverClass: 'driverjs-theme',
+                steps: [
+                    { 
+                        element: '#mainDropZone', 
+                        popover: { 
+                            title: 'The Canvas', 
+                            description: 'Drag & Drop your image here, or paste it (Ctrl+V) to get started.' 
+                        } 
+                    },
+                    { 
+                        element: '.toolbar-float', 
+                        popover: { 
+                            title: 'Toolbar', 
+                            description: 'Use the Eyedropper to pick colors, or the Pan/Zoom tools to navigate large images.' 
+                        } 
+                    },
+                    { 
+                        element: '.inspector-card', 
+                        popover: { 
+                            title: 'Inspector', 
+                            description: 'View precise HEX, RGB, and HSL values. Click any code to copy it instantly.' 
+                        } 
+                    },
+                    { 
+                        element: '.harmony-container', 
+                        popover: { 
+                            title: 'Color Harmonies', 
+                            description: 'We automatically generate Complementary and Analogous palettes based on your selected color.' 
+                        } 
+                    },
+                    { 
+                        element: '.group-header', 
+                        popover: { 
+                            title: 'Export Palette', 
+                            description: 'Extract dominant colors from the image and export them as CSS or JSON.' 
+                        } 
                     }
+                ]
+            });
+
+            // Check LocalStorage
+            if (!localStorage.getItem('lexora_chroma_tour_seen')) {
+                // Show welcome modal after 1 second
+                setTimeout(() => {
+                    tourModal.classList.add('show');
+                }, 1000);
+            }
+
+            // Handle Buttons
+            startTourBtn.addEventListener('click', () => {
+                tourModal.classList.remove('show');
+                localStorage.setItem('lexora_chroma_tour_seen', 'true');
+                tour.drive();
+            });
+
+            skipTourBtn.addEventListener('click', () => {
+                tourModal.classList.remove('show');
+                localStorage.setItem('lexora_chroma_tour_seen', 'true');
+            });
+
+            // Allow restarting from Help Menu
+            if(restartTourBtn) {
+                restartTourBtn.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                    tour.drive();
                 });
             }
         });
