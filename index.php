@@ -6,47 +6,329 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace | World's First Free All-in-One Creator Suite</title>
     <meta name="description" content="The only free operating system for creators. Access 12+ pro tools including Image Compressor, Code Formatter, Diff Checker, Teleprompter, and AI Voice.">
-    <meta name="keywords" content="free creator tools, image compressor, code formatter, diff checker, teleprompter, ai voice generator, Lexora apps">
-    <meta property="og:title" content="Lexora Workspace - Stop Switching Tabs. Create Everything Here.">
-    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
-    <meta property="og:url" content="https://apps.lexoratech.com/">
-    <meta property="og:type" content="website">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Lexora Workspace">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
 
     <style>
-        /* --- Mobile Specific Overrides --- */
-        @media (max-width: 768px) {
-            .header-left {
-                padding-left: 60px !important;
-                padding-top: 10px !important;
+        /* --- Global Layout Overrides --- */
+        body {
+            background-color: #050505;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Modern Minimal Header --- */
+        .modern-navbar {
+            position: sticky;
+            top: 0px;
+            z-index: 1000;
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 40px auto;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 12px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* Logo Area */
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+            transition: opacity 0.2s;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.9;
+        }
+
+        .brand-logo {
+            height: 32px;
+            width: auto;
+        }
+
+        .brand-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Right Actions */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .search-pill {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            padding: 8px 16px;
+            transition: 0.3s;
+            width: 240px;
+        }
+
+        .search-pill:focus-within {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            width: 280px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .search-pill i {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 0.9rem;
+            width: 100%;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-input::placeholder {
+            color: #52525b;
+        }
+
+        .shortcut-hint {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        /* Icon Buttons */
+        .icon-btn {
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
+        }
+
+        /* --- Content Layout --- */
+        .app-container {
+            display: block;
+            width: 100%;
+            padding-top: 0;
+            flex: 1;
+            /* Sticky Footer Logic */
+        }
+
+        .main-area {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-area {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 60px 40px;
+        }
+
+        /* --- Footer CSS --- */
+        .main-footer {
+            background: #000;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px 20px 20px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo img {
+            height: 22px;
+        }
+
+        .brand-col p {
+            color: #64748b;
+            font-size: 0.85rem;
+            max-width: 250px;
+            line-height: 1.5;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #444;
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 900px) {
+            .modern-navbar {
+                width: 92%;
+                padding: 10px 15px;
+                top: 0px;
             }
 
-            #sidebar {
-                z-index: 9999 !important;
+            .search-wrapper {
+                display: none;
             }
 
-            .sidebar-content {
-                background-color: #0a0a0a !important;
-                backdrop-filter: none !important;
+            .content-area {
+                padding: 0 20px 40px 20px;
             }
 
-            #mobileMenuToggle {
-                z-index: 999 !important;
+            /* Optimized Mobile Footer */
+            .main-footer {
+                padding: 30px 20px 20px;
             }
 
-            .top-header {
-                padding: 1rem !important;
+            .footer-grid {
+                display: grid;
+                /* Force 3 equal columns for links on mobile */
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .brand-col {
+                grid-column: span 3;
+                /* Logo takes full width at top */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding-bottom: 15px;
+            }
+
+            /* HIDE TEXT UNDER LOGO IN MOBILE */
+            .brand-col p {
+                display: none;
+            }
+
+            .footer-logo {
+                margin-bottom: 0;
+                /* Remove bottom margin since text is gone */
+            }
+
+            /* Adjust heading spacing */
+            .footer-col h4 {
+                margin-bottom: 10px;
+                font-size: 0.75rem;
+            }
+
+            .footer-col a {
+                font-size: 0.8rem;
             }
         }
 
-        /* --- NEW LIME THEME (For DiffCheck) --- */
+        /* --- Helper Classes --- */
         .lime-gradient {
             background: linear-gradient(135deg, #84cc16, #65a30d);
         }
@@ -71,6 +353,10 @@
         .lime-mesh {
             background: radial-gradient(at 100% 0%, rgba(132, 204, 22, 0.3) 0px, transparent 60%);
         }
+
+        .mobile-menu-toggle {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -84,122 +370,36 @@
         <div class="gradient-sphere sphere-3"></div>
     </div>
 
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-        <i class="fas fa-bars"></i>
-    </button>
-
     <div class="app-container">
 
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-            <div class="sidebar-content">
-                <div class="sidebar-header">
-                    <div class="logo-container" style="margin-left: 70px; margin-top: -14px;">
-                        <img src="./assets/logo/logo2.png" alt="Lexora Logo" class="logo-img">
-                        <div class="logo-glow"></div>
-                    </div>
-                    <button class="close-sidebar" id="closeSidebar" aria-label="Close menu" style="margin-top: -14px;">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+        <header class="modern-navbar">
 
-                <nav class="nav-menu">
-                    <a href="index.php" class="nav-item active" data-tooltip="Dashboard">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-th-large"></i>
-                        </div>
-                        <span class="nav-label">Dashboard</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                    <a href="projects.php" class="nav-item" data-tooltip="Projects">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-folder-open"></i>
-                        </div>
-                        <span class="nav-label">Projects</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                    <a href="analytics.php" class="nav-item" data-tooltip="Analytics">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <span class="nav-label">Analytics</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                    <a href="team.php" class="nav-item" data-tooltip="Team">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <span class="nav-label">Team</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                </nav>
+            <a href="index.php" class="nav-brand">
+                <img src="./assets/logo/logo2.png" alt="Lexora" class="brand-logo">
+                <span class="brand-text">Lexora Workspace</span>
+            </a>
 
-                <div class="sidebar-spacer"></div>
-
-                <div class="sidebar-footer">
-                    <a href="settings.php" class="nav-item" data-tooltip="Settings">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <span class="nav-label">Settings</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                    <div class="divider-line"></div>
-                    <a href="https://lexoratech.com" class="nav-item external-link" data-tooltip="Visit Website" target="_blank">
-                        <div class="nav-icon-wrapper">
-                            <i class="fas fa-external-link-alt"></i>
-                        </div>
-                        <span class="nav-label">Website</span>
-                        <div class="nav-glow"></div>
-                    </a>
-                    <div class="user-profile">
-                        <div class="avatar">
-                            <span>LT</span>
-                            <div class="avatar-ring"></div>
-                        </div>
-                        <div class="user-info">
-                            <span class="user-name">Lexora</span>
-                            <span class="user-role">Admin</span>
-                        </div>
-                        <i class="fas fa-chevron-right user-arrow"></i>
+            <div class="nav-right">
+                <div class="search-wrapper">
+                    <div class="search-pill">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" placeholder="Search 12+ tools..." id="globalSearch">
+                        <span class="shortcut-hint">/</span>
                     </div>
                 </div>
+
+                <button class="icon-btn" aria-label="Notifications">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <a href="https://discord.gg" target="_blank" class="icon-btn" aria-label="Help / Community">
+                    <i class="far fa-question-circle"></i>
+                </a>
             </div>
-        </aside>
+        </header>
 
         <main class="main-area">
-
-            <header class="top-header">
-                <div class="header-glass"></div>
-                <div class="header-content">
-                    <div class="header-left">
-                        <div class="breadcrumb">
-                            <span class="breadcrumb-item">Home</span>
-                            <i class="fas fa-chevron-right breadcrumb-separator"></i>
-                            <span class="breadcrumb-item active">Workspace</span>
-                        </div>
-                        <h1 class="workspace-title">Lexora Workspace</h1>
-                    </div>
-                    <div class="header-right">
-                        <div class="search-wrapper">
-                            <div class="search-container">
-                                <i class="fas fa-search search-icon"></i>
-                                <input type="text" id="searchInput" placeholder="Search tools..." class="search-input" autocomplete="off">
-                                <kbd class="shortcut-key">/</kbd>
-                            </div>
-                        </div>
-                        <button class="header-btn" aria-label="Notifications">
-                            <i class="fas fa-bell"></i>
-                            <div class="btn-glow"></div>
-                        </button>
-                        <button class="header-btn" aria-label="Help">
-                            <i class="fas fa-question-circle"></i>
-                            <div class="btn-glow"></div>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
             <div class="content-area">
 
                 <section class="featured-section">
@@ -226,27 +426,21 @@
                                     </p>
                                     <div class="featured-stats">
                                         <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-users"></i>
-                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-users"></i></div>
                                             <div class="stat-content">
                                                 <span class="stat-value">10K+</span>
                                                 <span class="stat-label">Active Users</span>
                                             </div>
                                         </div>
                                         <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-star"></i>
-                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-star"></i></div>
                                             <div class="stat-content">
                                                 <span class="stat-value">4.9</span>
                                                 <span class="stat-label">Rating</span>
                                             </div>
                                         </div>
                                         <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-bolt"></i>
-                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-bolt"></i></div>
                                             <div class="stat-content">
                                                 <span class="stat-value">Free</span>
                                                 <span class="stat-label">Forever</span>
@@ -265,18 +459,10 @@
                             <div class="featured-right">
                                 <div class="featured-icon-display">
                                     <div class="icon-circle"></div>
-                                    <div class="icon-main">
-                                        <i class="fas fa-stream"></i>
-                                    </div>
-                                    <div class="icon-float icon-1">
-                                        <i class="fas fa-microphone"></i>
-                                    </div>
-                                    <div class="icon-float icon-2">
-                                        <i class="fas fa-video"></i>
-                                    </div>
-                                    <div class="icon-float icon-3">
-                                        <i class="fas fa-desktop"></i>
-                                    </div>
+                                    <div class="icon-main"><i class="fas fa-stream"></i></div>
+                                    <div class="icon-float icon-1"><i class="fas fa-microphone"></i></div>
+                                    <div class="icon-float icon-2"><i class="fas fa-video"></i></div>
+                                    <div class="icon-float icon-3"><i class="fas fa-desktop"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -292,28 +478,22 @@
                         <div class="section-badge">12 Tools</div>
                     </div>
 
-                    <div class="tools-grid">
+                    <div class="tools-grid" id="toolsGrid">
 
                         <a href="voicegen/voicegen.php" class="tool-card">
                             <div class="card-glass"></div>
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon pink-gradient">
-                                        <i class="fas fa-microphone-lines"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon pink-gradient"><i class="fas fa-microphone-lines"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live pink-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live pink-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">VoiceGen AI</h3>
-                                <p class="tool-description">Neural text-to-speech with multiple voices and languages for professional content.</p>
-                                <div class="tool-tags"><span class="tag">AI Powered</span><span class="tag">Multi-Language</span></div>
+                                <p class="tool-description">Neural text-to-speech with multiple voices and languages.</p>
+                                <div class="tool-tags"><span class="tag">AI Powered</span><span class="tag">Audio</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn pink-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -326,20 +506,14 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon red-gradient">
-                                        <i class="fab fa-youtube"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon red-gradient"><i class="fab fa-youtube"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live red-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live red-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">ThumbGrab</h3>
-                                <p class="tool-description">Download high-resolution YouTube thumbnails instantly in multiple formats.</p>
+                                <p class="tool-description">Download high-resolution YouTube thumbnails instantly.</p>
                                 <div class="tool-tags"><span class="tag">HD Quality</span><span class="tag">Instant</span></div>
                             </div>
                             <div class="card-footer">
@@ -353,21 +527,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon green-gradient">
-                                        <i class="fas fa-qrcode"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon green-gradient"><i class="fas fa-qrcode"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live green-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live green-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">LinkVault</h3>
-                                <p class="tool-description">Generate custom QR codes with logo embedding and color customization.</p>
-                                <div class="tool-tags"><span class="tag">Customizable</span><span class="tag">SVG Export</span></div>
+                                <p class="tool-description">Generate custom QR codes with logo embedding.</p>
+                                <div class="tool-tags"><span class="tag">Customizable</span><span class="tag">SVG</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn green-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -380,21 +548,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon indigo-gradient">
-                                        <i class="fas fa-eye-dropper"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon indigo-gradient"><i class="fas fa-eye-dropper"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live indigo-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live indigo-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">ChromaPick</h3>
-                                <p class="tool-description">Extract color palettes from images with hex, RGB, and HSL formats.</p>
-                                <div class="tool-tags"><span class="tag">Color Theory</span><span class="tag">Palette Gen</span></div>
+                                <p class="tool-description">Extract color palettes from images in multiple formats.</p>
+                                <div class="tool-tags"><span class="tag">Design</span><span class="tag">Palette</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn indigo-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -407,20 +569,14 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon blue-gradient">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon blue-gradient"><i class="fas fa-file-pdf"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live blue-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live blue-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">Lexora PDF</h3>
-                                <p class="tool-description">Merge, split, compress, and convert PDFs with enterprise-grade security.</p>
+                                <p class="tool-description">Merge, split, compress, and convert PDFs securely.</p>
                                 <div class="tool-tags"><span class="tag">Secure</span><span class="tag">Fast</span></div>
                             </div>
                             <div class="card-footer">
@@ -434,21 +590,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon yellow-gradient">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon yellow-gradient"><i class="fas fa-shield-alt"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live yellow-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live yellow-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">SecurePass</h3>
-                                <p class="tool-description">Generate cryptographically secure passwords with custom complexity rules.</p>
-                                <div class="tool-tags"><span class="tag">256-bit</span><span class="tag">Zero-Log</span></div>
+                                <p class="tool-description">Generate cryptographically secure passwords.</p>
+                                <div class="tool-tags"><span class="tag">Security</span><span class="tag">Privacy</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn yellow-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -461,21 +611,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon cyan-gradient">
-                                        <i class="fas fa-layer-group"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon cyan-gradient"><i class="fas fa-layer-group"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live cyan-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live cyan-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">SocialMock</h3>
-                                <p class="tool-description">Create realistic social media post mockups for Twitter, Instagram, and LinkedIn.</p>
-                                <div class="tool-tags"><span class="tag">Design</span><span class="tag">Marketing</span></div>
+                                <p class="tool-description">Create realistic social media post mockups.</p>
+                                <div class="tool-tags"><span class="tag">Marketing</span><span class="tag">Social</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn cyan-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -488,21 +632,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon violet-gradient">
-                                        <i class="fas fa-headphones"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon violet-gradient"><i class="fas fa-headphones"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live violet-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live violet-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">FocusFlow</h3>
-                                <p class="tool-description">Ambient noise generator and Pomodoro timer for deep work sessions.</p>
-                                <div class="tool-tags"><span class="tag">Productivity</span><span class="tag">Wellness</span></div>
+                                <p class="tool-description">Ambient noise generator and Pomodoro timer.</p>
+                                <div class="tool-tags"><span class="tag">Productivity</span><span class="tag">Focus</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn violet-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -515,21 +653,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon orange-gradient">
-                                        <i class="fas fa-exchange-alt"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon orange-gradient"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live orange-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live orange-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">QuickConvert</h3>
-                                <p class="tool-description">Universal unit and currency converter with real-time exchange rates.</p>
-                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Travel</span></div>
+                                <p class="tool-description">Universal unit and currency converter.</p>
+                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Math</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn orange-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -542,21 +674,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon teal-gradient">
-                                        <i class="fas fa-compress-arrows-alt"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon teal-gradient"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live teal-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live teal-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">ImgOptim</h3>
-                                <p class="tool-description">Smart image compression for JPG, PNG, and WebP without quality loss.</p>
-                                <div class="tool-tags"><span class="tag">Optimization</span><span class="tag">Web Vitals</span></div>
+                                <p class="tool-description">Smart image compression without quality loss.</p>
+                                <div class="tool-tags"><span class="tag">Images</span><span class="tag">Optimization</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn teal-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -569,21 +695,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon purple-gradient">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon purple-gradient"><i class="fas fa-code"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live purple-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live purple-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">CodeFormat</h3>
-                                <p class="tool-description">Beautify and validate JSON, HTML, CSS, and JS code instantly.</p>
-                                <div class="tool-tags"><span class="tag">Developer</span><span class="tag">Syntax</span></div>
+                                <p class="tool-description">Beautify and validate JSON, HTML, CSS, and JS code.</p>
+                                <div class="tool-tags"><span class="tag">Dev</span><span class="tag">Syntax</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn purple-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -596,21 +716,15 @@
                             <div class="card-border-glow"></div>
                             <div class="card-header">
                                 <div class="tool-icon-wrapper">
-                                    <div class="tool-icon lime-gradient">
-                                        <i class="fas fa-not-equal"></i>
-                                    </div>
-                                    <div class="icon-particles">
-                                        <span class="particle"></span><span class="particle"></span><span class="particle"></span>
-                                    </div>
+                                    <div class="tool-icon lime-gradient"><i class="fas fa-not-equal"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
                                 </div>
-                                <div class="status-badge status-live lime-status">
-                                    <span class="status-dot"></span><span>Live</span>
-                                </div>
+                                <div class="status-badge status-live lime-status"><span class="status-dot"></span><span>Live</span></div>
                             </div>
                             <div class="card-body">
                                 <h3 class="tool-title">DiffCheck</h3>
-                                <p class="tool-description">Compare text files and code snippets to highlight differences instantly.</p>
-                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Dev Tool</span></div>
+                                <p class="tool-description">Compare text files and code snippets.</p>
+                                <div class="tool-tags"><span class="tag">Dev</span><span class="tag">Compare</span></div>
                             </div>
                             <div class="card-footer">
                                 <button class="launch-btn lime-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
@@ -621,13 +735,95 @@
                     </div>
                 </section>
 
-            </div> <?php include 'footer.php'; ?>
+            </div>
+
+            <footer class="main-footer">
+                <div class="footer-grid">
+                    <div class="footer-col brand-col">
+                        <div class="footer-logo">
+                            <img src="assets/logo/logo2.png" alt=""> Lexora Tech
+                        </div>
+                        <p>Engineering Freedom For The Modern Web.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">Changelog</a>
+                        <a href="#">Roadmap</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="about.php">About</a>
+                        <a href="#">Careers</a>
+                        <a href="contact.php">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <a href="privacy.php">Privacy</a>
+                        <a href="terms.php">Terms</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 LexoraTech. All rights reserved.
+                </div>
+            </footer>
+
         </main>
     </div>
 
-   
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('globalSearch');
+            const toolCards = document.querySelectorAll('.tool-card');
 
-    <script src="./js/index.js"></script>
+            if (searchInput) {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === '/' && document.activeElement !== searchInput) {
+                        e.preventDefault();
+                        searchInput.focus();
+                    }
+                });
+
+                searchInput.addEventListener('keyup', (e) => {
+                    const term = e.target.value.toLowerCase().trim();
+
+                    if (term.length > 0 && window.scrollY < 300) {
+                        document.querySelector('.tools-section').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+
+                    toolCards.forEach(card => {
+                        const title = card.querySelector('.tool-title').innerText.toLowerCase();
+                        const desc = card.querySelector('.tool-description').innerText.toLowerCase();
+                        const tags = Array.from(card.querySelectorAll('.tag'))
+                            .map(t => t.innerText.toLowerCase())
+                            .join(' ');
+
+                        const isMatch = title.includes(term) || desc.includes(term) || tags.includes(term);
+
+                        if (isMatch) {
+                            card.style.display = 'flex';
+                            card.style.animation = 'fadeIn 0.4s ease';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 
 </html>
+
+

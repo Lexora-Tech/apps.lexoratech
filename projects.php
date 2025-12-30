@@ -51,7 +51,7 @@
                         <span class="nav-label">Projects</span>
                         <div class="nav-glow"></div>
                     </a>
-                    <a href="analytics.php" class="nav-item">
+                   <!--  <a href="analytics.php" class="nav-item">
                         <div class="nav-icon-wrapper"><i class="fas fa-chart-bar"></i></div>
                         <span class="nav-label">Analytics</span>
                         <div class="nav-glow"></div>
@@ -60,23 +60,33 @@
                         <div class="nav-icon-wrapper"><i class="fas fa-users"></i></div>
                         <span class="nav-label">Team</span>
                         <div class="nav-glow"></div>
-                    </a>
+                    </a> -->
                 </nav>
 
                 <div class="sidebar-spacer"></div>
 
                 <div class="sidebar-footer">
-                    <a href="settings.php" class="nav-item">
+                   <!--  <a href="settings.php" class="nav-item">
                         <div class="nav-icon-wrapper"><i class="fas fa-cog"></i></div>
                         <span class="nav-label">Settings</span>
-                    </a>
+                        <div class="nav-glow"></div>
+                    </a> -->
                     <div class="divider-line"></div>
-                    <div class="user-profile">
-                        <div class="avatar"><span>LT</span>
+                    <a href="https://lexoratech.com" class="nav-item external-link" data-tooltip="Visit Website" target="_blank">
+                        <div class="nav-icon-wrapper"><i class="fas fa-external-link-alt"></i></div>
+                        <span class="nav-label">Website</span>
+                        <div class="nav-glow"></div>
+                    </a>
+                  <!--   <div class="user-profile">
+                        <div class="avatar">
+                            <span>LT</span>
                             <div class="avatar-ring"></div>
                         </div>
-                        <div class="user-info"><span class="user-name">Lexora</span><span class="user-role">Admin</span></div>
-                    </div>
+                        <div class="user-info">
+                            <span class="user-name">Lexora</span>
+                        </div>
+                        <i class="fas fa-chevron-right user-arrow"></i>
+                    </div> -->
                 </div>
             </div>
         </aside>
@@ -88,7 +98,7 @@
                 <div class="header-content">
                     <div class="header-left">
                         <div class="breadcrumb">
-                             <span class="breadcrumb-item">Workspace</span>
+                            <span class="breadcrumb-item">Workspace</span>
                             <i class="fas fa-chevron-right breadcrumb-separator"></i>
                             <span class="breadcrumb-item active">Projects</span>
                         </div>
@@ -153,12 +163,10 @@
                         <div class="card-body">
                             <h3>Lexora Dashboard V2</h3>
                             <p>Redesigning the main dashboard with glassmorphism and bento grids.</p>
-
                             <div class="meta-tags">
                                 <span class="tag">UI/UX</span>
                                 <span class="tag">Frontend</span>
                             </div>
-
                             <div class="progress-wrapper">
                                 <div class="progress-labels"><span>Progress</span><span>75%</span></div>
                                 <div class="progress-track">
@@ -250,7 +258,11 @@
 
                 </div>
             </div>
+
+            <?php include 'footer.php'; ?>
+
         </main>
+
     </div>
 
     <script src="./js/projects.js"></script>
