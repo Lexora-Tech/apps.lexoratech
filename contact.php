@@ -156,12 +156,12 @@
                     <h4>Company</h4>
                     <a href="about.php">About</a>
                     <a href="#">Careers</a>
-                    <a href="#">Contact</a>
+                    <a href="contact.php">Contact</a>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
+                    <a href="privacy.php">Privacy</a>
+                    <a href="terms.php">Terms</a>
                 </div>
             </div>
             <div class="footer-bottom">
