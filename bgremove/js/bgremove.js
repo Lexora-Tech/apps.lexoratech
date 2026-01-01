@@ -22,7 +22,7 @@
         downloadAllBtn: document.getElementById('downloadAllBtn'),
         toastContainer: document.getElementById('toastContainer'),
         
-        // Modal
+        // Modal & Help
         compareModal: document.getElementById('compareModal'),
         closeModal: document.getElementById('closeModal'),
         compareStage: document.getElementById('compareStage'),
@@ -37,33 +37,59 @@
 
     let state = { files: [] };
     
-    // Help Modal Logic
+    // --- HELP MODAL LOGIC ---
     if(ui.helpBtn && ui.helpModal) {
         ui.helpBtn.onclick = () => ui.helpModal.classList.add('active');
     }
 
-    // --- 1. ROBUST FILE SELECTION ---
-    
-    const triggerFileSelect = (e) => {
-        if(e) { e.preventDefault(); e.stopPropagation(); }
-        ui.fileInput.click();
-    };
+    // --- 1. FILE SELECTION LOGIC ---
+    // const triggerFileSelect = (e) => {
+    //     // Prevent bubbling to avoid double clicks
+    //     if(e) { e.preventDefault(); e.stopPropagation(); }
+    //     ui.fileInput.click();
+    // };
 
-    ui.browseBtn.addEventListener('click', triggerFileSelect);
-    if(ui.addMoreBtn) ui.addMoreBtn.addEventListener('click', triggerFileSelect);
+    // if(ui.browseBtn) ui.browseBtn.addEventListener('click', triggerFileSelect);
+    // if(ui.addMoreBtn) ui.addMoreBtn.addEventListener('click', triggerFileSelect);
     
-    // Make the entire dropzone clickable, but prevent double-fire if clicking the button
-    ui.dropZone.addEventListener('click', (e) => {
-        if(e.target !== ui.browseBtn && !ui.browseBtn.contains(e.target)) {
-            triggerFileSelect(e);
-        }
+    // // Make dropzone clickable (but avoid conflict with button)
+    // ui.dropZone.addEventListener('click', (e) => {
+    //     if(e.target !== ui.browseBtn && !ui.browseBtn.contains(e.target)) {
+    //         triggerFileSelect(e);
+    //     }
+    // });
+
+    // --- 1. FILE SELECTION LOGIC ---
+    
+    // "Add More" Button Logic
+    if(ui.addMoreBtn) {
+        ui.addMoreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('fileInput').click();
+        });
+    }
+
+    // Drop Zone Click Logic (Clicks anywhere in the box open the selector)
+    if(ui.dropZone) {
+        ui.dropZone.addEventListener('click', (e) => {
+            // Only trigger if we didn't click the browse button (to avoid double opening)
+            if(e.target !== ui.browseBtn && !ui.browseBtn.contains(e.target)) {
+                document.getElementById('fileInput').click();
+            }
+        });
+    }
+
+    // Drag & Drop Support
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        if(ui.dropZone) ui.dropZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
     });
 
+    function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+
     ui.fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            handleFiles(e.target.files);
-        }
-        ui.fileInput.value = ''; // Reset
+        if (e.target.files.length > 0) handleFiles(e.target.files);
+        ui.fileInput.value = ''; // Reset input
     });
 
     // --- 2. DRAG & DROP ---
@@ -72,10 +98,7 @@
         document.body.addEventListener(eventName, preventDefaults, false);
     });
 
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
+    function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
 
     ui.dropZone.addEventListener('dragenter', () => ui.dropZone.classList.add('dragover'));
     ui.dropZone.addEventListener('dragover', () => ui.dropZone.classList.add('dragover'));
@@ -83,12 +106,10 @@
     
     ui.dropZone.addEventListener('drop', (e) => {
         ui.dropZone.classList.remove('dragover');
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        handleFiles(files);
+        handleFiles(e.dataTransfer.files);
     });
 
-    // --- 3. UI LOGIC ---
+    // --- 3. UI CONTROLS ---
     ui.bgSelect.addEventListener('change', () => {
         if(ui.bgSelect.value === 'custom') ui.colorPickerGroup.classList.remove('hidden');
         else ui.colorPickerGroup.classList.add('hidden');
@@ -130,7 +151,7 @@
         });
     }
 
-    // Cache the module to avoid re-fetching
+    // Cache the AI module
     let aiModule = null;
 
     async function processImage(file, id, originalUrl) {
@@ -138,21 +159,22 @@
         ui.modelStatus.style.color = "#fbbf24";
 
         try {
-            // Updated to version 1.7.0 for better stability
             if (!aiModule) {
+                // Dynamically load the library
                 aiModule = await import("https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm");
             }
-            const removeBackground = aiModule.default;
+            
+            // FIX: Try to get the function from named export OR default export
+            // This handles differences in how CDNs package the library
+            const removeBackground = aiModule.removeBackground || aiModule.default;
+
+            if (typeof removeBackground !== 'function') {
+                throw new Error("AI Library loaded but function not found. Check Import.");
+            }
 
             ui.modelStatus.innerText = "Processing...";
             
-            // Process
-            const blob = await removeBackground(file, {
-                progress: (key, current, total) => {
-                    // Optional: You could update a progress bar here
-                    // console.log(`Downloading ${key}: ${current} of ${total}`);
-                }
-            });
+            const blob = await removeBackground(file);
             const processedUrl = URL.createObjectURL(blob);
 
             const fileData = {
@@ -172,11 +194,14 @@
 
         } catch (error) {
             console.error("AI Processing Error:", error);
-            // Specifically check for headers error
+            ui.modelStatus.innerText = "Error";
+            ui.modelStatus.style.color = "#ef4444";
+            
+            let errorMsg = "Failed: " + (error.message || "Unknown error");
             if(error.message && error.message.includes("SharedArrayBuffer")) {
-                throw new Error("Missing Security Headers. Check PHP file.");
+                errorMsg = "Missing Security Headers. Check PHP config.";
             }
-            throw error; 
+            updateCardError(id, errorMsg);
         }
     }
 
@@ -230,7 +255,7 @@
         }
     }
 
-    // --- 6. UTILS (Compare, Download) ---
+    // --- 6. UTILS ---
     window.downloadSingle = (id) => {
         const f = state.files.find(x => x.id === id);
         if(f) saveAs(f.processedBlob, f.name);
@@ -267,7 +292,6 @@
         
         const move = (e) => {
             const rect = stage.getBoundingClientRect();
-            // Handle both touch and mouse events
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             
             if(clientX) {
@@ -306,5 +330,4 @@
             setTimeout(() => t.remove(), 500);
         }, 3000);
     }
-
 });
