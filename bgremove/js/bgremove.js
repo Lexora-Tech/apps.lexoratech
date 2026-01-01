@@ -2,7 +2,7 @@
    ClearCut AI V5.3 - Robust On-Device AI
    ========================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
 
     const ui = {
         dropZone: document.getElementById('dropZone'),
@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let state = { files: [] };
+    
+    // Help Modal Logic
+    if(ui.helpBtn && ui.helpModal) {
+        ui.helpBtn.onclick = () => ui.helpModal.classList.add('active');
+    }
 
     // --- 1. ROBUST FILE SELECTION ---
     
@@ -72,11 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
     }
 
-    ui.dropZone.addEventListener('dragenter', () => ui.dropZone.style.borderColor = '#6366f1');
-    ui.dropZone.addEventListener('dragleave', () => ui.dropZone.style.borderColor = '');
+    ui.dropZone.addEventListener('dragenter', () => ui.dropZone.classList.add('dragover'));
+    ui.dropZone.addEventListener('dragover', () => ui.dropZone.classList.add('dragover'));
+    ui.dropZone.addEventListener('dragleave', () => ui.dropZone.classList.remove('dragover'));
     
     ui.dropZone.addEventListener('drop', (e) => {
-        ui.dropZone.style.borderColor = '';
+        ui.dropZone.classList.remove('dragover');
         const dt = e.dataTransfer;
         const files = dt.files;
         handleFiles(files);
@@ -98,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 4. AI PROCESSING (Lazy Import) ---
+    // --- 4. AI PROCESSING ---
     async function handleFiles(fileList) {
         if (!fileList || fileList.length === 0) return;
 
@@ -116,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     await processImage(file, id, originalUrl);
                 } catch (err) {
                     console.error(err);
-                    updateCardError(id, "AI Load Failed. Check .htaccess");
+                    updateCardError(id, "Failed: " + (err.message || "Unknown error"));
                 }
             } else {
                 showToast('error', 'Not an image: ' + file.name);
@@ -124,18 +130,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cache the module to avoid re-fetching
+    let aiModule = null;
+
     async function processImage(file, id, originalUrl) {
         ui.modelStatus.innerText = "Loading AI...";
         ui.modelStatus.style.color = "#fbbf24";
 
         try {
-            // DYNAMIC IMPORT from CDN
-            const { default: removeBackground } = await import("https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.0.5/+esm");
+            // Updated to version 1.7.0 for better stability
+            if (!aiModule) {
+                aiModule = await import("https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm");
+            }
+            const removeBackground = aiModule.default;
 
             ui.modelStatus.innerText = "Processing...";
             
             // Process
-            const blob = await removeBackground(file);
+            const blob = await removeBackground(file, {
+                progress: (key, current, total) => {
+                    // Optional: You could update a progress bar here
+                    // console.log(`Downloading ${key}: ${current} of ${total}`);
+                }
+            });
             const processedUrl = URL.createObjectURL(blob);
 
             const fileData = {
@@ -155,7 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("AI Processing Error:", error);
-            throw error; // Pass to handleFiles catch
+            // Specifically check for headers error
+            if(error.message && error.message.includes("SharedArrayBuffer")) {
+                throw new Error("Missing Security Headers. Check PHP file.");
+            }
+            throw error; 
         }
     }
 
@@ -205,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCardError(id, msg) {
         const card = document.getElementById(`card-${id}`);
         if(card) {
-            card.innerHTML = `<div style="padding:20px; color:#ef4444; text-align:center;"><i class="fas fa-exclamation-triangle"></i> ${msg}</div>`;
+            card.innerHTML = `<div style="padding:20px; color:#ef4444; text-align:center; font-size:0.9rem;"><i class="fas fa-exclamation-triangle"></i> <br>${msg}</div>`;
         }
     }
 
@@ -246,10 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const move = (e) => {
             const rect = stage.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const p = Math.max(0, Math.min(100, (x / rect.width) * 100));
-            wrapper.style.width = p + '%';
-            handle.style.left = p + '%';
+            // Handle both touch and mouse events
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            
+            if(clientX) {
+                const x = clientX - rect.left;
+                const p = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                wrapper.style.width = p + '%';
+                handle.style.left = p + '%';
+            }
         };
         
         stage.onmousemove = move;
@@ -271,10 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function showToast(type, msg) {
         const t = document.createElement('div');
         t.className = `toast ${type}`; 
-        t.innerText = msg;
-        t.style.cssText = "background:#333; color:#fff; padding:10px 20px; margin-bottom:10px; border-radius:8px; border-left:4px solid " + (type === 'success' ? '#10b981' : '#ef4444');
+        t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i> ${msg}`;
+        t.style.cssText = "background:#1e1e24; color:#fff; padding:12px 20px; border-radius:12px; border-left:4px solid " + (type === 'success' ? '#10b981' : '#ef4444') + "; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px;";
         ui.toastContainer.appendChild(t);
-        setTimeout(() => t.remove(), 3000);
+        setTimeout(() => {
+            t.style.opacity = '0';
+            t.style.transition = '0.5s';
+            setTimeout(() => t.remove(), 500);
+        }, 3000);
     }
 
 });

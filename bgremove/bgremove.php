@@ -1,3 +1,8 @@
+<?php
+// CRITICAL: These headers are required for the AI engine (SharedArrayBuffer) to work in the browser.
+header("Cross-Origin-Opener-Policy: same-origin");
+header("Cross-Origin-Embedder-Policy: require-corp");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
-    <link rel="stylesheet" href="css/bgremove.css">
+    <link rel="stylesheet" href="bgremove/css/bgremove.css">
 
     <style>
         /* Help Modal */
@@ -96,7 +100,7 @@
                 <div class="logo-wrapper"><i class="fas fa-eraser"></i></div>
                 <div class="brand-info">
                     <span class="brand-name">ClearCut AI</span>
-                    <span class="brand-version">V5.2 <span class="badge-pro">LOCAL</span></span>
+                    <span class="brand-version">V5.3 <span class="badge-pro">LOCAL</span></span>
                 </div>
             </div>
             <div class="header-right">
@@ -198,7 +202,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="js/bgremove.js"></script>
+    
+    <script src="bgremove/js/bgremove.js"></script>
 
 </body>
 
