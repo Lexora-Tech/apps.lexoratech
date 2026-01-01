@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexora Workspace | World's First Free All-in-One Creator Suite</title>
-    <meta name="description" content="The only free operating system for creators. Access 12+ pro tools including Image Compressor, Code Formatter, Diff Checker, Teleprompter, and AI Voice.">
+    <meta name="description" content="The only free operating system for creators. Access 15+ pro tools including YouTube Downloader, Image Compressor, Code Formatter, Diff Checker, and AI Voice.">
 
     <meta property="og:title" content="Lexora Workspace">
     <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
@@ -32,7 +32,7 @@
         /* --- Modern Minimal Header --- */
         .modern-navbar {
             position: sticky;
-            top: 0px;
+            top: 20px;
             z-index: 1000;
             width: 95%;
             max-width: 1400px;
@@ -271,7 +271,7 @@
             .modern-navbar {
                 width: 92%;
                 padding: 10px 15px;
-                top: 0px;
+                top: 10px;
             }
 
             .search-wrapper {
@@ -383,7 +383,7 @@
                 <div class="search-wrapper">
                     <div class="search-pill">
                         <i class="fas fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Search 12+ tools..." id="globalSearch">
+                        <input type="text" class="search-input" placeholder="Search 15+ tools..." id="globalSearch">
                         <span class="shortcut-hint">/</span>
                     </div>
                 </div>
@@ -475,7 +475,7 @@
                             <h2 class="section-title">Creative Suite</h2>
                             <span class="section-subtitle">Professional tools for creators</span>
                         </div>
-                        <div class="section-badge">12 Tools</div>
+                        <div class="section-badge">15 Tools</div>
                     </div>
 
                     <div class="tools-grid" id="toolsGrid">
@@ -732,6 +732,69 @@
                             <div class="card-mesh lime-mesh"></div>
                         </a>
 
+                        <a href="youtubedl/youtubedl.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon red-gradient"><i class="fab fa-youtube"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
+                                </div>
+                                <div class="status-badge status-live red-status"><span class="status-dot"></span><span>Live</span></div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">TubeSave</h3>
+                                <p class="tool-description">Download YouTube videos in 4K, 1080p, and MP3 formats.</p>
+                                <div class="tool-tags"><span class="tag">Video</span><span class="tag">Downloader</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn red-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh red-mesh"></div>
+                        </a>
+
+                        <a href="bgremove/bgremove.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon indigo-gradient"><i class="fas fa-eraser"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
+                                </div>
+                                <div class="status-badge status-live indigo-status"><span class="status-dot"></span><span>Live</span></div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">ClearCut AI</h3>
+                                <p class="tool-description">Remove image backgrounds automatically in seconds.</p>
+                                <div class="tool-tags"><span class="tag">AI</span><span class="tag">Photo</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn indigo-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh indigo-mesh"></div>
+                        </a>
+
+                        <a href="markdown/markdown.php" class="tool-card">
+                            <div class="card-glass"></div>
+                            <div class="card-border-glow"></div>
+                            <div class="card-header">
+                                <div class="tool-icon-wrapper">
+                                    <div class="tool-icon teal-gradient"><i class="fas fa-align-left"></i></div>
+                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
+                                </div>
+                                <div class="status-badge status-live teal-status"><span class="status-dot"></span><span>Live</span></div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="tool-title">MarkEdit</h3>
+                                <p class="tool-description">Real-time Markdown editor with live preview and export.</p>
+                                <div class="tool-tags"><span class="tag">Writing</span><span class="tag">Docs</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="launch-btn teal-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="card-mesh teal-mesh"></div>
+                        </a>
+
                     </div>
                 </section>
 
@@ -825,5 +888,3 @@
 </body>
 
 </html>
-
-
