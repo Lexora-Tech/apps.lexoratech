@@ -3,198 +3,136 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarkEdit Pro | Advanced Markdown Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MarkEdit | Pro Editor</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
-    <link rel="icon" href="assets/logo/logo.png" />
     <link rel="stylesheet" href="./css/markdown.css">
-
-    <style>
-        /* Inline styles for modal to match previous pattern */
-        #helpModal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.3s;
-        }
-
-        #helpModal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background: #0f1015;
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            border-radius: 16px;
-            width: 90%;
-            max-width: 600px;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(20, 184, 166, 0.05);
-        }
-
-        .modal-body {
-            padding: 25px;
-            color: #cbd5e1;
-            font-family: 'Outfit', sans-serif;
-            line-height: 1.6;
-        }
-
-        .shortcut-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .shortcut-item {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-
-        .key-badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-        }
-    </style>
+    <link rel="icon" href="../assets/logo/logo.png" />
 </head>
 
 <body>
 
-    <div id="helpModal">
-        <div class="modal-content">
+    <div id="customModal" class="modal-overlay hidden">
+        <div class="modal-glass">
             <div class="modal-header">
-                <h3 style="margin:0; color:#fff;">Keyboard Shortcuts</h3>
-                <button id="closeHelp" style="background:none; border:none; color:#fff; cursor:pointer; font-size:1.2rem;"><i class="fas fa-times"></i></button>
+                <h3 id="modalTitle">Notification</h3>
             </div>
             <div class="modal-body">
-                <div class="shortcut-grid">
-                    <div class="shortcut-item"><span>Bold</span> <span class="key-badge">Ctrl+B</span></div>
-                    <div class="shortcut-item"><span>Italic</span> <span class="key-badge">Ctrl+I</span></div>
-                    <div class="shortcut-item"><span>Link</span> <span class="key-badge">Ctrl+K</span></div>
-                    <div class="shortcut-item"><span>Save</span> <span class="key-badge">Ctrl+S</span></div>
-                    <div class="shortcut-item"><span>Code Block</span> <span class="key-badge">Ctrl+Shift+C</span></div>
-                    <div class="shortcut-item"><span>Presentation</span> <span class="key-badge">F8</span></div>
-                </div>
+                <p id="modalMessage">Message...</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modalBtnCancel" class="text-btn hidden">Cancel</button>
+                <button id="modalBtnOk" class="primary-btn">OK</button>
             </div>
         </div>
     </div>
 
-    <div id="presentationContainer" class="hidden">
-        <button id="closePresBtn"><i class="fas fa-times"></i> Exit</button>
-        <div class="slide-content" id="slideContent"></div>
-        <div class="slide-controls">
-            <button id="prevSlide"><i class="fas fa-chevron-left"></i></button>
-            <span id="slideCounter">1 / 1</span>
-            <button id="nextSlide"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
+    <div class="app-wrapper">
 
-    <div class="app-container">
-
-        <header class="editor-header">
+        <header class="clean-header">
             <div class="header-left">
-                <a href="index.php" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
+                <a href="../index.php" class="nav-icon-btn" title="Dashboard">
+                    <i class="fas fa-chevron-left"></i>
                 </a>
-                <div class="file-info">
-                    <input type="text" id="docTitle" value="Untitled Document" class="doc-title-input">
-                    <span class="save-status" id="saveStatus"><i class="fas fa-check-circle"></i> Saved</span>
+                <div class="title-wrapper">
+                    <input type="text" id="docTitle" value="Untitled Note" class="doc-title">
+                    <span id="saveStatus" class="save-dot connected"></span>
                 </div>
             </div>
 
-            <div class="header-toolbar">
-                <button class="tool-btn" data-action="bold" title="Bold"><i class="fas fa-bold"></i></button>
-                <button class="tool-btn" data-action="italic" title="Italic"><i class="fas fa-italic"></i></button>
-                <button class="tool-btn" data-action="heading" title="Heading"><i class="fas fa-heading"></i></button>
-                <div class="divider"></div>
-                <button class="tool-btn" data-action="link" title="Link"><i class="fas fa-link"></i></button>
-                <button class="tool-btn" data-action="image" title="Image"><i class="fas fa-image"></i></button>
-                <button class="tool-btn" data-action="code" title="Code Block"><i class="fas fa-code"></i></button>
-                <button class="tool-btn" data-action="table" title="Table"><i class="fas fa-table"></i></button>
+            <div class="header-center" id="toolbar">
+                <div class="tool-scroll">
+                    <button type="button" data-cmd="bold"><i class="fas fa-bold"></i></button>
+                    <button type="button" data-cmd="italic"><i class="fas fa-italic"></i></button>
+                    <button type="button" data-cmd="heading"><i class="fas fa-heading"></i></button>
+                    <span class="sep"></span>
+                    <button type="button" data-cmd="link"><i class="fas fa-link"></i></button>
+                    <button type="button" data-cmd="image"><i class="far fa-image"></i></button>
+                    <button type="button" data-cmd="code"><i class="fas fa-code"></i></button>
+                    <button type="button" data-cmd="table"><i class="fas fa-table"></i></button>
+                    <span class="sep"></span>
+                    <button type="button" data-cmd="math"><i class="fas fa-square-root-alt"></i></button>
+                    <button type="button" data-cmd="mermaid"><i class="fas fa-project-diagram"></i></button>
+                </div>
             </div>
 
             <div class="header-right">
-                <button class="action-btn voice-btn" id="voiceBtn" title="Dictate Text">
-                    <i class="fas fa-microphone"></i>
-                </button>
-                <button class="action-btn" id="presentBtn" title="Presentation Mode">
-                    <i class="fas fa-tv"></i>
-                </button>
-                <div class="dropdown">
-                    <button class="action-btn primary-btn" id="exportBtn">
-                        Export <i class="fas fa-chevron-down"></i>
+                <button type="button" id="zenBtn" class="nav-icon-btn mobile-hide"><i class="fas fa-expand-alt"></i></button>
+
+                <div class="dropdown-wrapper">
+                    <button type="button" class="primary-btn icon-only-mobile" id="exportToggle">
+                        <span class="desktop-text">Export</span> <i class="fas fa-share-square"></i>
                     </button>
-                    <div class="dropdown-content">
-                        <a href="#" data-export="md"><i class="fab fa-markdown"></i> Markdown (.md)</a>
-                        <a href="#" data-export="html"><i class="fas fa-code"></i> HTML (.html)</a>
-                        <a href="#" data-export="pdf"><i class="fas fa-file-pdf"></i> Print / PDF</a>
+                    <div class="dropdown-menu" id="exportMenu">
+                        <button type="button" class="drop-item" id="btnExportMD">
+                            <i class="fab fa-markdown"></i> Markdown
+                        </button>
+                        <button type="button" class="drop-item" id="btnExportHTML">
+                            <i class="fas fa-code"></i> HTML
+                        </button>
+                        <button type="button" class="drop-item" id="btnExportPDF">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <div class="divider"></div>
+                        <button type="button" class="drop-item" id="historyBtn">
+                            <i class="fas fa-history"></i> History
+                        </button>
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="editor-workspace">
-            <div class="pane editor-pane">
-                <textarea id="markdownInput" placeholder="Start typing or drop a markdown file here..." spellcheck="false"></textarea>
+        <main class="editor-grid" id="mainGrid">
+            <div class="editor-column">
+                <textarea id="editor" placeholder="# Start writing...&#10;&#10;markdown is supported."></textarea>
             </div>
 
-            <div class="resizer" id="dragHandle"></div>
-
-            <div class="pane preview-pane" id="markdownPreview">
+            <div class="preview-column markdown-body" id="preview">
+                <div class="empty-preview">Start typing to see preview...</div>
             </div>
 
-            <button class="mobile-view-toggle" id="viewToggle">
+            <button id="mobileToggle" class="mobile-fab">
                 <i class="fas fa-eye"></i>
             </button>
         </main>
 
-        <footer class="status-bar">
-            <div class="stats-group">
-                <span id="wordCount">0 words</span>
-                <span class="divider">|</span>
-                <span id="charCount">0 chars</span>
-                <span class="divider">|</span>
-                <span id="readTime">0 min read</span>
+        <footer class="clean-footer">
+            <div class="stats">
+                <span id="statWords">0 words</span>
+                <span class="sep-small"></span>
+                <span id="statRead">0m read</span>
             </div>
-            <div class="help-trigger">
-                <button id="helpTrigger">Shortcuts</button>
+            <div class="branding">
+                MarkEdit V10
             </div>
         </footer>
 
     </div>
 
+    <div id="historySidebar" class="history-panel">
+        <div class="panel-head">
+            <h3><i class="fas fa-history"></i> History</h3>
+            <button id="closeHistory" class="close-panel-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+        <div class="panel-foot">
+            <button id="clearHistory" class="danger-link">Clear All</button>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script src="./js/markdown.js"></script>
 </body>

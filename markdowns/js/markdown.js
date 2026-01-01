@@ -1,234 +1,233 @@
+/* ========================
+   MarkEdit V10 Logic
+   ======================== */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Elements ---
-    const input = document.getElementById('markdownInput');
-    const preview = document.getElementById('markdownPreview');
+    // --- DOM Elements ---
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
     const titleInput = document.getElementById('docTitle');
     const saveStatus = document.getElementById('saveStatus');
+    const toolbar = document.getElementById('toolbar');
+
+    // UI
+    const exportToggle = document.getElementById('exportToggle');
+    const exportMenu = document.getElementById('exportMenu');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainGrid = document.getElementById('mainGrid');
+
+    // Sidebar
+    const historyBtn = document.getElementById('historyBtn');
+    const historySidebar = document.getElementById('historySidebar');
+    const closeHistory = document.getElementById('closeHistory');
+    const historyList = document.getElementById('historyList');
+    const clearHistory = document.getElementById('clearHistory');
 
     // Stats
-    const wordCount = document.getElementById('wordCount');
-    const charCount = document.getElementById('charCount');
-    const readTime = document.getElementById('readTime');
+    const statWords = document.getElementById('statWords');
+    const statRead = document.getElementById('statRead');
 
-    // --- 1. CORE: Markdown Parsing ---
-    function updatePreview() {
-        const rawText = input.value;
-        // Parse with Marked
-        const html = marked.parse(rawText);
-        preview.innerHTML = html;
-
-        // Highlight Code Blocks
-        Prism.highlightAllUnder(preview);
-
-        updateStats(rawText);
-        saveLocally();
+    // Init Mermaid (Safe Mode)
+    if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
     }
 
-    // --- 2. Stats & Auto-Save ---
-    function updateStats(text) {
-        const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-        const chars = text.length;
-        const minutes = Math.ceil(words / 200);
+    // =========================================
+    //  1. TOOLBAR LOGIC (Event Delegation)
+    // =========================================
+    toolbar.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
 
-        wordCount.innerText = `${words} words`;
-        charCount.innerText = `${chars} chars`;
-        readTime.innerText = `${minutes} min read`;
-    }
+        e.preventDefault();
+        const cmd = btn.dataset.cmd;
 
-    function saveLocally() {
-        localStorage.setItem('lexora_md_content', input.value);
-        localStorage.setItem('lexora_md_title', titleInput.value);
+        editor.focus();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        const text = editor.value;
+        const sel = text.substring(start, end);
 
-        saveStatus.classList.add('visible');
-        setTimeout(() => saveStatus.classList.remove('visible'), 2000);
-    }
+        let insert = '';
 
-    // Load from storage
-    if (localStorage.getItem('lexora_md_content')) {
-        input.value = localStorage.getItem('lexora_md_content');
-        titleInput.value = localStorage.getItem('lexora_md_title') || "Untitled";
-        updatePreview();
-    }
+        // Command Map
+        const map = {
+            'bold': `**${sel || 'text'}**`,
+            'italic': `*${sel || 'text'}*`,
+            'heading': `\n## ${sel || 'Header'}`,
+            'code': `\n\`\`\`\n${sel || 'code'}\n\`\`\`\n`,
+            'link': `[${sel || 'link'}](url)`,
+            'image': `![alt](url)`,
+            'table': `\n| H1 | H2 |\n|---|---|\n| v1 | v2 |\n`,
+            'math': `$$ ${sel || 'x^2'} $$`,
+            'mermaid': `\n\`\`\`mermaid\ngraph TD;\nA-->B;\n\`\`\`\n`
+        };
 
-    input.addEventListener('input', updatePreview);
-
-    // --- 3. TOOLBAR ACTIONS ---
-    document.querySelectorAll('.tool-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const action = btn.dataset.action;
-            insertMarkdown(action);
-        });
-    });
-
-    function insertMarkdown(type) {
-        const start = input.selectionStart;
-        const end = input.selectionEnd;
-        const text = input.value;
-        const selected = text.substring(start, end);
-
-        let insertion = '';
-        let cursorOffset = 0;
-
-        switch (type) {
-            case 'bold': insertion = `**${selected || 'bold text'}**`; cursorOffset = 2; break;
-            case 'italic': insertion = `*${selected || 'italic text'}*`; cursorOffset = 1; break;
-            case 'heading': insertion = `\n# ${selected || 'Heading'}`; break;
-            case 'link': insertion = `[${selected || 'Link Text'}](url)`; cursorOffset = 1; break;
-            case 'image': insertion = `![Alt Text](image-url)`; break;
-            case 'code': insertion = `\n\`\`\`\n${selected || 'code'}\n\`\`\`\n`; break;
-            case 'table': insertion = `\n| Header 1 | Header 2 |\n| -------- | -------- |\n| Cell 1   | Cell 2   |\n`; break;
+        if (map[cmd]) {
+            editor.setRangeText(map[cmd], start, end, 'select');
+            render(); // Update preview
+            autoSave();
         }
-
-        input.setRangeText(insertion, start, end, 'select');
-        updatePreview();
-        input.focus();
-    }
-
-    // --- 4. EXPORT ---
-    document.querySelectorAll('[data-export]').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const type = item.dataset.export;
-            const filename = (titleInput.value || 'document').replace(/\s+/g, '_');
-
-            if (type === 'pdf') {
-                window.print(); // Browser native PDF is best
-            } else if (type === 'md') {
-                downloadFile(input.value, `${filename}.md`, 'text/markdown');
-            } else if (type === 'html') {
-                const htmlContent = `<!DOCTYPE html><html><head><title>${filename}</title></head><body>${preview.innerHTML}</body></html>`;
-                downloadFile(htmlContent, `${filename}.html`, 'text/html');
-            }
-        });
     });
 
-    function downloadFile(content, name, mime) {
-        const blob = new Blob([content], { type: mime });
+    // =========================================
+    //  2. EXPORT MENU (Toggle Fix)
+    // =========================================
+    exportToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        exportMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!exportToggle.contains(e.target) && !exportMenu.contains(e.target)) {
+            exportMenu.classList.remove('active');
+        }
+    });
+
+    // Export Actions
+    const download = (content, ext, type) => {
+        const blob = new Blob([content], { type });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = name;
+        a.download = (titleInput.value || 'note') + ext;
         a.click();
-    }
+        exportMenu.classList.remove('active');
+    };
 
-    // --- 5. PRESENTATION MODE (Unique Feature) ---
-    const presContainer = document.getElementById('presentationContainer');
-    let slides = [];
-    let currentSlide = 0;
+    document.getElementById('btnExportMD').onclick = () => download(editor.value, '.md', 'text/markdown');
+    document.getElementById('btnExportHTML').onclick = () => {
+        const html = `<!DOCTYPE html><html><head><style>body{font-family:sans-serif;max-width:800px;margin:20px auto;}</style></head><body>${preview.innerHTML}</body></html>`;
+        download(html, '.html', 'text/html');
+    };
+    document.getElementById('btnExportPDF').onclick = () => {
+        const opt = {
+            margin: 0.5,
+            filename: (titleInput.value || 'note') + '.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, backgroundColor: "#ffffff" },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        // Quick style fix for dark mode PDF
+        preview.style.color = "black";
+        html2pdf().set(opt).from(preview).save().then(() => preview.style.color = "");
+        exportMenu.classList.remove('active');
+    };
 
-    document.getElementById('presentBtn').addEventListener('click', startPresentation);
-    document.getElementById('closePresBtn').addEventListener('click', () => presContainer.classList.add('hidden'));
+    // =========================================
+    //  3. RENDERING ENGINE
+    // =========================================
+    function render() {
+        const text = editor.value;
+        const renderer = new marked.Renderer();
 
-    document.getElementById('prevSlide').addEventListener('click', () => showSlide(currentSlide - 1));
-    document.getElementById('nextSlide').addEventListener('click', () => showSlide(currentSlide + 1));
+        // Mermaid Hook
+        renderer.code = (code, lang) => {
+            if (lang === 'mermaid') return `<div class="mermaid">${code}</div>`;
+            return `<pre><code class="language-${lang}">${code}</code></pre>`;
+        };
 
-    function startPresentation() {
-        // Split by H1 or H2 or horizontal rule
-        const html = preview.innerHTML;
-        // Simple splitter: split by <hr> tags usually rendered from '---'
-        // Fallback: Split by H1/H2 if no HRs found
-        let parts = html.split('<hr>');
-        if (parts.length < 2) {
-            // Try splitting by H1 headers
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            const children = Array.from(tempDiv.children);
+        preview.innerHTML = marked.parse(text, { renderer });
 
-            slides = [];
-            let currentContent = '';
-
-            children.forEach(child => {
-                if (child.tagName === 'H1' || child.tagName === 'H2') {
-                    if (currentContent) slides.push(currentContent);
-                    currentContent = child.outerHTML;
-                } else {
-                    currentContent += child.outerHTML;
-                }
-            });
-            if (currentContent) slides.push(currentContent);
-        } else {
-            slides = parts;
+        if (typeof Prism !== 'undefined') Prism.highlightAllUnder(preview);
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(preview, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }] });
         }
 
-        if (slides.length === 0) slides = [html];
+        if (typeof mermaid !== 'undefined') {
+            try { mermaid.init(undefined, document.querySelectorAll('.mermaid')); } catch (e) { }
+        }
 
-        currentSlide = 0;
-        showSlide(0);
-        presContainer.classList.remove('hidden');
+        // Stats
+        const words = text.trim().split(/\s+/).filter(n => n).length;
+        statWords.innerText = `${words} words`;
+        statRead.innerText = `${Math.ceil(words / 200)}m read`;
     }
 
-    function showSlide(index) {
-        if (index < 0 || index >= slides.length) return;
-        currentSlide = index;
-        document.getElementById('slideContent').innerHTML = slides[index];
-        document.getElementById('slideCounter').innerText = `${index + 1} / ${slides.length}`;
-    }
+    editor.addEventListener('input', () => { render(); autoSave(); });
 
-    // --- 6. VOICE DICTATION (Web Speech API) ---
-    const voiceBtn = document.getElementById('voiceBtn');
-    if ('webkitSpeechRecognition' in window) {
-        const recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-
-        let isRecording = false;
-
-        voiceBtn.addEventListener('click', () => {
-            if (!isRecording) {
-                recognition.start();
-                voiceBtn.classList.add('recording');
-            } else {
-                recognition.stop();
-                voiceBtn.classList.remove('recording');
-            }
-            isRecording = !isRecording;
-        });
-
-        recognition.onresult = (event) => {
-            let finalTranscript = '';
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    finalTranscript += event.results[i][0].transcript;
-                }
-            }
-            if (finalTranscript) {
-                input.setRangeText(finalTranscript + ' ', input.selectionStart, input.selectionEnd, 'end');
-                updatePreview();
-            }
-        };
-    } else {
-        voiceBtn.style.display = 'none'; // Not supported
-    }
-
-    // --- 7. HELPER: Modals & Mobile View ---
-    document.getElementById('helpTrigger').onclick = () => document.getElementById('helpModal').classList.add('active');
-    document.getElementById('closeHelp').onclick = () => document.getElementById('helpModal').classList.remove('active');
+    // =========================================
+    //  4. UTILS (Mobile, Save, History)
+    // =========================================
 
     // Mobile Toggle
-    const viewToggle = document.getElementById('viewToggle');
     let isPreview = false;
-    viewToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', () => {
         isPreview = !isPreview;
         if (isPreview) {
-            document.querySelector('.preview-pane').classList.add('active');
-            viewToggle.innerHTML = '<i class="fas fa-pen"></i>';
+            mainGrid.classList.add('view-preview');
+            mobileToggle.innerHTML = '<i class="fas fa-pen"></i>';
         } else {
-            document.querySelector('.preview-pane').classList.remove('active');
-            viewToggle.innerHTML = '<i class="fas fa-eye"></i>';
+            mainGrid.classList.remove('view-preview');
+            mobileToggle.innerHTML = '<i class="fas fa-eye"></i>';
         }
     });
 
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            switch (e.key.toLowerCase()) {
-                case 's': e.preventDefault(); saveLocally(); break;
-                case 'b': e.preventDefault(); insertMarkdown('bold'); break;
-                case 'i': e.preventDefault(); insertMarkdown('italic'); break;
-                case 'k': e.preventDefault(); insertMarkdown('link'); break;
-            }
+    // Auto Save
+    function autoSave() {
+        const data = { title: titleInput.value, content: editor.value, date: new Date().toLocaleTimeString() };
+        localStorage.setItem('lexora_md_current', JSON.stringify(data));
+        saveStatus.classList.add('connected');
+        setTimeout(() => saveStatus.classList.remove('connected'), 500);
+
+        // Save History Snapshot occasionally (simple logic)
+        let hist = JSON.parse(localStorage.getItem('lexora_md_hist') || '[]');
+        if (!hist.length || hist[0].content !== data.content) {
+            if (hist.length > 0 && (new Date() - new Date(hist[0].fullDate) < 60000)) return; // Debounce 1 min
+
+            data.fullDate = new Date();
+            hist.unshift(data);
+            if (hist.length > 20) hist.pop();
+            localStorage.setItem('lexora_md_hist', JSON.stringify(hist));
         }
+    }
+
+    // Load
+    const saved = localStorage.getItem('lexora_md_current');
+    if (saved) {
+        const d = JSON.parse(saved);
+        editor.value = d.content;
+        titleInput.value = d.title;
+        render();
+    } else {
+        editor.value = "# Welcome\nStart typing...";
+        render();
+    }
+
+    // History Sidebar
+    historyBtn.addEventListener('click', () => {
+        historySidebar.classList.add('active');
+        exportMenu.classList.remove('active');
+        renderHistoryList();
     });
+    closeHistory.addEventListener('click', () => historySidebar.classList.remove('active'));
+
+    function renderHistoryList() {
+        const hist = JSON.parse(localStorage.getItem('lexora_md_hist') || '[]');
+        historyList.innerHTML = hist.length ? '' : '<div style="color:#666;text-align:center;margin-top:20px;">No history yet</div>';
+
+        hist.forEach(h => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `<small>${h.date}</small><div>${h.title}</div>`;
+            div.onclick = () => {
+                if (confirm("Restore version?")) {
+                    editor.value = h.content;
+                    titleInput.value = h.title;
+                    render();
+                    historySidebar.classList.remove('active');
+                }
+            };
+            historyList.appendChild(div);
+        });
+    }
+
+    clearHistory.onclick = () => {
+        if (confirm("Delete all history?")) {
+            localStorage.removeItem('lexora_md_hist');
+            renderHistoryList();
+        }
+    };
 
 });
