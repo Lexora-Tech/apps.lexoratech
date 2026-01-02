@@ -861,7 +861,7 @@
                             <div class="card-mesh orange-mesh"></div>
                         </a>
 
-                        <a href="resumeforge/resumeforge.php" class="tool-card">
+                        <a href="resumecraft/resumecraft.php" class="tool-card">
                             <div class="card-glass"></div>
                             <div class="card-border-glow"></div>
                             <div class="card-header">
