@@ -1,0 +1,1050 @@
+/* ========================
+   AudioMixer Pro - Hardware Theme
+   ======================== */
+
+:root {
+    --bg-dark: #121214;
+    --bg-panel: #1e1e24;
+    --strip-bg: #25252b;
+    --border: #333333;
+    --accent: #00e5ff;
+    /* Cyan */
+    --accent-glow: rgba(0, 229, 255, 0.4);
+    --record-red: #ff3b3b;
+    --text: #ffffff;
+    --text-muted: #888888;
+    --knob-size: 40px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+.mixer-header {
+    height: 60px;
+    background: #18181b;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+}
+
+.back-btn {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-right: 15px;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+}
+
+.badge {
+    background: var(--accent);
+    color: #000;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+    margin-left: 5px;
+}
+
+/* Transport */
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.transport-controls {
+    background: #000;
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 5px;
+}
+
+.transport-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.transport-btn:hover {
+    background: #333;
+}
+
+.transport-btn.main-play {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.transport-btn.record {
+    color: var(--record-red);
+}
+
+.transport-btn.record.recording {
+    background: var(--record-red);
+    color: #fff;
+    animation: pulse 1s infinite;
+}
+
+.time-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.action-btn {
+    background: #222;
+    border: 1px solid var(--border);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* --- Workspace --- */
+.workspace {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Mixer Board (Horizontal Scroll) */
+.mixer-board {
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 15px;
+    background: #121212;
+    background-image: radial-gradient(#222 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* --- Channel Strip --- */
+.channel-strip {
+    width: 140px;
+    background: var(--strip-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 10px;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.strip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.track-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    max-width: 90px;
+}
+
+.remove-track {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.remove-track:hover {
+    color: var(--record-red);
+}
+
+/* Knobs */
+.knob-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.knob-wrapper {
+    text-align: center;
+}
+
+.knob-wrapper label {
+    display: block;
+    font-size: 0.6rem;
+    color: #666;
+    margin-top: 4px;
+    font-weight: 700;
+}
+
+.knob {
+    width: var(--knob-size);
+    height: var(--knob-size);
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2a2a30, #1f1f25);
+    border: 1px solid #333;
+    position: relative;
+    cursor: ns-resize;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4), inset 1px 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.knob-indicator {
+    width: 2px;
+    height: 40%;
+    background: var(--accent);
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(0deg);
+    pointer-events: none;
+}
+
+/* Buttons (Mute/Solo) */
+.strip-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.mute-btn,
+.solo-btn {
+    width: 30px;
+    height: 30px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #666;
+    font-weight: 700;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.mute-btn.active {
+    background: #eab308;
+    color: #000;
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+}
+
+.solo-btn.active {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Fader */
+.fader-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Vertical Range Input Hack */
+input[type=range][orient=vertical] {
+    writing-mode: bt-lr;
+    /* IE */
+    -webkit-appearance: slider-vertical;
+    /* Webkit */
+    width: 30px;
+    height: 100%;
+    background: transparent;
+}
+
+/* Waveform Mini */
+.track-waveform {
+    height: 40px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.wave-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Add Strip */
+.add-strip {
+    background: rgba(37, 37, 43, 0.5);
+    border: 2px dashed #444;
+    justify-content: center;
+}
+
+.add-options {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.add-options h3 {
+    font-size: 0.9rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.add-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.add-btn.outline {
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    color: #444;
+    font-size: 0.6rem;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #333;
+}
+
+.divider span {
+    padding: 0 5px;
+}
+
+/* --- Master Section --- */
+.master-section {
+    width: 200px;
+    background: #111;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.viz-wrapper {
+    height: 100px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+#visualizer {
+    width: 100%;
+    height: 100%;
+}
+
+.master-fader-group {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: #080808;
+    padding: 20px 10px;
+    border-radius: 8px;
+    border: 1px solid #222;
+}
+
+.vu-meter {
+    display: flex;
+    gap: 4px;
+    width: 20px;
+}
+
+.vu-bar-l,
+.vu-bar-r {
+    flex: 1;
+    background: #222;
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.vu-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(to top, #10b981, #f59e0b, #ef4444);
+    transition: height 0.05s;
+}
+
+.label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .master-section {
+        display: none;
+    }
+
+    /* Hide master on small screens or make it a tab */
+    .mixer-board {
+        padding: 10px;
+    }
+
+    .channel-strip {
+        width: 120px;
+    }
+}
+
+/* ========================
+   AudioMixer Ultimate Theme
+   ======================== */
+
+:root {
+    --bg-dark: #09090b;
+    --panel: #18181b;
+    --border: #27272a;
+    --accent: #8b5cf6;
+    /* Violet */
+    --accent-glow: rgba(139, 92, 246, 0.5);
+    --led-red: #ef4444;
+    --text: #e4e4e7;
+    --text-muted: #71717a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.mixer-header {
+    height: 60px;
+    background: rgba(24, 24, 27, 0.95);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+}
+
+.back-btn {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-right: 15px;
+}
+
+.brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+}
+
+.badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+/* Transport */
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #000;
+    padding: 5px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.transport-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.transport-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.transport-btn:hover {
+    background: #333;
+}
+
+.main-play {
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.record {
+    color: var(--led-red);
+}
+
+.record.active {
+    animation: blink 1s infinite;
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.lcd-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    border-left: 1px solid #333;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 2px;
+}
+
+.bpm-readout {
+    font-size: 0.6rem;
+    color: #555;
+}
+
+/* Actions */
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.action-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Workspace */
+.workspace {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Mixer Board (Left) */
+.mixer-board {
+    flex: 1;
+    overflow-x: auto;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.empty-placeholder {
+    margin: auto;
+    text-align: center;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.empty-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Rack Mount (Right) */
+.rack-mount {
+    width: 280px;
+    background: #111;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.rack-unit {
+    background: #1c1c1f;
+    border-bottom: 1px solid #000;
+    padding: 15px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.unit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #888;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.led {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #10b981;
+}
+
+/* Visualizer */
+.viz-unit {
+    height: 100px;
+    padding: 0;
+    background: #000;
+}
+
+#visualizer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Synth-X */
+.pad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.drum-pad {
+    background: #25252b;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 15px 0;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.drum-pad:active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: scale(0.95);
+}
+
+.rack-btn {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.rack-btn:hover {
+    background: #333;
+}
+
+/* Master FX */
+.knob-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.knob-wrap {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.knob-wrap label {
+    font-size: 0.6rem;
+    color: #666;
+    font-weight: 700;
+}
+
+.knob {
+    -webkit-appearance: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #333, #111);
+    border: 2px solid #333;
+    cursor: ns-resize;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Visual trick for knob rotation logic handled in JS, simplified here as slider */
+.knob::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+}
+
+/* Switch */
+.switch {
+    position: relative;
+    width: 30px;
+    height: 16px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #333;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    left: 2px;
+    bottom: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+input:checked+.slider {
+    background: var(--accent);
+}
+
+input:checked+.slider:before {
+    transform: translateX(14px);
+}
+
+/* Channel Strip */
+.channel-strip {
+    width: 90px;
+    background: #1f1f23;
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 10px 5px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.strip-top {
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--led-red);
+}
+
+.strip-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.knob-tiny-wrap {
+    text-align: center;
+}
+
+.knob-tiny-wrap label {
+    display: block;
+    font-size: 0.5rem;
+    color: #666;
+    margin-top: 2px;
+}
+
+.knob-tiny {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.eq-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.eq-stack .knob-tiny {
+    width: 24px;
+    height: 24px;
+    background: #151515;
+}
+
+.strip-fader {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background: #111;
+    padding: 10px 0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: inset 0 0 5px #000;
+}
+
+input[type=range][orient=vertical] {
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    width: 20px;
+    height: 150px;
+    background: transparent;
+}
+
+.strip-mute {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mute-btn,
+.solo-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: #333;
+    border: 1px solid #444;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.mute-btn.active {
+    background: #fbbf24;
+    color: #000;
+    box-shadow: 0 0 8px #fbbf24;
+}
+
+.solo-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.track-name {
+    font-size: 0.65rem;
+    text-align: center;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #333;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+/* Master Unit */
+.master-unit {
+    text-align: center;
+}
+
+.fader-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 120px;
+}
+
+.vu-meter {
+    display: flex;
+    gap: 2px;
+    width: 12px;
+}
+
+.vu-bar {
+    flex: 1;
+    background: #111;
+    position: relative;
+    border-radius: 2px;
+}
+
+.vu-bar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(to top, #10b981, #f59e0b, #ef4444);
+    transition: height 0.05s;
+    id: "vuFill";
+}
+
+.unit-label {
+    font-size: 0.7rem;
+    color: #555;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .rack-mount {
+        display: none;
+    }
+
+    /* On mobile, hide rack for now or make it a tab */
+    .mixer-board {
+        padding: 10px;
+    }
+
+    .header-center {
+        display: none;
+    }
+}

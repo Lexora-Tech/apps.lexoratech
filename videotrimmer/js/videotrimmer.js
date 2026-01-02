@@ -3,14 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const { createFFmpeg, fetchFile } = FFmpeg;
     let ffmpeg = null;
 
-    // --- ELEMENTS ---
+    // Elements
     const uploadScreen = document.getElementById('uploadScreen');
     const editorScreen = document.getElementById('editorScreen');
     const fileInput = document.getElementById('fileInput');
     const video = document.getElementById('mainVideo');
     const playOverlay = document.getElementById('playOverlay');
+    const galleryStrip = document.getElementById('galleryStrip');
 
-    // Sliders & Inputs
+    // Controls
     const rangeStart = document.getElementById('rangeStart');
     const rangeEnd = document.getElementById('rangeEnd');
     const fillRange = document.getElementById('fillRange');
@@ -18,77 +19,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeEnd = document.getElementById('endTime');
     const durationDisplay = document.getElementById('duration');
 
-    // Controls
-    const muteToggle = document.getElementById('muteToggle');
-    const rotateSelect = document.getElementById('rotateSelect');
-    const speedSelect = document.getElementById('speedSelect');
-    const formatSelect = document.getElementById('formatSelect');
-
     // Buttons
     const btnPlay = document.getElementById('btnPlay');
     const btnExport = document.getElementById('btnExport');
     const btnSnapshot = document.getElementById('btnSnapshot');
+    const prevFrame = document.getElementById('prevFrame');
+    const nextFrame = document.getElementById('nextFrame');
     const resetBtn = document.getElementById('resetBtn');
+
+    // Options
+    const filterSelect = document.getElementById('filterSelect');
+    const volSelect = document.getElementById('volSelect');
+    const rotateSelect = document.getElementById('rotateSelect');
+    const formatSelect = document.getElementById('formatSelect');
 
     // Loader
     const loader = document.getElementById('loader');
-    const loaderText = document.getElementById('loaderText');
     const progressFill = document.getElementById('progressFill');
+    const loaderText = document.getElementById('loaderText');
 
     let videoFile = null;
     let videoDuration = 0;
+    let isPlaying = false;
+    let animationId;
 
-    // --- 1. INITIALIZATION ---
+    // --- 1. SETUP ---
     const initFFmpeg = async () => {
-        if (!window.crossOriginIsolated) {
-            console.warn("Security headers missing. Export may fail.");
-        }
-
+        if (!window.crossOriginIsolated) console.warn("COI missing.");
         if (ffmpeg === null) {
-            ffmpeg = createFFmpeg({ log: true });
+            ffmpeg = createFFmpeg({ log: false });
             ffmpeg.setProgress(({ ratio }) => {
-                const p = Math.round(ratio * 100);
-                progressFill.style.width = `${p}%`;
-                loaderText.innerText = `Exporting... ${p}%`;
+                progressFill.style.width = Math.round(ratio * 100) + '%';
             });
-
-            try {
-                await ffmpeg.load();
-                return true;
-            } catch (e) {
-                console.error(e);
-                alert("Engine Error. Please refresh.");
-                return false;
-            }
+            await ffmpeg.load();
         }
-        return true;
     };
 
-    // --- 2. UPLOAD & LOAD ---
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files[0]) loadVideo(e.target.files[0]);
-    });
+    fileInput.onchange = (e) => { if (e.target.files[0]) loadVideo(e.target.files[0]); };
 
     const loadVideo = (file) => {
         videoFile = file;
         video.src = URL.createObjectURL(file);
-
         video.onloadedmetadata = () => {
             videoDuration = video.duration;
             uploadScreen.classList.add('hidden');
             editorScreen.classList.remove('hidden');
             updateVisuals();
-            initFFmpeg(); // Pre-load
+            initFFmpeg();
         };
     };
 
-    // --- 3. TIMELINE LOGIC ---
+    // --- 2. TIMELINE & STRICT LOOP (FIXED) ---
     function updateVisuals() {
         let start = parseFloat(rangeStart.value);
         let end = parseFloat(rangeEnd.value);
 
-        if (start > end - 5) { rangeStart.value = end - 5; start = end - 5; }
-        if (end < start + 5) { rangeEnd.value = start + 5; end = start + 5; }
+        if (start > end - 1) { rangeStart.value = end - 1; start = end - 1; }
+        if (end < start + 1) { rangeEnd.value = start + 1; end = start + 1; }
 
         fillRange.style.left = start + '%';
         fillRange.style.width = (end - start) + '%';
@@ -98,126 +85,150 @@ document.addEventListener('DOMContentLoaded', () => {
 
         timeStart.innerText = formatTime(sTime);
         timeEnd.innerText = formatTime(eTime);
-        durationDisplay.innerText = formatTime(eTime - sTime) + 's';
+        durationDisplay.innerText = formatTime(eTime - sTime);
     }
 
-    rangeStart.oninput = () => {
-        updateVisuals();
-        video.currentTime = (rangeStart.value / 100) * videoDuration;
-    };
-    rangeEnd.oninput = updateVisuals;
+    rangeStart.oninput = () => { updateVisuals(); video.currentTime = (parseFloat(rangeStart.value) / 100) * videoDuration; pauseVideo(); };
+    rangeEnd.oninput = () => { updateVisuals(); video.currentTime = (parseFloat(rangeEnd.value) / 100) * videoDuration; pauseVideo(); };
 
-    // --- 4. PLAYBACK CONTROLS ---
+    // *** HIGH PRECISION LOOP MONITOR ***
+    function loopMonitor() {
+        if (!isPlaying) return;
 
-    // Toggle Play/Pause
-    const togglePlay = () => {
-        if (video.paused) {
-            const sTime = (rangeStart.value / 100) * videoDuration;
-            const eTime = (rangeEnd.value / 100) * videoDuration;
+        const sTime = (parseFloat(rangeStart.value) / 100) * videoDuration;
+        const eTime = (parseFloat(rangeEnd.value) / 100) * videoDuration;
 
-            // Loop logic
-            if (video.currentTime >= eTime || video.currentTime < sTime) {
-                video.currentTime = sTime;
-            }
-
-            video.play();
-            playOverlay.classList.add('hidden');
-            btnPlay.innerHTML = '<i class="fas fa-pause"></i>';
-
-            // Stop at end of range
-            const checker = setInterval(() => {
-                const limit = (rangeEnd.value / 100) * videoDuration;
-                if (video.currentTime >= limit || video.paused) {
-                    if (video.currentTime >= limit) video.pause();
-                    playOverlay.classList.remove('hidden');
-                    btnPlay.innerHTML = '<i class="fas fa-play"></i>';
-                    clearInterval(checker);
-                }
-            }, 100);
-        } else {
+        // Check exact time
+        if (video.currentTime >= eTime) {
             video.pause();
-            playOverlay.classList.remove('hidden');
-            btnPlay.innerHTML = '<i class="fas fa-play"></i>';
+            video.currentTime = sTime; // Instant loop
+            video.play();
         }
+
+        animationId = requestAnimationFrame(loopMonitor);
+    }
+
+    function playVideo() {
+        const sTime = (parseFloat(rangeStart.value) / 100) * videoDuration;
+        const eTime = (parseFloat(rangeEnd.value) / 100) * videoDuration;
+
+        if (video.currentTime < sTime || video.currentTime >= eTime) {
+            video.currentTime = sTime;
+        }
+
+        video.play();
+        isPlaying = true;
+        playOverlay.style.opacity = '0';
+        btnPlay.innerHTML = '<i class="fas fa-pause"></i>';
+
+        cancelAnimationFrame(animationId);
+        loopMonitor(); // Start monitor
+    }
+
+    function pauseVideo() {
+        video.pause();
+        isPlaying = false;
+        playOverlay.style.opacity = '1';
+        btnPlay.innerHTML = '<i class="fas fa-play"></i>';
+        cancelAnimationFrame(animationId);
+    }
+
+    btnPlay.onclick = () => { isPlaying ? pauseVideo() : playVideo(); };
+    video.parentElement.onclick = (e) => { if (e.target !== btnSnapshot) isPlaying ? pauseVideo() : playVideo(); };
+
+    // --- 3. FILTERS & TOOLS ---
+    filterSelect.onchange = () => {
+        // CSS Filter preview
+        const val = filterSelect.value;
+        video.style.filter = val === 'grayscale' ? 'grayscale(1)' : val === 'sepia' ? 'sepia(1)' : val === 'contrast' ? 'contrast(1.5)' : 'none';
     };
 
-    btnPlay.onclick = togglePlay;
-    video.onclick = togglePlay; // Tap video to play
-    playOverlay.onclick = togglePlay; // Tap overlay to play
-
-    // Speed
-    speedSelect.onchange = () => video.playbackRate = parseFloat(speedSelect.value);
-
-    // Mute Visuals
-    muteToggle.onchange = () => {
-        // Video element doesn't need to mute, we mute on export
-        // But for preview, we can mute:
-        video.muted = muteToggle.checked;
-    };
-
-    // Snapshot
-    btnSnapshot.onclick = () => {
+    btnSnapshot.onclick = (e) => {
+        e.stopPropagation();
         const canvas = document.createElement('canvas');
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         const ctx = canvas.getContext('2d');
 
-        // Handle rotation context if needed (advanced) - for now simple capture
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        // Apply current filters to snapshot
+        const filter = filterSelect.value;
+        if (filter !== 'none') ctx.filter = video.style.filter;
 
-        const a = document.createElement('a');
-        a.href = canvas.toDataURL('image/jpeg');
-        a.download = `snapshot_${Date.now()}.jpg`;
-        a.click();
+        ctx.drawImage(video, 0, 0);
+
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/jpeg');
+        img.className = 'snap-thumb';
+        img.onclick = () => {
+            const a = document.createElement('a');
+            a.href = img.src;
+            a.download = `Snap_${Date.now()}.jpg`;
+            a.click();
+        };
+
+        galleryStrip.insertBefore(img, galleryStrip.firstChild);
+        galleryStrip.classList.add('active');
     };
 
-    // --- 5. EXPORT LOGIC ---
+    // Frame steps
+    prevFrame.onclick = () => { pauseVideo(); video.currentTime -= 0.05; };
+    nextFrame.onclick = () => { pauseVideo(); video.currentTime += 0.05; };
+
+    // --- 4. EXPORT ---
     btnExport.onclick = async () => {
-        const loaded = await initFFmpeg();
-        if (!loaded) return;
+        if (!ffmpeg || !ffmpeg.isLoaded()) await initFFmpeg();
 
         loader.classList.remove('hidden');
         progressFill.style.width = '0%';
-        loaderText.innerText = "Encoding Video...";
+        loaderText.innerText = "Processing...";
 
-        const sTime = (rangeStart.value / 100) * videoDuration;
-        const duration = ((rangeEnd.value - rangeStart.value) / 100) * videoDuration;
+        const sTime = (parseFloat(rangeStart.value) / 100) * videoDuration;
+        const duration = ((parseFloat(rangeEnd.value) - parseFloat(rangeStart.value)) / 100) * videoDuration;
 
-        const rotation = rotateSelect.value;
         const format = formatSelect.value;
-        const isMuted = muteToggle.checked;
+        const rotation = rotateSelect.value;
+        const volume = volSelect.value;
+        const filter = filterSelect.value;
 
         const inputName = 'input.mp4';
         const outputName = `output.${format}`;
 
         ffmpeg.FS('writeFile', inputName, await fetchFile(videoFile));
 
-        let filters = [];
-        if (rotation === "90") filters.push("transpose=1");
-        else if (rotation === "180") filters.push("transpose=2,transpose=2");
-        else if (rotation === "270") filters.push("transpose=2");
+        let vf = [];
+        // Rotate
+        if (rotation !== "0") vf.push(`transpose=${rotation === "90" ? 1 : rotation === "180" ? "2,transpose=2" : 2}`);
+        // Visual Filters
+        if (filter === 'grayscale') vf.push('hue=s=0');
+        else if (filter === 'sepia') vf.push('colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131');
+        else if (filter === 'contrast') vf.push('eq=contrast=1.5');
+        // GIF specific
+        if (format === 'gif') vf.push('fps=10,scale=480:-1:flags=lanczos');
 
-        if (format === 'gif') filters.push("fps=10,scale=480:-1:flags=lanczos");
+        // Audio Filters
+        let af = [];
+        if (volume !== "1") af.push(`volume=${volume}`);
 
         const args = ['-ss', formatTimeFF(sTime), '-i', inputName, '-t', formatTimeFF(duration)];
-        if (filters.length) args.push('-vf', filters.join(','));
 
-        if (isMuted) args.push('-an');
-        else if (format === 'mp4') args.push('-c:a', 'copy');
+        if (vf.length) args.push('-vf', vf.join(','));
+        if (af.length) args.push('-af', af.join(','));
+        if (volume === "0") args.push('-an'); // Mute
 
-        // Speed preset for MP4
-        if (format === 'mp4') args.push('-c:v', 'libx264', '-preset', 'ultrafast');
+        // Speed up if simple
+        if (format === 'mp4' && !vf.length && !af.length && volume !== "0") args.push('-c:v', 'libx264', '-preset', 'ultrafast');
+        else if (format === 'mp4') args.push('-c:v', 'libx264', '-preset', 'ultrafast'); // Re-encode for filters
 
         args.push(outputName);
 
         await ffmpeg.run(...args);
 
         const data = ffmpeg.FS('readFile', outputName);
-        const url = URL.createObjectURL(new Blob([data.buffer], { type: format === 'gif' ? 'image/gif' : 'video/mp4' }));
+        const url = URL.createObjectURL(new Blob([data.buffer], { type: format === 'gif' ? 'image/gif' : (format === 'mp3' ? 'audio/mpeg' : 'video/mp4') }));
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = `Lexora_Cut_${Date.now()}.${format}`;
+        a.download = `Lexora_${Date.now()}.${format}`;
         a.click();
 
         loader.classList.add('hidden');
@@ -225,13 +236,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ffmpeg.FS('unlink', outputName);
     };
 
-    // Utils
     resetBtn.onclick = () => location.reload();
 
     function formatTime(s) {
         const m = Math.floor(s / 60);
         const sec = Math.floor(s % 60);
-        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        const ms = Math.floor((s % 1) * 10);
+        return `${m}:${sec < 10 ? '0' : ''}${sec}.${ms}`;
     }
 
     function formatTimeFF(s) {
