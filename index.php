@@ -947,7 +947,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    &copy; 2025 LexoraTech. All rights reserved.
+                    &copy; 2026 LexoraTech. All Rights Reserved.
                 </div>
             </footer>
 
