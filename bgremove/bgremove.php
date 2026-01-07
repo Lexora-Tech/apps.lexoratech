@@ -13,7 +13,7 @@ header("Cross-Origin-Embedder-Policy: require-corp");
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+       <link rel="icon" href="../assets/logo/logo.png" />
     <link rel="stylesheet" href="css/bgremove.css">
 
     <style>
@@ -59,7 +59,7 @@ header("Cross-Origin-Embedder-Policy: require-corp");
     <div class="app-container">
         <header class="glass-header">
             <div class="header-left">
-                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> <span>Dashboard</span></a>
+                <a href="../index.php" class="back-btn"><i class="fas fa-arrow-left"></i> <span>Dashboard</span></a>
             </div>
             <div class="brand">
                 <div class="logo-wrapper"><i class="fas fa-eraser"></i></div>
