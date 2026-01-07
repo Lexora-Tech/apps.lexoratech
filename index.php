@@ -756,7 +756,7 @@
 
     <div class="mobile-header">
         <a href="#" class="brand-mob">
-            <img src="./assets/logo/logo2.png" alt=""> Lexora
+            <img src="./assets/logo/logo2.png" alt=""> Lexora Workspace
         </a>
         <button id="menuBtn" style="background:none; border:none; color:#fff; font-size:1.4rem;">
             <i class="fas fa-bars"></i>
