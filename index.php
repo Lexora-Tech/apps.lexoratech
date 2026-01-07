@@ -3,737 +3,1062 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lexora Workspace | World's First Free All-in-One Creator Suite</title>
-    <meta name="description" content="The only free operating system for creators. Access 12+ pro tools including Image Compressor, Code Formatter, Diff Checker, Teleprompter, and AI Voice.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lexora Workspace | Ultra Studio</title>
 
-    <meta property="og:title" content="Lexora Workspace">
-    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo.png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
 
     <style>
-        /* --- Global Layout Overrides --- */
-        body {
-            background-color: #050505;
-            font-family: 'Inter', sans-serif;
+        /* ========================
+           1. CORE VARIABLES & RESET
+           ======================== */
+        :root {
+            /* Palette */
+            --bg-body: #030304;
+            --bg-panel: #0a0a0a;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --accent: #3b82f6;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+
+            /* Glass */
+            --card-bg: rgba(20, 20, 22, 0.6);
+            --glass: rgba(20, 20, 22, 0.8);
+            --blur: blur(20px);
+
+            /* Animation */
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
             overflow-x: hidden;
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- Modern Minimal Header --- */
-        .modern-navbar {
-            position: sticky;
-            top: 0px;
-            z-index: 1000;
-            width: 95%;
-            max-width: 1400px;
-            margin: 0 auto 40px auto;
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            padding: 12px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        /* Logo Area */
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #fff;
-            transition: opacity 0.2s;
-        }
-
-        .nav-brand:hover {
-            opacity: 0.9;
-        }
-
-        .brand-logo {
-            height: 32px;
-            width: auto;
-        }
-
-        .brand-text {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Right Actions */
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Search Bar */
-        .search-wrapper {
-            position: relative;
-            margin-right: 10px;
-        }
-
-        .search-pill {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            padding: 8px 16px;
-            transition: 0.3s;
-            width: 240px;
-        }
-
-        .search-pill:focus-within {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            width: 280px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-        }
-
-        .search-pill i {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-right: 10px;
-        }
-
-        .search-input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 0.9rem;
-            width: 100%;
-            outline: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .search-input::placeholder {
-            color: #52525b;
-        }
-
-        .shortcut-hint {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            color: #64748b;
+        /* Ambient Glow */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.04), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.04), transparent 25%);
+            z-index: -1;
             pointer-events: none;
         }
 
-        /* Icon Buttons */
-        .icon-btn {
-            background: transparent;
-            border: none;
-            width: 40px;
-            height: 40px;
+        /* --- LAYOUT SHELL --- */
+        .app-shell {
+            display: flex;
+            width: 100%;
+            transition: transform 0.3s var(--ease);
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            border-right: 1px solid var(--border);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: var(--blur);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-group-title {
+            font-size: 0.7rem;
+            color: #555;
+            font-weight: 700;
+            padding-left: 12px;
+            margin-bottom: 10px;
+            margin-top: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            height: 80%;
+            width: 3px;
+            background: var(--accent);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .nav-item i {
+            width: 24px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        /* USER PROFILE (Bottom Sidebar) */
+        .user-profile {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .u-info h4 {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #fff;
+        }
+
+        .u-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-view {
+            flex: 1;
+            padding: 0 40px 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        /* TOP BAR (Sticky) */
+        .top-bar {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: rgba(3, 3, 4, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 90;
+            margin-bottom: 30px;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .top-bar.scrolled {
+            border-bottom-color: var(--border);
+            background: rgba(3, 3, 4, 0.95);
+        }
+
+        .search-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 360px;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .search-container:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+            color: #fff;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .shortcut-key {
+            font-size: 0.7rem;
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: 0.2s;
-            position: relative;
         }
 
         .icon-btn:hover {
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
+            border-color: var(--text-muted);
         }
 
-        .notification-dot {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
-            border-radius: 50%;
-            border: 2px solid #1a1a1a;
+        /* --- CATEGORY HEADERS --- */
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-top: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
         }
 
-        /* --- Content Layout --- */
-        .app-container {
-            display: block;
-            width: 100%;
-            padding-top: 0;
-            flex: 1;
-            /* Sticky Footer Logic */
+        .cat-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
         }
 
-        .main-area {
-            width: 100%;
+        .cat-badge {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* --- TOOLS GRID --- */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s var(--ease);
+            position: relative;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-hover);
+            background: rgba(30, 30, 35, 0.9);
+        }
+
+        .tool-card:hover .launch-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .t-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .status {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .t-info h3 {
+            font-size: 1.1rem;
+            margin: 0 0 6px 0;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .t-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin: 0;
-            padding: 0;
+            line-height: 1.5;
         }
 
-        .content-area {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px 60px 40px;
-        }
-
-        /* --- Footer CSS --- */
-        .main-footer {
-            background: #000;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px 20px 20px;
+        .launch-btn {
             margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s var(--ease);
+            opacity: 0.7;
+        }
+
+        .launch-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            opacity: 1;
+        }
+
+        /* Icon Colors */
+        .icon-blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05));
+            color: #60a5fa;
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05));
+            color: #c084fc;
+        }
+
+        .icon-orange {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.05));
+            color: #fb923c;
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05));
+            color: #4ade80;
+        }
+
+        .icon-pink {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05));
+            color: #f472b6;
+        }
+
+        .icon-teal {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(20, 184, 166, 0.05));
+            color: #2dd4bf;
+        }
+
+        /* MOBILE HEADER & MENU */
+        .mobile-header {
+            display: none;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 95;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- FOOTER STYLES (Default Desktop) --- */
+        .main-footer {
+            margin-top: 80px;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0), rgba(5, 5, 5, 0.8));
         }
 
         .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .brand-col {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .footer-logo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #fff;
-            margin-bottom: 10px;
         }
 
         .footer-logo img {
-            height: 22px;
+            height: 28px;
+            width: auto;
         }
 
         .brand-col p {
-            color: #64748b;
-            font-size: 0.85rem;
-            max-width: 250px;
-            line-height: 1.5;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 280px;
         }
 
         .footer-col h4 {
             color: #fff;
-            margin-bottom: 15px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-family: 'Inter', sans-serif;
-            opacity: 0.8;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .footer-col a {
             display: block;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-decoration: none;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            transition: 0.2s;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            transition: color 0.2s;
         }
 
         .footer-col a:hover {
-            color: #fff;
-            transform: translateX(2px);
+            color: var(--accent);
         }
 
         .footer-bottom {
-            text-align: center;
-            color: #444;
-            font-size: 0.75rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding-top: 30px;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
         }
 
-        /* --- Mobile Responsiveness --- */
-        @media (max-width: 900px) {
-            .modern-navbar {
-                width: 92%;
-                padding: 10px 15px;
-                top: 0px;
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 20px 10px;
+                align-items: center;
             }
 
-            .search-wrapper {
+            .nav-item span,
+            .brand span,
+            .nav-group-title,
+            .user-profile span {
                 display: none;
             }
 
-            .content-area {
-                padding: 0 20px 40px 20px;
+            .nav-item {
+                justify-content: center;
+                padding: 12px;
+                width: 50px;
+                height: 50px;
             }
 
-            /* Optimized Mobile Footer */
-            .main-footer {
-                padding: 30px 20px 20px;
+            .nav-item i {
+                font-size: 1.2rem;
+                width: auto;
+            }
+
+            .brand {
+                margin-bottom: 30px;
+            }
+
+            .user-profile {
+                justify-content: center;
+                width: 100%;
             }
 
             .footer-grid {
-                display: grid;
-                /* Force 3 equal columns for links on mobile */
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 10px;
-                text-align: center;
-                margin-bottom: 20px;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
             }
+        }
 
-            .brand-col {
-                grid-column: span 3;
-                /* Logo takes full width at top */
-                display: flex;
+        @media (max-width: 900px) {
+            .app-shell {
                 flex-direction: column;
-                align-items: center;
-                margin-bottom: 15px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                padding-bottom: 15px;
             }
 
-            /* HIDE TEXT UNDER LOGO IN MOBILE */
-            .brand-col p {
+            /* Sidebar Drawer */
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 260px;
+                transform: translateX(-100%);
+                padding: 20px;
+                align-items: stretch;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .nav-item span,
+            .brand span,
+            .nav-group-title,
+            .user-profile span {
+                display: inline;
+            }
+
+            .nav-item {
+                justify-content: flex-start;
+                width: auto;
+                height: auto;
+                padding: 12px 16px;
+            }
+
+            /* Mobile Header */
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px 20px;
+                background: rgba(5, 5, 5, 0.95);
+                backdrop-filter: blur(10px);
+                position: sticky;
+                top: 0;
+                z-index: 200;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .brand-mob {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #fff;
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+            .brand-mob img {
+                height: 28px;
+            }
+
+            .top-bar {
                 display: none;
             }
 
-            .footer-logo {
-                margin-bottom: 0;
-                /* Remove bottom margin since text is gone */
+            .main-view {
+                padding: 20px;
             }
 
-            /* Adjust heading spacing */
+            .mobile-search {
+                margin-bottom: 20px;
+                display: block;
+                width: 100%;
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                padding: 12px;
+                border-radius: 12px;
+                color: #fff;
+                outline: none;
+            }
+
+            /* --- PREMIUM MOBILE FOOTER --- */
+            .main-footer {
+                padding: 50px 24px 30px;
+                background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                margin-top: 40px;
+            }
+
+            /* 3-Column Layout for Links */
+            .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px 10px;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            /* Brand Section Full Width Centered */
+            .brand-col {
+                grid-column: span 3;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-bottom: 30px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                margin-bottom: 20px;
+            }
+
+            .footer-logo {
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+                justify-content: center;
+                color: #fff;
+            }
+
+            .brand-col p {
+                display: block;
+                font-size: 0.9rem;
+                color: #a1a1aa;
+                max-width: 300px;
+                line-height: 1.6;
+                margin: 0 auto;
+            }
+
+            /* Links Columns */
+            .footer-col {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
             .footer-col h4 {
-                margin-bottom: 10px;
                 font-size: 0.75rem;
+                color: #fff;
+                opacity: 0.6;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+                font-weight: 700;
             }
 
             .footer-col a {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
+                color: #d4d4d8;
+                padding: 4px 0;
             }
-        }
 
-        /* --- Helper Classes --- */
-        .lime-gradient {
-            background: linear-gradient(135deg, #84cc16, #65a30d);
-        }
-
-        .lime-status {
-            background: rgba(132, 204, 22, 0.1);
-            border-color: rgba(132, 204, 22, 0.3);
-            color: #84cc16;
-        }
-
-        .lime-btn {
-            background: rgba(132, 204, 22, 0.1);
-            border-color: rgba(132, 204, 22, 0.3);
-            color: #84cc16;
-        }
-
-        .tool-card:hover .lime-btn {
-            background: rgba(132, 204, 22, 0.2);
-            box-shadow: 0 4px 16px rgba(132, 204, 22, 0.3);
-        }
-
-        .lime-mesh {
-            background: radial-gradient(at 100% 0%, rgba(132, 204, 22, 0.3) 0px, transparent 60%);
-        }
-
-        .mobile-menu-toggle {
-            display: none !important;
+            .footer-bottom {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                font-size: 0.75rem;
+                color: #52525b;
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="background-wrapper">
-        <div class="mesh-gradient"></div>
-        <div class="grid-overlay"></div>
-        <div class="gradient-sphere sphere-1"></div>
-        <div class="gradient-sphere sphere-2"></div>
-        <div class="gradient-sphere sphere-3"></div>
+    <div class="ambient-glow"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <div class="mobile-header">
+        <a href="#" class="brand-mob">
+            <img src="./assets/logo/logo2.png" alt=""> Lexora
+        </a>
+        <button id="menuBtn" style="background:none; border:none; color:#fff; font-size:1.4rem;">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
 
-    <div class="app-container">
+    <div class="app-shell">
 
-        <header class="modern-navbar">
-
-            <a href="index.php" class="nav-brand">
-                <img src="./assets/logo/logo2.png" alt="Lexora" class="brand-logo">
-                <span class="brand-text">Lexora Workspace</span>
+        <aside class="sidebar" id="sidebar">
+            <a href="index.php" class="brand">
+                <img src="./assets/logo/logo2.png" alt="">
+                <span>Lexora Workspace</span>
             </a>
 
-            <div class="nav-right">
-                <div class="search-wrapper">
-                    <div class="search-pill">
-                        <i class="fas fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Search 12+ tools..." id="globalSearch">
-                        <span class="shortcut-hint">/</span>
-                    </div>
-                </div>
+            <div class="nav-links">
+                <a href="#featured" class="nav-item active"><i class="fas fa-star"></i> <span>Featured</span></a>
 
-                <button class="icon-btn" aria-label="Notifications">
-                    <i class="far fa-bell"></i>
-                    <span class="notification-dot"></span>
-                </button>
+                <div class="nav-group-title">Studio</div>
+                <a href="#design" class="nav-item"><i class="fas fa-pen-nib"></i> <span>Design Tools</span></a>
+                <a href="#video" class="nav-item"><i class="fas fa-video"></i> <span>Video Suite</span></a>
+                <a href="#audio" class="nav-item"><i class="fas fa-music"></i> <span>Audio Lab</span></a>
 
-                <a href="https://discord.gg" target="_blank" class="icon-btn" aria-label="Help / Community">
-                    <i class="far fa-question-circle"></i>
-                </a>
+                <div class="nav-group-title">Productivity</div>
+                <a href="#dev" class="nav-item"><i class="fas fa-code"></i> <span>Developer</span></a>
+                <a href="#utilities" class="nav-item"><i class="fas fa-toolbox"></i> <span>Utilities</span></a>
+                <a href="#career" class="nav-item"><i class="fas fa-briefcase"></i> <span>Career</span></a>
             </div>
-        </header>
+        </aside>
 
-        <main class="main-area">
-            <div class="content-area">
+        <main class="main-view">
 
-                <section class="featured-section">
-                    <a href="teleprompter/teleprompter.php" class="featured-card">
-                        <div class="featured-mesh"></div>
-                        <div class="featured-grid"></div>
-                        <div class="featured-content">
-                            <div class="featured-left">
-                                <div class="featured-header">
-                                    <div class="featured-badge">
-                                        <span class="badge-dot"></span>
-                                        <span>Featured Tool</span>
-                                    </div>
-                                    <div class="status-badge status-live">
-                                        <span class="status-dot"></span>
-                                        <span>Live</span>
-                                    </div>
-                                </div>
-                                <div class="featured-body">
-                                    <h3 class="featured-title">PromptFlow Studio</h3>
-                                    <p class="featured-description">
-                                        Professional teleprompting with <span class="highlight">voice control</span>,
-                                        reality mode, and mirror casting. Trusted by <span class="highlight">10,000+ creators</span>.
-                                    </p>
-                                    <div class="featured-stats">
-                                        <div class="stat-card">
-                                            <div class="stat-icon"><i class="fas fa-users"></i></div>
-                                            <div class="stat-content">
-                                                <span class="stat-value">10K+</span>
-                                                <span class="stat-label">Active Users</span>
-                                            </div>
-                                        </div>
-                                        <div class="stat-card">
-                                            <div class="stat-icon"><i class="fas fa-star"></i></div>
-                                            <div class="stat-content">
-                                                <span class="stat-value">4.9</span>
-                                                <span class="stat-label">Rating</span>
-                                            </div>
-                                        </div>
-                                        <div class="stat-card">
-                                            <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-                                            <div class="stat-content">
-                                                <span class="stat-value">Free</span>
-                                                <span class="stat-label">Forever</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="featured-action">
-                                    <button class="action-btn">
-                                        <span>Launch Studio</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                        <div class="btn-shimmer"></div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="featured-right">
-                                <div class="featured-icon-display">
-                                    <div class="icon-circle"></div>
-                                    <div class="icon-main"><i class="fas fa-stream"></i></div>
-                                    <div class="icon-float icon-1"><i class="fas fa-microphone"></i></div>
-                                    <div class="icon-float icon-2"><i class="fas fa-video"></i></div>
-                                    <div class="icon-float icon-3"><i class="fas fa-desktop"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </section>
+            <div class="top-bar" id="topBar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search 20+ tools... (Press /)">
+                    <span class="shortcut-key">/</span>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="far fa-bell"></i></button>
+                    <button class="icon-btn"><i class="far fa-question-circle"></i></button>
+                </div>
+            </div>
 
-                <section class="tools-section">
-                    <div class="section-header">
-                        <div class="section-title-group">
-                            <h2 class="section-title">Creative Suite</h2>
-                            <span class="section-subtitle">Professional tools for creators</span>
-                        </div>
-                        <div class="section-badge">12 Tools</div>
+            <input type="text" class="mobile-search" id="mobSearch" placeholder="Search tools..." style="display:none;">
+
+            <div id="featured" class="category-header">
+                <span class="cat-title">Featured Tools</span>
+                <span class="cat-badge">3</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="sketchpad/sketchpad.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-orange"><i class="fas fa-pencil-alt"></i></div>
+                        <span class="status">New</span>
                     </div>
-
-                    <div class="tools-grid" id="toolsGrid">
-
-                        <a href="voicegen/voicegen.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon pink-gradient"><i class="fas fa-microphone-lines"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live pink-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">VoiceGen AI</h3>
-                                <p class="tool-description">Neural text-to-speech with multiple voices and languages.</p>
-                                <div class="tool-tags"><span class="tag">AI Powered</span><span class="tag">Audio</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn pink-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh pink-mesh"></div>
-                        </a>
-
-                        <a href="thumbgrab/thumbgrab.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon red-gradient"><i class="fab fa-youtube"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live red-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">ThumbGrab</h3>
-                                <p class="tool-description">Download high-resolution YouTube thumbnails instantly.</p>
-                                <div class="tool-tags"><span class="tag">HD Quality</span><span class="tag">Instant</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn red-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh red-mesh"></div>
-                        </a>
-
-                        <a href="qrcodegen/qrcodegen.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon green-gradient"><i class="fas fa-qrcode"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live green-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">LinkVault</h3>
-                                <p class="tool-description">Generate custom QR codes with logo embedding.</p>
-                                <div class="tool-tags"><span class="tag">Customizable</span><span class="tag">SVG</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn green-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh green-mesh"></div>
-                        </a>
-
-                        <a href="chromapick/chromapick.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon indigo-gradient"><i class="fas fa-eye-dropper"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live indigo-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">ChromaPick</h3>
-                                <p class="tool-description">Extract color palettes from images in multiple formats.</p>
-                                <div class="tool-tags"><span class="tag">Design</span><span class="tag">Palette</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn indigo-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh indigo-mesh"></div>
-                        </a>
-
-                        <a href="lexorapdf/lexorapdf.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon blue-gradient"><i class="fas fa-file-pdf"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live blue-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">Lexora PDF</h3>
-                                <p class="tool-description">Merge, split, compress, and convert PDFs securely.</p>
-                                <div class="tool-tags"><span class="tag">Secure</span><span class="tag">Fast</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn blue-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh blue-mesh"></div>
-                        </a>
-
-                        <a href="securepass/securepass.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon yellow-gradient"><i class="fas fa-shield-alt"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live yellow-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">SecurePass</h3>
-                                <p class="tool-description">Generate cryptographically secure passwords.</p>
-                                <div class="tool-tags"><span class="tag">Security</span><span class="tag">Privacy</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn yellow-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh yellow-mesh"></div>
-                        </a>
-
-                        <a href="socialmock/socialmock.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon cyan-gradient"><i class="fas fa-layer-group"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live cyan-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">SocialMock</h3>
-                                <p class="tool-description">Create realistic social media post mockups.</p>
-                                <div class="tool-tags"><span class="tag">Marketing</span><span class="tag">Social</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn cyan-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh cyan-mesh"></div>
-                        </a>
-
-                        <a href="focusflow/focusflow.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon violet-gradient"><i class="fas fa-headphones"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live violet-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">FocusFlow</h3>
-                                <p class="tool-description">Ambient noise generator and Pomodoro timer.</p>
-                                <div class="tool-tags"><span class="tag">Productivity</span><span class="tag">Focus</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn violet-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh violet-mesh"></div>
-                        </a>
-
-                        <a href="quickconvert/quickconvert.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon orange-gradient"><i class="fas fa-exchange-alt"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live orange-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">QuickConvert</h3>
-                                <p class="tool-description">Universal unit and currency converter.</p>
-                                <div class="tool-tags"><span class="tag">Utility</span><span class="tag">Math</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn orange-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh orange-mesh"></div>
-                        </a>
-
-                        <a href="imgoptim/imgoptim.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon teal-gradient"><i class="fas fa-compress-arrows-alt"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live teal-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">ImgOptim</h3>
-                                <p class="tool-description">Smart image compression without quality loss.</p>
-                                <div class="tool-tags"><span class="tag">Images</span><span class="tag">Optimization</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn teal-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh teal-mesh"></div>
-                        </a>
-
-                        <a href="codeformat/codeformat.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon purple-gradient"><i class="fas fa-code"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live purple-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">CodeFormat</h3>
-                                <p class="tool-description">Beautify and validate JSON, HTML, CSS, and JS code.</p>
-                                <div class="tool-tags"><span class="tag">Dev</span><span class="tag">Syntax</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn purple-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh purple-mesh"></div>
-                        </a>
-
-                        <a href="diffcheck/diffcheck.php" class="tool-card">
-                            <div class="card-glass"></div>
-                            <div class="card-border-glow"></div>
-                            <div class="card-header">
-                                <div class="tool-icon-wrapper">
-                                    <div class="tool-icon lime-gradient"><i class="fas fa-not-equal"></i></div>
-                                    <div class="icon-particles"><span class="particle"></span><span class="particle"></span><span class="particle"></span></div>
-                                </div>
-                                <div class="status-badge status-live lime-status"><span class="status-dot"></span><span>Live</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="tool-title">DiffCheck</h3>
-                                <p class="tool-description">Compare text files and code snippets.</p>
-                                <div class="tool-tags"><span class="tag">Dev</span><span class="tag">Compare</span></div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="launch-btn lime-btn"><span>Launch Tool</span><i class="fas fa-arrow-right"></i></button>
-                            </div>
-                            <div class="card-mesh lime-mesh"></div>
-                        </a>
-
+                    <div class="t-info">
+                        <h3>Sketchpad X</h3>
+                        <p>Infinite vector whiteboard for brainstorming and wireframing.</p>
                     </div>
-                </section>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="screenframe/screenframe.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-mobile-alt"></i></div>
+                        <span class="status">Popular</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>ScreenFrame</h3>
+                        <p>Professional 3D device mockups for your screenshots.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="resumecraft/resumecraft.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-file-contract"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>ResumeCraft</h3>
+                        <p>ATS-friendly resume builder with PDF export.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+            </div>
+
+            <div id="design" class="category-header">
+                <span class="cat-title">Design & Media</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="bgremove/bgremove.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-pink"><i class="fas fa-eraser"></i></div>
+                        <span class="status">AI</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>ClearCut AI</h3>
+                        <p>Remove backgrounds from images instantly.</p>
+                    </div>
+                </a>
+
+                <a href="chromapick/chromapick.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-teal"><i class="fas fa-eye-dropper"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>ChromaPick</h3>
+                        <p>Extract color palettes from images.</p>
+                    </div>
+                </a>
+
+                <a href="imgoptim/imgoptim.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-green"><i class="fas fa-compress-arrows-alt"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>ImgOptim</h3>
+                        <p>Smart image compression without quality loss.</p>
+                    </div>
+                </a>
+
+                <a href="thumbgrab/thumbgrab.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-orange"><i class="fab fa-youtube"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>ThumbGrab</h3>
+                        <p>Download high-res YouTube thumbnails.</p>
+                    </div>
+                </a>
+
+                <a href="socialmock/socialmock.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-layer-group"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>SocialMock</h3>
+                        <p>Create realistic social media post mockups.</p>
+                    </div>
+                </a>
+
+                <a href="memegen/memegen.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-laugh-squint"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>MemeGen</h3>
+                        <p>Fast meme generator with custom text.</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <div id="video" class="category-header">
+                <span class="cat-title">Audio & Video</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="voicegen/voicegen.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
+                        <span class="status">AI</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>VoiceGen</h3>
+                        <p>Neural text-to-speech engine.</p>
+                    </div>
+                </a>
+
+                <a href="videotrimmer/videotrimmer.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-film"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>VideoTrimmer</h3>
+                        <p>Simple online video cutter and trimmer.</p>
+                    </div>
+                </a>
+
+                <a href="audiomixer/audiomixer.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-sliders-h"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>AudioMixer</h3>
+                        <p>Mix multiple audio tracks in the browser.</p>
+                    </div>
+                </a>
+
+                <a href="teleprompter/teleprompter.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-green"><i class="fas fa-stream"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>PromptFlow</h3>
+                        <p>Teleprompter with voice scrolling.</p>
+                    </div>
+                </a>
+
+                <a href="youtubedl/youtubedl.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-orange"><i class="fab fa-youtube"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>TubeSave</h3>
+                        <p>Download YouTube videos in 4K.</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <div id="dev" class="category-header">
+                <span class="cat-title">Dev & Utilities</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="codeformat/codeformat.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-code"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>CodeFormat</h3>
+                        <p>Beautify and validate code snippets.</p>
+                    </div>
+                </a>
+
+                <a href="diffcheck/diffcheck.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-teal"><i class="fas fa-not-equal"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>DiffCheck</h3>
+                        <p>Compare text files for differences.</p>
+                    </div>
+                </a>
+
+                <a href="markdowns/markdown.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-align-left"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>MarkEdit</h3>
+                        <p>Real-time Markdown editor with export.</p>
+                    </div>
+                </a>
+
+                <a href="qrcodegen/qrcodegen.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-green"><i class="fas fa-qrcode"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>LinkVault</h3>
+                        <p>Custom branded QR code generator.</p>
+                    </div>
+                </a>
+
+                <a href="lexorapdf/lexorapdf.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-pink"><i class="fas fa-file-pdf"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>LexoraPDF</h3>
+                        <p>Merge, split, and compress PDFs.</p>
+                    </div>
+                </a>
+
+                <a href="securepass/securepass.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-orange"><i class="fas fa-shield-alt"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>SecurePass</h3>
+                        <p>Generate secure passwords locally.</p>
+                    </div>
+                </a>
+
+                <a href="quickconvert/quickconvert.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-exchange-alt"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>QuickConvert</h3>
+                        <p>Universal unit converter.</p>
+                    </div>
+                </a>
+
+                <a href="focusflow/focusflow.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-clock"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>FocusFlow</h3>
+                        <p>Pomodoro timer with ambient sounds.</p>
+                    </div>
+                </a>
 
             </div>
 
@@ -764,7 +1089,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    &copy; 2025 LexoraTech. All rights reserved.
+                    &copy; 2026 LexoraTech. All Rights Reserved.
                 </div>
             </footer>
 
@@ -773,57 +1098,81 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('globalSearch');
-            const toolCards = document.querySelectorAll('.tool-card');
 
-            if (searchInput) {
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === '/' && document.activeElement !== searchInput) {
-                        e.preventDefault();
-                        searchInput.focus();
-                    }
-                });
+            // 1. MOBILE MENU TOGGLE
+            const menuBtn = document.getElementById('menuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const mobSearch = document.getElementById('mobSearch');
 
-                searchInput.addEventListener('keyup', (e) => {
-                    const term = e.target.value.toLowerCase().trim();
+            function toggleMenu() {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+            }
 
-                    if (term.length > 0 && window.scrollY < 300) {
-                        document.querySelector('.tools-section').scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
+            menuBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
 
-                    toolCards.forEach(card => {
-                        const title = card.querySelector('.tool-title').innerText.toLowerCase();
-                        const desc = card.querySelector('.tool-description').innerText.toLowerCase();
-                        const tags = Array.from(card.querySelectorAll('.tag'))
-                            .map(t => t.innerText.toLowerCase())
-                            .join(' ');
+            // Show mobile search if screen is small
+            if (window.innerWidth <= 768) {
+                mobSearch.style.display = 'block';
+            }
 
-                        const isMatch = title.includes(term) || desc.includes(term) || tags.includes(term);
+            // 2. SEARCH FUNCTIONALITY
+            const searchInputs = [document.getElementById('globalSearch'), mobSearch];
+            const cards = document.querySelectorAll('.tool-card');
 
-                        if (isMatch) {
-                            card.style.display = 'flex';
-                            card.style.animation = 'fadeIn 0.4s ease';
-                        } else {
-                            card.style.display = 'none';
+            searchInputs.forEach(input => {
+                if (!input) return;
+                input.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+
+                    cards.forEach(card => {
+                        const title = card.querySelector('h3').innerText.toLowerCase();
+                        const desc = card.querySelector('p').innerText.toLowerCase();
+                        const match = title.includes(term) || desc.includes(term);
+                        card.style.display = match ? 'flex' : 'none';
+                    });
+
+                    // Hide empty category headers
+                    document.querySelectorAll('.tools-grid').forEach(grid => {
+                        const visible = grid.querySelectorAll('.tool-card[style="display: flex;"]');
+                        const header = grid.previousElementSibling;
+                        if (header && header.classList.contains('category-header')) {
+                            header.style.display = (visible.length > 0 || term === '') ? 'flex' : 'none';
                         }
                     });
                 });
-            }
-        });
+            });
 
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
+            // 3. KEYBOARD SHORTCUT (/)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/') {
+                    e.preventDefault();
+                    if (window.innerWidth > 768) document.getElementById('globalSearch').focus();
+                    else mobSearch.focus();
+                }
+            });
+
+            // 4. ACTIVE LINK HIGHLIGHT
+            const navLinks = document.querySelectorAll('.nav-item');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.forEach(n => n.classList.remove('active'));
+                    link.classList.add('active');
+                    if (window.innerWidth <= 768) toggleMenu(); // Close menu on click
+                });
+            });
+
+            // 5. SCROLL EFFECT
+            window.addEventListener('scroll', () => {
+                const bar = document.getElementById('topBar');
+                if (window.scrollY > 20) bar.classList.add('scrolled');
+                else bar.classList.remove('scrolled');
+            });
+        });
     </script>
+
 </body>
 
 </html>
-
-
