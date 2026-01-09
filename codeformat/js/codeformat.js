@@ -1,10 +1,10 @@
 /* ========================
-   CodeFormat Studio V5 Logic
+   CodeFormat Studio V5.1 (Fixed)
    ======================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Initial State ---
+    // --- INITIAL STATE ---
     const defaultFile = {
         id: 1,
         name: 'index.html',
@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeFileId = parseInt(localStorage.getItem('cf_active')) || 1;
     let renameTargetId = null;
 
-    // --- DOM Elements ---
+    // --- DOM ELEMENTS ---
     const ui = {
+        // Main Editor UI
         editor: document.getElementById('codeEditor'),
         fileList: document.getElementById('fileList'),
         langSelect: document.getElementById('languageSelect'),
@@ -28,48 +29,158 @@ document.addEventListener('DOMContentLoaded', () => {
         modeBtns: document.querySelectorAll('.mode-btn'),
         currentFileName: document.getElementById('currentFileName'),
         saveStatus: document.getElementById('saveStatus'),
-
-        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
-        sidebar: document.getElementById('sidebar'),
-        sidebarOverlay: document.getElementById('sidebarOverlay'),
         zenModeBtn: document.getElementById('zenModeBtn'),
         cursorPos: document.getElementById('cursorPos'),
         docLength: document.getElementById('docLength'),
 
-        // Modals
+        // Sidebar & Mobile UI
+        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+        sidebar: document.getElementById('sidebar'),
+        sidebarOverlay: document.getElementById('sidebarOverlay'),
+        closeSidebarBtn: document.getElementById('closeSidebarBtn'),
+
+        // Modals & Tour
+        helpBtn: document.getElementById('helpBtn'),
+        helpModal: document.getElementById('helpModal'),
+        closeHelp: document.getElementById('closeHelp'),
+        
+        tourWelcomeModal: document.getElementById('tourWelcomeModal'),
+        startTour: document.getElementById('startTour'),
+        skipTour: document.getElementById('skipTour'),
+        restartTourBtn: document.getElementById('restartTourBtn'),
+
+        // File Management Modals
         triggerNewFile: document.getElementById('triggerNewFile'),
         triggerReset: document.getElementById('triggerReset'),
-
         newFileModal: document.getElementById('newFileModal'),
         renameFileModal: document.getElementById('renameFileModal'),
         resetModal: document.getElementById('resetModal'),
-
         newFileNameInput: document.getElementById('newFileNameInput'),
         renameInput: document.getElementById('renameInput'),
-
         confirmNewFile: document.getElementById('confirmNewFile'),
         confirmRename: document.getElementById('confirmRename'),
         confirmReset: document.getElementById('confirmReset'),
-
         closeModalBtns: document.querySelectorAll('.close-modal')
     };
 
-    // --- Initialize CodeMirror ---
-    const cm = CodeMirror.fromTextArea(ui.editor, {
-        lineNumbers: true,
-        mode: 'htmlmixed',
-        theme: 'dracula',
-        lineWrapping: true,
-        indentUnit: 2,
-        tabSize: 2,
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        matchBrackets: true,
-        scrollbarStyle: "simple"
+    // --- 1. MOBILE SIDEBAR LOGIC ---
+    function openSidebar() { 
+        ui.sidebar.classList.add('open'); 
+        if(ui.sidebarOverlay) ui.sidebarOverlay.classList.add('active'); 
+    }
+    function closeSidebar() { 
+        ui.sidebar.classList.remove('open'); 
+        if(ui.sidebarOverlay) ui.sidebarOverlay.classList.remove('active'); 
+    }
+    
+    if(ui.mobileMenuBtn) ui.mobileMenuBtn.addEventListener('click', openSidebar);
+    if(ui.sidebarOverlay) ui.sidebarOverlay.addEventListener('click', closeSidebar);
+    if(ui.closeSidebarBtn) ui.closeSidebarBtn.addEventListener('click', closeSidebar);
+
+    // --- 2. HELP MODAL (FIXED) ---
+    if(ui.helpBtn && ui.helpModal) {
+        ui.helpBtn.onclick = () => {
+            ui.helpModal.classList.remove('hidden');
+            // Slight delay to ensure CSS transition sees the change
+            setTimeout(() => ui.helpModal.classList.add('active'), 10);
+        };
+    }
+    if(ui.closeHelp) {
+        ui.closeHelp.onclick = () => {
+            ui.helpModal.classList.remove('active');
+            // Wait for fade out animation before hiding
+            setTimeout(() => ui.helpModal.classList.add('hidden'), 300);
+        };
+    }
+
+    // --- 3. TOUR LOGIC (SMART) ---
+    const driver = window.driver.js.driver;
+    const tour = driver({
+        showProgress: true,
+        animate: true,
+        popoverClass: 'driverjs-theme',
+        steps: [
+            { element: '#sidebar', popover: { title: 'Project Explorer', description: 'Manage files here. Create, rename, or delete.' } },
+            { element: '.toolbar', popover: { title: 'Toolbar', description: 'Switch views, select languages, and download files.' } },
+            { element: '#formatBtn', popover: { title: 'Magic Format', description: 'Click to prettify code instantly.' } },
+            { element: '#editorPane', popover: { title: 'Editor', description: 'Your main coding workspace.' } }
+        ],
+        // Force Sidebar Open on Mobile
+        onHighlightStarted: (element) => {
+            const isMobile = window.innerWidth <= 768;
+            if (!isMobile || !element) return;
+
+            ui.sidebar.style.transition = 'none';
+
+            if (ui.sidebar.contains(element) || element === ui.sidebar) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        },
+        onDestroyed: () => {
+            ui.sidebar.style.transition = '';
+            if (window.innerWidth <= 768) closeSidebar();
+        }
     });
 
-    // --- Core Functions ---
+    // Welcome Logic
+    if (!localStorage.getItem('lexora_code_tour_seen')) {
+        setTimeout(() => { 
+            if(ui.tourWelcomeModal) {
+                // Add class directly to handle opacity logic in CSS
+                ui.tourWelcomeModal.style.opacity = '1';
+                ui.tourWelcomeModal.style.pointerEvents = 'all';
+            }
+        }, 1000);
+    }
 
+    if(ui.startTour) {
+        ui.startTour.onclick = () => {
+            if(ui.tourWelcomeModal) {
+                ui.tourWelcomeModal.style.opacity = '0';
+                ui.tourWelcomeModal.style.pointerEvents = 'none';
+            }
+            localStorage.setItem('lexora_code_tour_seen', 'true');
+            tour.drive();
+        };
+    }
+    if(ui.skipTour) {
+        ui.skipTour.onclick = () => {
+            if(ui.tourWelcomeModal) {
+                ui.tourWelcomeModal.style.opacity = '0';
+                ui.tourWelcomeModal.style.pointerEvents = 'none';
+            }
+            localStorage.setItem('lexora_code_tour_seen', 'true');
+        };
+    }
+    if(ui.restartTourBtn) {
+        ui.restartTourBtn.onclick = () => {
+            ui.helpModal.classList.remove('active');
+            setTimeout(() => {
+                ui.helpModal.classList.add('hidden');
+                tour.drive();
+            }, 300);
+        }
+    }
+
+    // --- 4. CODEMIRROR INITIALIZATION ---
+    if(ui.editor) {
+        var cm = CodeMirror.fromTextArea(ui.editor, {
+            lineNumbers: true,
+            mode: 'htmlmixed',
+            theme: 'dracula',
+            lineWrapping: true,
+            indentUnit: 2,
+            tabSize: 2,
+            autoCloseTags: true,
+            autoCloseBrackets: true,
+            matchBrackets: true,
+            scrollbarStyle: "simple"
+        });
+    }
+
+    // --- 5. FILE MANAGEMENT ---
     function renderFileList() {
         ui.fileList.innerHTML = '';
         files.forEach(file => {
@@ -105,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Click to rename
             const renBtn = el.querySelector('.rename-btn');
             renBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Don't switch file
+                e.stopPropagation(); 
                 openRenameModal(file.id, file.name);
             });
 
@@ -128,7 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Header Icon Update
         const indicator = document.querySelector('.file-icon-indicator');
-        indicator.className = `fas ${file.name.endsWith('.css') ? 'fa-css3-alt text-blue' : (file.name.endsWith('.html') ? 'fa-html5 text-orange' : 'fa-file-code')} file-icon-indicator`;
+        if(indicator) {
+            indicator.className = `fas ${file.name.endsWith('.css') ? 'fa-css3-alt text-blue' : (file.name.endsWith('.html') ? 'fa-html5 text-orange' : 'fa-file-code')} file-icon-indicator`;
+        }
 
         renderFileList();
         updatePreview();
@@ -163,8 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Modal Logic ---
-
+    // --- 6. MODAL ACTIONS (New/Rename/Reset) ---
+    
     // New File
     ui.triggerNewFile.addEventListener('click', () => {
         ui.newFileModal.classList.add('active');
@@ -205,14 +318,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fileIndex > -1) {
             files[fileIndex].name = newName;
 
-            // Detect mode change based on extension
             if (newName.endsWith('.css')) files[fileIndex].lang = 'css';
             else if (newName.endsWith('.js')) files[fileIndex].lang = 'javascript';
             else if (newName.endsWith('.html')) files[fileIndex].lang = 'htmlmixed';
 
             localStorage.setItem('cf_files', JSON.stringify(files));
 
-            // If active file was renamed, update header
             if (activeFileId === renameTargetId) {
                 ui.currentFileName.innerText = newName;
                 ui.langSelect.value = files[fileIndex].lang;
@@ -242,34 +353,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile Sidebar
-    function openSidebar() { ui.sidebar.classList.add('open'); ui.sidebarOverlay.classList.add('active'); }
-    function closeSidebar() { ui.sidebar.classList.remove('open'); ui.sidebarOverlay.classList.remove('active'); }
-    ui.mobileMenuBtn.addEventListener('click', openSidebar);
-    ui.sidebarOverlay.addEventListener('click', closeSidebar);
-
-    // Editor Events
+    // --- 7. EDITOR EVENTS & TOOLBAR ---
+    
     let timeout;
     cm.on('change', () => {
         clearTimeout(timeout);
         timeout = setTimeout(() => { saveCurrentFile(); updatePreview(); }, 1000);
-        ui.docLength.innerText = `${cm.getValue().length} Chars`;
+        if(ui.docLength) ui.docLength.innerText = `${cm.getValue().length} Chars`;
     });
+    
     cm.on('cursorActivity', () => {
         const pos = cm.getCursor();
-        ui.cursorPos.innerText = `Ln ${pos.line + 1}, Col ${pos.ch + 1}`;
+        if(ui.cursorPos) ui.cursorPos.innerText = `Ln ${pos.line + 1}, Col ${pos.ch + 1}`;
     });
 
-    // Toolbar Actions
+    // Format Code
     ui.formatBtn.addEventListener('click', () => {
         const code = cm.getValue();
         try {
-            const formatted = prettier.format(code, { parser: "html", plugins: prettierPlugins }); // Simplified for demo
-            cm.setValue(formatted);
-            showToast('success', 'Formatted');
+            // Check global prettier availability
+            if(window.prettier && window.prettierPlugins) {
+                const formatted = prettier.format(code, { 
+                    parser: "html", 
+                    plugins: prettierPlugins 
+                });
+                cm.setValue(formatted);
+                showToast('success', 'Formatted');
+            } else {
+                showToast('error', 'Formatter loading...');
+            }
         } catch (e) { showToast('error', 'Format Failed'); }
     });
 
+    // View Modes
     ui.modeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             ui.modeBtns.forEach(b => b.classList.remove('active'));
@@ -282,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    ui.zenModeBtn.addEventListener('click', () => document.body.classList.toggle('zen-mode'));
+    if(ui.zenModeBtn) ui.zenModeBtn.addEventListener('click', () => document.body.classList.toggle('zen-mode'));
 
     ui.downloadBtn.addEventListener('click', () => {
         const file = files.find(f => f.id === activeFileId);
@@ -300,7 +416,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const t = document.createElement('div');
         t.className = `toast ${type}`;
         t.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i> <span>${msg}</span>`;
-        document.getElementById('toastContainer').appendChild(t);
-        setTimeout(() => t.remove(), 3000);
+        const container = document.getElementById('toastContainer');
+        if(container) {
+            container.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
     }
 });

@@ -4,13 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PromptFlow Studio | Lexora Workspace</title>
-    <meta name="description" content="The world's smartest online teleprompter. Features voice-scrolling (listen mode), mirror/flip for beam splitters, and reality mode. 100% Free, privacy-focused, no app install needed.">
-    <meta name="keywords" content="voice activated teleprompter online, free autocue with voice recognition, mirror mode teleprompter, laptop teleprompter software, virtual teleprompter for zoom">
-    <meta property="og:title" content="PromptFlow Studio - Voice Activated Teleprompter">
-    <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free.">
-    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/logo2.png">
-    <meta property="og:url" content="https://apps.lexoratech.com/teleprompter/teleprompter.php">
+    
+    <title>Free Voice Activated Teleprompter Online | PromptFlow Studio</title>
+    <meta name="description" content="Professional free online teleprompter with AI voice tracking. Features mirror mode for beam splitters, adjustable speed, and reality overlay. No sign-up or download required. Works on Laptop, iPad, and Mobile.">
+    <meta name="keywords" content="voice activated teleprompter online, free teleprompter software, auto scroll text, mirror mode teleprompter, virtual teleprompter for zoom, autocue for youtubers, speech recognition scroller, promptflow studio, lexoratech">
+    <meta name="author" content="LexoraTech">
+    <link rel="canonical" href="https://apps.lexoratech.com/teleprompter/teleprompter.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PromptFlow Studio - The Smartest Free Teleprompter">
+    <meta property="og:description" content="Stop manually scrolling. Use PromptFlow with voice-tracking technology for free. Works directly in your browser.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-teleprompter.jpg"> <meta property="og:url" content="https://apps.lexoratech.com/teleprompter/teleprompter.php">
+    <meta property="og:site_name" content="LexoraTech Apps">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Voice Activated Teleprompter | PromptFlow">
+    <meta name="twitter:description" content="Professional teleprompter for creators. Voice tracking, mirror mode, and no install needed.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-teleprompter.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PromptFlow Studio",
+      "url": "https://apps.lexoratech.com/teleprompter/teleprompter.php",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "description": "A professional-grade online teleprompter with voice-activated scrolling and mirror mode.",
+      "browserRequirements": "Requires JavaScript. Works best on Chrome, Edge, Safari.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "LexoraTech",
+        "url": "https://lexoratech.com"
+      }
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">
@@ -20,96 +55,108 @@
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     
     <style>
-        /* --- MODAL STYLES --- */
+        /* ... Keep your existing CSS styles for Modal/Tour here ... */
+        /* Paste the styles from the previous fix (Help Modal, Driver.js overrides) here */
         .help-modal-content {
-            max-width: 800px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            background: #111;
+            border: 1px solid #333;
             padding: 0;
+            overflow: hidden; 
+            border-radius: 12px;
         }
         
         .help-header {
-            position: sticky;
-            top: 0;
-            background: rgba(20, 20, 20, 0.98);
-            padding: 20px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 25px;
+            background: #18181b;
+            border-bottom: 1px solid #27272a;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            flex-shrink: 0;
         }
 
-        .help-body { padding: 30px; line-height: 1.7; }
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #60a5fa; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #9ca3af; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #9ca3af; }
-        .help-body li { margin-bottom: 0.5rem; }
+        .help-tabs {
+            display: flex;
+            background: #09090b;
+            border-bottom: 1px solid #27272a;
+            flex-shrink: 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 16px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #71717a;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn:hover { color: #e4e4e7; background: rgba(255,255,255,0.03); }
+        .tab-btn.active { color: #6366f1; border-bottom-color: #6366f1; background: rgba(99, 102, 241, 0.05); }
+
+        .help-body { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+            padding: 30px; 
+            color: #d4d4d8;
+            background: #000;
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
         
-        .modal-faq-item {
-            background: rgba(255, 255, 255, 0.05);
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .help-step { 
+            display: flex; 
+            align-items: flex-start;
+            gap: 15px; 
+            margin-bottom: 25px; 
+            background: #18181b;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid #27272a;
         }
-        .modal-faq-question {
-            color: #fff;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
-
-        /* --- TOUR WELCOME MODAL --- */
-        #tourWelcomeModal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            z-index: 99999; display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        #tourWelcomeModal.show { opacity: 1; pointer-events: all; }
         
-        .tour-card {
-            background: #111; border: 1px solid rgba(255,255,255,0.15);
-            padding: 40px; border-radius: 20px; text-align: center; max-width: 450px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        .step-num { 
+            background: #2563eb; 
+            color: white; 
+            width: 24px; 
+            height: 24px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+            font-size: 0.75rem; 
+            flex-shrink: 0;
+            margin-top: 2px;
         }
-        .tour-icon { font-size: 3rem; color: #60a5fa; margin-bottom: 20px; }
-        .tour-card h2 { color: #fff; margin-bottom: 10px; font-family: 'Space Grotesk', sans-serif; }
-        .tour-card p { color: #9ca3af; margin-bottom: 30px; line-height: 1.6; }
-        
-        .tour-actions { display: flex; gap: 15px; justify-content: center; }
-        .btn-start-tour {
-            background: #2563eb; color: white; border: none; padding: 12px 24px;
-            border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
-        .btn-start-tour:hover { background: #1d4ed8; transform: translateY(-2px); }
-        .btn-skip-tour {
-            background: transparent; color: #9ca3af; border: 1px solid rgba(255,255,255,0.2);
-            padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: 0.2s;
-        }
-        .btn-skip-tour:hover { border-color: #fff; color: #fff; }
 
-        /* Driver.js Customization */
-        .driver-popover.driverjs-theme {
-            background-color: #1f2937; color: #fff;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
+        .step-content strong { color: #fff; display: block; margin-bottom: 4px; }
+        .step-content { font-size: 0.9rem; line-height: 1.5; color: #a1a1aa; }
+
+        .legal-list { list-style: none; padding: 0; }
+        .legal-list li { margin-bottom: 12px; }
+        .legal-link { 
+            display: flex; align-items: center; gap: 10px; 
+            text-decoration: none; color: #d4d4d8; 
+            padding: 10px; border-radius: 6px; 
+            transition: 0.2s; border: 1px solid transparent;
         }
-        .driver-popover.driverjs-theme .driver-popover-title { color: #60a5fa; font-size: 1.1rem; }
-        .driver-popover.driverjs-theme .driver-popover-description { color: #d1d5db; font-size: 0.95rem; }
-        .driver-popover.driverjs-theme button {
-            background-color: #2563eb; color: #fff; border-radius: 6px; text-shadow: none;
-        }
+        .legal-link:hover { background: #18181b; border-color: #27272a; color: white; }
+        .legal-link i { color: #6366f1; width: 20px; text-align: center; }
+
+        .driver-popover { z-index: 10000 !important; }
     </style>
 </head>
 
@@ -120,7 +167,7 @@
 
     <header class="mobile-header">
         <div class="brand-mobile">
-            <img src="../assets/logo/logo2.png" alt="Logo" style="height: 28px; width: auto; border-radius: 4px;"> PromptFlow
+            <img src="../assets/logo/logo2.png" alt="Logo" style="height: 28px;"> PromptFlow
         </div>
         <button id="mobileMenuBtn" class="icon-btn">
             <i class="fas fa-sliders-h"></i>
@@ -146,48 +193,101 @@
     <div id="helpModal" class="modal-overlay hidden" style="z-index: 2000;">
         <div class="modal-box glass-card help-modal-content">
             <div class="help-header">
-                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
-                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h2 style="margin:0; font-size:1.1rem; color:white; display:flex; align-items:center; gap:10px;">
+                    <i class="fas fa-book" style="color:#6366f1;"></i> Documentation
+                </h2>
+                <button id="closeHelp" class="icon-btn" style="border:none; background:none; font-size:1.2rem;"><i class="fas fa-times"></i></button>
             </div>
+            
+            <div class="help-tabs">
+                <button class="tab-btn active" onclick="switchTab('guide')">Quick Guide</button>
+                <button class="tab-btn" onclick="switchTab('voice')">Voice Mode</button>
+                <button class="tab-btn" onclick="switchTab('legal')">Legal & Contact</button>
+            </div>
+
             <div class="help-body">
-                <p>PromptFlow Studio is a professional-grade teleprompter that runs directly in your browser.</p>
-                <h3>Key Features</h3>
-                <ul>
-                    <li><strong>Voice Tracking (AI):</strong> The script pauses when you pause and moves when you speak.</li>
-                    <li><strong>Mirror Mode:</strong> Flip text horizontally (X) or vertically (Y) for beam-splitter glass.</li>
-                </ul>
-                <h3>How to Use</h3>
-                <ol>
-                    <li><strong>Paste Script:</strong> Copy your text into the main editor area.</li>
-                    <li><strong>Adjust Settings:</strong> Use the sidebar to set Font Size, Speed, and Margin.</li>
-                    <li><strong>Select Mode:</strong> Click "Voice" for AI scrolling or stay on Manual.</li>
-                    <li><strong>Start:</strong> Click the "START (3s)" button.</li>
-                </ol>
-                <button id="restartTourBtn" class="btn-glass" style="width:100%; margin-top:20px; justify-content:center; color:#60a5fa; border-color:#60a5fa;">
-                    <i class="fas fa-play-circle"></i> Replay Interactive Tour
-                </button>
+                
+                <div id="tab-guide" class="tab-content active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content"><strong>Paste Your Script</strong>Copy your text into the main editor window. It saves automatically to your browser's memory.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content"><strong>Configure Settings</strong>Open the sidebar to adjust font size, scrolling speed, and margin width to fit your reading style.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content"><strong>Launch</strong>Click the <strong>START (3s)</strong> button. The app will go full screen after a 3-second countdown.</div>
+                    </div>
+                    
+                    <button id="restartTourBtn" class="btn-glass" style="width:100%; justify-content:center; color:#60a5fa; border-color:rgba(96, 165, 250, 0.3); margin-top:20px;">
+                        <i class="fas fa-play-circle"></i> Replay Interactive Tour
+                    </button>
+                </div>
+
+                <div id="tab-voice" class="tab-content">
+                    <h3 style="color:white; margin-bottom:15px; font-size:1.1rem;">AI Voice Tracking</h3>
+                    <p style="margin-bottom:20px; line-height:1.6; color:#a1a1aa;">PromptFlow listens to your voice and scrolls the text automatically as you read.</p>
+                    
+                    <div style="background:rgba(234, 179, 8, 0.1); padding:15px; border-radius:8px; border:1px solid rgba(234, 179, 8, 0.2);">
+                        <strong style="color:#facc15; display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                            <i class="fas fa-exclamation-triangle"></i> Requirements
+                        </strong>
+                        <ul style="padding-left:20px; font-size:0.9rem; color:#d4d4d8; margin:0;">
+                            <li style="margin-bottom:5px;">Use <strong>Chrome, Edge, or Safari</strong>.</li>
+                            <li style="margin-bottom:5px;">Allow Microphone permission when asked.</li>
+                            <li>Speak clearly. If you go off-script, the scroller will pause and wait for you.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tab-legal" class="tab-content">
+                    <h3 style="color:white; margin-bottom:15px; font-size:1.1rem;">Contact Us</h3>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:30px;">
+                        <a href="../contact.php" class="btn-glass" style="text-decoration:none; justify-content:center;">Get Support</a>
+                        <a href="./suggestion.php" class="btn-glass" style="text-decoration:none; justify-content:center;">Report Bug</a>
+                    </div>
+
+                    <h3 style="color:white; margin-bottom:15px; font-size:1.1rem;">Legal Documents</h3>
+                    <ul class="legal-list">
+                        <li>
+                            <a href="../privacy.php" class="legal-link">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Privacy Policy</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../terms.php" class="legal-link">
+                                <i class="fas fa-file-contract"></i>
+                                <span>Terms of Service</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top:30px; border-top:1px solid #27272a; padding-top:20px; text-align:center; font-size:0.8rem; color:#52525b;">
+                        &copy; 2026 LexoraTech. All rights reserved.
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div id="tourWelcomeModal">
-        <div class="tour-card">
-            <div class="tour-icon"><i class="fas fa-rocket"></i></div>
-            <h2>Welcome to PromptFlow!</h2>
-            <p>It looks like you're new here. Would you like a quick 30-second tour of the features?</p>
-            <div class="tour-actions">
-                <button id="startTour" class="btn-start-tour">Yes, Start Tour</button>
-                <button id="skipTour" class="btn-skip-tour">No, Thanks</button>
+    <div id="tourWelcomeModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;">
+        <div class="tour-card" style="background: #111; border: 1px solid rgba(255,255,255,0.15); padding: 40px; border-radius: 20px; text-align: center; max-width: 450px; width:90%; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+            <div class="tour-icon" style="font-size: 3rem; color: #60a5fa; margin-bottom: 20px;"><i class="fas fa-rocket"></i></div>
+            <h2 style="color: #fff; margin-bottom: 10px;">Welcome to PromptFlow!</h2>
+            <p style="color: #9ca3af; margin-bottom: 30px;">It looks like you're new here. Would you like a quick 30-second tour?</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="startTour" class="btn-primary-glow" style="margin:0; width:auto;">Yes, Start Tour</button>
+                <button id="skipTour" class="btn-glass" style="width:auto;">No, Thanks</button>
             </div>
         </div>
     </div>
 
     <div class="app-layout">
-
         <aside class="sidebar glass-card" id="sidebar">
-
             <button id="closeSidebar" class="close-sidebar-btn hidden-desktop">
                 <i class="fas fa-times"></i> Close Settings
             </button>
@@ -202,13 +302,11 @@
             </div>
 
             <div class="scroll-area">
-
                 <a href="../index.php" class="btn-glass" style="margin-bottom: 20px; text-decoration: none; justify-content: flex-start;">
                     <i class="fas fa-chevron-left"></i> Back To Dashboard
                 </a>
 
                 <div class="section-title">PLAYBACK</div>
-
                 <div class="control-group" id="tour-speed">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-tachometer-alt"></i> Speed</span>
@@ -220,7 +318,6 @@
                 </div>
 
                 <div class="section-title">TYPOGRAPHY</div>
-
                 <div class="control-group" id="tour-font">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-text-height"></i> Size</span>
@@ -230,7 +327,7 @@
                         <input type="range" id="fontRange" min="20" max="150" value="60">
                     </div>
                 </div>
-
+                
                 <div class="control-group">
                     <div class="label-row"><span class="label-title">Font Family</span></div>
                     <div class="segmented-control">
@@ -248,7 +345,7 @@
                         <button class="seg-btn" data-align="right"><i class="fas fa-align-right"></i></button>
                     </div>
                 </div>
-
+                
                 <div class="control-group">
                     <div class="label-row">
                         <span class="label-title">Color</span>
@@ -260,7 +357,6 @@
                 </div>
 
                 <div class="section-title">VIEWPORT</div>
-
                 <div class="control-group">
                     <div class="label-row">
                         <span class="label-title"><i class="fas fa-arrows-alt-h"></i> Margin</span>
@@ -272,23 +368,14 @@
                 </div>
 
                 <div class="divider"></div>
-
                 <div class="grid-2">
-                    <button id="mirrorBtn" class="btn-glass">
-                        <i class="fas fa-arrows-alt-h"></i> Flip X
-                    </button>
-                    <button id="flipYBtn" class="btn-glass">
-                        <i class="fas fa-arrows-alt-v"></i> Flip Y
-                    </button>
+                    <button id="mirrorBtn" class="btn-glass"><i class="fas fa-arrows-alt-h"></i> Flip X</button>
+                    <button id="flipYBtn" class="btn-glass"><i class="fas fa-arrows-alt-v"></i> Flip Y</button>
                 </div>
 
                 <div class="grid-2">
-                    <button id="cameraBtn" class="btn-glass">
-                        <i class="fas fa-video"></i> Reality
-                    </button>
-                    <button id="voiceBtn" class="btn-glass">
-                        <i class="fas fa-microphone"></i> Voice
-                    </button>
+                    <button id="cameraBtn" class="btn-glass"><i class="fas fa-video"></i> Reality</button>
+                    <button id="voiceBtn" class="btn-glass"><i class="fas fa-microphone"></i> Voice</button>
                 </div>
 
                 <button id="resetBtn" class="btn-glass" style="margin-top: 10px;">
@@ -297,34 +384,9 @@
 
                 <div class="divider"></div>
                 <div class="section-title">SUPPORT</div>
-                
                 <button id="helpBtn" class="btn-glass" style="width:100%; margin-bottom: 10px; border-color: rgba(255,255,255,0.3); color: white;">
                     <i class="fas fa-question-circle"></i> How to Use?
                 </button>
-
-                <div class="grid-2">
-                    <a href="https://buymeacoffee.com/lexoratech" target="_blank" class="btn-glass btn-coffee" style="text-decoration:none;">
-                        <i class="fas fa-coffee"></i> Coffee
-                    </a>
-                    <a href="../teleprompter/suggestion.php" class="btn-glass" style="text-decoration:none;">
-                        <i class="fas fa-lightbulb"></i> Suggest
-                    </a>
-                </div>
-                
-                <div class="divider"></div>
-                <div class="section-title">LEGAL</div>
-                <div class="control-group" style="font-size: 0.85rem; opacity: 0.8;">
-                    <a href="../privacy.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-                        <i class="fas fa-shield-alt" style="width:20px;"></i> Privacy Policy
-                    </a>
-                    <a href="../terms.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-                        <i class="fas fa-file-contract" style="width:20px;"></i> Terms of Service
-                    </a>
-                    <a href="../contact.php" style="color:inherit; text-decoration:none; display:block; padding:5px 0;">
-                        <i class="fas fa-envelope" style="width:20px;"></i> Contact Us
-                    </a>
-                </div>
-
             </div>
 
             <button id="startBtn" class="btn-primary-glow">
@@ -356,9 +418,7 @@
         <div class="hud glass-hud">
             <button id="closeHud" class="hud-icon"><i class="fas fa-times"></i></button>
             <div class="hud-sep"></div>
-            <button id="restartHud" class="hud-icon" title="Restart from Beginning">
-                <i class="fas fa-undo"></i>
-            </button>
+            <button id="restartHud" class="hud-icon" title="Restart from Beginning"><i class="fas fa-undo"></i></button>
             <button id="playHud" class="hud-main-icon"><i class="fas fa-pause"></i></button>
             <div class="hud-sep"></div>
             <div id="voiceIndicator" class="hidden" style="color:#ef4444; margin-right:10px;">
@@ -373,12 +433,29 @@
     <script src="./js/teleprompter.js"></script>
 
     <script>
+        // --- Tab Logic ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            if(tabId === 'guide') buttons[0].classList.add('active');
+            if(tabId === 'voice') buttons[1].classList.add('active');
+            if(tabId === 'legal') buttons[2].classList.add('active');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // -- Help Modal Logic --
+            // Help Modal
             const helpBtn = document.getElementById('helpBtn');
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
             const restartTourBtn = document.getElementById('restartTourBtn');
+            const tourModal = document.getElementById('tourWelcomeModal');
+            const startTourBtn = document.getElementById('startTour');
+            const skipTourBtn = document.getElementById('skipTour');
+            const sidebar = document.getElementById('sidebar');
 
             if(helpBtn && helpModal) {
                 helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
@@ -388,13 +465,9 @@
                 });
             }
 
-            // -- Tour / Onboarding Logic --
-            const tourModal = document.getElementById('tourWelcomeModal');
-            const startTourBtn = document.getElementById('startTour');
-            const skipTourBtn = document.getElementById('skipTour');
-
-            // Define Driver.js Tour
+            // --- DRIVER.JS CONFIGURATION ---
             const driver = window.driver.js.driver;
+            
             const tour = driver({
                 showProgress: true,
                 animate: true,
@@ -402,63 +475,66 @@
                 steps: [
                     { 
                         element: '#editor', 
-                        popover: { 
-                            title: 'The Script Area', 
-                            description: 'Paste or type your script here. It saves automatically.' 
-                        } 
+                        popover: { title: 'The Script Area', description: 'Paste or type your script here. It saves automatically.' } 
                     },
                     { 
                         element: '#tour-speed', 
-                        popover: { 
-                            title: 'Adjust Speed', 
-                            description: 'Control how fast the text scrolls in manual mode.' 
-                        } 
+                        popover: { title: 'Adjust Speed', description: 'Control how fast the text scrolls in manual mode.' } 
                     },
                     { 
                         element: '#voiceBtn', 
-                        popover: { 
-                            title: 'AI Voice Tracking', 
-                            description: 'Activate this to have the text scroll automatically as you speak!' 
-                        } 
+                        popover: { title: 'AI Voice Tracking', description: 'Activate this to have the text scroll automatically as you speak!' } 
                     },
                     { 
                         element: '#cameraBtn', 
-                        popover: { 
-                            title: 'Reality Mode', 
-                            description: 'Overlays the script on top of your webcam feed.' 
-                        } 
+                        popover: { title: 'Reality Mode', description: 'Overlays the script on top of your webcam feed.' } 
                     },
                     { 
                         element: '#startBtn', 
-                        popover: { 
-                            title: 'Launch', 
-                            description: 'Click here to start the teleprompter full-screen mode.' 
-                        } 
+                        popover: { title: 'Launch', description: 'Click here to start the teleprompter full-screen mode.' } 
                     }
-                ]
+                ],
+                // CRITICAL FIX: Disable transition during tour so sidebar snaps to correct position
+                onHighlightStarted: (element) => {
+                    const isMobile = window.innerWidth <= 768;
+                    if (!isMobile || !element) return;
+
+                    // Disable sliding animation instantly
+                    sidebar.style.transition = 'none';
+
+                    if (sidebar.contains(element)) {
+                        sidebar.classList.add('mobile-open');
+                    } else {
+                        sidebar.classList.remove('mobile-open');
+                    }
+                },
+                onDestroyed: () => {
+                    // Re-enable sliding animation after tour
+                    sidebar.style.transition = ''; 
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('mobile-open');
+                    }
+                }
             });
 
-            // Check LocalStorage
+            // Tour Triggers
             if (!localStorage.getItem('lexora_prompter_tour_seen')) {
-                // Show welcome modal after 1 second
-                setTimeout(() => {
-                    tourModal.classList.add('show');
-                }, 1000);
+                setTimeout(() => { tourModal.style.opacity = '1'; tourModal.style.pointerEvents = 'all'; }, 1000);
             }
 
-            // Handle Buttons
             startTourBtn.addEventListener('click', () => {
-                tourModal.classList.remove('show');
+                tourModal.style.opacity = '0'; 
+                tourModal.style.pointerEvents = 'none';
                 localStorage.setItem('lexora_prompter_tour_seen', 'true');
                 tour.drive();
             });
 
             skipTourBtn.addEventListener('click', () => {
-                tourModal.classList.remove('show');
+                tourModal.style.opacity = '0'; 
+                tourModal.style.pointerEvents = 'none';
                 localStorage.setItem('lexora_prompter_tour_seen', 'true');
             });
 
-            // Allow restarting from Help Menu
             if(restartTourBtn) {
                 restartTourBtn.addEventListener('click', () => {
                     helpModal.classList.add('hidden');
@@ -468,5 +544,4 @@
         });
     </script>
 </body>
-
 </html>

@@ -837,3 +837,46 @@ textarea::placeholder {
         width: auto;
     }
 }
+
+/* --- TOUR & DRIVER.JS RESPONSIVENESS --- */
+.driver-popover {
+    max-width: 300px !important; /* Prevent overflow on small screens */
+    box-sizing: border-box;
+}
+
+.driver-popover.driverjs-theme {
+    background-color: #1f2937;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+    color: #60a5fa;
+    font-size: 1.1rem;
+}
+
+.driver-popover.driverjs-theme .driver-popover-description {
+    color: #d1d5db;
+    font-size: 0.95rem;
+}
+
+.driver-popover.driverjs-theme button {
+    background-color: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    text-shadow: none;
+    border: none;
+    padding: 6px 12px;
+}
+
+/* Ensure modal looks good on mobile */
+@media (max-width: 768px) {
+    .tour-card {
+        padding: 25px;
+        width: 85%;
+    }
+    .tour-icon {
+        font-size: 2.5rem;
+    }
+}

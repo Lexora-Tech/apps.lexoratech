@@ -31,37 +31,103 @@
         compOriginalWrapper: document.getElementById('compOriginalWrapper'),
         compBgLayer: document.getElementById('compBgLayer'),
         sliderHandle: document.getElementById('sliderHandle'),
-        helpBtn: document.getElementById('helpBtn'),
-        helpModal: document.getElementById('helpModal')
+        
+        // New Mobile & Tour Elements
+        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+        sidebarPanel: document.getElementById('sidebarPanel'),
+        closeSidebarBtn: document.getElementById('closeSidebarBtn'),
+        
+        helpBtnHeader: document.getElementById('helpBtnHeader'),
+        helpModal: document.getElementById('helpModal'),
+        closeHelp: document.getElementById('closeHelp'),
+        tourWelcomeModal: document.getElementById('tourWelcomeModal'),
+        startTour: document.getElementById('startTour'),
+        skipTour: document.getElementById('skipTour'),
+        tourBtnSidebar: document.getElementById('tourBtnSidebar')
     };
 
     let state = { files: [] };
-    
-    // --- HELP MODAL LOGIC ---
-    if(ui.helpBtn && ui.helpModal) {
-        ui.helpBtn.onclick = () => ui.helpModal.classList.add('active');
+
+    // --- MOBILE SIDEBAR TOGGLE ---
+    if(ui.mobileMenuBtn) {
+        ui.mobileMenuBtn.onclick = () => ui.sidebarPanel.classList.add('open');
+    }
+    if(ui.closeSidebarBtn) {
+        ui.closeSidebarBtn.onclick = () => ui.sidebarPanel.classList.remove('open');
     }
 
-    // --- 1. FILE SELECTION LOGIC ---
-    // const triggerFileSelect = (e) => {
-    //     // Prevent bubbling to avoid double clicks
-    //     if(e) { e.preventDefault(); e.stopPropagation(); }
-    //     ui.fileInput.click();
-    // };
+    // --- TOUR LOGIC (DRIVER.JS) ---
+    const driver = window.driver.js.driver;
+    const tour = driver({
+        showProgress: true,
+        animate: true,
+        popoverClass: 'driverjs-theme',
+        steps: [
+            { element: '#dropZone', popover: { title: 'Upload Here', description: 'Drag and drop images here. The AI will remove the background automatically.' } },
+            { element: '#sidebarPanel', popover: { title: 'Settings', description: 'Choose a background color (Transparent, White, Black) before or after processing.' } },
+            { element: '#modelStatus', popover: { title: 'AI Status', description: 'Shows when the on-device AI model is ready.' } },
+            { element: '#resetAllBtn', popover: { title: 'Reset', description: 'Clear all images and start over.' } }
+        ],
+        // SMART TOUR FIX: Open Sidebar on Mobile
+        onHighlightStarted: (element) => {
+            const isMobile = window.innerWidth <= 900;
+            if (!isMobile || !element) return;
 
-    // if(ui.browseBtn) ui.browseBtn.addEventListener('click', triggerFileSelect);
-    // if(ui.addMoreBtn) ui.addMoreBtn.addEventListener('click', triggerFileSelect);
-    
-    // // Make dropzone clickable (but avoid conflict with button)
-    // ui.dropZone.addEventListener('click', (e) => {
-    //     if(e.target !== ui.browseBtn && !ui.browseBtn.contains(e.target)) {
-    //         triggerFileSelect(e);
-    //     }
-    // });
+            // Disable transition for snap effect
+            ui.sidebarPanel.style.transition = 'none';
 
-    // --- 1. FILE SELECTION LOGIC ---
-    
-    // "Add More" Button Logic
+            if (ui.sidebarPanel.contains(element) || element === ui.sidebarPanel) {
+                ui.sidebarPanel.classList.add('open');
+            } else {
+                ui.sidebarPanel.classList.remove('open');
+            }
+        },
+        onDestroyed: () => {
+            ui.sidebarPanel.style.transition = '';
+            if (window.innerWidth <= 900) {
+                ui.sidebarPanel.classList.remove('open');
+            }
+        }
+    });
+
+    // Welcome Popup Trigger
+    if (!localStorage.getItem('lexora_bgremove_tour_seen')) {
+        setTimeout(() => { 
+            ui.tourWelcomeModal.style.opacity = '1'; 
+            ui.tourWelcomeModal.style.pointerEvents = 'all'; 
+        }, 1000);
+    }
+
+    if(ui.startTour) {
+        ui.startTour.onclick = () => {
+            ui.tourWelcomeModal.style.opacity = '0'; 
+            ui.tourWelcomeModal.style.pointerEvents = 'none';
+            localStorage.setItem('lexora_bgremove_tour_seen', 'true');
+            tour.drive();
+        };
+    }
+
+    if(ui.skipTour) {
+        ui.skipTour.onclick = () => {
+            ui.tourWelcomeModal.style.opacity = '0'; 
+            ui.tourWelcomeModal.style.pointerEvents = 'none';
+            localStorage.setItem('lexora_bgremove_tour_seen', 'true');
+        };
+    }
+
+    if(ui.tourBtnSidebar) {
+        ui.tourBtnSidebar.onclick = () => tour.drive();
+    }
+
+    // --- HELP MODAL LOGIC ---
+    if(ui.helpBtnHeader && ui.helpModal) {
+        ui.helpBtnHeader.onclick = () => ui.helpModal.classList.add('active');
+    }
+    if(ui.closeHelp) {
+        ui.closeHelp.onclick = () => ui.helpModal.classList.remove('active');
+    }
+
+    // --- 1. FILE SELECTION ---
     if(ui.addMoreBtn) {
         ui.addMoreBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -69,17 +135,15 @@
         });
     }
 
-    // Drop Zone Click Logic (Clicks anywhere in the box open the selector)
     if(ui.dropZone) {
         ui.dropZone.addEventListener('click', (e) => {
-            // Only trigger if we didn't click the browse button (to avoid double opening)
             if(e.target !== ui.browseBtn && !ui.browseBtn.contains(e.target)) {
                 document.getElementById('fileInput').click();
             }
         });
     }
 
-    // Drag & Drop Support
+    // Drag & Drop
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         if(ui.dropZone) ui.dropZone.addEventListener(eventName, preventDefaults, false);
         document.body.addEventListener(eventName, preventDefaults, false);
@@ -87,36 +151,30 @@
 
     function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
 
+    if(ui.dropZone) {
+        ui.dropZone.addEventListener('dragenter', () => ui.dropZone.classList.add('dragover'));
+        ui.dropZone.addEventListener('dragover', () => ui.dropZone.classList.add('dragover'));
+        ui.dropZone.addEventListener('dragleave', () => ui.dropZone.classList.remove('dragover'));
+        
+        ui.dropZone.addEventListener('drop', (e) => {
+            ui.dropZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+    }
+
     ui.fileInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) handleFiles(e.target.files);
-        ui.fileInput.value = ''; // Reset input
+        ui.fileInput.value = '';
     });
 
-    // --- 2. DRAG & DROP ---
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        ui.dropZone.addEventListener(eventName, preventDefaults, false);
-        document.body.addEventListener(eventName, preventDefaults, false);
-    });
-
-    function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
-
-    ui.dropZone.addEventListener('dragenter', () => ui.dropZone.classList.add('dragover'));
-    ui.dropZone.addEventListener('dragover', () => ui.dropZone.classList.add('dragover'));
-    ui.dropZone.addEventListener('dragleave', () => ui.dropZone.classList.remove('dragover'));
-    
-    ui.dropZone.addEventListener('drop', (e) => {
-        ui.dropZone.classList.remove('dragover');
-        handleFiles(e.dataTransfer.files);
-    });
-
-    // --- 3. UI CONTROLS ---
+    // --- 2. UI CONTROLS ---
     ui.bgSelect.addEventListener('change', () => {
         if(ui.bgSelect.value === 'custom') ui.colorPickerGroup.classList.remove('hidden');
         else ui.colorPickerGroup.classList.add('hidden');
     });
 
     ui.resetBtn.addEventListener('click', () => {
-        if(confirm("Clear workspace?")) {
+        if(state.files.length > 0 && confirm("Clear workspace?")) {
             state.files = [];
             ui.resultsGrid.innerHTML = '';
             ui.resultsContainer.classList.add('hidden');
@@ -125,7 +183,7 @@
         }
     });
 
-    // --- 4. AI PROCESSING ---
+    // --- 3. AI PROCESSING ---
     async function handleFiles(fileList) {
         if (!fileList || fileList.length === 0) return;
 
@@ -151,7 +209,6 @@
         });
     }
 
-    // Cache the AI module
     let aiModule = null;
 
     async function processImage(file, id, originalUrl) {
@@ -160,17 +217,11 @@
 
         try {
             if (!aiModule) {
-                // Dynamically load the library
                 aiModule = await import("https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm");
             }
             
-            // FIX: Try to get the function from named export OR default export
-            // This handles differences in how CDNs package the library
             const removeBackground = aiModule.removeBackground || aiModule.default;
-
-            if (typeof removeBackground !== 'function') {
-                throw new Error("AI Library loaded but function not found. Check Import.");
-            }
+            if (typeof removeBackground !== 'function') throw new Error("AI Library Error");
 
             ui.modelStatus.innerText = "Processing...";
             
@@ -193,10 +244,9 @@
             showToast('success', 'Background removed!');
 
         } catch (error) {
-            console.error("AI Processing Error:", error);
+            console.error("AI Error:", error);
             ui.modelStatus.innerText = "Error";
             ui.modelStatus.style.color = "#ef4444";
-            
             let errorMsg = "Failed: " + (error.message || "Unknown error");
             if(error.message && error.message.includes("SharedArrayBuffer")) {
                 errorMsg = "Missing Security Headers. Check PHP config.";
@@ -205,7 +255,7 @@
         }
     }
 
-    // --- 5. RENDER FUNCTIONS ---
+    // --- 4. RENDERERS ---
     function renderLoadingCard(id, name, url) {
         const div = document.createElement('div');
         div.className = 'img-card loading';
@@ -255,7 +305,7 @@
         }
     }
 
-    // --- 6. UTILS ---
+    // --- 5. EXPORTED FUNCTIONS ---
     window.downloadSingle = (id) => {
         const f = state.files.find(x => x.id === id);
         if(f) saveAs(f.processedBlob, f.name);
