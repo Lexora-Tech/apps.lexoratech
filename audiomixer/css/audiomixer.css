@@ -793,3 +793,34 @@ textarea {
     /* Hide wave on mobile to save space */
 }
 
+/* --- DRIVER.JS THEME --- */
+.driver-popover.driverjs-theme {
+    background-color: #1f1f22;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 12px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.driver-popover.driverjs-theme .driver-popover-description {
+    color: #a1a1aa;
+    font-size: 0.9rem;
+}
+
+.driver-popover.driverjs-theme button {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+.driver-popover.driverjs-theme button:hover {
+    background-color: #7c3aed; /* darker purple */
+}

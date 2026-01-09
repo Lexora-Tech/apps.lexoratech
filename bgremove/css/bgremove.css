@@ -218,3 +218,358 @@ select { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--gl
         min-height: 250px;
     }
 }
+
+/* --- DRIVER.JS & MODAL FIXES --- */
+.driver-popover.driverjs-theme {
+    background-color: #1f1f22;
+    color: #fff;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+    color: #6366f1;
+    font-size: 1.1rem;
+    font-family: 'Space Grotesk', monospace;
+}
+
+.driver-popover.driverjs-theme .driver-popover-description {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.driver-popover.driverjs-theme button {
+    background-color: #6366f1;
+    color: #fff;
+    border: none;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+/* Modal Active State */
+.modal-overlay.active {
+    display: flex !important;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Ensure Help Modal is scrollable on mobile */
+@media (max-width: 768px) {
+    .help-modal-content {
+        height: 80dvh; /* Dynamic Viewport Height */
+    }
+    .help-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .tab-btn {
+        min-width: 100px;
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE FIXES
+   ========================================= */
+
+/* Mobile Toggle Button */
+.mobile-toggle-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+/* Close Sidebar Button */
+.close-sidebar-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+    /* HEADER */
+    .glass-header {
+        flex-direction: row; /* Keep logo and menu side-by-side */
+        justify-content: space-between;
+        padding: 10px 15px;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .back-btn span {
+        display: none; /* Hide "Dashboard" text */
+    }
+
+    .brand-version {
+        display: none;
+    }
+
+    /* SIDEBAR DRAWER */
+    .sidebar-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 320px;
+        transform: translateX(-100%);
+        z-index: 2000;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar-panel.open {
+        transform: translateX(0);
+        box-shadow: 10px 0 50px rgba(0,0,0,0.5);
+    }
+
+    .panel-glass {
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        border-right: 1px solid var(--glass-border);
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    .close-sidebar-btn {
+        display: block;
+    }
+
+    /* LAYOUT */
+    .main-layout {
+        display: block;
+        padding-top: 20px;
+    }
+    
+    .workspace {
+        height: auto;
+        overflow: visible;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- DRIVER.JS & MODAL FIXES --- */
+.driver-popover.driverjs-theme {
+    background-color: #1f1f22;
+    color: #fff;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+    color: #6366f1;
+    font-size: 1.1rem;
+    font-family: 'Space Grotesk', monospace;
+}
+
+.driver-popover.driverjs-theme .driver-popover-description {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.driver-popover.driverjs-theme button {
+    background-color: #6366f1;
+    color: #fff;
+    border: none;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+.modal-overlay.active {
+    display: flex !important;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE FIXES
+   ========================================= */
+
+/* Mobile Toggle Button */
+.mobile-toggle-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+/* Close Sidebar Button */
+.close-sidebar-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+    /* HEADER */
+    .glass-header {
+        flex-direction: row; 
+        justify-content: space-between;
+        padding: 10px 15px;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .back-btn span {
+        display: none;
+    }
+
+    .brand-version {
+        display: none;
+    }
+
+    /* SIDEBAR DRAWER */
+    .sidebar-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 320px;
+        transform: translateX(-100%);
+        z-index: 2000;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar-panel.open {
+        transform: translateX(0);
+        box-shadow: 10px 0 50px rgba(0,0,0,0.5);
+    }
+
+    .panel-glass {
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        border-right: 1px solid var(--glass-border);
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    .close-sidebar-btn {
+        display: block;
+    }
+
+    /* LAYOUT */
+    .main-layout {
+        display: block;
+        padding-top: 20px;
+    }
+    
+    .workspace {
+        height: auto;
+        overflow: visible;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- CRITICAL: DRIVER.JS Z-INDEX FIX --- */
+.driver-popover {
+    z-index: 200000 !important; /* Top of the world */
+}
+
+.driver-overlay {
+    z-index: 199999 !important; /* Just below popover */
+}
+
+.driver-popover.driverjs-theme {
+    background-color: #1f1f22;
+    color: #fff;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+    color: #6366f1;
+    font-size: 1.1rem;
+    font-family: 'Space Grotesk', monospace;
+}
+
+.driver-popover.driverjs-theme .driver-popover-description {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.driver-popover.driverjs-theme button {
+    background-color: #6366f1;
+    color: #fff;
+    border: none;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+/* Ensure Modals are BELOW the tour */
+.modal-overlay {
+    z-index: 9000 !important; 
+}
+.modal-overlay.active {
+    display: flex !important;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
