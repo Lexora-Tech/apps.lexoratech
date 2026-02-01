@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lexora Workspace | Ultra Studio</title>
+    <title>Lexora Workspace | Free Online Creator Tools</title>
+    <meta name="description" content="Access free online tools including Background Remover, Resume Builder, Video Downloader, AI Photo Enhancer, and more.">
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./css/index.css">
@@ -17,7 +18,6 @@
            1. CORE VARIABLES & RESET
            ======================== */
         :root {
-            /* Palette */
             --bg-body: #030304;
             --bg-panel: #0a0a0a;
             --border: rgba(255, 255, 255, 0.08);
@@ -25,13 +25,9 @@
             --accent: #3b82f6;
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
-
-            /* Glass */
             --card-bg: rgba(20, 20, 22, 0.6);
             --glass: rgba(20, 20, 22, 0.8);
             --blur: blur(20px);
-
-            /* Animation */
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -213,7 +209,7 @@
             position: relative;
         }
 
-        /* TOP BAR (Sticky) */
+        /* TOP BAR */
         .top-bar {
             height: 80px;
             display: flex;
@@ -296,15 +292,16 @@
             border-color: var(--text-muted);
         }
 
-        /* --- CATEGORY HEADERS --- */
+        /* --- HEADERS --- */
         .category-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 24px;
-            padding-top: 20px;
+            padding-top: 40px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 12px;
+            scroll-margin-top: 80px;
         }
 
         .cat-title {
@@ -453,7 +450,22 @@
             color: #2dd4bf;
         }
 
-        /* MOBILE HEADER & MENU */
+        .icon-indigo {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.05));
+            color: #818cf8;
+        }
+
+        .icon-red {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05));
+            color: #f87171;
+        }
+
+        .icon-cyan {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.05));
+            color: #22d3ee;
+        }
+
+        /* MOBILE HEADER */
         .mobile-header {
             display: none;
         }
@@ -474,7 +486,7 @@
             pointer-events: auto;
         }
 
-        /* --- FOOTER STYLES (Default Desktop) --- */
+        /* --- FOOTER STYLES --- */
         .main-footer {
             margin-top: 80px;
             padding: 60px 0 30px;
@@ -603,6 +615,7 @@
                 transform: translateX(-100%);
                 padding: 20px;
                 align-items: stretch;
+                z-index: 300;
             }
 
             .sidebar.open {
@@ -670,7 +683,12 @@
                 outline: none;
             }
 
-            /* --- PREMIUM MOBILE FOOTER --- */
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            /* Premium Mobile Footer */
             .main-footer {
                 padding: 50px 24px 30px;
                 background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
@@ -678,7 +696,6 @@
                 margin-top: 40px;
             }
 
-            /* 3-Column Layout for Links */
             .footer-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -687,7 +704,6 @@
                 margin-bottom: 40px;
             }
 
-            /* Brand Section Full Width Centered */
             .brand-col {
                 grid-column: span 3;
                 display: flex;
@@ -715,11 +731,10 @@
                 margin: 0 auto;
             }
 
-            /* Links Columns */
             .footer-col {
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
             }
 
             .footer-col h4 {
@@ -756,7 +771,7 @@
 
     <div class="mobile-header">
         <a href="#" class="brand-mob">
-            <img src="./assets/logo/logo2.png" alt=""> Lexora Workspace
+            <img src="./assets/logo/logo2.png" alt=""> Lexora
         </a>
         <button id="menuBtn" style="background:none; border:none; color:#fff; font-size:1.4rem;">
             <i class="fas fa-bars"></i>
@@ -815,7 +830,7 @@
                         <span class="status">New</span>
                     </div>
                     <div class="t-info">
-                        <h3>Sketchpad X</h3>
+                        <h3>Online Whiteboard</h3>
                         <p>Infinite vector whiteboard for brainstorming and wireframing.</p>
                     </div>
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
@@ -827,30 +842,11 @@
                         <span class="status">Popular</span>
                     </div>
                     <div class="t-info">
-                        <h3>ScreenFrame</h3>
+                        <h3>Device Mockups</h3>
                         <p>Professional 3D device mockups for your screenshots.</p>
                     </div>
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
-
-                <a href="resumecraft/resumecraft.php" class="tool-card">
-                    <div class="card-top">
-                        <div class="t-icon icon-purple"><i class="fas fa-file-contract"></i></div>
-                    </div>
-                    <div class="t-info">
-                        <h3>ResumeCraft</h3>
-                        <p>ATS-friendly resume builder with PDF export.</p>
-                    </div>
-                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
-                </a>
-
-            </div>
-
-            <div id="design" class="category-header">
-                <span class="cat-title">Design & Media</span>
-            </div>
-
-            <div class="tools-grid">
 
                 <a href="bgremove/bgremove.php" class="tool-card">
                     <div class="card-top">
@@ -858,9 +854,30 @@
                         <span class="status">AI</span>
                     </div>
                     <div class="t-info">
-                        <h3>ClearCut AI</h3>
+                        <h3>Background Remover</h3>
                         <p>Remove backgrounds from images instantly.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+            </div>
+
+            <div id="design" class="category-header">
+                <span class="cat-title">Image Editing & Design</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="photoenhancer/photoenhancer.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-indigo"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <span class="status">AI</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>Photo Enhancer</h3>
+                        <p>Upscale and clarify blurry images instantly.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="chromapick/chromapick.php" class="tool-card">
@@ -868,7 +885,7 @@
                         <div class="t-icon icon-teal"><i class="fas fa-eye-dropper"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>ChromaPick</h3>
+                        <h3>Image Color Picker</h3>
                         <p>Extract color palettes from images.</p>
                     </div>
                 </a>
@@ -878,7 +895,7 @@
                         <div class="t-icon icon-green"><i class="fas fa-compress-arrows-alt"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>ImgOptim</h3>
+                        <h3>Image Compressor</h3>
                         <p>Smart image compression without quality loss.</p>
                     </div>
                 </a>
@@ -888,7 +905,7 @@
                         <div class="t-icon icon-orange"><i class="fab fa-youtube"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>ThumbGrab</h3>
+                        <h3>Thumbnail Downloader</h3>
                         <p>Download high-res YouTube thumbnails.</p>
                     </div>
                 </a>
@@ -898,7 +915,7 @@
                         <div class="t-icon icon-blue"><i class="fas fa-layer-group"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>SocialMock</h3>
+                        <h3>Social Media Mockups</h3>
                         <p>Create realistic social media post mockups.</p>
                     </div>
                 </a>
@@ -908,7 +925,7 @@
                         <div class="t-icon icon-purple"><i class="fas fa-laugh-squint"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>MemeGen</h3>
+                        <h3>Meme Generator</h3>
                         <p>Fast meme generator with custom text.</p>
                     </div>
                 </a>
@@ -916,39 +933,18 @@
             </div>
 
             <div id="video" class="category-header">
-                <span class="cat-title">Audio & Video</span>
+                <span class="cat-title">Video Editing & Content</span>
             </div>
 
             <div class="tools-grid">
-
-                <a href="voicegen/voicegen.php" class="tool-card">
-                    <div class="card-top">
-                        <div class="t-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
-                        <span class="status">AI</span>
-                    </div>
-                    <div class="t-info">
-                        <h3>VoiceGen</h3>
-                        <p>Neural text-to-speech engine.</p>
-                    </div>
-                </a>
 
                 <a href="videotrimmer/videotrimmer.php" class="tool-card">
                     <div class="card-top">
                         <div class="t-icon icon-blue"><i class="fas fa-film"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>VideoTrimmer</h3>
+                        <h3>Video Trimmer</h3>
                         <p>Simple online video cutter and trimmer.</p>
-                    </div>
-                </a>
-
-                <a href="audiomixer/audiomixer.php" class="tool-card">
-                    <div class="card-top">
-                        <div class="t-icon icon-purple"><i class="fas fa-sliders-h"></i></div>
-                    </div>
-                    <div class="t-info">
-                        <h3>AudioMixer</h3>
-                        <p>Mix multiple audio tracks in the browser.</p>
                     </div>
                 </a>
 
@@ -957,7 +953,7 @@
                         <div class="t-icon icon-green"><i class="fas fa-stream"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>PromptFlow</h3>
+                        <h3>Online Teleprompter</h3>
                         <p>Teleprompter with voice scrolling.</p>
                     </div>
                 </a>
@@ -967,15 +963,55 @@
                         <div class="t-icon icon-orange"><i class="fab fa-youtube"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>TubeSave</h3>
+                        <h3>YouTube Downloader</h3>
                         <p>Download YouTube videos in 4K.</p>
                     </div>
                 </a>
 
             </div>
 
+            <div id="audio" class="category-header">
+                <span class="cat-title">Audio Tools</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="voicerecorder/voicerecorder.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-red"><i class="fas fa-microphone-alt"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Voice Recorder</h3>
+                        <p>Capture high-quality audio notes in your browser.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="voicegen/voicegen.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-pink"><i class="fas fa-microphone-lines"></i></div>
+                        <span class="status">AI</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>Text to Speech</h3>
+                        <p>Neural text-to-speech engine.</p>
+                    </div>
+                </a>
+
+                <a href="audiomixer/audiomixer.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-sliders-h"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Audio Mixer</h3>
+                        <p>Mix multiple audio tracks in the browser.</p>
+                    </div>
+                </a>
+
+            </div>
+
             <div id="dev" class="category-header">
-                <span class="cat-title">Dev & Utilities</span>
+                <span class="cat-title">Developer Tools</span>
             </div>
 
             <div class="tools-grid">
@@ -985,7 +1021,7 @@
                         <div class="t-icon icon-blue"><i class="fas fa-code"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>CodeFormat</h3>
+                        <h3>Code Formatter</h3>
                         <p>Beautify and validate code snippets.</p>
                     </div>
                 </a>
@@ -995,7 +1031,7 @@
                         <div class="t-icon icon-teal"><i class="fas fa-not-equal"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>DiffCheck</h3>
+                        <h3>Diff Checker</h3>
                         <p>Compare text files for differences.</p>
                     </div>
                 </a>
@@ -1005,7 +1041,7 @@
                         <div class="t-icon icon-purple"><i class="fas fa-align-left"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>MarkEdit</h3>
+                        <h3>Markdown Editor</h3>
                         <p>Real-time Markdown editor with export.</p>
                     </div>
                 </a>
@@ -1015,9 +1051,28 @@
                         <div class="t-icon icon-green"><i class="fas fa-qrcode"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>LinkVault</h3>
+                        <h3>QR Code Generator</h3>
                         <p>Custom branded QR code generator.</p>
                     </div>
+                </a>
+
+            </div>
+
+            <div id="utilities" class="category-header">
+                <span class="cat-title">File Converters & Utilities</span>
+            </div>
+
+            <div class="tools-grid">
+
+                <a href="fontgenerator/fontgenerator.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-cyan"><i class="fas fa-font"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Font Generator</h3>
+                        <p>Stylish text for social media bios.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="lexorapdf/lexorapdf.php" class="tool-card">
@@ -1025,7 +1080,7 @@
                         <div class="t-icon icon-pink"><i class="fas fa-file-pdf"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>LexoraPDF</h3>
+                        <h3>PDF Tools</h3>
                         <p>Merge, split, and compress PDFs.</p>
                     </div>
                 </a>
@@ -1035,7 +1090,7 @@
                         <div class="t-icon icon-orange"><i class="fas fa-shield-alt"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>SecurePass</h3>
+                        <h3>Password Generator</h3>
                         <p>Generate secure passwords locally.</p>
                     </div>
                 </a>
@@ -1045,7 +1100,7 @@
                         <div class="t-icon icon-blue"><i class="fas fa-exchange-alt"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>QuickConvert</h3>
+                        <h3>Unit Converter</h3>
                         <p>Universal unit converter.</p>
                     </div>
                 </a>
@@ -1055,16 +1110,33 @@
                         <div class="t-icon icon-purple"><i class="fas fa-clock"></i></div>
                     </div>
                     <div class="t-info">
-                        <h3>FocusFlow</h3>
+                        <h3>Pomodoro Timer</h3>
                         <p>Pomodoro timer with ambient sounds.</p>
                     </div>
                 </a>
 
             </div>
 
+            <div id="career" class="category-header">
+                <span class="cat-title">Career</span>
+            </div>
+
+            <div class="tools-grid">
+                <a href="resumecraft/resumecraft.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-file-contract"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Resume Builder</h3>
+                        <p>ATS-friendly resume builder with PDF export.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+            </div>
+
             <footer class="main-footer">
                 <div class="footer-grid">
-                    <div class="footer-col brand-col">
+                    <div class="brand-col">
                         <div class="footer-logo">
                             <img src="assets/logo/logo2.png" alt=""> Lexora Tech
                         </div>
