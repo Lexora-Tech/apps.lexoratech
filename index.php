@@ -871,6 +871,17 @@
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
+                <a href="imageresizer/imageresizer.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Resize Image</h3>
+                        <p>Resize images to exact dimensions easily.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
                 <a href="chromapick/chromapick.php" class="tool-card">
                     <div class="card-top">
                         <div class="t-icon icon-teal"><i class="fas fa-eye-dropper"></i></div>
@@ -878,6 +889,17 @@
                     <div class="t-info">
                         <h3>Image Color Picker</h3>
                         <p>Extract color palettes from images.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="gradient/gradient.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-purple"><i class="fas fa-swatchbook"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Color Gradients</h3>
+                        <p>Create custom CSS gradients and palettes.</p>
                     </div>
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
@@ -963,6 +985,17 @@
                     <div class="t-info">
                         <h3>YouTube Downloader</h3>
                         <p>Download YouTube videos in 4K.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="screenrecorder/screenrecorder.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-red"><i class="fas fa-record-vinyl"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Screen Recorder</h3>
+                        <p>Record your screen and audio directly in the browser.</p>
                     </div>
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
@@ -1080,6 +1113,17 @@
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
+                <a href="wordcounter/wordcounter.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-teal"><i class="fas fa-align-left"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>Word Counter</h3>
+                        <p>Real-time word, character, and sentence counting.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
                 <a href="lexorapdf/lexorapdf.php" class="tool-card">
                     <div class="card-top">
                         <div class="t-icon icon-pink"><i class="fas fa-file-pdf"></i></div>
@@ -1138,6 +1182,17 @@
                     <div class="t-info">
                         <h3>Resume Builder</h3>
                         <p>ATS-friendly resume builder with PDF export.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
+                <a href="signature/signature.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-blue"><i class="fas fa-file-signature"></i></div>
+                    </div>
+                    <div class="t-info">
+                        <h3>E-Signature Maker</h3>
+                        <p>Create and download digital signatures.</p>
                     </div>
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
