@@ -209,7 +209,7 @@
             position: relative;
         }
 
-        /* TOP BAR */
+        /* TOP BAR (Sticky) */
         .top-bar {
             height: 80px;
             display: flex;
@@ -292,16 +292,15 @@
             border-color: var(--text-muted);
         }
 
-        /* --- HEADERS --- */
+        /* --- CATEGORY HEADERS --- */
         .category-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 24px;
-            padding-top: 40px;
+            padding-top: 20px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 12px;
-            scroll-margin-top: 80px;
         }
 
         .cat-title {
@@ -486,7 +485,7 @@
             pointer-events: auto;
         }
 
-        /* --- FOOTER STYLES --- */
+        /* --- FOOTER STYLES (Default Desktop) --- */
         .main-footer {
             margin-top: 80px;
             padding: 60px 0 30px;
@@ -615,7 +614,6 @@
                 transform: translateX(-100%);
                 padding: 20px;
                 align-items: stretch;
-                z-index: 300;
             }
 
             .sidebar.open {
@@ -688,7 +686,7 @@
                 gap: 15px;
             }
 
-            /* Premium Mobile Footer */
+            /* --- PREMIUM MOBILE FOOTER --- */
             .main-footer {
                 padding: 50px 24px 30px;
                 background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
@@ -696,6 +694,7 @@
                 margin-top: 40px;
             }
 
+            /* 3-Column Layout for Links */
             .footer-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -704,6 +703,7 @@
                 margin-bottom: 40px;
             }
 
+            /* Brand Section Full Width Centered */
             .brand-col {
                 grid-column: span 3;
                 display: flex;
@@ -731,10 +731,11 @@
                 margin: 0 auto;
             }
 
+            /* Links Columns */
             .footer-col {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
             }
 
             .footer-col h4 {
@@ -787,10 +788,9 @@
             </a>
 
             <div class="nav-links">
-                <a href="#featured" class="nav-item active"><i class="fas fa-star"></i> <span>Featured</span></a>
 
-                <div class="nav-group-title">Studio</div>
-                <a href="#design" class="nav-item"><i class="fas fa-pen-nib"></i> <span>Design Tools</span></a>
+                <div class="nav-group-title" style="margin-top:0;">Studio</div>
+                <a href="#design" class="nav-item active"><i class="fas fa-pen-nib"></i> <span>Design Tools</span></a>
                 <a href="#video" class="nav-item"><i class="fas fa-video"></i> <span>Video Suite</span></a>
                 <a href="#audio" class="nav-item"><i class="fas fa-music"></i> <span>Audio Lab</span></a>
 
@@ -817,9 +817,8 @@
 
             <input type="text" class="mobile-search" id="mobSearch" placeholder="Search tools..." style="display:none;">
 
-            <div id="featured" class="category-header">
-                <span class="cat-title">Featured Tools</span>
-                <span class="cat-badge">3</span>
+            <div id="design" class="category-header">
+                <span class="cat-title">Image Editing & Design</span>
             </div>
 
             <div class="tools-grid">
@@ -848,26 +847,6 @@
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
-                <a href="bgremove/bgremove.php" class="tool-card">
-                    <div class="card-top">
-                        <div class="t-icon icon-pink"><i class="fas fa-eraser"></i></div>
-                        <span class="status">AI</span>
-                    </div>
-                    <div class="t-info">
-                        <h3>Background Remover</h3>
-                        <p>Remove backgrounds from images instantly.</p>
-                    </div>
-                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
-                </a>
-
-            </div>
-
-            <div id="design" class="category-header">
-                <span class="cat-title">Image Editing & Design</span>
-            </div>
-
-            <div class="tools-grid">
-
                 <a href="photoenhancer/photoenhancer.php" class="tool-card">
                     <div class="card-top">
                         <div class="t-icon icon-indigo"><i class="fas fa-wand-magic-sparkles"></i></div>
@@ -880,6 +859,18 @@
                     <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
+                <a href="bgremove/bgremove.php" class="tool-card">
+                    <div class="card-top">
+                        <div class="t-icon icon-pink"><i class="fas fa-eraser"></i></div>
+                        <span class="status">AI</span>
+                    </div>
+                    <div class="t-info">
+                        <h3>Background Remover</h3>
+                        <p>Remove backgrounds from images instantly.</p>
+                    </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
+                </a>
+
                 <a href="chromapick/chromapick.php" class="tool-card">
                     <div class="card-top">
                         <div class="t-icon icon-teal"><i class="fas fa-eye-dropper"></i></div>
@@ -888,6 +879,7 @@
                         <h3>Image Color Picker</h3>
                         <p>Extract color palettes from images.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="imgoptim/imgoptim.php" class="tool-card">
@@ -898,6 +890,7 @@
                         <h3>Image Compressor</h3>
                         <p>Smart image compression without quality loss.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="thumbgrab/thumbgrab.php" class="tool-card">
@@ -908,6 +901,7 @@
                         <h3>Thumbnail Downloader</h3>
                         <p>Download high-res YouTube thumbnails.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="socialmock/socialmock.php" class="tool-card">
@@ -918,6 +912,7 @@
                         <h3>Social Media Mockups</h3>
                         <p>Create realistic social media post mockups.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="memegen/memegen.php" class="tool-card">
@@ -928,6 +923,7 @@
                         <h3>Meme Generator</h3>
                         <p>Fast meme generator with custom text.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
             </div>
@@ -946,6 +942,7 @@
                         <h3>Video Trimmer</h3>
                         <p>Simple online video cutter and trimmer.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="teleprompter/teleprompter.php" class="tool-card">
@@ -956,6 +953,7 @@
                         <h3>Online Teleprompter</h3>
                         <p>Teleprompter with voice scrolling.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="youtubedl/youtubedl.php" class="tool-card">
@@ -966,6 +964,7 @@
                         <h3>YouTube Downloader</h3>
                         <p>Download YouTube videos in 4K.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
             </div>
@@ -996,6 +995,7 @@
                         <h3>Text to Speech</h3>
                         <p>Neural text-to-speech engine.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="audiomixer/audiomixer.php" class="tool-card">
@@ -1006,6 +1006,7 @@
                         <h3>Audio Mixer</h3>
                         <p>Mix multiple audio tracks in the browser.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
             </div>
@@ -1024,6 +1025,7 @@
                         <h3>Code Formatter</h3>
                         <p>Beautify and validate code snippets.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="diffcheck/diffcheck.php" class="tool-card">
@@ -1034,6 +1036,7 @@
                         <h3>Diff Checker</h3>
                         <p>Compare text files for differences.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="markdowns/markdown.php" class="tool-card">
@@ -1044,6 +1047,7 @@
                         <h3>Markdown Editor</h3>
                         <p>Real-time Markdown editor with export.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="qrcodegen/qrcodegen.php" class="tool-card">
@@ -1054,6 +1058,7 @@
                         <h3>QR Code Generator</h3>
                         <p>Custom branded QR code generator.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
             </div>
@@ -1083,6 +1088,7 @@
                         <h3>PDF Tools</h3>
                         <p>Merge, split, and compress PDFs.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="securepass/securepass.php" class="tool-card">
@@ -1093,6 +1099,7 @@
                         <h3>Password Generator</h3>
                         <p>Generate secure passwords locally.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="quickconvert/quickconvert.php" class="tool-card">
@@ -1103,6 +1110,7 @@
                         <h3>Unit Converter</h3>
                         <p>Universal unit converter.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
                 <a href="focusflow/focusflow.php" class="tool-card">
@@ -1113,6 +1121,7 @@
                         <h3>Pomodoro Timer</h3>
                         <p>Pomodoro timer with ambient sounds.</p>
                     </div>
+                    <div class="launch-btn">Launch Tool <i class="fas fa-arrow-right"></i></div>
                 </a>
 
             </div>
