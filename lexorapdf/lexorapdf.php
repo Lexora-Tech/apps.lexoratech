@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lexora PDF | Secure PDF Editor: Merge, Split & Compress (Client-Side)</title>
+    <title>Lexora PDF | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Process PDFs directly in your browser without uploading files to a server. 100% private. Merge, split, rotate, and watermark PDFs securely and instantly.">
     <meta name="keywords" content="private pdf merger online, split pdf offline browser, client side pdf tools, secure pdf watermark, combine pdfs free no upload">
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/lexorapdf.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+ 
 
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7/download.min.js"></script>

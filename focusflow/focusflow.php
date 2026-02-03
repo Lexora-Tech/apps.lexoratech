@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FocusFlow | Free Pomodoro Timer & Ambient Noise Generator (Lofi/Binaural)</title>
+    <title>FocusFlow | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Boost focus with a customizable Pomodoro timer and immersive soundscapes (Rain, Lofi, White Noise). Features 40Hz Gamma waves for deep work. No ads, fully immersive.">
     <meta name="keywords" content="pomodoro timer online, ambient noise generator for studying, lofi study timer, binaural beats player, focus timer with music, online study clock">
-    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 

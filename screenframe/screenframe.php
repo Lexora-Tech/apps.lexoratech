@@ -8,7 +8,8 @@ header("Cross-Origin-Opener-Policy: same-origin");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ScreenFrame | Mobile Ready</title>
+    <title>ScreenFrame | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,7 +17,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <link rel="stylesheet" href="./css/screenframe.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+  
 </head>
 
 <body>

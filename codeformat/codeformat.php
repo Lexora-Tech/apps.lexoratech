@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>CodeFormat | Ultimate Dev Environment</title>
+    <title>CodeFormat | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Online code editor and formatter. Supports HTML, CSS, JS, PHP, Python, and SQL. Real-time preview, syntax highlighting, and instant formatting.">
     <meta name="keywords" content="online code editor, code formatter, html preview, css beautifier, js minifier, web ide, codeformat studio, lexoratech">
     <meta name="author" content="LexoraTech">
@@ -31,7 +32,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">

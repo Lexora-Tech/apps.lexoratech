@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>ChromaPick | Free Image Color Picker & Palette Generator (HEX/RGB/HSL)</title>
+    <title>ChromaPick | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Extract colors directly from images. Use the built-in eyedropper to get HEX, RGB, and HSL codes. Generate harmonic color palettes instantly. Privacy-first: Images never leave your browser.">
     <meta name="keywords" content="image color picker, hex code finder, color palette generator, get color from picture, css gradient generator, eyedropper tool online, chromapick, lexoratech">
     <meta name="author" content="LexoraTech">
@@ -32,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/chromapick.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 

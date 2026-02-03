@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoiceGen AI | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Generate ultra-realistic AI voiceovers instantly. Supports English, Sinhala, Tamil, and 30+ languages. Unlimited MP3 downloads for YouTube and content creation.">
     <meta name="keywords" content="free neural tts, realistic ai voice generator, sinhala text to speech ai, tamil text to speech, tiktok voice generator, download tts mp3 free">
     <link rel="canonical" href="https://apps.lexoratech.com/voicegen/voicegen.php" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/voicegen.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
 
     <style>
         /* --- HELP MODAL STYLES --- */

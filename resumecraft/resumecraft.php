@@ -9,6 +9,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ResumeCraft | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,7 +18,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <link rel="stylesheet" href="./css/resumecraft.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+   
 </head>
 
 <body>

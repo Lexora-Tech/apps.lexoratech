@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QuickConvert | Universal Unit & Currency Converter (Live Rates)</title>
+    <title>QuickConvert | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Convert 100+ units instantly: Currency (Real-time), Engineering, Physics, and Cooking. The fastest, ad-free converter for professionals and students.">
     <meta name="keywords" content="online unit converter, live currency converter, engineering unit converter, cooking measurement converter, scientific calculator online">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/quickconvert.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+   
 
     <style>
         /* --- HELP MODAL STYLES --- */

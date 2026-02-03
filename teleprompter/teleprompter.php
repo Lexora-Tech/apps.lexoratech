@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Free Voice Activated Teleprompter Online | PromptFlow Studio</title>
+    <title>Free Voice Activated Teleprompter Online | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Professional free online teleprompter with AI voice tracking. Features mirror mode for beam splitters, adjustable speed, and reality overlay. No sign-up or download required. Works on Laptop, iPad, and Mobile.">
     <meta name="keywords" content="voice activated teleprompter online, free teleprompter software, auto scroll text, mirror mode teleprompter, virtual teleprompter for zoom, autocue for youtubers, speech recognition scroller, promptflow studio, lexoratech">
     <meta name="author" content="LexoraTech">
@@ -49,7 +50,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/teleprompter.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>SonicForge | Free Online Audio Mixer & Voice Recorder</title>
+
+    <title>SonicForge | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Professional browser-based audio mixer. Record vocals, mix tracks, apply reverb/delay effects, and export MP3s. No download required. Perfect for podcasters and singers.">
     <meta name="keywords" content="online audio mixer, free music maker, voice recorder with effects, virtual dj mixer, podcast editor online, sonicforge, lexoratech">
     <meta name="author" content="LexoraTech">
@@ -18,19 +19,19 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SonicForge Audio Mixer",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": "Multitrack mixing, Audio Effects, Voice Recording"
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "SonicForge Audio Mixer",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": "Multitrack mixing, Audio Effects, Voice Recording"
+        }
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -38,7 +39,7 @@
     <link rel="stylesheet" href="./css/audiomixer.css">
     <link rel="icon" href="../assets/logo/logo.png" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
 
     <style>
@@ -46,8 +47,9 @@
         .help-modal-content {
             max-width: 700px;
             width: 95%;
-            height: 80vh; 
-            height: 80dvh; /* Mobile browser fix */
+            height: 80vh;
+            height: 80dvh;
+            /* Mobile browser fix */
             display: flex;
             flex-direction: column;
             background: #111;
@@ -56,7 +58,7 @@
             overflow: hidden;
             border-radius: 12px;
         }
-        
+
         .help-header {
             padding: 15px 20px;
             background: #18181b;
@@ -66,84 +68,149 @@
             align-items: center;
             flex-shrink: 0;
         }
-        
+
         /* SCROLLABLE TABS FOR MOBILE */
-        .help-tabs { 
-            display: flex; 
-            background: #09090b; 
-            border-bottom: 1px solid #27272a; 
+        .help-tabs {
+            display: flex;
+            background: #09090b;
+            border-bottom: 1px solid #27272a;
             flex-shrink: 0;
-            overflow-x: auto; 
+            overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
-        
-        .tab-btn { 
-            flex: 1; 
-            min-width: 100px; 
-            padding: 15px; 
-            background: transparent; 
-            border: none; 
-            border-bottom: 2px solid transparent; 
-            color: #71717a; 
-            font-weight: 600; 
-            cursor: pointer; 
+
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #71717a;
+            font-weight: 600;
+            cursor: pointer;
             transition: 0.2s;
             font-size: 0.9rem;
         }
-        
-        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.03); }
-        .tab-btn.active { color: #8b5cf6; border-bottom-color: #8b5cf6; background: rgba(139, 92, 246, 0.05); }
-        
-        .help-body { 
-            flex-grow: 1; 
-            overflow-y: auto; 
-            padding: 20px; 
-            color: #d4d4d8; 
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn.active {
+            color: #8b5cf6;
+            border-bottom-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .help-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            color: #d4d4d8;
             background: #000;
         }
-        
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .help-step { 
-            display: flex; 
-            align-items: flex-start; 
-            gap: 15px; 
-            margin-bottom: 20px; 
-            background: #18181b; 
-            padding: 15px; 
-            border-radius: 8px; 
-            border: 1px solid #27272a; 
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
-        
-        .step-num { 
-            background: #8b5cf6; 
-            color: white; 
-            width: 24px; 
-            height: 24px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: bold; 
-            font-size: 0.75rem; 
-            flex-shrink: 0; 
-            margin-top: 2px; 
+
+        .tab-content.active {
+            display: block;
         }
-        
-        .step-content strong { color: #fff; display: block; margin-bottom: 4px; }
-        .step-content { font-size: 0.9rem; line-height: 1.5; color: #a1a1aa; }
-        
-        .legal-list { list-style: none; padding: 0; }
-        .legal-list li { margin-bottom: 12px; }
-        .legal-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #d4d4d8; padding: 10px; border-radius: 6px; transition: 0.2s; border: 1px solid transparent; }
-        .legal-link:hover { background: #18181b; border-color: #27272a; color: white; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: #18181b;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #27272a;
+        }
+
+        .step-num {
+            background: #8b5cf6;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .step-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #a1a1aa;
+        }
+
+        .legal-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .legal-list li {
+            margin-bottom: 12px;
+        }
+
+        .legal-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #d4d4d8;
+            padding: 10px;
+            border-radius: 6px;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .legal-link:hover {
+            background: #18181b;
+            border-color: #27272a;
+            color: white;
+        }
 
         /* Driver.js Mobile Fixes */
-        .driver-popover { z-index: 20000 !important; background-color: #1f2937; color: #fff; max-width: 300px; box-sizing: border-box; }
-        .driver-popover .driver-popover-title { color: #8b5cf6; }
+        .driver-popover {
+            z-index: 20000 !important;
+            background-color: #1f2937;
+            color: #fff;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        .driver-popover .driver-popover-title {
+            color: #8b5cf6;
+        }
     </style>
 </head>
 
@@ -202,9 +269,9 @@
                     <div class="source-card special" id="openTTSBtn">
                         <i class="fas fa-robot"></i> <span>AI Vocals</span>
                     </div>
-                    
+
                     <div class="divider" style="height:1px; background:#333; margin:10px 0;"></div>
-                    
+
                     <button id="helpBtnSidebar" class="source-card" style="width:100%; justify-content:center; border-color:#444;">
                         <i class="fas fa-book"></i> <span>User Guide</span>
                     </button>
@@ -291,7 +358,7 @@
                     </h2>
                     <button id="closeHelp" class="icon-btn" style="border:none; background:none; font-size:1.2rem; color:#aaa; cursor:pointer;"><i class="fas fa-times"></i></button>
                 </div>
-                
+
                 <div class="help-tabs">
                     <button class="tab-btn active" onclick="switchTab('guide')">Quick Start</button>
                     <button class="tab-btn" onclick="switchTab('fx')">Effects</button>
@@ -411,11 +478,11 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
-            
+
             const btns = document.querySelectorAll('.tab-btn');
-            if(tabId==='guide') btns[0].classList.add('active');
-            if(tabId==='fx') btns[1].classList.add('active');
-            if(tabId==='legal') btns[2].classList.add('active');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'fx') btns[1].classList.add('active');
+            if (tabId === 'legal') btns[2].classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -427,25 +494,54 @@
             const leftSidebar = document.getElementById('sourceSidebar');
             const rightSidebar = document.getElementById('rackSidebar');
 
-            if(openHelp) openHelp.onclick = () => helpModal.classList.remove('hidden');
-            if(openHelpSide) openHelpSide.onclick = () => {
+            if (openHelp) openHelp.onclick = () => helpModal.classList.remove('hidden');
+            if (openHelpSide) openHelpSide.onclick = () => {
                 helpModal.classList.remove('hidden');
                 leftSidebar.classList.remove('open'); // Auto-close on mobile
             };
-            if(closeHelp) closeHelp.onclick = () => helpModal.classList.add('hidden');
+            if (closeHelp) closeHelp.onclick = () => helpModal.classList.add('hidden');
 
             // --- DRIVER.JS CONFIGURATION (SMART TOUR) ---
             const driver = window.driver.js.driver;
-            
+
             const tour = driver({
                 showProgress: true,
                 popoverClass: 'driverjs-theme',
-                steps: [
-                    { element: '#sourceSidebar', popover: { title: 'Sound Library', description: 'Import files, record vocals, or generate AI voiceovers here.' } },
-                    { element: '#trackContainer', popover: { title: 'Mixing Console', description: 'Your tracks appear here. Adjust volume, pan, and pitch for each track.' } },
-                    { element: '#rackSidebar', popover: { title: 'FX Rack', description: 'Apply master effects like Reverb and Delay to your entire mix.' } },
-                    { element: '#tour-transport', popover: { title: 'Transport', description: 'Play, Stop, and Record your mix.' } },
-                    { element: '#btnExport', popover: { title: 'Export', description: 'Download your final mix as an MP3.' } }
+                steps: [{
+                        element: '#sourceSidebar',
+                        popover: {
+                            title: 'Sound Library',
+                            description: 'Import files, record vocals, or generate AI voiceovers here.'
+                        }
+                    },
+                    {
+                        element: '#trackContainer',
+                        popover: {
+                            title: 'Mixing Console',
+                            description: 'Your tracks appear here. Adjust volume, pan, and pitch for each track.'
+                        }
+                    },
+                    {
+                        element: '#rackSidebar',
+                        popover: {
+                            title: 'FX Rack',
+                            description: 'Apply master effects like Reverb and Delay to your entire mix.'
+                        }
+                    },
+                    {
+                        element: '#tour-transport',
+                        popover: {
+                            title: 'Transport',
+                            description: 'Play, Stop, and Record your mix.'
+                        }
+                    },
+                    {
+                        element: '#btnExport',
+                        popover: {
+                            title: 'Export',
+                            description: 'Download your final mix as an MP3.'
+                        }
+                    }
                 ],
                 // SMART FOCUS LOGIC
                 onHighlightStarted: (element) => {
@@ -460,12 +556,10 @@
                     if (leftSidebar.contains(element) || element === leftSidebar) {
                         leftSidebar.classList.add('open');
                         rightSidebar.classList.remove('open');
-                    } 
-                    else if (rightSidebar.contains(element) || element === rightSidebar) {
+                    } else if (rightSidebar.contains(element) || element === rightSidebar) {
                         rightSidebar.classList.add('open');
                         leftSidebar.classList.remove('open');
-                    } 
-                    else {
+                    } else {
                         // If focusing on center, close both sidebars
                         leftSidebar.classList.remove('open');
                         rightSidebar.classList.remove('open');
@@ -485,16 +579,21 @@
             // Welcome & Tour Triggers
             const tourModal = document.getElementById('tourWelcomeModal');
             if (!localStorage.getItem('lexora_mixer_tour_seen')) {
-                setTimeout(() => { tourModal.style.opacity = '1'; tourModal.style.pointerEvents = 'all'; }, 1000);
+                setTimeout(() => {
+                    tourModal.style.opacity = '1';
+                    tourModal.style.pointerEvents = 'all';
+                }, 1000);
             }
 
             document.getElementById('startTour').onclick = () => {
-                tourModal.style.opacity = '0'; tourModal.style.pointerEvents = 'none';
+                tourModal.style.opacity = '0';
+                tourModal.style.pointerEvents = 'none';
                 localStorage.setItem('lexora_mixer_tour_seen', 'true');
                 tour.drive();
             };
             document.getElementById('skipTour').onclick = () => {
-                tourModal.style.opacity = '0'; tourModal.style.pointerEvents = 'none';
+                tourModal.style.opacity = '0';
+                tourModal.style.pointerEvents = 'none';
                 localStorage.setItem('lexora_mixer_tour_seen', 'true');
             };
             document.getElementById('restartTourBtn').onclick = () => {
@@ -505,4 +604,5 @@
     </script>
 
 </body>
+
 </html>

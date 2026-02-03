@@ -10,7 +10,8 @@ header("Cross-Origin-Embedder-Policy: require-corp");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>ClearCut AI | Free On-Device Background Remover</title>
+    <title>ClearCut AI | Lexora Workspace</title>
+    <link rel="icon" href="../assets/logo/logo.png" />
     <meta name="description" content="Remove image backgrounds instantly for free. 100% private, on-device AI processing. No uploads, no sign-up required. Supports JPG, PNG, WebP.">
     <meta name="keywords" content="remove background online free, ai background remover, delete photo background, transparent png maker, clearcut ai, lexoratech">
     <meta name="author" content="LexoraTech">
@@ -40,7 +41,7 @@ header("Cross-Origin-Embedder-Policy: require-corp");
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+    
     <link rel="stylesheet" href="css/bgremove.css">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
