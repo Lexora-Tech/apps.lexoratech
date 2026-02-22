@@ -4,13 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TubeSave - Coming Soon | Lexora Workspace</title>
-    <meta name="description" content="TubeSave: The ultimate YouTube video downloader is coming soon. Get ready for 4K downloads and MP3 conversion.">
 
+    <title>TubeSave Pro - Coming Soon | 4K Video Downloader</title>
+    <meta name="title" content="TubeSave Pro - Coming Soon | 4K Video Downloader">
+    <meta name="description" content="TubeSave: The ultimate YouTube video downloader is coming soon. Get ready for ultra-fast 4K video downloads and MP3 audio conversion. Join the waitlist today.">
+    <meta name="keywords" content="youtube video downloader coming soon, 4k video downloader, youtube to mp3 converter, fast video downloader, tubesave pro, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/tubesave/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/tubesave/">
+    <meta property="og:title" content="TubeSave Pro | 4K Video Downloader (Coming Soon)">
+    <meta property="og:description" content="The ultimate video downloader is coming soon. Get ready for blazing fast 4K downloads and MP3 extraction.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-tubesave.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/tubesave/">
+    <meta name="twitter:title" content="TubeSave Pro | 4K Video Downloader (Coming Soon)">
+    <meta name="twitter:description" content="The ultimate video downloader is coming soon. Get ready for blazing fast 4K downloads and MP3 extraction.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-tubesave.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "TubeSave Pro",
+            "url": "https://apps.lexoratech.com/tubesave/",
+            "description": "An upcoming ultra-fast YouTube video downloader supporting 4K resolution and MP3 audio extraction.",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="icon" href="assets/logo/logo.png" />
 
     <style>
         /* ========================
@@ -328,6 +367,56 @@
             font-size: 0.8rem;
         }
 
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200 !important;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000 !important;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1rem;
+            color: #1A1200;
+        }
+
         /* ========================
            MOBILE RESPONSIVENESS
            ======================== */
@@ -345,7 +434,13 @@
                 display: none;
             }
 
-            /* Show only icon on mobile */
+            .bmc-text {
+                display: none;
+            }
+
+            .custom-bmc-btn {
+                padding: 8px 12px;
+            }
 
             .coming-soon-card {
                 padding: 40px 20px;
@@ -401,12 +496,15 @@
     <div class="app-container">
 
         <header class="modern-navbar">
-            <a href="../index.php" class="nav-brand">
-                <img src="../assets/logo/logo2.png" alt="Lexora" class="brand-logo">
+            <a href="../index.php" class="nav-brand" aria-label="Back to Lexora Workspace">
+                <img src="../assets/logo/logo2.png" alt="Lexora Workspace Logo" class="brand-logo">
                 <span class="brand-text">Lexora Workspace</span>
             </a>
-            <div class="nav-right">
-                <a href="../index.php" class="back-link">
+            <div class="nav-right" style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn" aria-label="Buy Me a Coffee">
+                    <i class="fas fa-mug-hot"></i> <span class="bmc-text">Support Us</span>
+                </a>
+                <a href="../index.php" class="back-link" aria-label="Back to Dashboard">
                     <i class="fas fa-arrow-left"></i> <span>Back To Dashboard</span>
                 </a>
             </div>
@@ -417,7 +515,7 @@
 
                 <div class="hero-icon-wrapper">
                     <div class="hero-icon-bg"></div>
-                    <i class="fab fa-youtube hero-icon"></i>
+                    <i class="fab fa-youtube hero-icon" aria-hidden="true"></i>
                 </div>
 
                 <div class="badge">In Development</div>
@@ -428,22 +526,22 @@
                     Experience blazing fast 4K downloads and MP3 extraction soon.
                 </p>
 
-                <form class="notify-form" id="notifyForm">
-                    <input type="email" class="notify-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="notify-btn">Notify Me</button>
+                <form class="notify-form" id="notifyForm" aria-label="Waitlist Signup Form">
+                    <input type="email" class="notify-input" placeholder="Enter your email address" aria-label="Email Address for Notification" required>
+                    <button type="submit" class="notify-btn" aria-label="Subscribe to waitlist notifications">Notify Me</button>
                 </form>
 
                 <div class="features-preview">
                     <div class="f-item">
-                        <i class="fas fa-film"></i>
+                        <i class="fas fa-film" aria-hidden="true"></i>
                         <span>4K Video</span>
                     </div>
                     <div class="f-item">
-                        <i class="fas fa-music"></i>
+                        <i class="fas fa-music" aria-hidden="true"></i>
                         <span>MP3 Audio</span>
                     </div>
                     <div class="f-item">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
                         <span>Ultra Fast</span>
                     </div>
                 </div>
@@ -452,7 +550,7 @@
         </main>
 
         <footer class="simple-footer">
-            &copy; 2025 LexoraTech. All rights reserved.
+            &copy; 2026 LexoraTech. All rights reserved.
         </footer>
 
     </div>
@@ -486,3 +584,6 @@
 </body>
 
 </html>
+
+
+

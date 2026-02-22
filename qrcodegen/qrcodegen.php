@@ -4,18 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LinkVault | Pro QR Generator</title>
 
+    <title>LinkVault | Free Custom QR Code Generator with Logo</title>
+    <meta name="title" content="LinkVault | Free Custom QR Code Generator with Logo">
+    <meta name="description" content="Create custom, high-resolution QR codes for free. Add your logo, change colors, apply gradients, and download as PNG or SVG. No sign-up required.">
+    <meta name="keywords" content="qr code generator, custom qr code maker, qr code with logo, free qr code creator, svg qr code, high resolution qr code, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/qrcodegen/qrcodegen.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/qrcodegen/qrcodegen.php">
+    <meta property="og:title" content="LinkVault - Ultimate QR Code Generator">
+    <meta property="og:description" content="Design custom QR codes with your brand logo, colors, and unique shapes. 100% Free.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-qr.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/qrcodegen/qrcodegen.php">
+    <meta name="twitter:title" content="LinkVault - Ultimate QR Code Generator">
+    <meta name="twitter:description" content="Design custom QR codes with your brand logo, colors, and unique shapes. 100% Free.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-qr.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "LinkVault QR Code Generator",
+            "url": "https://apps.lexoratech.com/qrcodegen/qrcodegen.php",
+            "description": "An advanced online utility for creating fully customized, branded QR codes. Supports logo embedding, color gradients, and high-resolution SVG exports.",
+            "applicationCategory": "DesignApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Custom Logo Integration",
+                "Linear and Radial Color Gradients",
+                "Custom Dot and Corner Shapes",
+                "High Resolution PNG and SVG Export",
+                "100% Client-Side Processing"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/qrcodegen.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
 
     <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
 
     <style>
-        /* --- HELP MODAL STYLES --- */
-        #helpModal {
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -32,50 +92,141 @@
             pointer-events: auto;
         }
 
-        #helpModal.hidden {
+        .modal-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
         .help-modal-content {
-            max-width: 800px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
             padding: 0;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Outfit', sans-serif;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
 
         .help-header {
-            position: sticky;
-            top: 0;
-            background: rgba(20, 20, 20, 0.98);
-            padding: 20px 30px;
+            padding: 20px;
+            background: #18181b;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #10b981;
+            border-bottom-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
         }
 
         .help-body {
-            padding: 30px;
-            line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #10b981; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #10b981;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -83,6 +234,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
@@ -90,19 +242,28 @@
             margin-bottom: 5px;
         }
 
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(16, 185, 129, 0.1); /* Emerald tint */
+            background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: #10b981;
             padding: 12px;
@@ -111,19 +272,78 @@
             font-weight: 600;
             transition: all 0.2s;
             font-family: 'Outfit', sans-serif;
+            margin-top: 15px;
         }
-        .sidebar-btn-help:hover { background: rgba(16, 185, 129, 0.2); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 25px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
+        }
 
         /* Legal Links */
         .legal-links {
-            margin-top: 20px;
+            margin-top: 15px;
             padding-top: 20px;
-            padding-bottom: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .legal-links a {
             color: #94a3b8;
             text-decoration: none;
@@ -134,51 +354,83 @@
             transition: color 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .legal-links a:hover { color: #fff; }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Custom QR Code Generator with Logo Integration</h2>
+        <p>LinkVault by Lexora is a premium, free QR code creator. Transform standard links and text into beautiful, branded QR codes. Customize the design by changing the shape of the data points to rounded or classy, modifying corner styles, and applying linear or radial color gradients. Enhance brand recognition by uploading your company logo directly into the center of the code. Generate high-resolution exports suitable for both digital screens (PNG) and commercial print media (vector SVG up to 4000px). 100% Private: Your data and logos are processed locally in your web browser and are never stored on our servers.</p>
+    </div>
+
     <div class="ambient-glow"></div>
     <div id="toastBox" class="toast-container"></div>
 
-    <div id="helpModal" class="hidden">
+    <div id="helpModal" class="modal-overlay hidden">
         <div class="help-modal-content">
             <div class="help-header">
-                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
-                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">LinkVault Guide</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Features</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('faq')">FAQ & Privacy</button>
+            </div>
+
             <div class="help-body">
-                <p>LinkVault is a professional-grade QR code generator. Create fully customized, high-resolution QR codes with logos, custom colors, and unique shapes—all running locally in your browser for maximum privacy.</p>
-
-                <h3>Core Features</h3>
-                <ul>
-                    <li><strong>Custom Design:</strong> Change dots to "Classy" or "Rounded". Customize corner shapes and colors.</li>
-                    <li><strong>Branding:</strong> Upload your own logo to center it within the QR code automatically.</li>
-                    <li><strong>High Resolution:</strong> Download standard PNGs or ultra-high quality SVGs for print media (up to 4000px).</li>
-                    <li><strong>Gradients:</strong> Apply beautiful linear or radial color gradients to make your code stand out.</li>
-                </ul>
-
-                <h3>How to Create a QR Code</h3>
-                <ol>
-                    <li><strong>Enter Content:</strong> Paste your URL or text into the "Content" field at the top.</li>
-                    <li><strong>Style It:</strong> Use the "Design Style" and "Appearance" sections to change shapes and colors.</li>
-                    <li><strong>Add Logo:</strong> (Optional) Upload a logo file to embed your brand identity.</li>
-                    <li><strong>Download:</strong> Select your format (PNG/SVG) and click "Download".</li>
-                </ol>
-
-                <h3>Frequently Asked Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Do these QR codes expire?</span>
-                    No. LinkVault generates "Static" QR codes. They contain the data directly and will work forever without any subscription.
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Enter Content:</strong> Paste your website URL, text, or vCard information into the "Content" field at the top of the sidebar.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Style It:</strong> Use the "Design Style" and "Appearance" sections to change the shape of the QR blocks and apply colors or gradients.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Add Logo & Export:</strong> Upload your brand logo to embed it in the center. Then, select your format (PNG/SVG/JPEG/WEBP) and click "Download".</div>
+                    </div>
                 </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Can I use this for commercial print?</span>
-                    Yes! We recommend downloading the <strong>SVG</strong> format for commercial printing (billboards, flyers) as it never loses quality.
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-paint-brush" style="color:#10b981;"></i> Custom Design</h3>
+                    <p>Change standard blocky QR codes into modern art. Adjust the inner "Dots" to Classy, Rounded, or Extra-Rounded, and modify the outer corner squares to match.</p>
+
+                    <h3><i class="fas fa-image" style="color:#10b981;"></i> Branding & Logos</h3>
+                    <p>Upload your own logo to center it within the QR code. You can adjust the size of the logo and the negative space margin around it to ensure the code remains scannable.</p>
+
+                    <h3><i class="fas fa-print" style="color:#10b981;"></i> High-Res Export</h3>
+                    <p>Unlike basic generators, LinkVault lets you set the exact pixel size of your export (up to 4000px). For commercial printing (posters, billboards), we highly recommend exporting as an <strong>SVG</strong> vector file.</p>
+                </div>
+
+                <div id="modal-tab-faq" class="tab-content-modal">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="modal-faq-item">
+                        <span class="modal-faq-question">Do these QR codes expire?</span>
+                        No. LinkVault generates "Static" QR codes. The data is encoded directly into the pattern, meaning they will work forever without any subscriptions.
+                    </div>
+
+                    <h3>Privacy Guarantee</h3>
+                    <p>LinkVault operates entirely client-side.</p>
+                    <div style="background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); padding:15px; border-radius:8px; color:#6ee7b7; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> Your URL content and uploaded logos are processed in your browser. We do not track, scan, or store your generated QR codes.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#10b981; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#10b981; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#10b981; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -188,9 +440,9 @@
 
         <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="brand">
+                <h1 class="brand" style="font-size:inherit; font-weight:inherit; margin:0; display:flex; align-items:center; gap:8px;">
                     <i class="fas fa-qrcode"></i> LinkVault <span class="badge">ULTIMATE</span>
-                </div>
+                </h1>
                 <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
             </div>
 
@@ -312,6 +564,10 @@
                     <input type="range" id="sizeInput" min="500" max="4000" step="100" value="2000" class="range-slider">
                 </div>
 
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                    <i class="fas fa-mug-hot"></i> Support Tool
+                </a>
+
                 <div class="legal-links">
                     <a href="../privacy.php">
                         <i class="fas fa-shield-alt"></i> Privacy Policy
@@ -364,18 +620,15 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
-                // Open Modal
+            if (helpBtn && helpModal) {
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');
                 });
 
-                // Close Button
                 closeHelp.addEventListener('click', () => {
                     helpModal.classList.add('hidden');
                 });
 
-                // Close on Outside Click
                 helpModal.addEventListener('click', (e) => {
                     if (e.target === helpModal) {
                         helpModal.classList.add('hidden');
@@ -383,6 +636,18 @@
                 });
             }
         });
+
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'faq') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

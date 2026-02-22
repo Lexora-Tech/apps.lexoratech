@@ -4,8 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Signature X | Lexora</title>
 
+    <title>E-Signature Maker | Free Online Signature Generator</title>
+    <meta name="title" content="E-Signature Maker | Free Online Signature Generator">
+    <meta name="description" content="Create perfect digital signatures online for free. Draw with smooth pen physics or type using elegant handwriting fonts. Auto-crops and exports as a transparent PNG. 100% Private.">
+    <meta name="keywords" content="e-signature maker, online signature generator, draw signature online, transparent signature png, digital signature creator, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/e-signature/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/e-signature/">
+    <meta property="og:title" content="E-Signature Maker | Free Online Signature Generator">
+    <meta property="og:description" content="Create perfect digital signatures online for free. Draw with smooth pen physics or type using elegant handwriting fonts. Auto-crops and exports as a transparent PNG.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-esignature.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/e-signature/">
+    <meta name="twitter:title" content="E-Signature Maker | Free Online Signature Generator">
+    <meta name="twitter:description" content="Create perfect digital signatures online for free. Draw with smooth pen physics or type using elegant handwriting fonts.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-esignature.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "E-Signature Maker",
+            "url": "https://apps.lexoratech.com/e-signature/",
+            "description": "An advanced online utility for creating digital signatures. Features velocity-based pen physics, custom handwriting fonts, and smart auto-cropping for transparent PNG exports.",
+            "applicationCategory": "DesignApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Velocity-based Fountain Pen Simulation",
+                "Custom Handwriting Fonts",
+                "Smart Bounding-Box Auto-Crop",
+                "Transparent PNG Export",
+                "100% Client-Side Processing (No tracking)"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Great+Vibes&family=Mrs+Saint+Delafield&family=Herr+Von+Muellerhoff&family=Pinyon+Script&family=Mr+De+Haviland&family=La+Belle+Aurore&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -77,6 +126,11 @@
             backdrop-filter: blur(10px);
         }
 
+        .nav-left {
+            display: flex;
+            gap: 15px;
+        }
+
         .nav-brand {
             display: flex;
             align-items: center;
@@ -88,6 +142,9 @@
             text-decoration: none;
             color: #fff;
             transition: 0.3s;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
         }
 
         .nav-brand:hover {
@@ -97,7 +154,6 @@
 
         .nav-brand span {
             font-weight: 600;
-            font-size: 0.9rem;
         }
 
         .action-btn {
@@ -114,6 +170,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: inherit;
         }
 
         .action-btn:hover {
@@ -167,6 +224,7 @@
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.85rem;
+            font-family: inherit;
         }
 
         .mode-btn:hover {
@@ -304,6 +362,7 @@
             font-size: 1.1rem;
             outline: none;
             transition: 0.2s;
+            font-family: inherit;
         }
 
         .text-input:focus {
@@ -438,6 +497,138 @@
             color: rgba(255, 255, 255, 0.2);
         }
 
+        /* --- HOW TO USE MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-deep);
+            border: 1px solid var(--glass-border);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 30px;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .guide-step h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-step i {
+            color: var(--accent);
+        }
+
+        .guide-step p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            margin-top: 15px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
+
         @media (max-width: 900px) {
             .workspace {
                 flex-direction: column;
@@ -455,6 +646,7 @@
             .canvas-area {
                 height: 400px;
                 order: 1;
+                flex: none;
             }
         }
     </style>
@@ -463,12 +655,41 @@
 <body>
 
     <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
-        </a>
+        <div class="nav-left">
+            <a href="../index.php" class="nav-brand">
+                <i class="fas fa-chevron-left"></i> <span>Workspace</span>
+            </a>
+            <button id="openGuideBtn" class="nav-brand" style="background: transparent; border: none;">
+                <i class="fas fa-book"></i> <span>How to Use</span>
+            </button>
+        </div>
         <button class="action-btn" id="downloadBtn">
             <i class="fas fa-file-signature"></i> Download PNG
         </button>
+    </div>
+
+    <div id="guideModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="closeGuideBtn">&times;</button>
+            <h2>How to Use E-Signature Maker</h2>
+
+            <div class="guide-step">
+                <h4><i class="fas fa-pen-nib"></i> 1. Choose Your Input Mode</h4>
+                <p>Toggle between <strong>Draw (Pen)</strong> to manually sign your name using your mouse or touch screen, or <strong>Type (Font)</strong> to auto-generate a signature from elegant cursive fonts.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-sliders-h"></i> 2. Customize Style</h4>
+                <p>In Draw mode, adjust the ink color, stroke width, and pen style (Fountain simulates pressure for a realistic look). In Type mode, select your preferred handwriting font.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-crop-alt"></i> 3. Smart Export</h4>
+                <p>Click "Download PNG". The app will automatically detect your signature, crop out all the empty canvas space around it, and save it as a perfect transparent image ready for documents.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-shield-alt"></i> 100% Private</h4>
+                <p>All drawing, rendering, and cropping is done securely in your browser. Your signature data is never uploaded to any servers.</p>
+            </div>
+        </div>
     </div>
 
     <div class="ambient-light"></div>
@@ -550,6 +771,9 @@
                 <button class="action-btn" style="background:rgba(239, 68, 68, 0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.3); width:100%; justify-content:center;" onclick="clearCanvas()">
                     <i class="fas fa-trash-alt"></i> Clear Canvas
                 </button>
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                    <i class="fas fa-mug-hot"></i> Keep This Tool Free
+                </a>
             </div>
         </aside>
 
@@ -570,6 +794,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Modal Logic ---
+            const guideModal = document.getElementById('guideModal');
+            document.getElementById('openGuideBtn').addEventListener('click', () => guideModal.classList.add('active'));
+            document.getElementById('closeGuideBtn').addEventListener('click', () => guideModal.classList.remove('active'));
+            guideModal.addEventListener('click', (e) => {
+                if (e.target === guideModal) guideModal.classList.remove('active');
+            });
+
+            // --- Canvas Logic ---
             const canvas = document.getElementById('signCanvas');
             const ctx = canvas.getContext('2d');
             const helperText = document.getElementById('helperText');
@@ -594,7 +828,6 @@
 
             // --- 1. CANVAS SETUP ---
             function resizeCanvas() {
-                // Buffer content
                 const temp = document.createElement('canvas');
                 temp.width = canvas.width;
                 temp.height = canvas.height;
@@ -605,12 +838,11 @@
                 canvas.width = parent.clientWidth;
                 canvas.height = parent.clientHeight;
 
-                // Restore
                 if (currentMode === 'type') renderText();
                 else ctx.drawImage(temp, 0, 0);
             }
             window.addEventListener('resize', resizeCanvas);
-            setTimeout(resizeCanvas, 100); // Initial resize
+            setTimeout(resizeCanvas, 100);
 
             // --- 2. PHYSICS DRAWING ENGINE ---
             function getPointerPos(e) {
@@ -631,7 +863,6 @@
                 const p = getPointerPos(e);
                 points = [p];
 
-                // Initial dot
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, penSize / 2, 0, Math.PI * 2);
                 ctx.fillStyle = inkColor;
@@ -644,27 +875,23 @@
                 const p = getPointerPos(e);
                 points.push(p);
 
-                // Streamline Buffer
                 if (points.length > smoothingFactor) {
                     const i = points.length - smoothingFactor - 1;
-                    // Draw curve between history points
                     drawCurveSegment(points[i], points[i + 1]);
                 }
             }
 
             function drawCurveSegment(p1, p2) {
-                // Calculate velocity for pressure simulation
                 const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-                // Fountain pen logic: Faster = Thinner
                 let width = penSize;
 
                 if (penType === 'fountain') {
                     const velocity = Math.min(dist, 10);
                     width = Math.max(penSize * 0.4, penSize - (velocity * 0.2));
                 } else if (penType === 'marker') {
-                    width = penSize; // Constant
+                    width = penSize;
                 } else if (penType === 'fine') {
-                    width = 1; // Constant fine
+                    width = 1;
                 }
 
                 ctx.beginPath();
@@ -680,7 +907,6 @@
             function endDraw() {
                 if (!isDrawing) return;
                 isDrawing = false;
-                // Draw remaining buffer points
                 for (let i = Math.max(0, points.length - smoothingFactor - 1); i < points.length - 1; i++) {
                     drawCurveSegment(points[i], points[i + 1]);
                 }
@@ -701,15 +927,12 @@
             window.addEventListener('touchend', endDraw);
 
             // --- 3. CONTROLS ---
-
-            // Pen Type
             window.setPenType = (type, el) => {
                 penType = type;
                 document.querySelectorAll('.pen-type').forEach(b => b.classList.remove('active'));
                 el.classList.add('active');
             };
 
-            // Ink
             window.setInk = (c, el) => {
                 inkColor = c;
                 document.querySelectorAll('.colors-row .color-dot').forEach(d => d.classList.remove('active'));
@@ -726,7 +949,6 @@
                 document.getElementById('smoothVal').innerText = smoothingFactor;
             });
 
-            // Mode Switch
             window.switchMode = (mode) => {
                 currentMode = mode;
                 document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -786,7 +1008,7 @@
 
             window.undo = () => {
                 if (history.length > 0) {
-                    history.pop(); // Remove current
+                    history.pop();
                     const prev = history[history.length - 1];
                     if (prev) {
                         const img = new Image();
@@ -812,19 +1034,16 @@
                 }
             };
 
-            // Toggle BG (White/Dark/Transparent)
-            let bgState = 0; // 0: White, 1: Transparent, 2: Dark
+            let bgState = 0;
             window.toggleBg = () => {
                 bgState = (bgState + 1) % 3;
-                canvas.className = 'drawing-pad'; // reset
+                canvas.className = 'drawing-pad';
                 if (bgState === 1) canvas.classList.add('transparent');
                 if (bgState === 2) canvas.classList.add('dark');
             };
 
-            // Hash Generator (Mock SHA)
             async function updateHash() {
                 const data = canvas.toDataURL();
-                // Simple hash sim
                 let hash = 0;
                 for (let i = 0; i < data.length; i++) {
                     const char = data.charCodeAt(i);
@@ -843,7 +1062,6 @@
                     return;
                 }
 
-                // 1. Get Bounding Box
                 const w = canvas.width,
                     h = canvas.height;
                 const pix = ctx.getImageData(0, 0, w, h).data;
@@ -868,7 +1086,6 @@
 
                 if (!found) return;
 
-                // Add Padding
                 const pad = 20;
                 minX = Math.max(0, minX - pad);
                 minY = Math.max(0, minY - pad);
@@ -877,7 +1094,6 @@
                 const cw = maxX - minX;
                 const ch = maxY - minY;
 
-                // 2. Crop to new Canvas
                 const cropC = document.getElementById('cropCanvas');
                 cropC.width = cw;
                 cropC.height = ch;

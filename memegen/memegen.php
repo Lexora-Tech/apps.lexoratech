@@ -1,30 +1,364 @@
-<?php
-header("Cross-Origin-Embedder-Policy: require-corp");
-header("Cross-Origin-Opener-Policy: same-origin");
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MemeForge | Titanium</title>
 
+    <title>MemeForge | Free Online Meme Generator & Maker</title>
+    <meta name="title" content="MemeForge | Free Online Meme Generator & Maker">
+    <meta name="description" content="Create custom memes instantly. Free online meme generator with popular templates, deep fryer effects, and custom stickers. No watermarks, 100% private.">
+    <meta name="keywords" content="meme generator, free meme maker, deep fried meme creator, online meme editor, add text to image, custom meme templates, make a meme online, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/memegen/memegen.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/memegen/memegen.php">
+    <meta property="og:title" content="MemeForge - Ultimate Meme Creator">
+    <meta property="og:description" content="Generate high-quality memes, add text, stickers, and deep-fry effects directly in your browser.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-meme.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/memegen/memegen.php">
+    <meta name="twitter:title" content="MemeForge - Ultimate Meme Creator">
+    <meta name="twitter:description" content="Generate high-quality memes, add text, stickers, and deep-fry effects directly in your browser.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-meme.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "MemeForge Generator",
+            "url": "https://apps.lexoratech.com/memegen/memegen.php",
+            "description": "An advanced online meme generation tool. Features include text overlays, custom stickers, deep fryer distortion effects, and layer management.",
+            "applicationCategory": "DesignApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Popular Meme Templates",
+                "Deep Fryer Image Distortion",
+                "Layer Management",
+                "Custom Text Formatting",
+                "Sticker Integration"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/memegen.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
+
+    <style>
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #ec4899;
+            border-bottom-color: #ec4899;
+            background: rgba(236, 72, 153, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #ec4899;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: calc(100% - 40px);
+            /* Account for padding */
+            margin: auto 20px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
+    </style>
 </head>
 
 <body>
+
+    <div class="sr-only">
+        <h2>Free Online Meme Maker & Deep Fryer</h2>
+        <p>MemeForge by Lexora Workspace is a fully-featured, free online meme generator. Easily create viral internet content by uploading your own images or choosing from our library of popular meme templates. Add customizable impact font text, overlay stickers, and draw directly on the canvas. Want to make your meme "dank"? Use our advanced Deep Fryer tool to crank up the noise and saturation levels. All editing is done locally in your browser to protect your privacy. No watermarks, no registration required. Export your creations instantly as high-quality image files.</p>
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">MemeForge Guide</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Pro Features</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="help-body">
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Add an Image:</strong> Drag & drop an image onto the canvas, click "Upload Image" in the left sidebar, or select a pre-made template.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Add Text & Elements:</strong> Click the "Text" or "Draw" buttons floating below the canvas. You can also drag stickers from the left sidebar directly onto your meme.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Format & Export:</strong> Use the right sidebar to change text colors, arrange layers, or apply Deep Fry effects. Click Export to save your image.</div>
+                    </div>
+                </div>
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-fire" style="color:#ec4899;"></i> Deep Fryer</h3>
+                    <p>Make your memes "dank". Use the Crunch and Saturation sliders in the right sidebar to heavily distort the image colors and add noise artifacts.</p>
+
+                    <h3><i class="fas fa-layer-group" style="color:#ec4899;"></i> Layer Management</h3>
+                    <p>MemeForge supports full layer control. In the right sidebar under "LAYERS", you can drag items to reorder them, delete specific elements, or select text layers to edit their contents.</p>
+
+                    <h3><i class="fas fa-radiation" style="color:#ec4899;"></i> The Nuke Button</h3>
+                    <p>Messed up? Click the red Nuke button below the canvas to instantly wipe everything and start over from scratch.</p>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>MemeForge operates entirely within your browser.</p>
+                    <div style="background:rgba(236, 72, 153, 0.1); border:1px solid rgba(236, 72, 153, 0.3); padding:15px; border-radius:8px; color:#fbcfe8; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> All image rendering, filtering, and text overlaying is done locally via HTML5 Canvas. Your photos are never uploaded or stored on our servers.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#ec4899; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#ec4899; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#ec4899; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="app-shell">
 
         <header class="app-header">
             <div class="header-left">
                 <button class="mobile-btn" id="toggleLeft"><i class="fas fa-th-large"></i></button>
-                <a href="../index.php" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-                <div class="logo">MemeForge <span class="tag">MAX</span></div>
+                <a href="../index.php" class="back-btn" title="Back to Workspace"><i class="fas fa-arrow-left"></i></a>
+
+                <h1 class="logo" style="margin:0; font-size:inherit; font-weight:inherit; display:flex; align-items:center;">
+                    MemeForge <span class="tag">MAX</span>
+                </h1>
 
                 <div class="history-stack">
                     <button class="icon-btn" id="undoBtn" title="Undo"><i class="fas fa-undo"></i></button>
@@ -33,7 +367,9 @@ header("Cross-Origin-Opener-Policy: same-origin");
             </div>
 
             <div class="header-right">
-                <button id="resetBtn" class="icon-btn danger" title="Clear"><i class="fas fa-trash"></i></button>
+                <button id="helpBtnHeader" class="icon-btn" title="How to use"><i class="fas fa-question-circle"></i></button>
+
+                <button id="resetBtn" class="icon-btn danger" title="Clear Canvas"><i class="fas fa-trash"></i></button>
                 <button id="exportBtn" class="action-btn glow">
                     <span>Export</span> <i class="fas fa-save"></i>
                 </button>
@@ -43,7 +379,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
 
         <main class="workspace">
 
-            <aside class="sidebar left" id="leftSidebar">
+            <aside class="sidebar left" id="leftSidebar" style="display: flex; flex-direction: column;">
                 <div class="sidebar-header mobile-only">
                     <h3>Assets</h3>
                     <button class="close-sidebar" id="closeLeft"><i class="fas fa-times"></i></button>
@@ -54,7 +390,7 @@ header("Cross-Origin-Opener-Policy: same-origin");
                     <button class="tab" data-target="stickers">Stickers</button>
                 </div>
 
-                <div id="tab-upload" class="tab-content active">
+                <div id="tab-upload" class="tab-content active" style="flex: 1; overflow-y: auto;">
                     <div class="upload-zone">
                         <label for="imgUpload" class="upload-box">
                             <i class="fas fa-cloud-upload-alt"></i>
@@ -68,10 +404,14 @@ header("Cross-Origin-Opener-Policy: same-origin");
                     </div>
                 </div>
 
-                <div id="tab-stickers" class="tab-content">
+                <div id="tab-stickers" class="tab-content" style="flex: 1; overflow-y: auto;">
                     <div class="grid-3" id="stickerGrid">
                     </div>
                 </div>
+
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                    <i class="fas fa-mug-hot"></i> Support Tool
+                </a>
             </aside>
 
             <section class="canvas-stage">
@@ -154,6 +494,40 @@ header("Cross-Origin-Opener-Policy: same-origin");
     </div>
 
     <script src="./js/memegen.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtnHeader');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => {
+                    helpModal.classList.remove('hidden');
+                });
+                closeHelp.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                });
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) {
+                        helpModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
+    </script>
 
 </body>
 

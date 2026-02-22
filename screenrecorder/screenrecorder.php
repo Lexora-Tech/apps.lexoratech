@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Master Recorder | Lexora</title>
-    
+
+    <title>Master Recorder | Free Online Screen & Webcam Recorder</title>
+    <meta name="title" content="Master Recorder | Free Online Screen & Webcam Recorder">
+    <meta name="description" content="Record your screen, webcam, system audio, and microphone simultaneously. A professional, browser-based broadcast studio by Lexora Workspace. No installation required.">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/master-recorder/">
+    <meta property="og:title" content="Master Recorder | Lexora Workspace">
+    <meta property="og:description" content="Record your screen, webcam, and audio simultaneously directly from your browser. Free & Private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-recorder.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Master Recorder | Lexora Workspace">
+    <meta name="twitter:description" content="Record your screen, webcam, and audio simultaneously directly from your browser. Free & Private.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-recorder.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Master Recorder",
+            "url": "https://apps.lexoratech.com/master-recorder/",
+            "description": "A free online screen recording utility. Features include picture-in-picture webcam, custom watermarks, and multi-track audio mixing.",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Screen and Webcam Recording",
+                "System Audio & Microphone Mixing",
+                "Picture-in-Picture & Split Screen Layouts",
+                "1080p Local Rendering",
+                "Client-Side Processing (No Server Uploads)"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -16,12 +63,19 @@
             --bg-deep: #020203;
             --glass-panel: rgba(20, 20, 20, 0.85);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --accent: #ef4444; /* Red */
+            --accent: #ef4444;
+            /* Red */
             --text-main: #ffffff;
             --text-muted: #9ca3b8;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             background-color: var(--bg-deep);
@@ -29,153 +83,519 @@
             color: var(--text-main);
             height: 100vh;
             overflow: hidden;
+            /* Prevent scrolling, keeps app full-screen */
             display: flex;
             flex-direction: column;
         }
 
         .ambient-light {
-            position: fixed; inset: 0; pointer-events: none; z-index: -1;
-            background: 
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background:
                 radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.06), transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.06), transparent 40%);
         }
+
         .grid-bg {
-            position: fixed; inset: 0; z-index: -1; opacity: 0.15;
-            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.15;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
         }
 
         /* --- HEADER --- */
         .top-bar {
-            height: 60px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;
-            z-index: 100; border-bottom: 1px solid var(--glass-border); background: rgba(5,5,5,0.8); backdrop-filter: blur(10px);
+            height: 60px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
         }
+
+        .nav-left {
+            display: flex;
+            gap: 15px;
+        }
+
         .nav-brand {
-            display: flex; align-items: center; gap: 10px; 
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-            padding: 6px 16px; border-radius: 50px; text-decoration: none; color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 6px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
             transition: 0.3s;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
         }
-        .nav-brand:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
-        .nav-brand span { font-weight: 600; font-size: 0.9rem; }
+
+        .nav-brand:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-brand span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
 
         .rec-status {
-            display: flex; align-items: center; gap: 12px;
-            background: rgba(20, 20, 20, 0.8); border: 1px solid var(--glass-border);
-            padding: 6px 16px; border-radius: 50px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-            opacity: 0; transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--glass-border);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: 0.3s;
         }
-        .rec-status.active { opacity: 1; border-color: var(--accent); }
-        .rec-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 1s infinite; }
-        .file-size { color: var(--text-muted); border-left: 1px solid rgba(255,255,255,0.1); padding-left: 10px; }
 
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .rec-status.active {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
+        .rec-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .file-size {
+            color: var(--text-muted);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 10px;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
 
         /* --- WORKSPACE --- */
         .workspace {
-            flex: 1; display: flex; gap: 20px; padding: 20px;
-            max-width: 1600px; margin: 0 auto; width: 100%; overflow: hidden;
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
         }
 
         /* LEFT: CONTROLS */
         .controls-panel {
-            flex: 0 0 340px; display: flex; flex-direction: column; gap: 20px;
-            background: var(--glass-panel); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 20px; overflow-y: auto; height: 100%;
+            flex: 0 0 340px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: var(--glass-panel);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
         }
 
-        .section-title { font-size: 0.75rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        .section-title {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
 
         /* Device Selects */
         .device-select {
-            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            color: #fff; padding: 10px; border-radius: 8px; font-size: 0.85rem; outline: none;
-            margin-bottom: 5px; cursor: pointer; transition: 0.2s;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .device-select:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); }
-        .device-select option { background: #111; color: #fff; }
+
+        .device-select:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .device-select option {
+            background: #111;
+            color: #fff;
+        }
 
         /* Checkbox Option */
         .check-opt {
-            display: flex; align-items: center; gap: 10px; cursor: pointer;
-            background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;
-            border: 1px solid var(--glass-border); transition: 0.2s; flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            transition: 0.2s;
+            flex: 1;
         }
-        .check-opt:hover { background: rgba(255,255,255,0.05); }
-        .check-opt input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
-        .check-opt span { font-size: 0.85rem; color: #ccc; font-weight: 500; }
+
+        .check-opt:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .check-opt input {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .check-opt span {
+            font-size: 0.85rem;
+            color: #ccc;
+            font-weight: 500;
+        }
 
         .sys-audio-note {
-            font-size: 0.75rem; color: #fbbf24; margin-top: 5px; display: flex; align-items: center; gap: 5px;
-            background: rgba(251, 191, 36, 0.1); padding: 8px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.2);
+            font-size: 0.75rem;
+            color: #fbbf24;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
         /* Scene Grid */
-        .scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .scene-btn {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-            border-radius: 8px; padding: 12px; cursor: pointer; text-align: center;
-            color: #ccc; font-size: 0.8rem; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 5px;
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
-        .scene-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-        .scene-btn.active { border-color: var(--accent); background: rgba(239, 68, 68, 0.1); color: #fff; }
+
+        .scene-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+            color: #ccc;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .scene-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .scene-btn.active {
+            border-color: var(--accent);
+            background: rgba(239, 68, 68, 0.1);
+            color: #fff;
+        }
 
         /* Audio Vis */
-        .audio-bar-wrap { height: 6px; background: #333; border-radius: 3px; overflow: hidden; margin-top: 5px; }
-        .audio-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s; }
+        .audio-bar-wrap {
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .audio-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            transition: width 0.1s;
+        }
 
         /* Main Buttons */
-        .main-actions { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
-        .btn-xl {
-            width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700;
-            font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
+        .main-actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .btn-record { background: #fff; color: #000; }
-        .btn-record:hover { box-shadow: 0 0 20px rgba(255,255,255,0.3); transform: translateY(-2px); }
-        .btn-record.recording { background: var(--accent); color: #fff; animation: pulse-shadow 2s infinite; }
-        .btn-dl { background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); display: none; }
-        
-        @keyframes pulse-shadow { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+
+        .btn-xl {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-record {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-record:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-record.recording {
+            background: var(--accent);
+            color: #fff;
+            animation: pulse-shadow 2s infinite;
+        }
+
+        .btn-dl {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: none;
+        }
+
+        @keyframes pulse-shadow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
 
         /* RIGHT: VIEWPORT */
         .viewport-area {
-            flex: 1; display: flex; flex-direction: column; 
-            background: #000; border-radius: 20px; border: 1px solid var(--glass-border);
-            position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
         }
 
-        canvas#compositor { width: 100%; height: 100%; object-fit: contain; cursor: crosshair; display: block; }
-        
-        .placeholder {
-            position: absolute; inset: 0; display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; color: var(--text-muted); pointer-events: none; z-index: 10;
-            background: #050505; transition: 0.3s;
+        canvas#compositor {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: crosshair;
+            display: block;
         }
-        .placeholder i { font-size: 4rem; color: #222; margin-bottom: 20px; }
+
+        .placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            pointer-events: none;
+            z-index: 10;
+            background: #050505;
+            transition: 0.3s;
+        }
+
+        .placeholder i {
+            font-size: 4rem;
+            color: #222;
+            margin-bottom: 20px;
+        }
 
         /* Hidden Video Sources */
-        .sources-hidden { 
-            position: absolute; top: -9999px; left: -9999px; 
-            opacity: 0; pointer-events: none; z-index: -100;
+        .sources-hidden {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -100;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-deep);
+            border: 1px solid var(--glass-border);
+            width: 90%;
+            max-width: 650px;
+            border-radius: 16px;
+            padding: 30px;
+            color: var(--text-muted);
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .modal-content h3 {
+            color: #fff;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .modal-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .guide-step h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-step i {
+            color: var(--accent);
+        }
+
+        .guide-step p {
+            margin: 0;
+            font-size: 0.95rem;
         }
 
         @media (max-width: 900px) {
-            .workspace { flex-direction: column; padding: 15px; }
-            .controls-panel { width: 100%; flex: none; height: auto; max-height: 50vh; order: 2; }
-            .viewport-area { width: 100%; height: 40vh; order: 1; }
+            .workspace {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .controls-panel {
+                width: 100%;
+                flex: none;
+                height: auto;
+                max-height: 50vh;
+                order: 2;
+            }
+
+            .viewport-area {
+                width: 100%;
+                height: 40vh;
+                order: 1;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
-        </a>
+        <div class="nav-left">
+            <a href="../index.php" class="nav-brand">
+                <i class="fas fa-chevron-left"></i> <span>Workspace</span>
+            </a>
+            <button id="openGuideBtn" class="nav-brand" style="background: transparent; border: none;">
+                <i class="fas fa-book"></i> <span>How to Use</span>
+            </button>
+        </div>
         <div class="rec-status" id="recStatus">
             <div class="rec-dot"></div>
             <span id="timer">00:00:00</span>
@@ -183,13 +603,39 @@
         </div>
     </div>
 
+    <div id="guideModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="closeGuideBtn">&times;</button>
+            <h2>Free Online Screen & Webcam Recorder</h2>
+            <p>Master Recorder by LexoraTech is an advanced online broadcast studio. Because all video rendering and audio mixing happens locally on your device, your recordings remain 100% private with absolutely zero server uploads.</p>
+
+            <h3>How to Use Master Recorder</h3>
+
+            <div class="guide-step">
+                <h4><i class="fas fa-video"></i> 1. Select Your Sources</h4>
+                <p>Use the left control panel to pick your preferred Webcam and Microphone from the dropdown lists. Check the boxes to activate them.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-layer-group"></i> 2. Choose a Layout</h4>
+                <p>Select how you want to present your content. Choose PiP (Picture-in-Picture) to place your camera in the corner, or Split to put your camera and screen side-by-side.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-volume-up"></i> 3. Mix Your Audio</h4>
+                <p>If you are sharing a presentation with sound, ensure "Record Desktop Audio" is checked. <strong>Important:</strong> When your browser asks what screen to share, toggle "Share audio" in that specific popup window!</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-record-vinyl"></i> 4. Start & Save</h4>
+                <p>Click "Start Recording". Once you are finished presenting, click stop. A "Save Video" button will appear, allowing you to download the final high-quality `.webm` file instantly.</p>
+            </div>
+        </div>
+    </div>
+
     <div class="ambient-light"></div>
     <div class="grid-bg"></div>
 
     <div class="workspace">
-        
+
         <aside class="controls-panel">
-            
             <div>
                 <span class="section-title">Layout / Scene</span>
                 <div class="scene-grid">
@@ -227,20 +673,20 @@
 
             <div>
                 <span class="section-title">Audio Setup</span>
-                
+
                 <div style="margin-bottom:10px;">
                     <select id="micSelect" class="device-select">
                         <option value="">Detecting mics...</option>
                     </select>
                     <label class="check-opt">
-                        <input type="checkbox" id="micToggle"> 
+                        <input type="checkbox" id="micToggle">
                         <span>Record Microphone</span>
                     </label>
                 </div>
 
                 <div>
                     <label class="check-opt">
-                        <input type="checkbox" id="sysAudioToggle" checked> 
+                        <input type="checkbox" id="sysAudioToggle" checked>
                         <span>Record Desktop Audio</span>
                     </label>
                     <div class="sys-audio-note">
@@ -297,7 +743,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
+
+            // --- UI Modal Logic ---
+            const guideModal = document.getElementById('guideModal');
+
+            document.getElementById('openGuideBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                guideModal.classList.add('active');
+            });
+
+            document.getElementById('closeGuideBtn').addEventListener('click', () => {
+                guideModal.classList.remove('active');
+            });
+
+            guideModal.addEventListener('click', (e) => {
+                if (e.target === guideModal) guideModal.classList.remove('active');
+            });
+
             // --- ELEMENTS ---
             const screenVideo = document.getElementById('screenVideo');
             const camVideo = document.getElementById('camVideo');
@@ -305,7 +767,7 @@
             const canvas = document.getElementById('compositor');
             const ctx = canvas.getContext('2d');
             const placeholder = document.getElementById('placeholder');
-            
+
             // UI
             const recordBtn = document.getElementById('recordBtn');
             const dlBtn = document.getElementById('dlBtn');
@@ -313,7 +775,7 @@
             const timerEl = document.getElementById('timer');
             const sizeEl = document.getElementById('fileSize');
             const audioMeter = document.getElementById('audioMeter');
-            
+
             // Settings
             const camToggle = document.getElementById('camToggle');
             const camSelect = document.getElementById('camSelect');
@@ -340,14 +802,16 @@
             // --- 1. DEVICE LISTING ---
             async function getDevices() {
                 try {
-                    // Trigger permission request to get labels
-                    const temp = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+                    const temp = await navigator.mediaDevices.getUserMedia({
+                        audio: true,
+                        video: true
+                    });
                     temp.getTracks().forEach(t => t.stop());
-                    
+
                     const devices = await navigator.mediaDevices.enumerateDevices();
                     camSelect.innerHTML = '';
                     micSelect.innerHTML = '';
-                    
+
                     devices.forEach(d => {
                         const opt = document.createElement('option');
                         opt.value = d.deviceId;
@@ -355,19 +819,19 @@
                         if (d.kind === 'videoinput') camSelect.appendChild(opt);
                         if (d.kind === 'audioinput') micSelect.appendChild(opt);
                     });
-                    
-                    // Trigger initial mic vis if checkbox checked (default off)
-                    if(micToggle.checked && micSelect.value) setupMic(micSelect.value);
 
-                } catch(e) { console.warn("Device Enum Error", e); }
+                    if (micToggle.checked && micSelect.value) setupMic(micSelect.value);
+
+                } catch (e) {
+                    console.warn("Device Enum Error", e);
+                }
             }
             getDevices();
 
             // --- 2. SOURCE HANDLING ---
-            
             logoInput.addEventListener('change', (e) => {
                 const file = e.target.files[0];
-                if(file) {
+                if (file) {
                     const reader = new FileReader();
                     reader.onload = evt => logoImg.src = evt.target.result;
                     reader.readAsDataURL(file);
@@ -376,24 +840,31 @@
 
             // Camera Logic
             camToggle.addEventListener('change', async (e) => {
-                if(e.target.checked) {
+                if (e.target.checked) {
                     const devId = camSelect.value;
                     try {
                         const stream = await navigator.mediaDevices.getUserMedia({
-                            video: { 
-                                deviceId: devId ? { exact: devId } : undefined, 
-                                width: { ideal: 1280 }, height: { ideal: 720 } 
+                            video: {
+                                deviceId: devId ? {
+                                    exact: devId
+                                } : undefined,
+                                width: {
+                                    ideal: 1280
+                                },
+                                height: {
+                                    ideal: 720
+                                }
                             }
                         });
                         camVideo.srcObject = stream;
                         await camVideo.play();
                         state.hasCam = true;
-                    } catch(err) {
+                    } catch (err) {
                         alert("Camera Error: " + err.message);
                         e.target.checked = false;
                     }
                 } else {
-                    if(camVideo.srcObject) {
+                    if (camVideo.srcObject) {
                         camVideo.srcObject.getTracks().forEach(t => t.stop());
                         camVideo.srcObject = null;
                         state.hasCam = false;
@@ -402,40 +873,47 @@
             });
 
             camSelect.addEventListener('change', () => {
-                if(camToggle.checked) { camToggle.checked = false; camToggle.click(); }
+                if (camToggle.checked) {
+                    camToggle.checked = false;
+                    camToggle.click();
+                }
             });
 
             // Mic Logic
             micToggle.addEventListener('change', (e) => {
-                if(e.target.checked) {
+                if (e.target.checked) {
                     setupMic(micSelect.value);
                 } else {
-                    if(audioCtx) audioCtx.close();
+                    if (audioCtx) audioCtx.close();
                     audioMeter.style.width = '0%';
                 }
             });
 
             async function setupMic(deviceId) {
-                if(audioCtx && audioCtx.state !== 'closed') audioCtx.close();
+                if (audioCtx && audioCtx.state !== 'closed') audioCtx.close();
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({
-                        audio: { deviceId: deviceId ? { exact: deviceId } : undefined }
+                        audio: {
+                            deviceId: deviceId ? {
+                                exact: deviceId
+                            } : undefined
+                        }
                     });
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
                     analyser = audioCtx.createAnalyser();
                     micSource = audioCtx.createMediaStreamSource(stream);
                     micSource.connect(analyser);
                     analyser.fftSize = 32;
                     drawMeter();
-                } catch(e){}
+                } catch (e) {}
             }
 
             function drawMeter() {
-                if(!analyser || !micToggle.checked) return;
+                if (!analyser || !micToggle.checked) return;
                 const data = new Uint8Array(analyser.frequencyBinCount);
                 analyser.getByteFrequencyData(data);
                 let sum = 0;
-                for(let i=0; i<data.length; i++) sum += data[i];
+                for (let i = 0; i < data.length; i++) sum += data[i];
                 const avg = sum / data.length;
                 audioMeter.style.width = Math.min(100, avg * 3) + '%';
                 requestAnimationFrame(drawMeter);
@@ -446,50 +924,51 @@
             });
 
             // --- 3. RECORDING (AUDIO MIXER) ---
-            
             window.toggleRecording = async () => {
-                if(!state.recording) {
+                if (!state.recording) {
                     try {
-                        // 1. Get Screen (Ask for System Audio)
                         const displayStream = await navigator.mediaDevices.getDisplayMedia({
-                            video: { 
-                                displaySurface: "monitor", 
-                                width: { ideal: 1920 }, height: { ideal: 1080 },
-                                frameRate: 60 
+                            video: {
+                                displaySurface: "monitor",
+                                width: {
+                                    ideal: 1920
+                                },
+                                height: {
+                                    ideal: 1080
+                                },
+                                frameRate: 60
                             },
                             audio: sysAudioToggle.checked
                         });
-                        
-                        // Set Canvas to Native Resolution
+
                         const track = displayStream.getVideoTracks()[0];
                         const settings = track.getSettings();
                         canvas.width = settings.width || 1920;
                         canvas.height = settings.height || 1080;
-                        
+
                         screenVideo.srcObject = displayStream;
                         await screenVideo.play();
-                        
+
                         state.hasScreen = true;
                         placeholder.style.opacity = 0;
                         ctx.imageSmoothingQuality = 'high';
                         renderLoop();
 
-                        // 2. Audio Mixer (The Fix)
                         const mixCtx = new AudioContext();
                         const dest = mixCtx.createMediaStreamDestination();
-                        
-                        // Add System Audio
-                        if(displayStream.getAudioTracks().length > 0) {
+
+                        if (displayStream.getAudioTracks().length > 0) {
                             const sysSource = mixCtx.createMediaStreamSource(displayStream);
                             sysSource.connect(dest);
                         }
 
-                        // Add Mic Audio
-                        if(micToggle.checked && micSelect.value) {
+                        if (micToggle.checked && micSelect.value) {
                             try {
                                 const micStream = await navigator.mediaDevices.getUserMedia({
-                                    audio: { 
-                                        deviceId: { exact: micSelect.value },
+                                    audio: {
+                                        deviceId: {
+                                            exact: micSelect.value
+                                        },
                                         echoCancellation: true,
                                         autoGainControl: true,
                                         noiseSuppression: true
@@ -497,32 +976,33 @@
                                 });
                                 const mSource = mixCtx.createMediaStreamSource(micStream);
                                 mSource.connect(dest);
-                            } catch(e) { console.warn("Mic mix error", e); }
+                            } catch (e) {
+                                console.warn("Mic mix error", e);
+                            }
                         }
 
-                        // 3. Final Stream
                         const canvasStream = canvas.captureStream(60);
                         const finalTracks = [...canvasStream.getVideoTracks()];
-                        // If we have mixed audio, add it
-                        if(dest.stream.getAudioTracks().length > 0) {
+
+                        if (dest.stream.getAudioTracks().length > 0) {
                             finalTracks.push(dest.stream.getAudioTracks()[0]);
-                        } else if(displayStream.getAudioTracks().length > 0) {
-                            // Fallback if mic off but sys audio on (direct add)
+                        } else if (displayStream.getAudioTracks().length > 0) {
                             finalTracks.push(displayStream.getAudioTracks()[0]);
                         }
 
                         const finalStream = new MediaStream(finalTracks);
-
-                        // 4. Recorder
-                        const options = { mimeType: 'video/webm; codecs=vp9', videoBitsPerSecond: 15000000 }; // 15 Mbps
+                        const options = {
+                            mimeType: 'video/webm; codecs=vp9',
+                            videoBitsPerSecond: 15000000
+                        };
                         if (!MediaRecorder.isTypeSupported(options.mimeType)) options.mimeType = 'video/webm';
-                        
+
                         mediaRecorder = new MediaRecorder(finalStream, options);
 
                         chunks = [];
                         let totalSize = 0;
                         mediaRecorder.ondataavailable = e => {
-                            if(e.data.size > 0) {
+                            if (e.data.size > 0) {
                                 chunks.push(e.data);
                                 totalSize += e.data.size;
                                 sizeEl.innerText = (totalSize / 1048576).toFixed(1) + ' MB';
@@ -536,9 +1016,9 @@
                             recordBtn.innerHTML = '<div class="rec-dot" style="background:red;"></div> Start Recording';
                             recStatus.classList.remove('active');
                             dlBtn.style.display = 'flex';
-                            
+
                             displayStream.getTracks().forEach(t => t.stop());
-                            mixCtx.close(); // Clean up audio context
+                            mixCtx.close();
                             state.hasScreen = false;
                             cancelAnimationFrame(animId);
                             placeholder.style.opacity = 1;
@@ -546,14 +1026,14 @@
 
                         mediaRecorder.start(1000);
                         state.recording = true;
-                        
+
                         recordBtn.classList.add('recording');
                         recordBtn.innerHTML = '<i class="fas fa-stop"></i> Stop Recording';
                         recStatus.classList.add('active');
                         dlBtn.style.display = 'none';
                         startTimer();
 
-                    } catch(e) {
+                    } catch (e) {
                         console.error(e);
                         alert("Recording Error: " + e.message);
                     }
@@ -564,42 +1044,42 @@
 
             // --- 4. COMPOSITOR ---
             function renderLoop() {
-                if(!state.hasScreen) return;
+                if (!state.hasScreen) return;
 
                 ctx.fillStyle = "#000";
-                ctx.fillRect(0,0,canvas.width, canvas.height);
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Scenes
-                if(state.scene === 'pip') {
+                if (state.scene === 'pip') {
                     ctx.drawImage(screenVideo, 0, 0, canvas.width, canvas.height);
-                    if(state.hasCam) {
+                    if (state.hasCam) {
                         ctx.save();
                         ctx.filter = document.getElementById('camFilter').value;
-                        const w = canvas.width * 0.2; 
-                        const h = w * 0.75; 
+                        const w = canvas.width * 0.2;
+                        const h = w * 0.75;
                         const pad = canvas.width * 0.02;
                         ctx.drawImage(camVideo, canvas.width - w - pad, canvas.height - h - pad, w, h);
-                        ctx.strokeStyle = "#fff"; ctx.lineWidth = 4;
+                        ctx.strokeStyle = "#fff";
+                        ctx.lineWidth = 4;
                         ctx.strokeRect(canvas.width - w - pad, canvas.height - h - pad, w, h);
                         ctx.restore();
                     }
-                } 
-                else if (state.scene === 'split') {
+                } else if (state.scene === 'split') {
                     const half = canvas.width / 2;
-                    ctx.drawImage(screenVideo, 0, canvas.height*0.2, half, half * (9/16));
-                    if(state.hasCam) {
-                        ctx.save(); ctx.filter = document.getElementById('camFilter').value;
-                        ctx.drawImage(camVideo, half, canvas.height*0.2, half, half * (3/4));
+                    ctx.drawImage(screenVideo, 0, canvas.height * 0.2, half, half * (9 / 16));
+                    if (state.hasCam) {
+                        ctx.save();
+                        ctx.filter = document.getElementById('camFilter').value;
+                        ctx.drawImage(camVideo, half, canvas.height * 0.2, half, half * (3 / 4));
                         ctx.restore();
                     }
-                }
-                else {
+                } else {
                     ctx.drawImage(screenVideo, 0, 0, canvas.width, canvas.height);
                 }
 
-                // Logo
-                if(logoImg.src) {
-                    try { ctx.drawImage(logoImg, canvas.width - 150, 40, 100, 100 * (logoImg.height/logoImg.width)); } catch(e){}
+                if (logoImg.src) {
+                    try {
+                        ctx.drawImage(logoImg, canvas.width - 150, 40, 100, 100 * (logoImg.height / logoImg.width));
+                    } catch (e) {}
                 }
 
                 animId = requestAnimationFrame(renderLoop);
@@ -613,7 +1093,9 @@
             };
 
             window.downloadVideo = () => {
-                const blob = new Blob(chunks, { type: "video/webm" });
+                const blob = new Blob(chunks, {
+                    type: "video/webm"
+                });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
@@ -631,5 +1113,19 @@
 
         });
     </script>
+
+    <script
+        data-name="BMC-Widget"
+        data-cfasync="false"
+        src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+        data-id="LexoraTech"
+        data-description="Support me on Buy me a coffee!"
+        data-message=""
+        data-color="#ef4444"
+        data-position="Right"
+        data-x_margin="18"
+        data-y_margin="18">
+    </script>
 </body>
+
 </html>

@@ -4,11 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThumbGrab | YouTube Thumbnail Downloader</title>
 
+    <title>ThumbGrab | Free YouTube Thumbnail Downloader</title>
+    <meta name="title" content="ThumbGrab | Free YouTube Thumbnail Downloader">
+    <meta name="description" content="Download high-resolution YouTube thumbnails instantly for free. ThumbGrab extracts Max Res (1080p), High Quality, and Standard images. Convert to PNG or save as JPG.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, grab youtube thumbnail, save youtube thumbnail hd, youtube thumbnail grabber, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/thumbgrab/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/thumbgrab/">
+    <meta property="og:title" content="ThumbGrab | Free YouTube Thumbnail Downloader">
+    <meta property="og:description" content="Download high-resolution YouTube thumbnails instantly for free. Extract Max Res (1080p) images and convert to PNG.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-thumbgrab.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/thumbgrab/">
+    <meta name="twitter:title" content="ThumbGrab | Free YouTube Thumbnail Downloader">
+    <meta name="twitter:description" content="Download high-resolution YouTube thumbnails instantly for free. Extract Max Res (1080p) images and convert to PNG.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-thumbgrab.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "ThumbGrab Thumbnail Downloader",
+            "url": "https://apps.lexoratech.com/thumbgrab/",
+            "description": "A free online tool to easily extract and download high-resolution YouTube thumbnails in JPG and PNG formats.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Extract Max Resolution (1080p) Thumbnails",
+                "Instant JPG to PNG Conversion",
+                "One-click URL Copy",
+                "Local Grab History Tracking"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="../assets/logo/logo.png" />
 
     <style>
         :root {
@@ -74,7 +121,7 @@
             position: relative;
             font-family: 'Outfit', sans-serif;
             border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         .help-header {
@@ -94,12 +141,35 @@
             line-height: 1.7;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #ef4444; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .help-body h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .help-body h3 {
+            color: #ef4444;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .help-body p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .help-body ul,
+        .help-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #d1d5db;
+        }
+
+        .help-body li {
+            margin-bottom: 0.5rem;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -107,6 +177,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
@@ -114,9 +185,18 @@
             margin-bottom: 5px;
         }
 
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
 
         /* Help Button Style */
         .help-trigger {
@@ -134,7 +214,12 @@
             align-items: center;
             gap: 8px;
         }
-        .help-trigger:hover { background: rgba(239, 68, 68, 0.2); transform: translateY(-1px); color: #fff; }
+
+        .help-trigger:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-1px);
+            color: #fff;
+        }
 
         /* Legal Footer */
         .legal-footer {
@@ -146,6 +231,7 @@
             justify-content: center;
             gap: 20px;
         }
+
         .legal-footer a {
             color: var(--text-muted);
             text-decoration: none;
@@ -155,7 +241,10 @@
             gap: 6px;
             transition: color 0.2s;
         }
-        .legal-footer a:hover { color: #fff; }
+
+        .legal-footer a:hover {
+            color: #fff;
+        }
 
         .ambient-glow {
             position: fixed;
@@ -183,7 +272,6 @@
             background: rgba(5, 5, 5, 0.8);
         }
 
-        /* UPDATED BACK BUTTON STYLE */
         .back-link {
             text-decoration: none;
             color: var(--text-muted);
@@ -223,6 +311,8 @@
             align-items: center;
             gap: 10px;
             color: #fff;
+            margin: 0;
+            /* Important for semantic H1 upgrade */
         }
 
         .logo i {
@@ -247,7 +337,7 @@
             width: 100%;
         }
 
-        h1 {
+        .hero-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 3rem;
             margin-bottom: 10px;
@@ -522,7 +612,6 @@
             flex: 1;
         }
 
-        /* PNG Specific Button */
         .btn-png {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.2);
@@ -703,6 +792,58 @@
             display: none !important;
         }
 
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            margin: 40px auto 10px;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
+        }
+
         @media (max-width: 768px) {
             .results-grid {
                 grid-template-columns: 1fr;
@@ -734,18 +875,17 @@
 <body>
 
     <div class="ambient-glow"></div>
-
     <div id="toastBox" class="toast-container"></div>
 
     <div id="helpModal" class="hidden">
         <div class="help-modal-content">
             <div class="help-header">
                 <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
-                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                <button id="closeHelp" class="icon-btn" aria-label="Close Guide" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="help-body">
                 <p>ThumbGrab is the simplest way to extract high-resolution thumbnails from any YouTube video. It retrieves all available sizes (Max, High, Standard) instantly.</p>
 
@@ -777,32 +917,32 @@
         </div>
     </div>
 
-    <div id="imageModal" class="modal">
-        <i class="fas fa-times modal-close" id="modalClose"></i>
-        <img id="modalImg" src="" alt="Full Preview">
+    <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-label="Image Preview">
+        <i class="fas fa-times modal-close" id="modalClose" aria-label="Close Image Preview" role="button" tabindex="0"></i>
+        <img id="modalImg" src="" alt="Full Resolution Thumbnail Preview">
     </div>
 
     <header class="top-nav">
-        <a href="../index.php" class="back-link">
+        <a href="../index.php" class="back-link" aria-label="Back to Lexora Workspace">
             <i class="fas fa-arrow-left"></i> <span>Back To Workspace</span>
         </a>
-        <div class="logo"><i class="fab fa-youtube"></i> ThumbGrab</div>
+        <h1 class="logo"><i class="fab fa-youtube"></i> ThumbGrab</h1>
     </header>
 
     <main class="content">
 
         <div class="hero-section">
-            <h1>Unlock Full Resolution.</h1>
+            <h2 class="hero-title">Unlock Full Resolution.</h2>
             <p class="hero-desc">Extract standard and max-definition thumbnails instantly.</p>
 
-            <button id="helpBtn" class="help-trigger">
+            <button id="helpBtn" class="help-trigger" aria-label="Open User Guide">
                 <i class="fas fa-question-circle"></i> User Guide
             </button>
 
             <div class="search-container">
                 <div class="search-box">
-                    <input type="text" id="ytUrl" placeholder="Paste YouTube Link here..." autocomplete="off">
-                    <button id="fetchBtn">Fetch</button>
+                    <input type="text" id="ytUrl" placeholder="Paste YouTube Link here..." autocomplete="off" aria-label="YouTube Video URL Input">
+                    <button id="fetchBtn" aria-label="Fetch Thumbnails">Fetch</button>
                 </div>
             </div>
         </div>
@@ -813,9 +953,9 @@
                 <div class="channel-name"><i class="fas fa-user-circle"></i> <span id="metaChannel">Channel Name</span></div>
             </div>
             <div class="meta-actions">
-                <button class="action-btn" id="btnCopyTitle"><i class="fas fa-heading"></i> Copy Title</button>
-                <button class="action-btn" id="btnCopyLink"><i class="fas fa-link"></i> Copy Link</button>
-                <a href="#" target="_blank" class="action-btn btn-watch" id="btnWatch"><i class="fas fa-play"></i> Watch</a>
+                <button class="action-btn" id="btnCopyTitle" aria-label="Copy Video Title"><i class="fas fa-heading"></i> Copy Title</button>
+                <button class="action-btn" id="btnCopyLink" aria-label="Copy Video Link"><i class="fas fa-link"></i> Copy Link</button>
+                <a href="#" target="_blank" class="action-btn btn-watch" id="btnWatch" aria-label="Watch Video on YouTube"><i class="fas fa-play"></i> Watch</a>
             </div>
         </div>
 
@@ -823,38 +963,38 @@
 
             <div class="thumb-card">
                 <div class="card-header"><span>Max Resolution</span><span class="resolution-badge">1280 x 720</span></div>
-                <div class="img-wrapper" onclick="openModal('imgMax')">
-                    <img id="imgMax" src="" alt="Max Res">
+                <div class="img-wrapper" onclick="openModal('imgMax')" role="button" aria-label="View Max Resolution Thumbnail Fullscreen" tabindex="0">
+                    <img id="imgMax" src="" alt="Max Resolution YouTube Thumbnail">
                     <div class="img-overlay"><i class="fas fa-search-plus" style="color:white; font-size:2rem;"></i></div>
                 </div>
                 <div class="card-actions">
-                    <button class="dl-btn" data-img="imgMax" data-fmt="jpg"><i class="fas fa-download"></i> JPG</button>
-                    <button class="dl-btn btn-png" data-img="imgMax" data-fmt="png"><i class="fas fa-file-image"></i> PNG</button>
-                    <button class="copy-btn" data-img="imgMax" title="Copy URL"><i class="fas fa-link"></i></button>
+                    <button class="dl-btn" data-img="imgMax" data-fmt="jpg" aria-label="Download Max Res JPG"><i class="fas fa-download"></i> JPG</button>
+                    <button class="dl-btn btn-png" data-img="imgMax" data-fmt="png" aria-label="Download Max Res PNG"><i class="fas fa-file-image"></i> PNG</button>
+                    <button class="copy-btn" data-img="imgMax" title="Copy Image URL" aria-label="Copy Max Res Image Link"><i class="fas fa-link"></i></button>
                 </div>
             </div>
 
             <div class="thumb-card">
                 <div class="card-header"><span>High Quality</span><span class="resolution-badge">640 x 480</span></div>
-                <div class="img-wrapper" onclick="openModal('imgHigh')">
-                    <img id="imgHigh" src="" alt="High Res">
+                <div class="img-wrapper" onclick="openModal('imgHigh')" role="button" aria-label="View High Quality Thumbnail Fullscreen" tabindex="0">
+                    <img id="imgHigh" src="" alt="High Quality YouTube Thumbnail">
                     <div class="img-overlay"><i class="fas fa-search-plus" style="color:white; font-size:2rem;"></i></div>
                 </div>
                 <div class="card-actions">
-                    <button class="dl-btn" data-img="imgHigh"><i class="fas fa-download"></i> Download</button>
-                    <button class="copy-btn" data-img="imgHigh" title="Copy URL"><i class="fas fa-link"></i></button>
+                    <button class="dl-btn" data-img="imgHigh" aria-label="Download High Quality Thumbnail"><i class="fas fa-download"></i> Download</button>
+                    <button class="copy-btn" data-img="imgHigh" title="Copy Image URL" aria-label="Copy High Quality Image Link"><i class="fas fa-link"></i></button>
                 </div>
             </div>
 
             <div class="thumb-card">
                 <div class="card-header"><span>Standard</span><span class="resolution-badge">480 x 360</span></div>
-                <div class="img-wrapper" onclick="openModal('imgMed')">
-                    <img id="imgMed" src="" alt="Medium Res">
+                <div class="img-wrapper" onclick="openModal('imgMed')" role="button" aria-label="View Standard Thumbnail Fullscreen" tabindex="0">
+                    <img id="imgMed" src="" alt="Standard Quality YouTube Thumbnail">
                     <div class="img-overlay"><i class="fas fa-search-plus" style="color:white; font-size:2rem;"></i></div>
                 </div>
                 <div class="card-actions">
-                    <button class="dl-btn" data-img="imgMed"><i class="fas fa-download"></i> Download</button>
-                    <button class="copy-btn" data-img="imgMed" title="Copy URL"><i class="fas fa-link"></i></button>
+                    <button class="dl-btn" data-img="imgMed" aria-label="Download Standard Thumbnail"><i class="fas fa-download"></i> Download</button>
+                    <button class="copy-btn" data-img="imgMed" title="Copy Image URL" aria-label="Copy Standard Image Link"><i class="fas fa-link"></i></button>
                 </div>
             </div>
 
@@ -863,11 +1003,15 @@
         <div id="historySection" class="history-section hidden">
             <div class="hist-header">
                 <div class="hist-title">Recent Grabs</div>
-                <button class="clear-hist-btn" id="clearHistBtn"><i class="fas fa-trash"></i> Clear</button>
+                <button class="clear-hist-btn" id="clearHistBtn" aria-label="Clear Local History"><i class="fas fa-trash"></i> Clear</button>
             </div>
             <div class="history-list" id="historyList">
             </div>
         </div>
+
+        <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+            <i class="fas fa-mug-hot"></i> Keep This Tool Free
+        </a>
 
         <footer class="legal-footer">
             <a href="../privacy.php">
@@ -891,7 +1035,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');

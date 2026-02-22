@@ -4,29 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>ChromaPick | Free Image Color Picker & Palette Generator (HEX/RGB/HSL)</title>
+
+    <title>ChromaPick | Free Image Color Picker & Eyedropper Tool</title>
+    <meta name="title" content="ChromaPick | Free Image Color Picker & Eyedropper Tool">
     <meta name="description" content="Extract colors directly from images. Use the built-in eyedropper to get HEX, RGB, and HSL codes. Generate harmonic color palettes instantly. Privacy-first: Images never leave your browser.">
-    <meta name="keywords" content="image color picker, hex code finder, color palette generator, get color from picture, css gradient generator, eyedropper tool online, chromapick, lexoratech">
+    <meta name="keywords" content="image color picker, hex code finder, color palette generator, get color from picture, css gradient generator, eyedropper tool online, find hex code from image, chromapick, lexoratech">
     <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://apps.lexoratech.com/chromapick/chromapick.php">
 
-    <meta property="og:title" content="ChromaPick - Pro Color Tools">
-    <meta property="og:description" content="Pick colors, analyze contrast, and export palettes directly in your browser.">
-    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-chroma.jpg">
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://apps.lexoratech.com/chromapick/chromapick.php">
+    <meta property="og:title" content="ChromaPick - Pro Image Color Picker">
+    <meta property="og:description" content="Pick colors, analyze contrast, and export CSS palettes directly in your browser. 100% Free.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-chroma.jpg">
+
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/chromapick/chromapick.php">
+    <meta name="twitter:title" content="ChromaPick - Pro Image Color Picker">
+    <meta name="twitter:description" content="Pick colors, analyze contrast, and export CSS palettes directly in your browser. 100% Free.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-chroma.jpg">
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ChromaPick",
-      "applicationCategory": "DesignTool",
-      "operatingSystem": "Web",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": "Image Color Extraction, Palette Generation, Contrast Checker"
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "ChromaPick Color Extractor",
+            "url": "https://apps.lexoratech.com/chromapick/chromapick.php",
+            "description": "An advanced online image color picker tool. Extract HEX, RGB, and HSL color codes from photos, generate harmonic color palettes, and check WCAG text contrast.",
+            "applicationCategory": "DesignTool",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Image Color Extraction (Eyedropper)",
+                "Auto Color Palette Generator",
+                "WCAG Contrast Checker",
+                "HEX, RGB, HSL Conversion",
+                "CSS/JSON Export"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -36,15 +60,28 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
 
     <style>
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
         /* --- TABBED HELP MODAL --- */
         .help-modal-content {
             max-width: 700px;
             width: 95%;
-            height: 80vh; 
+            height: 80vh;
             height: 80dvh;
             display: flex;
             flex-direction: column;
@@ -53,35 +90,180 @@
             border-radius: 16px;
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
-        .help-header { padding: 20px; background: #141416; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .help-tabs { 
-            display: flex; background: #050505; border-bottom: 1px solid rgba(255,255,255,0.1); 
-            flex-shrink: 0; overflow-x: auto; white-space: nowrap;
-        }
-        .tab-btn { flex: 1; min-width: 100px; padding: 15px; background: transparent; border: none; color: #888; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; transition:0.2s; font-family: 'Outfit', sans-serif; }
-        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.03); }
-        .tab-btn.active { color: #6366f1; border-bottom-color: #6366f1; background: rgba(99, 102, 241, 0.05); }
-        
-        .help-body { flex: 1; overflow-y: auto; padding: 25px; color: #cbd5e1; }
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .help-step { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .step-num { width: 28px; height: 28px; background: #6366f1; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; margin-top: 2px; }
-        
+        .help-header {
+            padding: 20px;
+            background: #141416;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #050505;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn.active {
+            color: #6366f1;
+            border-bottom-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #6366f1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
         /* Modal Layering */
-        .modal-overlay { z-index: 9000 !important; }
-        
+        .modal-overlay {
+            z-index: 9000 !important;
+        }
+
         /* Driver.js Layering (Critical Fix) */
-        .driver-popover { z-index: 200000 !important; }
-        .driver-overlay { z-index: 199999 !important; }
+        .driver-popover {
+            z-index: 200000 !important;
+        }
+
+        .driver-overlay {
+            z-index: 199999 !important;
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="sr-only">
+        <h2>Free Online Image Color Picker & Eyedropper</h2>
+        <p>ChromaPick by Lexora is a free, professional color extraction tool. Upload any image to instantly find the exact HEX code, RGB, and HSL values using our precision eyedropper tool. Automatically generate dominant color palettes, test WCAG text contrast ratios, and explore complementary and analogous color harmonies. Perfect for web designers, graphic artists, and developers. 100% secure: Images are processed entirely in your web browser and are never uploaded to a server.</p>
+    </div>
 
     <div class="ambient-glow"></div>
     <div id="toastBox" class="toast-container"></div>
@@ -90,7 +272,9 @@
 
     <header class="mobile-header">
         <div class="brand-mobile">
-            <i class="fas fa-eye-dropper" style="color:#6366f1;"></i> ChromaPick
+            <h1 style="font-size:inherit; font-weight:inherit; margin:0; display:inline;">
+                <i class="fas fa-eye-dropper" style="color:#6366f1;"></i> ChromaPick
+            </h1>
         </div>
         <button id="mobileMenuBtn" class="icon-btn">
             <i class="fas fa-sliders-h"></i>
@@ -139,7 +323,9 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
-                    <i class="fas fa-eye-dropper"></i> ChromaPick <span class="badge">PRO</span>
+                    <h1 style="font-size:inherit; font-weight:inherit; margin:0; display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-eye-dropper"></i> ChromaPick <span class="badge">PRO</span>
+                    </h1>
                 </div>
                 <button id="closeSidebarBtn" class="icon-btn mobile-only"><i class="fas fa-times"></i></button>
                 <a href="../index.php" class="back-link-icon desktop-only">
@@ -238,6 +424,10 @@
                     <button id="helpBtn" class="tool-btn" style="width:100%; justify-content: center;">
                         <i class="fas fa-question-circle"></i> Help & Legal
                     </button>
+
+                    <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                        <i class="fas fa-mug-hot"></i> Support Tool
+                    </a>
                 </div>
 
             </div>
@@ -251,42 +441,49 @@
                 <h2 style="margin:0; font-size:1.2rem; color:white;">ChromaPick Guide</h2>
                 <button id="closeHelp" class="icon-btn" style="border:none;"><i class="fas fa-times"></i></button>
             </div>
-            
+
             <div class="help-tabs">
                 <button class="tab-btn active" onclick="switchTab('guide')">Quick Start</button>
                 <button class="tab-btn" onclick="switchTab('features')">Features</button>
-                <button class="tab-btn" onclick="switchTab('legal')">Legal</button>
+                <button class="tab-btn" onclick="switchTab('privacy')">Privacy</button>
             </div>
 
             <div class="help-body">
                 <div id="tab-guide" class="tab-content active">
                     <div class="help-step">
                         <div class="step-num">1</div>
-                        <div><strong>Upload Image</strong><br>Drag & Drop an image onto the canvas, or click the folder icon to upload.</div>
+                        <div><strong>Upload Image</strong><br>Drag & Drop an image onto the canvas, or click the folder icon to upload. You can also press Ctrl+V to paste an image from your clipboard.</div>
                     </div>
                     <div class="help-step">
                         <div class="step-num">2</div>
-                        <div><strong>Pick Color</strong><br>Select the <i class="fas fa-eye-dropper"></i> Eyedropper tool and click anywhere on the image.</div>
+                        <div><strong>Pick Color</strong><br>Select the <i class="fas fa-eye-dropper" style="color:#6366f1;"></i> Eyedropper tool and click anywhere on the image to inspect the exact pixel color.</div>
                     </div>
                     <div class="help-step">
                         <div class="step-num">3</div>
-                        <div><strong>Copy Code</strong><br>Click on the HEX, RGB, or HSL values in the sidebar to copy them instantly.</div>
+                        <div><strong>Copy Code</strong><br>Click on the HEX, RGB, or HSL values in the right sidebar to copy them instantly to your clipboard.</div>
                     </div>
                 </div>
 
                 <div id="tab-features" class="tab-content">
-                    <h3><i class="fas fa-palette"></i> Palette Generation</h3>
-                    <p>ChromaPick automatically extracts the dominant color palette from your image. You can export this as CSS variables or JSON.</p>
-                    
-                    <h3><i class="fas fa-adjust"></i> Contrast Checker</h3>
-                    <p>The "Aa" badge shows if your selected color has enough contrast against white or black text (WCAG standards).</p>
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-palette" style="color:#6366f1;"></i> Palette Generation</h3>
+                    <p style="margin-bottom:20px;">ChromaPick automatically uses a quantization algorithm to extract the dominant color palette from your image. You can export this entire palette as CSS variables or JSON data.</p>
+
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-adjust" style="color:#6366f1;"></i> Contrast Checker</h3>
+                    <p style="margin-bottom:20px;">The "Aa" badge in the inspector shows if your selected color has enough contrast to be used as a background for white or black text, adhering to WCAG accessibility standards.</p>
+
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-crosshairs" style="color:#6366f1;"></i> Screen Picker (Chromium Only)</h3>
+                    <p>Click "Screen Picker" to select colors from anywhere on your desktop, outside of the browser window.</p>
                 </div>
 
-                <div id="tab-legal" class="tab-content">
-                    <h3>Legal & Privacy</h3>
-                    <p>All image processing happens <strong>locally in your browser</strong>. Your images are never uploaded to our servers.</p>
+                <div id="tab-privacy" class="tab-content">
+                    <h3 style="color:white; margin-bottom:15px;">100% On-Device Processing</h3>
+                    <p style="margin-bottom:15px;">All image rendering, color extraction, and palette generation happens <strong>locally in your web browser</strong> using HTML5 Canvas APIs.</p>
+                    <div style="background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); padding:15px; border-radius:8px; color:#6ee7b7; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> Your images are never uploaded, stored, or sent to any server.
+                    </div>
+
                     <ul style="list-style:none; padding:0; margin-top:20px;">
-                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#6366f1; text-decoration:none;"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#6366f1; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
                         <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#6366f1; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
                         <li><a href="../contact.php" style="color:#6366f1; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
                     </ul>
@@ -314,12 +511,34 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
-            
+
             const btns = document.querySelectorAll('.tab-btn');
-            if(tabId==='guide') btns[0].classList.add('active');
-            if(tabId==='features') btns[1].classList.add('active');
-            if(tabId==='legal') btns[2].classList.add('active');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
         }
+
+        // Modal Logic Hookup
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtn');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => {
+                    helpModal.classList.remove('hidden');
+                });
+                closeHelp.addEventListener('click', () => {
+                    helpModal.classList.add('hidden');
+                });
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) {
+                        helpModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
     </script>
 </body>
+
 </html>

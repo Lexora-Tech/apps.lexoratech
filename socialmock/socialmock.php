@@ -4,9 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SocialMock | Free Fake Tweet & Instagram Post Generator (No Watermark)</title>
-    <meta name="description" content="Create realistic social media mockups for Twitter (X), Instagram, Facebook, and TikTok. Customize verified badges, metrics, and dark mode. Download high-res PNGs for free.">
+
+    <title>SocialMock | Free Social Media Post Mockup Generator</title>
+    <meta name="title" content="SocialMock | Free Social Media Post Mockup Generator">
+    <meta name="description" content="Create realistic social media mockups for Twitter (X), Instagram, Facebook, LinkedIn, and TikTok. Customize verified badges, metrics, and dark mode. Download high-res PNGs for free.">
     <meta name="keywords" content="fake tweet generator, instagram post mockup free, fake social media post maker, twitter mockup generator, tiktok interface mockup, social media simulator">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/socialmock/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/socialmock/">
+    <meta property="og:title" content="SocialMock | Free Social Media Post Mockup Generator">
+    <meta property="og:description" content="Create realistic social media mockups for Twitter, Instagram, Facebook, and TikTok. Customize metrics and download high-res PNGs.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-socialmock.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/socialmock/">
+    <meta name="twitter:title" content="SocialMock | Free Social Media Post Mockup Generator">
+    <meta name="twitter:description" content="Create realistic social media mockups for Twitter, Instagram, Facebook, and TikTok. Customize metrics and download high-res PNGs.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-socialmock.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "SocialMock Generator",
+            "url": "https://apps.lexoratech.com/socialmock/",
+            "description": "An advanced online utility for generating highly realistic social media post mockups across multiple platforms including Twitter, Instagram, LinkedIn, Facebook, and TikTok.",
+            "applicationCategory": "DesignApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Multi-platform Support (Twitter, IG, FB, LinkedIn, TikTok)",
+                "Customizable Engagement Metrics and Badges",
+                "Dark Mode & Active Story Ring Toggles",
+                "High-Resolution PNG Export",
+                "100% Client-Side Processing"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
     <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -52,7 +99,7 @@
             position: relative;
             font-family: 'Inter', sans-serif;
             border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         .help-header {
@@ -72,12 +119,35 @@
             line-height: 1.7;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #06b6d4; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .help-body h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .help-body h3 {
+            color: #06b6d4;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .help-body p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .help-body ul,
+        .help-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #d1d5db;
+        }
+
+        .help-body li {
+            margin-bottom: 0.5rem;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -85,6 +155,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
@@ -92,9 +163,18 @@
             margin-bottom: 5px;
         }
 
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
@@ -104,7 +184,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(6, 182, 212, 0.1); /* Cyan tint */
+            background: rgba(6, 182, 212, 0.1);
+            /* Cyan tint */
             border: 1px solid rgba(6, 182, 212, 0.3);
             color: #06b6d4;
             padding: 12px;
@@ -114,17 +195,22 @@
             transition: all 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        .sidebar-btn-help:hover { background: rgba(6, 182, 212, 0.2); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(6, 182, 212, 0.2);
+            transform: translateY(-1px);
+        }
 
         /* Legal Links */
         .legal-links {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .legal-links a {
             color: #9ca3af;
             text-decoration: none;
@@ -135,7 +221,62 @@
             transition: color 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        .legal-links a:hover { color: #fff; }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            margin-top: 15px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
     </style>
 </head>
 
@@ -149,7 +290,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="help-body">
                 <p>SocialMock allows you to generate realistic social media posts for presentations, marketing, or fun. Support for Twitter, Instagram, LinkedIn, Facebook, and TikTok interfaces is included.</p>
 
@@ -204,13 +345,13 @@
                     <span>Dashboard</span>
                 </a>
                 <div class="panel-title-row">
-                    <h2>Configuration</h2>
+                    <h1 style="font-size: 1.5rem; margin: 0; color: #fff;">Configuration</h1>
                     <span class="pro-badge">PRO</span>
                 </div>
             </div>
 
             <div class="scrollable-content">
-                
+
                 <button id="helpBtn" class="sidebar-btn-help">
                     <i class="fas fa-question-circle"></i> How to Use?
                 </button>
@@ -345,6 +486,10 @@
                         </div>
                     </div>
                 </div>
+
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                    <i class="fas fa-mug-hot"></i> Keep This Tool Free
+                </a>
 
                 <div class="legal-links">
                     <a href="../privacy.php">
@@ -521,7 +666,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');

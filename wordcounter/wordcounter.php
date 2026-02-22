@@ -4,8 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Word Counter Ultimate | Lexora</title>
 
+    <title>Word Counter Ultimate | Free Online Character & Readability Analyzer</title>
+    <meta name="title" content="Word Counter Ultimate | Free Online Character & Readability Analyzer">
+    <meta name="description" content="Free online word counter and text analyzer. Calculate word count, character count, Flesch readability score, and keyword density instantly in your browser.">
+    <meta name="keywords" content="word counter online, character count, flesch readability score calculator, keyword density checker, text analyzer, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/wordcounter/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/wordcounter/">
+    <meta property="og:title" content="Word Counter Ultimate | Free Text Analyzer">
+    <meta property="og:description" content="Calculate word count, character count, Flesch readability score, and keyword density instantly in your browser. 100% Private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-wordcounter.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/wordcounter/">
+    <meta name="twitter:title" content="Word Counter Ultimate | Free Text Analyzer">
+    <meta name="twitter:description" content="Calculate word count, character count, Flesch readability score, and keyword density instantly.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-wordcounter.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Word Counter Ultimate",
+            "url": "https://apps.lexoratech.com/wordcounter/",
+            "description": "An advanced online text analyzer for real-time word counting, Flesch readability scoring, and keyword density extraction.",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Real-time Word and Character Counting",
+                "Flesch Reading Ease Readability Scoring",
+                "SEO Keyword Density Extraction",
+                "Find and Replace Utility",
+                "Text Case Conversion (Upper, Lower, Title, Sentence)",
+                "Client-Side Processing (No server uploads)"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -65,6 +115,116 @@
             mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
         }
 
+        /* --- HELP MODAL STYLES --- */
+        #helpModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        #helpModal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .help-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .help-body h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .help-body h3 {
+            color: var(--accent);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .help-body p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .guide-step i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .guide-step h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
         /* --- HEADER --- */
         .top-bar {
             height: 60px;
@@ -96,9 +256,10 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .nav-brand span {
+        .nav-brand h1 {
             font-weight: 600;
             font-size: 0.9rem;
+            margin: 0;
         }
 
         .save-status {
@@ -285,7 +446,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 1px;
             background: var(--glass-border);
-            /* Grid lines */
         }
 
         .stat-box {
@@ -389,6 +549,57 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            margin: 20px 25px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
+
         @media (max-width: 900px) {
             .workspace {
                 flex-direction: column;
@@ -417,20 +628,62 @@
 
 <body>
 
+    <div id="helpModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 id="helpModalTitle" style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" aria-label="Close User Guide" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-body">
+                <p>Word Counter Ultimate is an advanced, privacy-first text analysis tool. All processing happens locally in your browser, meaning your documents are never uploaded to any external servers.</p>
+
+                <h3>Core Features</h3>
+                <div class="guide-grid">
+                    <div class="guide-step">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Real-Time Analytics</h4>
+                        <p>Instantly track word, character, sentence, and paragraph counts as you type or paste your content.</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-book-reader"></i>
+                        <h4>Readability Scoring</h4>
+                        <p>Automatically calculates the Flesch Reading Ease score to help you ensure your writing is tailored to your target audience's reading level.</p>
+
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-key"></i>
+                        <h4>Keyword Extraction</h4>
+                        <p>Automatically identifies and ranks the most frequently used words (ignoring common stop words) to assist with SEO optimization.</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-tools"></i>
+                        <h4>Formatting Tools</h4>
+                        <p>Utilize the built-in Find & Replace, Case Converter (UPPERCASE, lowercase, Title Case), and font toggles for a customized writing environment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
+        <a href="../index.php" class="nav-brand" aria-label="Back to Lexora Workspace">
+            <i class="fas fa-chevron-left"></i>
+            <h1>Word Counter Ultimate</h1>
         </a>
 
         <div class="save-status" id="saveStatus"><i class="fas fa-check-circle"></i> Saved locally</div>
 
         <div class="action-group">
-            <button class="icon-btn" onclick="importFile()" title="Import .txt"><i class="fas fa-file-upload"></i></button>
+            <button class="icon-btn" id="helpBtn" aria-label="Open User Guide" title="How to Use"><i class="fas fa-question-circle"></i></button>
+            <button class="icon-btn" onclick="importFile()" aria-label="Import Text File" title="Import .txt"><i class="fas fa-file-upload"></i></button>
             <input type="file" id="fileInput" accept=".txt" hidden>
 
-            <button class="icon-btn" onclick="exportFile()" title="Export .txt"><i class="fas fa-file-download"></i></button>
-            <button class="icon-btn" onclick="copyText()" title="Copy All"><i class="far fa-copy"></i></button>
-            <button class="icon-btn" onclick="clearText()" style="color:#ef4444; border-color:rgba(239,68,68,0.3);"><i class="fas fa-trash-alt"></i></button>
+            <button class="icon-btn" onclick="exportFile()" aria-label="Export as Text File" title="Export .txt"><i class="fas fa-file-download"></i></button>
+            <button class="icon-btn" onclick="copyText()" aria-label="Copy All Text" title="Copy All"><i class="far fa-copy"></i></button>
+            <button class="icon-btn" onclick="clearText()" aria-label="Clear Editor" style="color:#ef4444; border-color:rgba(239,68,68,0.3);"><i class="fas fa-trash-alt"></i></button>
         </div>
     </div>
 
@@ -442,29 +695,29 @@
         <main class="editor-area">
             <div class="toolbar">
                 <div class="tool-group">
-                    <button class="tool-item active" onclick="setFont('Lora')">Serif</button>
-                    <button class="tool-item" onclick="setFont('Outfit')">Sans</button>
-                    <button class="tool-item" onclick="setFont('JetBrains Mono')">Mono</button>
+                    <button class="tool-item active" onclick="setFont('Lora')" aria-label="Set Serif Font">Serif</button>
+                    <button class="tool-item" onclick="setFont('Outfit')" aria-label="Set Sans-serif Font">Sans</button>
+                    <button class="tool-item" onclick="setFont('JetBrains Mono')" aria-label="Set Monospace Font">Mono</button>
                 </div>
                 <div class="tool-group">
-                    <button class="tool-item" onclick="changeCase('upper')">AA</button>
-                    <button class="tool-item" onclick="changeCase('lower')">aa</button>
-                    <button class="tool-item" onclick="changeCase('title')">Aa</button>
-                    <button class="tool-item" onclick="changeCase('sentence')">A. a</button>
+                    <button class="tool-item" onclick="changeCase('upper')" aria-label="Convert to Uppercase">AA</button>
+                    <button class="tool-item" onclick="changeCase('lower')" aria-label="Convert to Lowercase">aa</button>
+                    <button class="tool-item" onclick="changeCase('title')" aria-label="Convert to Title Case">Aa</button>
+                    <button class="tool-item" onclick="changeCase('sentence')" aria-label="Convert to Sentence Case">A. a</button>
                 </div>
                 <div class="tool-group">
-                    <button class="tool-item" onclick="toggleFind()"><i class="fas fa-search"></i> Find</button>
+                    <button class="tool-item" onclick="toggleFind()" aria-label="Open Find and Replace"><i class="fas fa-search"></i> Find</button>
                 </div>
             </div>
 
             <div class="find-replace-bar" id="frBar">
-                <input type="text" id="findInput" class="fr-input" placeholder="Find...">
-                <input type="text" id="replaceInput" class="fr-input" placeholder="Replace with...">
-                <button class="fr-btn" onclick="execReplace()">Replace All</button>
-                <button class="tool-item" onclick="toggleFind()"><i class="fas fa-times"></i></button>
+                <input type="text" id="findInput" class="fr-input" placeholder="Find..." aria-label="Find Text">
+                <input type="text" id="replaceInput" class="fr-input" placeholder="Replace with..." aria-label="Replace Text">
+                <button class="fr-btn" onclick="execReplace()" aria-label="Execute Replace All">Replace All</button>
+                <button class="tool-item" onclick="toggleFind()" aria-label="Close Find and Replace"><i class="fas fa-times"></i></button>
             </div>
 
-            <textarea id="inputArea" placeholder="Type or paste your content here..." spellcheck="false" autofocus></textarea>
+            <textarea id="inputArea" placeholder="Type or paste your content here..." spellcheck="false" autofocus aria-label="Main Text Editor"></textarea>
         </main>
 
         <aside class="stats-panel">
@@ -526,12 +779,29 @@
                 </div>
             </div>
 
+            <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                <i class="fas fa-mug-hot"></i> Keep This Tool Free
+            </a>
+
         </aside>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- UI MODAL LOGIC ---
+            const helpModal = document.getElementById('helpModal');
+            const helpBtn = document.getElementById('helpBtn');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
 
             // Elements
             const input = document.getElementById('inputArea');
@@ -553,7 +823,6 @@
             };
 
             // --- 1. INIT & AUTO SAVE ---
-            // Load from storage
             if (localStorage.getItem('lexora_text')) {
                 input.value = localStorage.getItem('lexora_text');
                 analyze();
@@ -586,7 +855,6 @@
                 const avgLen = words > 0 ? (chars - spaces) / words : 0;
 
                 // Readability (Flesch Reading Ease)
-                // Score = 206.835 - 1.015(Total Words/Total Sentences) - 84.6(Total Syllables/Total Words)
                 let score = 0;
                 let level = "N/A";
 

@@ -4,8 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VectorPad | Lexora  Workspace</title>
-      <link rel="icon" href="../assets/logo/logo.png" />
+
+    <title>VectorPad | Free Online Drawing & Sketching Pad</title>
+    <meta name="title" content="VectorPad | Free Online Drawing & Sketching Pad">
+    <meta name="description" content="A free, infinite-canvas online drawing pad. Sketch, brainstorm, and take notes using smooth pens, highlighters, and pan controls. Export your art as a PNG instantly.">
+    <meta name="keywords" content="online drawing pad, free sketchpad, infinite canvas online, digital whiteboard, drawing app browser, vectorpad, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/vectorpad/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/vectorpad/">
+    <meta property="og:title" content="VectorPad | Free Online Drawing & Sketching Pad">
+    <meta property="og:description" content="A free, infinite-canvas online drawing pad. Sketch, brainstorm, and take notes using smooth pens and highlighters. 100% private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-vectorpad.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/vectorpad/">
+    <meta name="twitter:title" content="VectorPad | Free Online Drawing & Sketching Pad">
+    <meta name="twitter:description" content="A free, infinite-canvas online drawing pad. Sketch, brainstorm, and take notes. Export your art as a PNG instantly.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-vectorpad.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "VectorPad",
+            "url": "https://apps.lexoratech.com/vectorpad/",
+            "description": "An advanced online whiteboard and sketching tool featuring an infinite canvas, smooth drawing physics, and instant local PNG exports.",
+            "applicationCategory": "DesignApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Infinite Panning Canvas",
+                "Smooth Quadratic Curve Drawing",
+                "Pen, Marker, and Eraser Tools",
+                "Custom Color Picker",
+                "Client-Side PNG Export"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -104,12 +153,11 @@
             height: 100%;
         }
 
-        /* --- VISIBLE BACK BUTTON (SVG FIXED) --- */
+        /* --- VISIBLE BACK BUTTON --- */
         .back-nav-btn {
             width: 42px;
             height: 42px;
             background: rgba(255, 255, 255, 0.1);
-            /* Brighter background */
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             color: #fff;
@@ -120,7 +168,6 @@
             transition: all 0.2s ease;
             cursor: pointer;
             z-index: 102;
-            /* Ensure clickable */
         }
 
         .back-nav-btn svg {
@@ -193,6 +240,11 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
         }
 
         .sep {
@@ -378,7 +430,7 @@
             transform: translateX(18px);
         }
 
-        /* --- POP-UP MODAL --- */
+        /* --- MODALS (CONFIRM & GUIDE) --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -409,6 +461,13 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
             transform: scale(0.9) translateY(20px);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-box.guide-box {
+            max-width: 550px;
+            text-align: left;
+            padding: 40px;
+            position: relative;
         }
 
         .modal-overlay.active .modal-box {
@@ -482,6 +541,45 @@
             transform: translateY(-1px);
         }
 
+        /* Guide Specific Styles */
+        .close-guide {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-guide:hover {
+            color: #fff;
+        }
+
+        .guide-step {
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .guide-step h4 {
+            color: var(--accent);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .guide-step p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
         /* TOAST */
         #toast-container {
             position: fixed;
@@ -526,6 +624,57 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1rem;
+            color: #1A1200;
         }
 
         /* MOBILE RESPONSIVE */
@@ -600,6 +749,8 @@
             </div>
 
             <div class="actions">
+                <button class="icon-btn" id="helpBtn" title="How to Use"><i class="fas fa-question-circle"></i></button>
+                <div class="sep"></div>
                 <button class="icon-btn" id="undoBtn" title="Undo"><i class="fas fa-undo"></i></button>
                 <button class="icon-btn" id="redoBtn" title="Redo"><i class="fas fa-redo"></i></button>
                 <div class="sep"></div>
@@ -658,11 +809,37 @@
                     <span class="slider"></span>
                 </label>
             </div>
+
+            <div class="prop-item" style="margin-top: 10px;">
+                <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                    <i class="fas fa-mug-hot"></i> Keep Free
+                </a>
+            </div>
         </aside>
 
     </div>
 
     <div id="toast-container"></div>
+
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal-box guide-box">
+            <button class="close-guide" id="closeGuideBtn"><i class="fas fa-times"></i></button>
+            <h3 style="text-align: left; margin-bottom: 20px;">Welcome to VectorPad</h3>
+
+            <div class="guide-step">
+                <h4><i class="fas fa-pen-nib"></i> Drawing Tools</h4>
+                <p>Use the left toolbar to switch between the solid <strong>Pen</strong>, the semi-transparent <strong>Marker</strong>, and the <strong>Eraser</strong>. Change colors by clicking the circular color preview at the bottom.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-hand-paper"></i> Infinite Canvas Panning</h4>
+                <p>VectorPad offers an unlimited drawing surface. Select the <strong>Hand Tool</strong> (or click your middle mouse button) and drag to pan around the canvas. Your drawings remain saved relative to the grid.</p>
+            </div>
+            <div class="guide-step">
+                <h4><i class="fas fa-sliders-h"></i> Properties & Export</h4>
+                <p>Adjust your brush thickness using the top-right slider. When your sketch is complete, click <strong>Export</strong> to instantly save the current view of your canvas as a high-quality PNG.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-box">
@@ -704,6 +881,10 @@
             const confirmModal = document.getElementById('confirmModal');
             const confirmClearBtn = document.getElementById('confirmClear');
             const cancelClearBtn = document.getElementById('cancelClear');
+
+            const helpBtn = document.getElementById('helpBtn');
+            const guideModal = document.getElementById('guideModal');
+            const closeGuideBtn = document.getElementById('closeGuideBtn');
 
             // --- STATE ---
             const state = {
@@ -929,14 +1110,16 @@
             });
 
             // --- 5. MODAL LOGIC ---
-            triggerModalBtn.addEventListener('click', () => {
-                confirmModal.classList.add('active');
+            // Guide Modal
+            helpBtn.addEventListener('click', () => guideModal.classList.add('active'));
+            closeGuideBtn.addEventListener('click', () => guideModal.classList.remove('active'));
+            guideModal.addEventListener('click', (e) => {
+                if (e.target === guideModal) guideModal.classList.remove('active');
             });
 
-            cancelClearBtn.addEventListener('click', () => {
-                confirmModal.classList.remove('active');
-            });
-
+            // Confirm Clear Modal
+            triggerModalBtn.addEventListener('click', () => confirmModal.classList.add('active'));
+            cancelClearBtn.addEventListener('click', () => confirmModal.classList.remove('active'));
             confirmClearBtn.addEventListener('click', () => {
                 paths = [];
                 redoStack = [];

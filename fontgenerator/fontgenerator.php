@@ -4,8 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ultimate Font Generator | Lexora</title>
 
+    <title>Ultimate Font Generator | Free Stylish Text & Fonts Maker</title>
+    <meta name="title" content="Ultimate Font Generator | Free Stylish Text & Fonts Maker">
+    <meta name="description" content="Generate 80+ fancy fonts, glitch text (Zalgo), and stylish text for your social media bios. 100% free, instant copy-paste, and works offline.">
+    <meta name="keywords" content="font generator, stylish text maker, copy paste fonts, fancy text generator, zalgo text, instagram bio fonts, discord fonts, text repeater, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/fontgenerator/fontgenerator.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/fontgenerator/fontgenerator.php">
+    <meta property="og:title" content="Ultimate Font Generator - Stylish Text Maker">
+    <meta property="og:description" content="Type and instantly generate 80+ unique text styles for Instagram, Twitter, and Discord.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-font.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/fontgenerator/fontgenerator.php">
+    <meta name="twitter:title" content="Ultimate Font Generator - Stylish Text Maker">
+    <meta name="twitter:description" content="Type and instantly generate 80+ unique text styles for Instagram, Twitter, and Discord.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-font.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Lexora Font Generator",
+            "url": "https://apps.lexoratech.com/fontgenerator/fontgenerator.php",
+            "description": "A comprehensive online tool to convert normal text into 80+ stylish, aesthetic fonts, including Zalgo glitch text, Morse code, and binary.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "80+ Copy-Paste Fonts",
+                "Zalgo Glitch Text Generator",
+                "Text Decorations & Emoji Inserts",
+                "Morse Code & Binary Converter"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -91,6 +138,7 @@
             transition: 0.3s;
             font-size: 0.9rem;
             font-weight: 600;
+            cursor: pointer;
         }
 
         .nav-brand:hover {
@@ -465,7 +513,6 @@
             position: relative;
             overflow: hidden;
             height: auto;
-            /* Allow auto height */
             min-height: 100px;
         }
 
@@ -498,7 +545,6 @@
             color: #aaa;
         }
 
-        /* FIX: Text Wrapping */
         .font-preview {
             font-size: 1.1rem;
             color: #fff;
@@ -576,16 +622,211 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px);
-            }
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #22d3ee;
+            border-bottom-color: #22d3ee;
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #22d3ee;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
         }
 
         @media (max-width: 900px) {
@@ -619,10 +860,18 @@
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Stylish Fonts Generator & Text Converter</h2>
+        <p>Lexora's Ultimate Font Generator allows you to instantly convert normal text into over 80 stylish, aesthetic, and unique fonts. Easily generate Zalgo glitch text, cursive fonts, bold serif, bubble letters, and more for your Instagram, Twitter, and Discord bios. It also includes advanced text modifier tools like text repeater, upside-down text, wide text, Morse code, and binary translation. The tool is 100% free, requires no installation, and runs offline in your web browser ensuring complete privacy.</p>
+    </div>
+
     <div class="top-bar">
         <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
+            <i class="fas fa-chevron-left"></i> <span>Back to Workspace</span>
         </a>
+        <button id="helpBtnHeader" class="nav-brand" style="background:transparent; border:1px solid rgba(255,255,255,0.1); cursor:pointer;">
+            <i class="fas fa-question-circle"></i> <span>Help</span>
+        </button>
     </div>
 
     <div class="ambient-light"></div>
@@ -632,7 +881,7 @@
 
         <div class="input-panel">
             <div class="input-header">
-                <h1>Font Generator</h1>
+                <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff;">Ultimate Font Generator</h1>
                 <p>Type to generate 80+ unique styles.</p>
             </div>
 
@@ -705,6 +954,10 @@
                 </div>
             </div>
 
+            <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                <i class="fas fa-mug-hot"></i> Support Tool
+            </a>
+
         </div>
 
         <div class="results-panel">
@@ -731,6 +984,62 @@
             </div>
         </div>
 
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">Generator Guide</h2>
+                <button id="closeHelp" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Pro Tools</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="help-body">
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Type Your Text:</strong> Enter your text into the main input box. The panel on the right will instantly generate over 80 variations of your text.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Modify & Decorate:</strong> Use the tool tabs to add aesthetic symbols, glitch effects (Zalgo), or flip your text upside down.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Click to Copy:</strong> Find a style you like in the right panel and simply click it. It will instantly copy to your clipboard.</div>
+                    </div>
+                </div>
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-magic" style="color:#22d3ee;"></i> Zalgo Glitch Text</h3>
+                    <p>Use the "Chaos Level" slider under the Decorate tab to add randomized diacritical marks to your text, creating a "cursed" or "hacked" appearance.</p>
+
+                    <h3><i class="fas fa-exchange-alt" style="color:#22d3ee;"></i> Converters & Repeater</h3>
+                    <p>Under the "Pro Tools" tab, you can instantly translate your text into Morse Code or Binary. You can also use the Text Repeater to duplicate a word or phrase up to 100 times automatically.</p>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>The Ultimate Font Generator is a pure front-end application.</p>
+                    <div style="background:rgba(34, 211, 238, 0.1); border:1px solid rgba(34, 211, 238, 0.3); padding:15px; border-radius:8px; color:#67e8f9; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> Text conversion happens locally in your browser. Whatever you type is never stored or sent to any server.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#22d3ee; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#22d3ee; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#22d3ee; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="toast" id="toast">
@@ -770,12 +1079,12 @@
                 {
                     name: "Serif Bold Italic",
                     cat: "serif",
-                    map: "𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗"
+                    map: "𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁𝒂𝒃𝑐𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗"
                 },
                 {
                     name: "Sans Bold",
                     cat: "sans",
-                    map: "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵"
+                    map: "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝐥𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵"
                 },
                 {
                     name: "Sans Italic",
@@ -820,7 +1129,7 @@
                 {
                     name: "Double Struck",
                     cat: "fancy",
-                    map: "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡"
+                    map: "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠ℙ𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡"
                 },
                 {
                     name: "Bubbles",
@@ -1011,7 +1320,7 @@
                 // 1. Modifiers
                 if (activeMods.reverse) raw = raw.split('').reverse().join('');
                 if (activeMods.upside) raw = flipString(raw);
-                if (activeMods.wide) raw = convert(raw, "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ０１２３４５６７８９");
+                if (activeMods.wide) raw = convert(raw, "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔＵｖｗｘｙｚ０１２３４５６７８９");
                 if (activeMods.slash) raw = convert(raw, "A̷B̷C̷D̷E̷F̷G̷H̷I̷J̷K̷L̷M̷N̷O̷P̷Q̷R̷S̷T̷U̷V̷W̷X̷Y̷Z̷a̷b̷c̷d̷e̷f̷g̷h̷i̷j̷k̷l̷m̷n̷o̷p̷q̷r̷s̷t̷u̷v̷w̷x̷y̷z̷0̷1̷2̷3̷4̷5̷6̷7̷8̷9̷");
 
                 fontGrid.innerHTML = '';
@@ -1120,7 +1429,7 @@
                 render();
             });
 
-            // 5. Reset (FIXED Logic: Clears decorations too)
+            // 5. Reset
             document.querySelectorAll('.reset-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     // Reset internal state
@@ -1142,13 +1451,11 @@
                     document.querySelectorAll('.decor-chip').forEach(chip => {
                         const pre = chip.dataset.pre;
                         const suf = chip.dataset.suf;
-                        // Recursively strip if stacked
                         while (currentText.startsWith(pre) && currentText.endsWith(suf)) {
                             currentText = currentText.substring(pre.length, currentText.length - suf.length);
                         }
                     });
                     inputText.value = currentText;
-
                     render();
                 });
             });
@@ -1209,11 +1516,34 @@
                 t.classList.add('show');
                 setTimeout(() => t.classList.remove('show'), 2000);
             }
+
+            // --- HELP MODAL LOGIC ---
+            const helpBtn = document.getElementById('helpBtnHeader');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
         });
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
     </script>
 </body>
 
 </html>
-
-
-

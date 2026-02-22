@@ -4,11 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lexora Workspace | Free Online Creator Tools</title>
-    <meta name="description" content="Access free online tools including Background Remover, Resume Builder, Video Downloader, AI Photo Enhancer, and more.">
 
+    <title>Lexora Workspace | Free Online Creator & Productivity Tools</title>
+    <meta name="title" content="Lexora Workspace | Free Online Creator & Productivity Tools">
+    <meta name="description" content="Access 20+ free premium tools including a Screen Recorder, Image Resizer, Background Remover, Resume Builder, and more. No installation required.">
+    <meta name="keywords" content="free online tools, creator tools, image resizer, screen recorder, word counter, PDF tools, background remover, online developer tools">
+    <meta name="author" content="Lexora Tech">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lexora Workspace | Free Online Creator & Productivity Tools">
+    <meta property="og:description" content="Access 20+ free premium tools including a Screen Recorder, Image Resizer, Background Remover, Resume Builder, and more.">
+    <meta property="og:image" content="./assets/logo/logo2.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Lexora Workspace | Free Online Creator & Productivity Tools">
+    <meta property="twitter:description" content="Access 20+ free premium tools including a Screen Recorder, Image Resizer, Background Remover, Resume Builder, and more.">
+    <meta property="twitter:image" content="./assets/logo/logo2.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Lexora Workspace",
+            "description": "A comprehensive suite of free online creator, developer, and productivity tools.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "All",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "creator": {
+                "@type": "Organization",
+                "name": "Lexora Tech"
+            }
+        }
+    </script>
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="assets/logo/logo.png" />
@@ -165,7 +202,7 @@
             font-size: 1rem;
         }
 
-        /* USER PROFILE (Bottom Sidebar) */
+        /* USER PROFILE */
         .user-profile {
             margin-top: auto;
             padding-top: 20px;
@@ -209,7 +246,7 @@
             position: relative;
         }
 
-        /* TOP BAR (Sticky) */
+        /* TOP BAR */
         .top-bar {
             height: 80px;
             display: flex;
@@ -292,6 +329,28 @@
             border-color: var(--text-muted);
         }
 
+        /* --- SEO HERO SECTION --- */
+        .seo-hero {
+            margin-bottom: 40px;
+            padding-top: 10px;
+        }
+
+        .seo-hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .seo-hero h2 {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
         /* --- CATEGORY HEADERS --- */
         .category-header {
             display: flex;
@@ -308,14 +367,6 @@
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.02em;
-        }
-
-        .cat-badge {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: var(--text-muted);
         }
 
         /* --- TOOLS GRID --- */
@@ -485,7 +536,7 @@
             pointer-events: auto;
         }
 
-        /* --- FOOTER STYLES (Default Desktop) --- */
+        /* --- FOOTER STYLES --- */
         .main-footer {
             margin-top: 80px;
             padding: 60px 0 30px;
@@ -557,6 +608,57 @@
             font-size: 0.85rem;
         }
 
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            margin-top: 15px;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.3rem;
+            color: #1A1200;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .sidebar {
@@ -604,7 +706,6 @@
                 flex-direction: column;
             }
 
-            /* Sidebar Drawer */
             .sidebar {
                 position: fixed;
                 left: 0;
@@ -634,7 +735,6 @@
                 padding: 12px 16px;
             }
 
-            /* Mobile Header */
             .mobile-header {
                 display: flex;
                 align-items: center;
@@ -686,7 +786,10 @@
                 gap: 15px;
             }
 
-            /* --- PREMIUM MOBILE FOOTER --- */
+            .seo-hero h1 {
+                font-size: 1.8rem;
+            }
+
             .main-footer {
                 padding: 50px 24px 30px;
                 background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
@@ -694,7 +797,6 @@
                 margin-top: 40px;
             }
 
-            /* 3-Column Layout for Links */
             .footer-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -703,7 +805,6 @@
                 margin-bottom: 40px;
             }
 
-            /* Brand Section Full Width Centered */
             .brand-col {
                 grid-column: span 3;
                 display: flex;
@@ -731,7 +832,10 @@
                 margin: 0 auto;
             }
 
-            /* Links Columns */
+            .custom-bmc-btn {
+                margin: 15px auto 0;
+            }
+
             .footer-col {
                 display: flex;
                 flex-direction: column;
@@ -772,7 +876,7 @@
 
     <div class="mobile-header">
         <a href="#" class="brand-mob">
-            <img src="./assets/logo/logo2.png" alt=""> Lexora
+            <img src="./assets/logo/logo2.png" alt="Lexora Workspace Logo"> Lexora
         </a>
         <button id="menuBtn" style="background:none; border:none; color:#fff; font-size:1.4rem;">
             <i class="fas fa-bars"></i>
@@ -783,7 +887,7 @@
 
         <aside class="sidebar" id="sidebar">
             <a href="index.php" class="brand">
-                <img src="./assets/logo/logo2.png" alt="">
+                <img src="./assets/logo/logo2.png" alt="Lexora Workspace Logo">
                 <span>Lexora Workspace</span>
             </a>
 
@@ -815,8 +919,12 @@
                 </div>
             </div>
 
-            <input type="text" class="mobile-search" id="mobSearch" placeholder="Search tools..." style="display:none;">
+           
 
+            <div class="seo-hero">
+                <h1>Free Online Creator & Productivity Tools</h1>
+                <h2>Lexora Workspace provides 20+ powerful, browser-based utilities. Edit images, record your screen, format code, and boost your productivity without downloading any software.</h2>
+            </div>
             <div id="design" class="category-header">
                 <span class="cat-title">Image Editing & Design</span>
             </div>
@@ -1202,9 +1310,13 @@
                 <div class="footer-grid">
                     <div class="brand-col">
                         <div class="footer-logo">
-                            <img src="assets/logo/logo2.png" alt=""> Lexora Tech
+                            <img src="assets/logo/logo2.png" alt="Lexora Workspace Logo"> Lexora Tech
                         </div>
                         <p>Engineering Freedom For The Modern Web.</p>
+
+                        <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                            <i class="fas fa-mug-hot"></i> Keep This Tool Free Forever
+                        </a>
                     </div>
                     <div class="footer-col">
                         <h4>Product</h4>
@@ -1284,6 +1396,7 @@
             // 3. KEYBOARD SHORTCUT (/)
             document.addEventListener('keydown', (e) => {
                 if (e.key === '/') {
+                    if (document.activeElement === document.getElementById('globalSearch') || document.activeElement === mobSearch) return;
                     e.preventDefault();
                     if (window.innerWidth > 768) document.getElementById('globalSearch').focus();
                     else mobSearch.focus();
