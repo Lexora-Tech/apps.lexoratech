@@ -9,67 +9,187 @@
 
 <url>
   <loc>https://apps.lexoratech.com/</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/teleprompter/teleprompter.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/index.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/voicegen/voicegen.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/sketchpad/sketchpad.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/thumbgrab/thumbgrab.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/screenframe/screenframe.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/qrcodegen/qrcodegen.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/photoenhancer/photoenhancer.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/bgremove/bgremove.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/imageresizer/imageresizer.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://apps.lexoratech.com/chromapick/chromapick.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/lexorapdf/lexorapdf.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/gradient/gradient.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/securepass/securepass.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/imgoptim/imgoptim.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/thumbgrab/thumbgrab.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://apps.lexoratech.com/socialmock/socialmock.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/focusflow/focusflow.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <loc>https://apps.lexoratech.com/memegen/memegen.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/videotrimmer/videotrimmer.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/teleprompter/teleprompter.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/youtubedl/youtubedl.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/screenrecorder/screenrecorder.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/voicerecorder/voicerecorder.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/voicegen/voicegen.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/audiomixer/audiomixer.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/codeformat/codeformat.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/diffcheck/diffcheck.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/markdowns/markdown.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/qrcodegen/qrcodegen.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/fontgenerator/fontgenerator.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/wordcounter/wordcounter.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/lexorapdf/lexorapdf.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/securepass/securepass.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://apps.lexoratech.com/quickconvert/quickconvert.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://apps.lexoratech.com/index.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://apps.lexoratech.com/focusflow/focusflow.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/resumecraft/resumecraft.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/signature/signature.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/about.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/contact.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/privacy.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://apps.lexoratech.com/terms.php</loc>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://apps.lexoratech.com/teleprompter/suggestion.php</loc>
-  <lastmod>2025-12-28T14:37:44+00:00</lastmod>
+  <lastmod>2026-02-22T14:32:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
