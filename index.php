@@ -919,7 +919,7 @@
                 </div>
             </div>
 
-            <input type="text" class="mobile-search" id="mobSearch" placeholder="Search tools..." style="display:none;">
+           
 
             <div class="seo-hero">
                 <h1>Free Online Creator & Productivity Tools</h1>
