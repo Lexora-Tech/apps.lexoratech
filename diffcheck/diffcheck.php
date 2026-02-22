@@ -94,8 +94,8 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
-        /* --- HELP MODAL STYLES --- */
-        #helpModal {
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -112,71 +112,140 @@
             pointer-events: auto;
         }
 
-        #helpModal.hidden {
+        .modal-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
         .help-modal-content {
-            max-width: 800px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            /* Teal tint */
+            border-radius: 16px;
             padding: 0;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Outfit', sans-serif;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         .help-header {
-            position: sticky;
-            top: 0;
-            background: rgba(20, 20, 20, 0.98);
-            padding: 20px 30px;
+            padding: 20px;
+            background: #18181b;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #14b8a6;
+            border-bottom-color: #14b8a6;
+            background: rgba(20, 184, 166, 0.05);
         }
 
         .help-body {
-            padding: 30px;
-            line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
         }
 
-        .help-body h2 {
-            color: #fff;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #14b8a6;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
         }
 
         .help-body h3 {
-            color: #60a5fa;
-            margin-top: 2rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .help-body p {
-            color: #d1d5db;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
-        .help-body ul,
-        .help-body ol {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-            color: #d1d5db;
-        }
-
-        .help-body li {
-            margin-bottom: 0.5rem;
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
         }
 
         .modal-faq-item {
@@ -210,16 +279,15 @@
         /* Sidebar Button Style */
         .sidebar-btn-help {
             width: 90%;
-            margin: 15px auto 0;
+            margin: 15px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(59, 130, 246, 0.15);
-            /* Blue tint */
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
-            padding: 10px;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            color: #2dd4bf;
+            padding: 12px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
@@ -228,13 +296,64 @@
         }
 
         .sidebar-btn-help:hover {
-            background: rgba(59, 130, 246, 0.25);
+            background: rgba(20, 184, 166, 0.2);
             transform: translateY(-1px);
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 90%;
+            margin: 0 auto 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
         }
 
         /* Legal Links */
         .legal-links {
-            margin-top: 20px;
+            margin-top: auto;
             padding: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
@@ -268,41 +387,65 @@
 
     <div id="toastContainer" class="toast-container"></div>
 
-    <div id="helpModal" class="hidden">
+    <div id="helpModal" class="modal-overlay hidden">
         <div class="help-modal-content">
             <div class="help-header">
-                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <h2 style="margin:0; font-size:1.4rem; color:white;">DiffCheck Guide</h2>
                 <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('modes')">Modes</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('faq')">FAQ & Privacy</button>
+            </div>
+
             <div class="help-body">
-                <p>DiffCheck is a powerful utility for developers and writers to identify differences between two pieces of text or code. It runs entirely in your browser using the <code>jsdiff</code> library.</p>
-
-                <h3>Comparison Modes</h3>
-                <ul>
-                    <li><strong>Chars:</strong> Highlights every single character difference. Best for fixing typos.</li>
-                    <li><strong>Words:</strong> Compares word by word. Ideal for editing articles or blog posts.</li>
-                    <li><strong>Lines:</strong> Shows differences line by line. Perfect for comparing code snippets.</li>
-                    <li><strong>JSON:</strong> Validates and prettifies JSON before comparing structure.</li>
-                </ul>
-
-                <h3>Features</h3>
-                <ul>
-                    <li><strong>Scroll Sync:</strong> Both editor panes scroll together to keep lines aligned.</li>
-                    <li><strong>Ignore Options:</strong> Toggle "Ignore Whitespace" or "Case Insensitive" to filter out minor formatting changes.</li>
-                    <li><strong>Export Report:</strong> Generate a summary file of all additions and deletions.</li>
-                </ul>
-
-                <h3>Frequently Asked Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Are my files uploaded to a server?</span>
-                    No. DiffCheck is a client-side tool. All processing happens in your browser's memory for maximum privacy.
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Input Text:</strong> Paste your original text in the left panel and your modified text in the right panel.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Choose Settings:</strong> Select your preferred comparison mode (Lines, Words, Chars) in the sidebar. Toggle "Ignore Whitespace" if needed.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Compare:</strong> Click the "Run Compare" button. Green highlights show additions, red highlights show deletions.</div>
+                    </div>
                 </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Can I compare huge files?</span>
-                    Yes, but performance depends on your device's CPU. For files larger than 1MB, the "Lines" mode is recommended over "Chars".
+
+                <div id="modal-tab-modes" class="tab-content-modal">
+                    <h3>Comparison Modes</h3>
+                    <ul>
+                        <li><strong><i class="fas fa-font" style="color:#14b8a6;"></i> Chars:</strong> Highlights every single character difference. Best for fixing typos.</li>
+                        <li><strong><i class="fas fa-file-word" style="color:#14b8a6;"></i> Words:</strong> Compares word by word. Ideal for editing articles or blog posts.</li>
+                        <li><strong><i class="fas fa-bars" style="color:#14b8a6;"></i> Lines:</strong> Shows differences line by line. Perfect for comparing code snippets.</li>
+                        <li><strong><i class="fas fa-code" style="color:#14b8a6;"></i> JSON:</strong> Validates and prettifies JSON before comparing structure.</li>
+                    </ul>
+                </div>
+
+                <div id="modal-tab-faq" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>DiffCheck runs entirely in your browser using the <code>jsdiff</code> library.</p>
+                    <div style="background:rgba(20, 184, 166, 0.1); border:1px solid rgba(20, 184, 166, 0.3); padding:15px; border-radius:8px; color:#5eead4; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> Your text and code snippets are never uploaded to our servers. Processing happens in your browser's memory for maximum privacy.
+                    </div>
+
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="modal-faq-item">
+                        <span class="modal-faq-question">Can I compare huge files?</span>
+                        Yes, but performance depends on your device's CPU. For files larger than 1MB, the "Lines" mode is recommended over "Chars".
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#14b8a6; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#14b8a6; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#14b8a6; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -382,6 +525,10 @@
                     <span class="stat-label">Deletions</span>
                 </div>
             </div>
+
+            <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                <i class="fas fa-mug-hot"></i> Support Tool
+            </a>
 
             <div class="legal-links">
                 <a href="../privacy.php">
@@ -465,7 +612,7 @@
         </main>
     </div>
 
-    <div id="clearModal" class="modal-overlay">
+    <div id="clearModal" class="modal-overlay hidden">
         <div class="modal-glass danger-mode">
             <div class="modal-icon-wrapper">
                 <i class="fas fa-eraser"></i>
@@ -506,6 +653,19 @@
                 });
             }
         });
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'modes') btns[1].classList.add('active');
+            if (tabId === 'faq') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

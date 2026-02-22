@@ -210,37 +210,59 @@
             flex-shrink: 0;
         }
 
-        .help-body h3 {
-            color: #fff;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
         }
 
-        .help-body p {
-            margin-bottom: 15px;
-            line-height: 1.6;
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
         }
 
-        .help-body ul {
-            margin-bottom: 15px;
-            padding-left: 20px;
-            line-height: 1.6;
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
         }
 
-        .modal-faq-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
         }
 
-        .modal-faq-question {
-            color: #fff;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
         }
     </style>
 
@@ -297,22 +319,26 @@
                         <div class="step-num">3</div>
                         <div><strong>Export:</strong> Click the "Export" button in the top right to download your file as Markdown, HTML, or a formatted PDF.</div>
                     </div>
+
+                    <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                        <i class="fas fa-mug-hot"></i> Keep MarkEdit Free
+                    </a>
                 </div>
 
                 <div id="modal-tab-features" class="tab-content-modal">
-                    <h3><i class="fas fa-square-root-alt" style="color:#6366f1;"></i> LaTeX Math Support</h3>
-                    <p>Write math equations effortlessly. Use single <code>$</code> for inline equations, and double <code>$$</code> for display equations.</p>
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-square-root-alt" style="color:#6366f1;"></i> LaTeX Math Support</h3>
+                    <p style="margin-bottom:20px;">Write math equations effortlessly. Use single <code>$</code> for inline equations, and double <code>$$</code> for display equations.</p>
 
-                    <h3><i class="fas fa-project-diagram" style="color:#6366f1;"></i> Mermaid Diagrams</h3>
-                    <p>Create flowcharts and graphs using code blocks. Just set the language of the code block to <code>mermaid</code>.</p>
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-project-diagram" style="color:#6366f1;"></i> Mermaid Diagrams</h3>
+                    <p style="margin-bottom:20px;">Create flowcharts and graphs using code blocks. Just set the language of the code block to <code>mermaid</code>.</p>
 
-                    <h3><i class="fas fa-history" style="color:#6366f1;"></i> Auto-Save History</h3>
+                    <h3 style="color:white; margin-bottom:10px;"><i class="fas fa-history" style="color:#6366f1;"></i> Auto-Save History</h3>
                     <p>Your work is continuously auto-saved to your browser. Click "History" in the Export menu to view or restore previous versions of your notes.</p>
                 </div>
 
                 <div id="modal-tab-privacy" class="tab-content-modal">
-                    <h3>100% Offline & Private</h3>
-                    <p>MarkEdit is a client-side application.</p>
+                    <h3 style="color:white; margin-bottom:15px;">100% Offline & Private</h3>
+                    <p style="margin-bottom:15px;">MarkEdit is a client-side application.</p>
                     <div style="background:rgba(99, 102, 241, 0.1); border:1px solid rgba(99, 102, 241, 0.3); padding:15px; border-radius:8px; color:#a5b4fc; margin-bottom:20px;">
                         <i class="fas fa-shield-alt"></i> Your notes, documents, and auto-saves are stored locally in your browser's memory. We do not upload or store any of your content on our servers.
                     </div>

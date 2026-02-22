@@ -264,10 +264,64 @@
             transform: translateY(-1px);
         }
 
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
+
         /* Legal Links */
         .legal-links {
-            margin-top: auto;
-            padding: 20px;
+            margin-top: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
@@ -501,6 +555,10 @@
                 </button>
             </nav>
 
+            <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                <i class="fas fa-mug-hot"></i> Support Tool
+            </a>
+
             <div class="legal-links">
                 <a href="../privacy.php">
                     <i class="fas fa-shield-alt"></i> Privacy Policy
@@ -593,6 +651,7 @@
             }
         });
 
+        // Global function for modal tabs
         function switchModalTab(tabId) {
             document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));

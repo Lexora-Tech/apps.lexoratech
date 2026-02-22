@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>FocusFlow | Free Online Pomodoro Timer & Ambient Soundscape Generator</title>
     <meta name="title" content="FocusFlow | Free Online Pomodoro Timer & Ambient Soundscape Generator">
     <meta name="description" content="Boost focus with a customizable Pomodoro timer and immersive soundscapes (Rain, Lofi, White Noise). Features 40Hz Gamma waves for deep work. No ads, fully immersive.">
@@ -26,26 +26,30 @@
     <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-focus.jpg">
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "FocusFlow Timer",
-      "url": "https://apps.lexoratech.com/focusflow/focusflow.php",
-      "description": "An advanced online Pomodoro timer featuring a built-in ambient noise generator, binaural beats engine, and YouTube integration for deep focus and study sessions.",
-      "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "Web Browser",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-          "Customizable Pomodoro Timer",
-          "Ambient Soundscapes (Rain, Fire, White Noise)",
-          "Binaural Beats (Gamma, Beta, Alpha, Theta)",
-          "Integrated YouTube Player"
-      ],
-      "creator": {
-          "@type": "Organization",
-          "name": "LexoraTech"
-      }
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "FocusFlow Timer",
+            "url": "https://apps.lexoratech.com/focusflow/focusflow.php",
+            "description": "An advanced online Pomodoro timer featuring a built-in ambient noise generator, binaural beats engine, and YouTube integration for deep focus and study sessions.",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Customizable Pomodoro Timer",
+                "Ambient Soundscapes (Rain, Fire, White Noise)",
+                "Binaural Beats (Gamma, Beta, Alpha, Theta)",
+                "Integrated YouTube Player"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
     </script>
 
     <link rel="icon" href="../assets/logo/logo.png" />
@@ -85,12 +89,16 @@
             transition: opacity 0.3s ease;
             pointer-events: auto;
         }
-        #helpModal.hidden { opacity: 0; pointer-events: none; }
+
+        #helpModal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
         .help-modal-content {
             max-width: 700px;
             width: 95%;
-            height: 80vh; 
+            height: 80vh;
             height: 80dvh;
             display: flex;
             flex-direction: column;
@@ -99,46 +107,235 @@
             border-radius: 16px;
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Outfit', sans-serif;
         }
-        .help-header { padding: 20px; background: #18181b; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        
-        .help-tabs { 
-            display: flex; background: #0a0a0a; border-bottom: 1px solid rgba(255,255,255,0.1); 
-            flex-shrink: 0; overflow-x: auto; white-space: nowrap;
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
         }
-        .tab-btn { flex: 1; min-width: 100px; padding: 15px; background: transparent; border: none; color: #94a3b8; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; transition:0.2s; font-family: 'Outfit', sans-serif; }
-        .tab-btn.active { color: #a855f7; border-bottom-color: #a855f7; background: rgba(168, 85, 247, 0.05); }
-        
-        .help-body { flex: 1; overflow-y: auto; padding: 25px; color: #cbd5e1; }
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .help-step { display: flex; gap: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .step-num { width: 28px; height: 28px; background: #a855f7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        
-        .help-body h3 { color: #fff; margin-top: 10px; margin-bottom: 15px; font-size: 1.1rem; }
-        .help-body p { margin-bottom: 15px; line-height: 1.6; }
-        .help-body ul, .help-body ol { margin-bottom: 15px; padding-left: 20px; line-height: 1.6; }
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
 
-        .modal-faq-item { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .modal-faq-question { color: #fff; font-weight: 600; display: block; margin-bottom: 5px; }
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tab-btn.active {
+            color: #a855f7;
+            border-bottom-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #a855f7;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul,
+        .help-body ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-faq-question {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
-            width: 100%; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;
-            gap: 8px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3);
-            color: #c084fc; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600;
-            transition: all 0.2s; font-family: 'Outfit', sans-serif;
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: 'Outfit', sans-serif;
         }
-        .sidebar-btn-help:hover { background: rgba(168, 85, 247, 0.25); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(168, 85, 247, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
+        }
 
         /* Legal Links */
-        .legal-links { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px; }
-        .legal-links a { color: #9ca3af; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; transition: color 0.2s; font-family: 'Outfit', sans-serif; }
-        .legal-links a:hover { color: #fff; }
+        .legal-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .legal-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -157,7 +354,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="help-tabs">
                 <button class="tab-btn active" onclick="switchTab('guide')">How to Use</button>
                 <button class="tab-btn" onclick="switchTab('features')">Features</button>
@@ -198,7 +395,7 @@
                     <div style="background:rgba(16, 185, 129, 0.1); border:1px solid rgba(16, 185, 129, 0.3); padding:15px; border-radius:8px; color:#6ee7b7; margin-bottom:20px;">
                         <i class="fas fa-wifi"></i> The core timer, ambient sounds, and Neuro-Engine run entirely locally in your browser and do not require an active internet connection after the page loads. (Note: The YouTube player feature does require internet).
                     </div>
-                    
+
                     <ul style="list-style:none; padding:0; margin-top:20px;">
                         <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#a855f7; text-decoration:none;"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
                         <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#a855f7; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
@@ -408,6 +605,10 @@
                         </div>
                     </div>
 
+                    <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                        <i class="fas fa-mug-hot"></i> Support Tool
+                    </a>
+
                     <div class="legal-links">
                         <a href="../privacy.php">
                             <i class="fas fa-shield-alt"></i> Privacy Policy
@@ -455,7 +656,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');
                 });

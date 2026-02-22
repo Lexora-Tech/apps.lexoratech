@@ -1,3 +1,7 @@
+<?php
+header("Cross-Origin-Embedder-Policy: require-corp");
+header("Cross-Origin-Opener-Policy: same-origin");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -154,8 +158,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .help-step {
@@ -235,6 +246,56 @@
         .driver-popover .driver-popover-title {
             color: #8b5cf6;
         }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.1rem;
+            color: #1A1200;
+        }
     </style>
 </head>
 
@@ -304,6 +365,10 @@
                     <button id="helpBtnSidebar" class="source-card" style="width:100%; justify-content:center; border-color:#444;">
                         <i class="fas fa-book"></i> <span>User Guide</span>
                     </button>
+
+                    <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn" style="margin-top: 10px; margin-bottom: 15px;">
+                        <i class="fas fa-mug-hot"></i> Support Tool
+                    </a>
 
                     <div class="master-meter-vertical">
                         <div class="vu-container">

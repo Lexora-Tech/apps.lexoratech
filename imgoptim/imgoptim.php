@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>ImgOptim | Free Bulk Image Compressor & WebP Converter</title>
     <meta name="title" content="ImgOptim | Free Bulk Image Compressor & WebP Converter">
     <meta name="description" content="Compress, resize, and convert images online for free. Batch process JPG, PNG, and WebP files locally in your browser. No uploads, no limits, 100% private.">
@@ -26,33 +26,37 @@
     <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-imgoptim.jpg">
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ImgOptim",
-      "url": "https://apps.lexoratech.com/imgoptim/imgoptim.php",
-      "description": "A high-performance, client-side web application for bulk compressing, resizing, and converting image files (JPG, PNG, WebP) without server uploads.",
-      "applicationCategory": "PhotoEditor",
-      "operatingSystem": "Web Browser",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-          "Batch Image Compression",
-          "WebP Format Conversion",
-          "Local On-Device Processing",
-          "Before vs After Visual Slider",
-          "ZIP File Export"
-      ],
-      "creator": {
-          "@type": "Organization",
-          "name": "LexoraTech"
-      }
-    }
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "ImgOptim",
+            "url": "https://apps.lexoratech.com/imgoptim/imgoptim.php",
+            "description": "A high-performance, client-side web application for bulk compressing, resizing, and converting image files (JPG, PNG, WebP) without server uploads.",
+            "applicationCategory": "PhotoEditor",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Batch Image Compression",
+                "WebP Format Conversion",
+                "Local On-Device Processing",
+                "Before vs After Visual Slider",
+                "ZIP File Export"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
     </script>
 
     <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="css/imgoptim.css">
 
     <style>
@@ -71,17 +75,31 @@
 
         /* --- TABBED HELP MODAL --- */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999; opacity: 1; transition: opacity 0.3s ease; pointer-events: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
         }
-        .modal-overlay.hidden { opacity: 0; pointer-events: none; }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
         .help-modal-content {
             max-width: 700px;
             width: 95%;
-            height: 80vh; 
+            height: 80vh;
             height: 80dvh;
             display: flex;
             flex-direction: column;
@@ -90,31 +108,111 @@
             border-radius: 16px;
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Outfit', sans-serif;
         }
 
-        .help-header { padding: 20px; background: #18181b; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        
-        .help-tabs { 
-            display: flex; background: #0a0a0a; border-bottom: 1px solid rgba(255,255,255,0.1); 
-            flex-shrink: 0; overflow-x: auto; white-space: nowrap;
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
         }
 
-        .tab-btn-modal { flex: 1; min-width: 100px; padding: 15px; background: transparent; border: none; color: #94a3b8; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; transition:0.2s; font-family: 'Outfit', sans-serif; font-size: 0.9rem;}
-        .tab-btn-modal:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
-        .tab-btn-modal.active { color: #22d3ee; border-bottom-color: #22d3ee; background: rgba(34, 211, 238, 0.05); }
-        
-        .help-body { flex: 1; overflow-y: auto; padding: 25px; color: #cbd5e1; }
-        .tab-content-modal { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content-modal.active { display: block; }
-        
-        .help-step { display: flex; gap: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .step-num { width: 28px; height: 28px; background: #22d3ee; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        
-        .help-body h3 { color: #fff; margin-top: 10px; margin-bottom: 15px; font-size: 1.1rem; }
-        .help-body p { margin-bottom: 15px; line-height: 1.6; }
-        .help-body ul { margin-bottom: 15px; padding-left: 20px; line-height: 1.6; }
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #22d3ee;
+            border-bottom-color: #22d3ee;
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #22d3ee;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
@@ -124,7 +222,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(34, 211, 238, 0.1); /* Cyan tint */
+            background: rgba(34, 211, 238, 0.1);
+            /* Cyan tint */
             border: 1px solid rgba(34, 211, 238, 0.3);
             color: #22d3ee;
             padding: 12px;
@@ -135,17 +234,78 @@
             font-family: 'Outfit', sans-serif;
             margin-top: 15px;
         }
-        .sidebar-btn-help:hover { background: rgba(34, 211, 238, 0.2); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(34, 211, 238, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* --- PREMIUM GOLD BUY ME A COFFEE BUTTON --- */
+        .custom-bmc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #F3E282 0%, #D4AF37 50%, #B8860B 100%);
+            color: #1A1200;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: 1px solid #E8C14E;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .custom-bmc-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background: linear-gradient(135deg, #FDF0A6 0%, #DFB943 50%, #C4920E 100%);
+        }
+
+        .custom-bmc-btn:hover::after {
+            left: 150%;
+            transition: all 0.6s ease;
+        }
+
+        .custom-bmc-btn i {
+            font-size: 1.2rem;
+            color: #1A1200;
+        }
 
         /* Legal Links */
         .legal-links {
-            margin-top: 20px;
+            margin-top: 10px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .legal-links a {
             color: #94a3b8;
             text-decoration: none;
@@ -156,7 +316,10 @@
             transition: color 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .legal-links a:hover { color: #fff; }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -182,7 +345,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="help-tabs">
                 <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
                 <button class="tab-btn-modal" onclick="switchModalTab('features')">Features</button>
@@ -208,7 +371,7 @@
                 <div id="modal-tab-features" class="tab-content-modal">
                     <h3><i class="fas fa-file-archive" style="color:#22d3ee;"></i> Batch Compression</h3>
                     <p>Drag and drop dozens of images at once. The engine will process them in parallel using your device's resources.</p>
-                    
+
                     <h3><i class="fas fa-magic" style="color:#22d3ee;"></i> Smart WebP Conversion</h3>
                     <p>Convert legacy formats like JPEG and PNG into modern WebP format, achieving up to 80% reduction in file size while maintaining visual fidelity.</p>
 
@@ -222,7 +385,7 @@
                     <div style="background:rgba(34, 211, 238, 0.1); border:1px solid rgba(34, 211, 238, 0.3); padding:15px; border-radius:8px; color:#67e8f9; margin-bottom:20px;">
                         <i class="fas fa-shield-alt"></i> All image compression and conversion happens locally in your browser. Your files are never uploaded to a cloud server.
                     </div>
-                    
+
                     <ul style="list-style:none; padding:0; margin-top:20px;">
                         <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#22d3ee; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
                         <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#22d3ee; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
@@ -331,6 +494,10 @@
                         </div>
                     </div>
 
+                    <a href="https://www.buymeacoffee.com/LexoraTech" target="_blank" class="custom-bmc-btn">
+                        <i class="fas fa-mug-hot"></i> Support Tool
+                    </a>
+
                     <div class="legal-links">
                         <a href="../privacy.php">
                             <i class="fas fa-shield-alt"></i> Privacy Policy
@@ -426,7 +593,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');
@@ -450,9 +617,9 @@
         function switchModalTab(tabId) {
             document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
-            
+
             document.getElementById('modal-tab-' + tabId).classList.add('active');
-            
+
             const btns = document.querySelectorAll('.tab-btn-modal');
             if (tabId === 'guide') btns[0].classList.add('active');
             if (tabId === 'features') btns[1].classList.add('active');
