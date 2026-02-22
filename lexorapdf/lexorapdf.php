@@ -4,15 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lexora PDF | Lexora Workspace</title>
+
+    <title>Lexora PDF | Free Private PDF Merger, Splitter & Watermark Tool</title>
+    <meta name="title" content="Lexora PDF | Free Private PDF Merger, Splitter & Watermark Tool">
+    <meta name="description" content="Process PDFs directly in your browser without uploading files to a server. 100% private. Merge, split, rotate, convert images to PDF, and watermark securely.">
+    <meta name="keywords" content="private pdf merger online, split pdf offline browser, client side pdf tools, secure pdf watermark, combine pdfs free no upload, image to pdf converter, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/lexorapdf/lexorapdf.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/lexorapdf/lexorapdf.php">
+    <meta property="og:title" content="Lexora PDF - Secure Client-Side PDF Tools">
+    <meta property="og:description" content="Process, merge, and split your PDFs directly in your browser. 100% Private, no server uploads.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-pdf.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/lexorapdf/lexorapdf.php">
+    <meta name="twitter:title" content="Lexora PDF - Secure Client-Side PDF Tools">
+    <meta name="twitter:description" content="Process, merge, and split your PDFs directly in your browser. 100% Private, no server uploads.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-pdf.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Lexora PDF Tools",
+            "url": "https://apps.lexoratech.com/lexorapdf/lexorapdf.php",
+            "description": "A secure, client-side web application for manipulating PDF files. Merge, split, rotate, watermark, and convert images to PDF entirely in your browser.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Merge multiple PDFs",
+                "Split PDF pages",
+                "Image to PDF Converter",
+                "Add Text Watermarks",
+                "Rotate PDF Pages",
+                "Add Page Numbers"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
     <link rel="icon" href="../assets/logo/logo.png" />
-    <meta name="description" content="Process PDFs directly in your browser without uploading files to a server. 100% private. Merge, split, rotate, and watermark PDFs securely and instantly.">
-    <meta name="keywords" content="private pdf merger online, split pdf offline browser, client side pdf tools, secure pdf watermark, combine pdfs free no upload">
-    
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/lexorapdf.css">
- 
 
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7/download.min.js"></script>
@@ -23,8 +68,21 @@
     <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
 
     <style>
-        /* --- HELP MODAL STYLES --- */
-        #helpModal {
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -41,50 +99,129 @@
             pointer-events: auto;
         }
 
-        #helpModal.hidden {
+        .modal-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
         .help-modal-content {
-            max-width: 800px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 16px;
             padding: 0;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Outfit', sans-serif;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
 
         .help-header {
-            position: sticky;
-            top: 0;
-            background: rgba(20, 20, 20, 0.98);
-            padding: 20px 30px;
+            padding: 20px;
+            background: #18181b;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #ef4444;
+            border-bottom-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
         }
 
         .help-body {
-            padding: 30px;
-            line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #ef4444; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #ef4444;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -92,6 +229,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
@@ -99,9 +237,18 @@
             margin-bottom: 5px;
         }
 
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
@@ -111,7 +258,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(239, 68, 68, 0.1); /* Red tint for PDF */
+            background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
             color: #f87171;
             padding: 12px;
@@ -121,17 +268,22 @@
             transition: all 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .sidebar-btn-help:hover { background: rgba(239, 68, 68, 0.2); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-1px);
+        }
 
         /* Legal Links */
         .legal-links {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .legal-links a {
             color: #94a3b8;
             text-decoration: none;
@@ -142,53 +294,84 @@
             transition: color 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .legal-links a:hover { color: #fff; }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
     </style>
-    
+
 </head>
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Secure PDF Tools: Merge, Split, and Watermark</h2>
+        <p>Lexora PDF is a suite of 100% private, client-side PDF utilities. Unlike traditional online PDF editors, Lexora PDF processes your sensitive documents entirely within your web browser using WebAssembly. Your files are never uploaded to an external server. Seamlessly merge multiple PDFs, extract and split specific pages, add custom text watermarks, rotate pages, or convert JPG/PNG images into a single PDF document. Completely free, no registration required, and safe for confidential documents.</p>
+    </div>
+
     <div class="ambient-glow"></div>
     <div id="toastBox" class="toast-container"></div>
 
-    <div id="helpModal" class="hidden">
+    <div id="helpModal" class="modal-overlay hidden">
         <div class="help-modal-content">
             <div class="help-header">
-                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <h2 style="margin:0; font-size:1.4rem; color:white;">Lexora PDF Guide</h2>
                 <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Tools</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy & FAQ</button>
+            </div>
+
             <div class="help-body">
-                <p>Lexora PDF is a suite of secure, client-side tools designed to manipulate PDF documents. Unlike other free tools, <strong>we do not upload your files to any server</strong>. All processing happens locally on your device, ensuring 100% privacy.</p>
-
-                <h3>Available Tools</h3>
-                <ul>
-                    <li><strong>Merge:</strong> Combine multiple PDF files into a single document. You can drag and drop to reorder files before merging.</li>
-                    <li><strong>Split:</strong> Extract specific pages (e.g., "1-3, 5") from a large document into a new PDF.</li>
-                    <li><strong>Image to PDF:</strong> Convert JPG or PNG images into a PDF document. Perfect for receipts and scans.</li>
-                    <li><strong>Watermark:</strong> Add text watermarks with custom colors and opacity to protect your documents.</li>
-                    <li><strong>Rotate:</strong> Fix the orientation of pages by rotating them 90, 180, or 270 degrees.</li>
-                </ul>
-
-                <h3>How to Use</h3>
-                <ol>
-                    <li><strong>Select Tool:</strong> Click a tool button in the sidebar (e.g., "Merge").</li>
-                    <li><strong>Upload Files:</strong> Drag and drop your PDFs into the main area.</li>
-                    <li><strong>Configure:</strong> Adjust settings in the sidebar (e.g., set page ranges or watermark text).</li>
-                    <li><strong>Process:</strong> Click the "Process Files" button at the bottom of the sidebar to download your new file.</li>
-                </ol>
-
-                <h3>Frequently Asked Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Are my files really private?</span>
-                    Yes. We use WebAssembly libraries (pdf-lib) to process files in your browser's memory. No file ever leaves your computer.
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Select Tool:</strong> Click a tool button in the left sidebar (e.g., "Merge" or "Split").</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Upload Files:</strong> Drag and drop your PDFs into the main area. You can drag the file cards to reorder them before merging.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Configure & Process:</strong> Adjust any specific settings in the sidebar (like page ranges), then click the blue "Process Files" button to download your new PDF.</div>
+                    </div>
                 </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Can I merge protected PDFs?</span>
-                    If a PDF has a password, you will need to unlock it first before merging or editing it here.
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3>Available Utilities</h3>
+                    <ul>
+                        <li><strong><i class="fas fa-layer-group" style="color:#ef4444;"></i> Merge:</strong> Combine multiple PDF files into a single document.</li>
+                        <li><strong><i class="fas fa-cut" style="color:#ef4444;"></i> Split:</strong> Extract specific pages (e.g., "1-3, 5") from a large document into a new PDF.</li>
+                        <li><strong><i class="fas fa-images" style="color:#ef4444;"></i> Image to PDF:</strong> Convert JPG or PNG images into a PDF document. Perfect for receipts and scans.</li>
+                        <li><strong><i class="fas fa-stamp" style="color:#ef4444;"></i> Watermark:</strong> Add text watermarks with custom colors and opacity to protect your documents.</li>
+                        <li><strong><i class="fas fa-sync-alt" style="color:#ef4444;"></i> Rotate:</strong> Fix the orientation of pages by rotating them 90, 180, or 270 degrees.</li>
+                    </ul>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% On-Device Processing</h3>
+                    <p>Unlike other free tools, <strong>we do not upload your files to any server</strong>.</p>
+                    <div style="background:rgba(239, 68, 68, 0.1); border:1px solid rgba(239, 68, 68, 0.3); padding:15px; border-radius:8px; color:#fca5a5; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> All processing happens locally on your device using WebAssembly (pdf-lib), ensuring complete privacy for sensitive documents.
+                    </div>
+
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="modal-faq-item">
+                        <span class="modal-faq-question">Can I merge password-protected PDFs?</span>
+                        Currently, you must unlock a PDF before it can be processed by the client-side engine.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#ef4444; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#ef4444; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#ef4444; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -197,9 +380,9 @@
     <div class="app-shell">
 
         <aside class="sidebar">
-            <div class="brand">
+            <h1 class="brand" style="font-size:inherit; font-weight:inherit; margin:0; display:flex; align-items:center; gap:8px;">
                 <i class="fas fa-file-pdf"></i> Lexora PDF <span class="badge">PRO</span>
-            </div>
+            </h1>
 
             <a href="../index.php" class="back-link" title="Return to Lexora OS">
                 <i class="fas fa-th-large"></i> Back to Creator OS
@@ -223,7 +406,7 @@
                         <button class="tool-card" data-tool="img2pdf" onclick="setTool('img2pdf')">
                             <i class="fas fa-images"></i> <span>Img to PDF</span>
                         </button>
-                       <button class="tool-card" data-tool="watermark" onclick="setTool('watermark')">
+                        <button class="tool-card" data-tool="watermark" onclick="setTool('watermark')">
                             <i class="fas fa-stamp"></i> <span>Watermark</span>
                         </button>
                         <button class="tool-card" data-tool="number" onclick="setTool('number')">
@@ -232,7 +415,7 @@
                         <button class="tool-card" data-tool="rotate" onclick="setTool('rotate')">
                             <i class="fas fa-sync-alt"></i> <span>Rotate</span>
                         </button>
-                       </div>
+                    </div>
                 </div>
 
                 <div id="settingsArea">
@@ -343,7 +526,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');
@@ -362,6 +545,19 @@
                 });
             }
         });
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

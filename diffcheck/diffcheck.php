@@ -4,7 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiffCheck | Lexora Workspace</title>
+
+    <title>DiffCheck | Free Online Text & Code Compare Tool</title>
+    <meta name="title" content="DiffCheck | Free Online Text & Code Compare Tool">
+    <meta name="description" content="Compare text files and code snippets instantly. Identify differences character by character, line by line, or word by word. Free, private, and runs entirely in your browser.">
+    <meta name="keywords" content="diff checker online, compare text files, code difference tool, text comparison, find differences in text, JSON diff, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/diffcheck/diffcheck.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/diffcheck/diffcheck.php">
+    <meta property="og:title" content="DiffCheck - Pro Text Compare Tool">
+    <meta property="og:description" content="Identify differences between two pieces of text or code instantly. 100% Free and Private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-diff.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/diffcheck/diffcheck.php">
+    <meta name="twitter:title" content="DiffCheck - Pro Text Compare Tool">
+    <meta name="twitter:description" content="Identify differences between two pieces of text or code instantly. 100% Free and Private.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-diff.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "DiffCheck Text Comparison Tool",
+            "url": "https://apps.lexoratech.com/diffcheck/diffcheck.php",
+            "description": "An advanced online utility for comparing text and code to find additions and deletions.",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Character, Word, and Line Comparison",
+                "JSON Formatting and Validation",
+                "Synchronized Scrolling",
+                "Export Diff Reports"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
     <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,6 +61,39 @@
     <link rel="stylesheet" href="css/diffcheck.css">
 
     <style>
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* --- BACK TO WORKSPACE BUTTON --- */
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
         /* --- HELP MODAL STYLES --- */
         #helpModal {
             position: fixed;
@@ -50,7 +130,7 @@
             position: relative;
             font-family: 'Outfit', sans-serif;
             border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         .help-header {
@@ -70,12 +150,35 @@
             line-height: 1.7;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #60a5fa; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .help-body h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .help-body h3 {
+            color: #60a5fa;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .help-body p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .help-body ul,
+        .help-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #d1d5db;
+        }
+
+        .help-body li {
+            margin-bottom: 0.5rem;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -83,6 +186,7 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
@@ -90,9 +194,18 @@
             margin-bottom: 5px;
         }
 
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
@@ -102,7 +215,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(59, 130, 246, 0.15); /* Blue tint */
+            background: rgba(59, 130, 246, 0.15);
+            /* Blue tint */
             border: 1px solid rgba(59, 130, 246, 0.3);
             color: #60a5fa;
             padding: 10px;
@@ -112,17 +226,22 @@
             transition: all 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .sidebar-btn-help:hover { background: rgba(59, 130, 246, 0.25); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(59, 130, 246, 0.25);
+            transform: translateY(-1px);
+        }
 
         /* Legal Links */
         .legal-links {
             margin-top: 20px;
             padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .legal-links a {
             color: #94a3b8;
             text-decoration: none;
@@ -133,11 +252,19 @@
             transition: color 0.2s;
             font-family: 'Outfit', sans-serif;
         }
-        .legal-links a:hover { color: #fff; }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="sr-only">
+        <h2>Free Online Text and Code Comparison Tool</h2>
+        <p>DiffCheck by Lexora is a powerful online utility to compare two text files or code snippets and instantly highlight the differences. Features include character-by-character comparison, line-by-line code diffs, JSON formatting and validation, and synchronized scrolling. Built for developers, writers, and editors to track revisions quickly. 100% secure: All text processing is done locally in your browser. Your data is never uploaded to an external server.</p>
+    </div>
 
     <div id="toastContainer" class="toast-container"></div>
 
@@ -149,7 +276,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="help-body">
                 <p>DiffCheck is a powerful utility for developers and writers to identify differences between two pieces of text or code. It runs entirely in your browser using the <code>jsdiff</code> library.</p>
 
@@ -185,12 +312,16 @@
 
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="logo">
+                <h1 class="logo" style="font-size:inherit; font-weight:inherit; margin:0; display:flex; align-items:center; gap:10px;">
                     <i class="fas fa-not-equal"></i>
                     <span>DiffCheck</span>
-                </div>
-                <a href="../index.php" class="nav-icon" title="Dashboard"><i class="fas fa-th-large"></i></a>
+                </h1>
+                <a href="../index.php" class="nav-icon desktop-only" title="Dashboard"><i class="fas fa-th-large"></i></a>
             </div>
+
+            <a href="../index.php" class="back-link">
+                <i class="fas fa-chevron-left"></i> Back to Workspace
+            </a>
 
             <button id="helpBtn" class="sidebar-btn-help">
                 <i class="fas fa-question-circle"></i> How to Use?
@@ -269,8 +400,13 @@
         <main class="workspace">
 
             <header class="mobile-header">
-                <button id="mobileMenuBtn" class="icon-btn"><i class="fas fa-bars"></i></button>
-                <div class="logo-mobile">DiffCheck</div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <a href="../index.php" class="icon-btn" style="text-decoration:none;" title="Back to Workspace"><i class="fas fa-chevron-left"></i></a>
+                    <button id="mobileMenuBtn" class="icon-btn"><i class="fas fa-bars"></i></button>
+                </div>
+
+                <h1 class="logo-mobile" style="font-size:inherit; font-weight:inherit; margin:0;">DiffCheck</h1>
+
                 <button id="mobileExportBtn" class="icon-btn"><i class="fas fa-file-export"></i></button>
             </header>
 
@@ -351,7 +487,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');

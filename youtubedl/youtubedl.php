@@ -4,14 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TubeSave - Coming Soon | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
-    <meta name="description" content="TubeSave: The ultimate YouTube video downloader is coming soon. Get ready for 4K downloads and MP3 conversion.">
 
+    <title>TubeSave Pro - Coming Soon | 4K Video Downloader</title>
+    <meta name="title" content="TubeSave Pro - Coming Soon | 4K Video Downloader">
+    <meta name="description" content="TubeSave: The ultimate YouTube video downloader is coming soon. Get ready for ultra-fast 4K video downloads and MP3 audio conversion. Join the waitlist today.">
+    <meta name="keywords" content="youtube video downloader coming soon, 4k video downloader, youtube to mp3 converter, fast video downloader, tubesave pro, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/tubesave/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/tubesave/">
+    <meta property="og:title" content="TubeSave Pro | 4K Video Downloader (Coming Soon)">
+    <meta property="og:description" content="The ultimate video downloader is coming soon. Get ready for blazing fast 4K downloads and MP3 extraction.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-tubesave.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/tubesave/">
+    <meta name="twitter:title" content="TubeSave Pro | 4K Video Downloader (Coming Soon)">
+    <meta name="twitter:description" content="The ultimate video downloader is coming soon. Get ready for blazing fast 4K downloads and MP3 extraction.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-tubesave.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "TubeSave Pro",
+            "url": "https://apps.lexoratech.com/tubesave/",
+            "description": "An upcoming ultra-fast YouTube video downloader supporting 4K resolution and MP3 audio extraction.",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  
 
     <style>
         /* ========================
@@ -346,8 +384,6 @@
                 display: none;
             }
 
-            /* Show only icon on mobile */
-
             .coming-soon-card {
                 padding: 40px 20px;
             }
@@ -402,12 +438,12 @@
     <div class="app-container">
 
         <header class="modern-navbar">
-            <a href="../index.php" class="nav-brand">
-                <img src="../assets/logo/logo2.png" alt="Lexora" class="brand-logo">
+            <a href="../index.php" class="nav-brand" aria-label="Back to Lexora Workspace">
+                <img src="../assets/logo/logo2.png" alt="Lexora Workspace Logo" class="brand-logo">
                 <span class="brand-text">Lexora Workspace</span>
             </a>
             <div class="nav-right">
-                <a href="../index.php" class="back-link">
+                <a href="../index.php" class="back-link" aria-label="Back to Dashboard">
                     <i class="fas fa-arrow-left"></i> <span>Back To Dashboard</span>
                 </a>
             </div>
@@ -418,7 +454,7 @@
 
                 <div class="hero-icon-wrapper">
                     <div class="hero-icon-bg"></div>
-                    <i class="fab fa-youtube hero-icon"></i>
+                    <i class="fab fa-youtube hero-icon" aria-hidden="true"></i>
                 </div>
 
                 <div class="badge">In Development</div>
@@ -429,22 +465,22 @@
                     Experience blazing fast 4K downloads and MP3 extraction soon.
                 </p>
 
-                <form class="notify-form" id="notifyForm">
-                    <input type="email" class="notify-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="notify-btn">Notify Me</button>
+                <form class="notify-form" id="notifyForm" aria-label="Waitlist Signup Form">
+                    <input type="email" class="notify-input" placeholder="Enter your email address" aria-label="Email Address for Notification" required>
+                    <button type="submit" class="notify-btn" aria-label="Subscribe to waitlist notifications">Notify Me</button>
                 </form>
 
                 <div class="features-preview">
                     <div class="f-item">
-                        <i class="fas fa-film"></i>
+                        <i class="fas fa-film" aria-hidden="true"></i>
                         <span>4K Video</span>
                     </div>
                     <div class="f-item">
-                        <i class="fas fa-music"></i>
+                        <i class="fas fa-music" aria-hidden="true"></i>
                         <span>MP3 Audio</span>
                     </div>
                     <div class="f-item">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
                         <span>Ultra Fast</span>
                     </div>
                 </div>
@@ -453,7 +489,7 @@
         </main>
 
         <footer class="simple-footer">
-            &copy; 2025 LexoraTech. All rights reserved.
+            &copy; 2026 LexoraTech. All rights reserved.
         </footer>
 
     </div>

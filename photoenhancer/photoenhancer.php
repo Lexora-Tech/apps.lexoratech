@@ -4,9 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lumina Enhancer | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
 
+    <title>Lumina Enhancer | Free Online Photo Editor & Color Grading</title>
+    <meta name="title" content="Lumina Enhancer | Free Online Photo Editor & Color Grading">
+    <meta name="description" content="Edit photos online for free. Adjust brightness, contrast, saturation, temperature, and apply professional presets. 100% private, client-side browser image editor.">
+    <meta name="keywords" content="free online photo editor, browser image editor, photo filter online, adjust image brightness, color grading tool online, client-side photo editor, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/lumina/lumina.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/lumina/lumina.php">
+    <meta property="og:title" content="Lumina Enhancer - Pro Browser Photo Editor">
+    <meta property="og:description" content="Color grade and enhance your photos securely in your browser. 100% Free & Private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-lumina.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/lumina/lumina.php">
+    <meta name="twitter:title" content="Lumina Enhancer - Pro Browser Photo Editor">
+    <meta name="twitter:description" content="Color grade and enhance your photos securely in your browser. 100% Free & Private.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-lumina.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Lumina Enhancer",
+            "url": "https://apps.lexoratech.com/lumina/lumina.php",
+            "description": "A high-performance, client-side web application for editing and color grading photos securely without server uploads.",
+            "applicationCategory": "PhotoEditor",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Exposure and Contrast Adjustment",
+                "Color Grading (Saturation, Temperature, Tint)",
+                "Live RGB Histogram",
+                "Professional Photo Presets",
+                "Local On-Device Processing"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -46,6 +93,19 @@
             flex-direction: column;
         }
 
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
         /* --- BACKGROUND MESH --- */
         .bg-mesh {
             position: fixed;
@@ -71,6 +131,12 @@
             align-items: center;
         }
 
+        .header-left-group {
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+        }
+
         .nav-pill {
             pointer-events: auto;
             background: var(--glass-panel);
@@ -82,6 +148,13 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-pill:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .back-link {
@@ -476,6 +549,158 @@
             }
         }
 
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #3b82f6;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
             .adjust-panel {
                 width: 95%;
@@ -499,11 +724,81 @@
 
 <body>
 
-    <div class="top-bar">
-        <div class="nav-pill">
-            <a href="../index.php" class="back-link"><i class="fas fa-chevron-left"></i></a>
-            <span class="app-title">Lumina Editor</span>
+    <div class="sr-only">
+        <h2>Free Online Photo Editor & Image Enhancer</h2>
+        <p>Lumina Enhancer by Lexora Workspace is a professional online photo editing application. Easily upload your images to adjust brightness, contrast, highlights, saturation, temperature, and tint in real-time. Utilize our built-in RGB histogram to precisely monitor your color distribution. Apply one-click professional presets like Vivid, Moody, Black & White, and Film Grain. Featuring advanced panning, zooming, and a direct before-and-after comparison tool. The best part? It's 100% private. All image processing is handled locally within your web browser using HTML5 Canvas APIs, meaning your photos are never uploaded or stored on an external server.</p>
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">Lumina Guide</h2>
+                <button id="closeHelp" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Features</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="help-body">
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Upload Image:</strong> Drag & drop your photo into the center screen, or click the upload box to browse your files.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Edit & Adjust:</strong> Use the bottom dock to switch between editing panels (Light, Color, Filters, Crop). Slide the values to see instant changes.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Compare & Save:</strong> Click and hold the "Eye" icon on the right to compare your edits with the original image. Click "Save" to download.</div>
+                    </div>
+                </div>
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-sliders-h" style="color:#3b82f6;"></i> Pro Adjustments</h3>
+                    <p>Gain fine control over your image's Exposure, Contrast, Highlights, Saturation, Temperature, and Tint. Edits are calculated per-pixel for high-fidelity results.</p>
+
+                    <h3><i class="fas fa-chart-area" style="color:#3b82f6;"></i> Live RGB Histogram</h3>
+                    <p>Monitor the tonal distribution of your image in real-time. The histogram graph in the top right automatically updates as you adjust sliders, helping you prevent clipping in highlights or shadows.</p>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>Lumina Enhancer is a pure client-side web application.</p>
+                    <div style="background:rgba(59, 130, 246, 0.1); border:1px solid rgba(59, 130, 246, 0.3); padding:15px; border-radius:8px; color:#93c5fd; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> All pixel manipulation and color grading happens locally in your browser. Your photos are never sent to a cloud server.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="bg-mesh"></div>
+
+    <div class="top-bar">
+        <div class="header-left-group">
+            <div class="nav-pill">
+                <a href="../index.php" class="back-link"><i class="fas fa-chevron-left"></i></a>
+                <h1 class="app-title" style="margin:0; font-size: 0.9rem;">Lumina Editor</h1>
+            </div>
+
+            <button id="helpBtnHeader" class="nav-pill" style="border:1px solid rgba(233, 233, 233, 0.1); cursor:pointer;">
+                <i style="color:#ffffff" class="fas fa-question-circle"></i> <span class="desktop-text" style="font-size:0.9rem; font-weight:600; color: #ffffff;">Help</span>
+            </button>
+        </div>
+
         <button class="action-btn" id="saveBtn" disabled>
             <span>Save</span> <i class="fas fa-arrow-down"></i>
         </button>
@@ -662,7 +957,6 @@
 
         function initEditor() {
             // Resize canvas to fit screen initially but keep high res
-            // Limit max resolution for performance if needed (e.g. 4K)
             canvas.width = originalImg.naturalWidth;
             canvas.height = originalImg.naturalHeight;
 
@@ -682,14 +976,13 @@
         function render(isCompare = false) {
             if (!sourceData) return;
 
-            // Start with original data
             const w = canvas.width;
             const h = canvas.height;
 
             // If Comparing, just draw original and return
             if (isCompare) {
                 ctx.putImageData(sourceData, 0, 0);
-                applyTransforms(); // Keep rotation/flip
+                applyTransforms();
                 return;
             }
 
@@ -740,8 +1033,7 @@
 
         function applyTransforms() {
             const wrapper = document.getElementById('canvasWrapper');
-            // We use CSS transform on the wrapper for display performance
-            // Actual pixel rotation happens only on Export
+            // Use CSS transform on the wrapper for display performance
             wrapper.style.transform = `translate(${state.pX}px, ${state.pY}px) rotate(${state.rotation}deg) scale(${state.flipH}, ${state.flipV})`;
         }
 
@@ -919,6 +1211,7 @@
             startX, startY, initialX, initialY;
 
         stage.addEventListener('mousedown', (e) => {
+            if (e.target === cmpBtn) return; // Prevent pan when comparing
             isDown = true;
             stage.classList.add('active');
             startX = e.pageX;
@@ -943,6 +1236,32 @@
             state.pY = initialY + dy;
             applyTransforms();
         });
+
+        // --- HELP MODAL LOGIC ---
+        const helpBtn = document.getElementById('helpBtnHeader');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelp = document.getElementById('closeHelp');
+
+        if (helpBtn && helpModal) {
+            helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+            closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+            helpModal.addEventListener('click', (e) => {
+                if (e.target === helpModal) helpModal.classList.add('hidden');
+            });
+        }
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

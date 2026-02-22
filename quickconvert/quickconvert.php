@@ -1,20 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>QuickConvert | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
+
+    <title>QuickConvert | Free Online Unit & Currency Converter</title>
+    <meta name="title" content="QuickConvert | Free Online Unit & Currency Converter">
     <meta name="description" content="Convert 100+ units instantly: Currency (Real-time), Engineering, Physics, and Cooking. The fastest, ad-free converter for professionals and students.">
-    <meta name="keywords" content="online unit converter, live currency converter, engineering unit converter, cooking measurement converter, scientific calculator online">
+    <meta name="keywords" content="online unit converter, live currency converter, engineering unit converter, cooking measurement converter, scientific calculator online, metric to imperial converter, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/quickconvert/quickconvert.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/quickconvert/quickconvert.php">
+    <meta property="og:title" content="QuickConvert - Universal Unit & Currency Converter">
+    <meta property="og:description" content="Convert 100+ units across physics, engineering, and daily life instantly.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-convert.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/quickconvert/quickconvert.php">
+    <meta name="twitter:title" content="QuickConvert - Universal Unit & Currency Converter">
+    <meta name="twitter:description" content="Convert 100+ units across physics, engineering, and daily life instantly.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-convert.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "QuickConvert",
+            "url": "https://apps.lexoratech.com/quickconvert/quickconvert.php",
+            "description": "An advanced online universal converter tool. Supports real-time currency exchange rates, physics units, engineering measurements, and everyday conversions like cooking and temperature.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Real-time Currency Exchange Rates",
+                "Physics & Engineering Unit Conversions",
+                "Digital Storage & Data Transfer Rates",
+                "Everyday Cooking & Temperature Conversions",
+                "100% Ad-Free UI"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/quickconvert.css">
-   
 
     <style>
-        /* --- HELP MODAL STYLES --- */
-        #helpModal {
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -31,50 +90,141 @@
             pointer-events: auto;
         }
 
-        #helpModal.hidden {
+        .modal-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
         .help-modal-content {
-            max-width: 800px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 16px;
             padding: 0;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Inter', sans-serif;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
 
         .help-header {
-            position: sticky;
-            top: 0;
-            background: rgba(20, 20, 20, 0.98);
-            padding: 20px 30px;
+            padding: 20px;
+            background: #18181b;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #f59e0b;
+            border-bottom-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
         }
 
         .help-body {
-            padding: 30px;
-            line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
         }
 
-        .help-body h2 { color: #fff; margin-bottom: 1rem; font-size: 1.8rem; }
-        .help-body h3 { color: #f59e0b; margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1.2rem; }
-        .help-body p { color: #d1d5db; margin-bottom: 1rem; }
-        .help-body ul, .help-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: #d1d5db; }
-        .help-body li { margin-bottom: 0.5rem; }
-        
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #f59e0b;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         .modal-faq-item {
             background: rgba(255, 255, 255, 0.05);
             padding: 15px;
@@ -82,16 +232,13 @@
             margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .modal-faq-question {
             color: #fff;
             font-weight: 600;
             display: block;
             margin-bottom: 5px;
         }
-
-        .help-modal-content::-webkit-scrollbar { width: 8px; }
-        .help-modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
-        .help-modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 
         /* Sidebar Button Style */
         .sidebar-btn-help {
@@ -101,7 +248,7 @@
             align-items: center;
             justify-content: flex-start;
             gap: 12px;
-            background: rgba(245, 158, 11, 0.1); /* Amber tint */
+            background: rgba(245, 158, 11, 0.1);
             border: 1px solid rgba(245, 158, 11, 0.3);
             color: #f59e0b;
             padding: 12px 16px;
@@ -111,17 +258,22 @@
             transition: all 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        .sidebar-btn-help:hover { background: rgba(245, 158, 11, 0.2); transform: translateY(-1px); }
+
+        .sidebar-btn-help:hover {
+            background: rgba(245, 158, 11, 0.2);
+            transform: translateY(-1px);
+        }
 
         /* Legal Links */
         .legal-links {
-            margin-top: auto; /* Pushes to bottom */
+            margin-top: auto;
             padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
+
         .legal-links a {
             color: #64748b;
             text-decoration: none;
@@ -133,47 +285,102 @@
             font-family: 'Inter', sans-serif;
             font-weight: 500;
         }
-        .legal-links a:hover { color: #f8fafc; }
+
+        .legal-links a:hover {
+            color: #f8fafc;
+        }
+
+        /* --- FIX FOR SELECT DROPDOWN MENU --- */
+        .select-wrapper select {
+            color-scheme: dark;
+            background-color: #111111;
+            color: #ffffff;
+        }
+
+        .select-wrapper select option {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Hover styles for options (supported in some modern browsers) */
+        .select-wrapper select option:hover,
+        .select-wrapper select option:focus,
+        .select-wrapper select option:active,
+        .select-wrapper select option:checked {
+            background-color: #f59e0b !important;
+            color: #000000 !important;
+        }
     </style>
 </head>
+
 <body>
 
-    <div id="helpModal" class="hidden">
+    <div class="sr-only">
+        <h2>Free Universal Unit Converter & Live Currency Rates</h2>
+        <p>QuickConvert by Lexora is a fast, reliable, and ad-free universal conversion tool. Designed for students, professionals, and travelers, it supports over 100 measurement units across various disciplines. Instantly translate Engineering metrics (Power, Torque, Pressure), Physics units (Force, Acceleration, Energy), and Everyday measurements (Length, Weight, Cooking volume, Temperature). Additionally, our tool features a live Currency Converter that fetches real-time exchange rates for global currencies (USD, EUR, GBP, JPY, etc.). All unit conversions work 100% offline.</p>
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
         <div class="help-modal-content">
             <div class="help-header">
-                <h2 style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
-                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">QuickConvert Guide</h2>
+                <button id="closeHelp" class="icon-btn" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Categories</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('faq')">FAQ & Privacy</button>
+            </div>
+
             <div class="help-body">
-                <p>QuickConvert is your all-in-one translation engine for numbers. Whether you are an engineer, student, or traveler, switch seamlessly between Currency, Physics, and Everyday units instantly.</p>
-
-                <h3>Core Categories</h3>
-                <ul>
-                    <li><strong>Currency:</strong> Real-time exchange rates (USD, EUR, GBP, JPY, etc.) updated hourly via open APIs.</li>
-                    <li><strong>Physics & Engineering:</strong> Specialized units for Force, Torque, Pressure, Energy, and Power.</li>
-                    <li><strong>Everyday:</strong> Cooking measurements (cups to ml), Temperature (C to F), and Time zones.</li>
-                    <li><strong>Digital:</strong> Data storage conversions (MB to GB, TB) for IT professionals.</li>
-                </ul>
-
-                <h3>How to Convert</h3>
-                <ol>
-                    <li><strong>Select Category:</strong> Click a tab in the sidebar (e.g., "Currency" or "Length").</li>
-                    <li><strong>Input Value:</strong> Type the number in the "From" box.</li>
-                    <li><strong>Choose Units:</strong> Select your starting unit and target unit from the dropdowns.</li>
-                    <li><strong>Result:</strong> The conversion happens instantly as you type.</li>
-                </ol>
-
-                <h3>Frequently Asked Questions</h3>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Are currency rates live?</span>
-                    Yes. We fetch the latest exchange rates every time you load the app.
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Select Category:</strong> Click a tab in the left sidebar (e.g., "Currency", "Length", or "Pressure").</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Input Value:</strong> Type the number you want to convert in the top "From" box.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Choose Units:</strong> Select your starting unit and target unit from the dropdown menus. The conversion happens instantly as you type!</div>
+                    </div>
                 </div>
-                <div class="modal-faq-item">
-                    <span class="modal-faq-question">Does it work offline?</span>
-                    All unit conversions (Length, Weight, etc.) work 100% offline. Only Currency conversion requires an internet connection to fetch rates.
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-coins" style="color:#f59e0b;"></i> Currency</h3>
+                    <p>Real-time exchange rates (USD, EUR, GBP, JPY, etc.) updated hourly via open APIs.</p>
+
+                    <h3><i class="fas fa-rocket" style="color:#f59e0b;"></i> Physics & Engineering</h3>
+                    <p>Specialized units for professionals and students, covering Force, Torque, Pressure, Energy, Power, Speed, and Acceleration.</p>
+
+                    <h3><i class="fas fa-utensils" style="color:#f59e0b;"></i> Everyday & Digital</h3>
+                    <p>Convert cooking measurements (cups to ml), Temperature (Celsius to Fahrenheit), and digital storage sizes (MB to GB, TB).</p>
+                </div>
+
+                <div id="modal-tab-faq" class="tab-content-modal">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="modal-faq-item">
+                        <span class="modal-faq-question">Are currency rates live?</span>
+                        Yes. We fetch the latest exchange rates every time you load the app using secure, public financial APIs.
+                    </div>
+                    <div class="modal-faq-item">
+                        <span class="modal-faq-question">Does it work offline?</span>
+                        Yes! All mathematical unit conversions (Length, Weight, Pressure, etc.) work 100% offline. Only Currency conversion requires an internet connection.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#f59e0b; text-decoration:none;"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#f59e0b; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#f59e0b; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -185,13 +392,13 @@
     <header class="mobile-header">
         <div class="brand-row">
             <div class="brand-icon-sm"><i class="fas fa-exchange-alt"></i></div>
-            <span class="brand-name">QuickConvert</span>
+            <h1 class="brand-name" style="font-size:inherit; font-weight:inherit; margin:0;">QuickConvert</h1>
         </div>
         <button id="mobileMenuBtn" class="icon-btn"><i class="fas fa-bars"></i></button>
     </header>
 
     <div class="app-shell">
-        
+
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header hidden-mobile">
                 <a href="../index.php" class="back-link">
@@ -202,13 +409,13 @@
             <div class="brand-section hidden-mobile">
                 <div class="brand-icon"><i class="fas fa-exchange-alt"></i></div>
                 <div class="brand-text">
-                    <h1>QuickConvert</h1>
+                    <h1 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 2px;">QuickConvert</h1>
                     <span>v1.5.0</span>
                 </div>
             </div>
 
             <nav class="nav-menu">
-                
+
                 <button id="helpBtn" class="sidebar-btn-help">
                     <i class="fas fa-question-circle"></i> User Guide
                 </button>
@@ -311,7 +518,7 @@
         <main class="main-content">
             <div class="converter-card">
                 <div class="card-glow"></div>
-                
+
                 <header class="card-header">
                     <div class="header-icon" id="headerIcon"><i class="fas fa-coins"></i></div>
                     <div class="header-text">
@@ -366,7 +573,7 @@
             const helpModal = document.getElementById('helpModal');
             const closeHelp = document.getElementById('closeHelp');
 
-            if(helpBtn && helpModal) {
+            if (helpBtn && helpModal) {
                 // Open Modal
                 helpBtn.addEventListener('click', () => {
                     helpModal.classList.remove('hidden');
@@ -385,6 +592,19 @@
                 });
             }
         });
+
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'faq') btns[2].classList.add('active');
+        }
     </script>
 </body>
+
 </html>

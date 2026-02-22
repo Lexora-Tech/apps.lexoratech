@@ -4,9 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gradient Studio | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
 
+    <title>Gradient Studio | Free CSS & Tailwind Gradient Generator</title>
+    <meta name="title" content="Gradient Studio | Free CSS & Tailwind Gradient Generator">
+    <meta name="description" content="Create beautiful custom CSS and Tailwind gradients. Add noise textures, control color stops, and export code instantly. Free online gradient maker.">
+    <meta name="keywords" content="css gradient generator, tailwind gradient maker, noise gradient background, linear gradient css, radial gradient generator, conic gradient, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/gradient/gradient.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/gradient/gradient.php">
+    <meta property="og:title" content="Gradient Studio - CSS & Tailwind Gradient Maker">
+    <meta property="og:description" content="Design complex gradients with noise and export them as CSS or Tailwind classes.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-gradient.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/gradient/gradient.php">
+    <meta name="twitter:title" content="Gradient Studio - CSS & Tailwind Gradient Maker">
+    <meta name="twitter:description" content="Design complex gradients with noise and export them as CSS or Tailwind classes.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-gradient.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Gradient Studio",
+            "url": "https://apps.lexoratech.com/gradient/gradient.php",
+            "description": "An advanced online gradient generator for web developers and designers. Create linear, radial, and conic gradients with noise textures and export them to CSS or Tailwind.",
+            "applicationCategory": "DesignTool",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Linear, Radial, and Conic Gradients",
+                "Custom Noise and Grain Textures",
+                "Unlimited Color Stops",
+                "One-Click CSS and Tailwind Export",
+                "Magic Randomizer"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -42,6 +89,19 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         .ambient-light {
@@ -145,7 +205,7 @@
             overflow-y: auto;
         }
 
-        .panel-header h2 {
+        .panel-header h1 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 5px;
@@ -409,7 +469,6 @@
             margin-top: 15px;
             width: 100%;
             background: linear-gradient(135deg, var(--accent), #ec4899);
-            /* Purple to Pink */
             color: #fff;
             border: none;
             padding: 14px;
@@ -435,10 +494,6 @@
 
         .random-btn:active {
             transform: scale(0.98);
-        }
-
-        .random-btn i {
-            font-size: 1rem;
         }
 
         /* RIGHT: PREVIEW */
@@ -565,6 +620,147 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #a855f7;
+            border-bottom-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #a855f7;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         @media (max-width: 900px) {
             .workspace {
                 flex-direction: column;
@@ -589,12 +785,23 @@
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Online CSS & Tailwind Gradient Generator</h2>
+        <p>Gradient Studio by Lexora is a free, powerful online tool for web designers and developers. Create stunning linear, radial, and conic backgrounds instantly. Blend unlimited color stops, adjust focal points, and add aesthetic noise or grain textures to your gradients. With a single click, export your creation as standard CSS code or modern Tailwind CSS arbitrary values. Utilize our smart generator buttons to quickly load neon, pastel, or dark themes, or hit the Magic Randomizer for instant inspiration.</p>
+    </div>
+
     <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
-        </a>
+        <div style="display:flex; gap:10px;">
+            <a href="../index.php" class="nav-brand">
+                <i class="fas fa-chevron-left"></i> <span>Back</span>
+            </a>
+            <button id="helpBtnHeader" class="nav-brand" style="background:transparent; border:1px solid rgba(255,255,255,0.1); cursor:pointer;">
+                <i class="fas fa-question-circle"></i> <span class="desktop-only">Help</span>
+            </button>
+        </div>
+
         <button class="action-btn" id="downloadBtn">
-            <i class="fas fa-image"></i> Save Image
+            <i class="fas fa-image"></i> <span class="desktop-only">Save Image</span>
         </button>
     </div>
 
@@ -605,7 +812,7 @@
 
         <aside class="controls-panel">
             <div class="panel-header">
-                <h2>Gradient Studio</h2>
+                <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; color: #fff;">Gradient Studio</h1>
                 <p>Create pro gradients with noise & patterns.</p>
             </div>
 
@@ -693,6 +900,62 @@
             </div>
         </main>
 
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">Studio Guide</h2>
+                <button id="closeHelp" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('features')">Pro Features</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="help-body">
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Set the Base:</strong> Choose between Linear, Radial, or Conic gradient styles using the top toggles.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Adjust Colors:</strong> Use the Color Stops section to add, remove, and shift colors. Click the color circle to open the picker.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Copy the Code:</strong> The CSS/Tailwind code updates automatically at the bottom. Click "Copy Code" to paste it directly into your project.</div>
+                    </div>
+                </div>
+
+                <div id="modal-tab-features" class="tab-content-modal">
+                    <h3><i class="fas fa-braille" style="color:#a855f7;"></i> Noise & Grain Textures</h3>
+                    <p>Slide the "Grain/Noise" slider to apply an aesthetic, retro TV static effect over your gradient. This utilizes an SVG turbulence filter overlaid on the gradient.</p>
+
+                    <h3><i class="fab fa-css3-alt" style="color:#a855f7;"></i> Tailwind Export</h3>
+                    <p>Switch the code format tab to "Tailwind" to generate an arbitrary value class (e.g., <code>bg-[linear-gradient(...)]</code>) that you can drop directly into your markup.</p>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>Gradient Studio is a pure client-side application.</p>
+                    <div style="background:rgba(168, 85, 247, 0.1); border:1px solid rgba(168, 85, 247, 0.3); padding:15px; border-radius:8px; color:#d8b4fe; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> All rendering and code generation happens locally in your browser. No data is ever sent to a server.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#a855f7; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#a855f7; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#a855f7; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="toast" id="toast">Copied to Clipboard!</div>
@@ -996,10 +1259,36 @@
                 link.click();
             });
 
+            // --- HELP MODAL LOGIC ---
+            const helpBtn = document.getElementById('helpBtnHeader');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
+
             // Init
             renderColors();
             render();
         });
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'features') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

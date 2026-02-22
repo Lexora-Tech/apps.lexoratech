@@ -5,32 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>SonicForge | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
+    <title>SonicForge | Free Online Audio Mixer & Multitrack Editor</title>
+    <meta name="title" content="SonicForge | Free Online Audio Mixer & Multitrack Editor">
     <meta name="description" content="Professional browser-based audio mixer. Record vocals, mix tracks, apply reverb/delay effects, and export MP3s. No download required. Perfect for podcasters and singers.">
-    <meta name="keywords" content="online audio mixer, free music maker, voice recorder with effects, virtual dj mixer, podcast editor online, sonicforge, lexoratech">
+    <meta name="keywords" content="online audio mixer, free music maker, voice recorder with effects, virtual dj mixer, podcast editor online, multitrack audio editor, sonicforge, lexora workspace">
     <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://apps.lexoratech.com/audiomixer/audiomixer.php">
 
-    <meta property="og:title" content="SonicForge - Pro Audio Mixer Online">
-    <meta property="og:description" content="Record, Mix, and Master directly in your browser. Free studio tools for creators.">
-    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-mixer.jpg">
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://apps.lexoratech.com/audiomixer/audiomixer.php">
+    <meta property="og:title" content="SonicForge - Pro Audio Mixer Online">
+    <meta property="og:description" content="Record, Mix, and Master directly in your browser. Free studio tools for creators, podcasters, and musicians.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-mixer.jpg">
+
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/audiomixer/audiomixer.php">
+    <meta name="twitter:title" content="SonicForge - Pro Audio Mixer Online">
+    <meta name="twitter:description" content="Record, Mix, and Master directly in your browser. Free studio tools for creators, podcasters, and musicians.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-mixer.jpg">
 
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "SonicForge Audio Mixer",
+            "url": "https://apps.lexoratech.com/audiomixer/audiomixer.php",
+            "description": "A professional, free online multitrack audio mixer and podcast editor. Record vocals, mix audio files, and apply studio effects directly in the browser.",
             "applicationCategory": "MultimediaApplication",
-            "operatingSystem": "Web",
+            "operatingSystem": "Windows, macOS, Linux, ChromeOS",
             "offers": {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "USD"
             },
-            "featureList": "Multitrack mixing, Audio Effects, Voice Recording"
+            "featureList": [
+                "Multitrack audio mixing",
+                "Real-time voice recording",
+                "Reverb and Delay FX Rack",
+                "Master EQ",
+                "MP3 Export"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
         }
     </script>
 
@@ -43,13 +62,25 @@
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
 
     <style>
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
         /* --- FIXED RESPONSIVE HELP MODAL --- */
         .help-modal-content {
             max-width: 700px;
             width: 95%;
             height: 80vh;
             height: 80dvh;
-            /* Mobile browser fix */
             display: flex;
             flex-direction: column;
             background: #111;
@@ -123,15 +154,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .help-step {
@@ -216,6 +240,11 @@
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Online Multitrack Audio Editor & Podcast Mixer</h2>
+        <p>SonicForge by Lexora is a professional browser-based audio mixer. Import audio files, record vocals, apply studio effects like reverb and delay, and mix multiple tracks seamlessly. Export your final mix as an MP3 instantly without downloading any software. Perfect for podcasters, musicians, and audio creators.</p>
+    </div>
+
     <div class="studio-shell">
 
         <header class="transport-header">
@@ -224,7 +253,7 @@
                 <a href="../index.php" class="back-btn"><i class="fas fa-chevron-left"></i></a>
                 <div class="logo">
                     <span class="logo-icon"><i class="fas fa-wave-square"></i></span>
-                    <span class="logo-text">SonicForge</span>
+                    <h1 class="logo-text" style="font-size: inherit; font-weight: inherit; margin: 0; display: inline;">SonicForge</h1>
                     <span class="pro-tag">MAX</span>
                 </div>
             </div>
@@ -498,7 +527,7 @@
             if (openHelpSide) openHelpSide.onclick = () => {
                 helpModal.classList.remove('hidden');
                 leftSidebar.classList.remove('open'); // Auto-close on mobile
-            };
+            }
             if (closeHelp) closeHelp.onclick = () => helpModal.classList.add('hidden');
 
             // --- DRIVER.JS CONFIGURATION (SMART TOUR) ---

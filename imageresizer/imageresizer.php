@@ -4,9 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Image Resizer Pro | Lexora Workspace</title>
-    <link rel="icon" href="../assets/logo/logo.png" />
 
+    <title>Image Resizer Pro | Free Online Photo Resizer & Cropper</title>
+    <meta name="title" content="Image Resizer Pro | Free Online Photo Resizer & Cropper">
+    <meta name="description" content="Resize, crop, and convert images online for free. Support for exact pixel dimensions, smart aspect ratio locking, and JPG/PNG/WEBP conversion. No uploads required.">
+    <meta name="keywords" content="image resizer online, resize photo free, crop image online, change image dimensions, convert jpg to webp, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://apps.lexoratech.com/imageresizer/imageresizer.php">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/imageresizer/imageresizer.php">
+    <meta property="og:title" content="Image Resizer Pro - Fast & Private Image Scaling">
+    <meta property="og:description" content="Resize and convert your images directly in your browser. 100% Free and Private.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-image-resizer.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/imageresizer/imageresizer.php">
+    <meta name="twitter:title" content="Image Resizer Pro - Fast & Private Image Scaling">
+    <meta name="twitter:description" content="Resize and convert your images directly in your browser. 100% Free and Private.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-image-resizer.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Image Resizer Pro",
+            "url": "https://apps.lexoratech.com/imageresizer/imageresizer.php",
+            "description": "A client-side web application for resizing, cropping, and converting image files with smart aspect ratio preservation.",
+            "applicationCategory": "PhotoEditor",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Exact Pixel Resizing",
+                "Aspect Ratio Locking",
+                "Contain & Cover Cropping Modes",
+                "Custom Background Fill",
+                "JPG, PNG, and WebP Export",
+                "Quality Compression"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech"
+            }
+        }
+    </script>
+
+    <link rel="icon" href="../assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -38,6 +86,19 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+
+        /* --- SEO HIDDEN TEXT CLASS --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         .ambient-light {
@@ -72,6 +133,7 @@
             text-decoration: none;
             color: #fff;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .nav-brand:hover {
@@ -356,6 +418,147 @@
             background: rgba(59, 130, 246, 0.05);
         }
 
+        /* --- TABBED HELP MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 700px;
+            width: 95%;
+            height: 80vh;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            background: #0f1015;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .help-header {
+            padding: 20px;
+            background: #18181b;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .help-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn-modal:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn-modal.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .help-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            color: #cbd5e1;
+        }
+
+        .tab-content-modal {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content-modal.active {
+            display: block;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: #3b82f6;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .help-body h3 {
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .help-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .help-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
         @media (max-width: 900px) {
             .workspace {
                 flex-direction: column;
@@ -364,6 +567,7 @@
 
             .settings-panel {
                 width: 100%;
+                flex: none;
                 order: 2;
             }
 
@@ -377,10 +581,21 @@
 
 <body>
 
+    <div class="sr-only">
+        <h2>Free Online Image Resizer & Format Converter</h2>
+        <p>Image Resizer Pro by Lexora is a fast, free, and private tool to resize photos online. Simply upload your image and specify exact pixel dimensions. Utilize our smart Fit Modes: "Stretch" to fill dimensions, "Fit" to add letterboxing (customizable background colors available), or "Cover" to automatically crop your image to the desired aspect ratio. Adjust compression quality and instantly convert images between JPG, PNG, and WebP formats. We offer social media presets for Instagram posts, TikTok stories, and YouTube thumbnails. 100% Secure: Image processing happens locally in your browser.</p>
+    </div>
+
     <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
-        </a>
+        <div style="display:flex; gap:10px;">
+            <a href="../index.php" class="nav-brand">
+                <i class="fas fa-chevron-left"></i> <span>Back</span>
+            </a>
+            <button id="helpBtnHeader" class="nav-brand" style="background:transparent; border:1px solid rgba(255,255,255,0.1);">
+                <i class="fas fa-question-circle"></i> <span class="desktop-only">Help</span>
+            </button>
+        </div>
+
         <button class="action-btn" id="downloadBtn">
             Download Image <i class="fas fa-arrow-down"></i>
         </button>
@@ -391,6 +606,7 @@
     <div class="workspace">
 
         <aside class="settings-panel">
+            <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; color: #fff;">Image Resizer Pro</h1>
 
             <div class="control-group">
                 <span class="label">Dimensions (px)</span>
@@ -476,6 +692,64 @@
             <div class="file-info-badge" id="fileInfo">Loading...</div>
         </main>
 
+    </div>
+
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 style="margin:0; font-size:1.4rem; color:white;">Resizer Guide</h2>
+                <button id="closeHelp" style="background:none; border:none; color:#aaa; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-tabs">
+                <button class="tab-btn-modal active" onclick="switchModalTab('guide')">How to Use</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('modes')">Fit Modes</button>
+                <button class="tab-btn-modal" onclick="switchModalTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="help-body">
+                <div id="modal-tab-guide" class="tab-content-modal active">
+                    <div class="help-step">
+                        <div class="step-num">1</div>
+                        <div><strong>Upload Image:</strong> Click the center panel to upload any photo (JPG, PNG, WebP).</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">2</div>
+                        <div><strong>Set Size:</strong> Enter specific Pixel dimensions, or use the "Social Presets" dropdown at the bottom to auto-fill common sizes like Instagram Posts.</div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-num">3</div>
+                        <div><strong>Export:</strong> Choose your desired output format and compression quality, then click "Download Image".</div>
+                    </div>
+                </div>
+
+                <div id="modal-tab-modes" class="tab-content-modal">
+                    <h3><i class="fas fa-compress-arrows-alt" style="color:#3b82f6;"></i> Understanding Fit Modes</h3>
+                    <p>When you change an image's dimensions to an aspect ratio that is different from the original, you have three options:</p>
+                    <ul>
+                        <li><strong>Stretch:</strong> Forces the image to fit the new dimensions exactly. This will distort/squash the image.</li>
+                        <li><strong>Fit (Bars):</strong> Preserves the original aspect ratio and fits the entire image inside the new dimensions. It adds background "bars" to fill empty space. You can change the color of these bars using the color picker.</li>
+                        <li><strong>Cover (Crop):</strong> Preserves the original aspect ratio but scales the image up to fill the entire new box, cropping off the excess edges. Ideal for profile pictures.</li>
+                    </ul>
+                </div>
+
+                <div id="modal-tab-privacy" class="tab-content-modal">
+                    <h3>100% Offline & Private</h3>
+                    <p>Image Resizer Pro is a pure client-side application.</p>
+                    <div style="background:rgba(59, 130, 246, 0.1); border:1px solid rgba(59, 130, 246, 0.3); padding:15px; border-radius:8px; color:#93c5fd; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i> All image rendering, scaling, and format conversion happens locally in your browser using HTML5 Canvas APIs. Your photos are never sent to a server.
+                    </div>
+
+                    <ul style="list-style:none; padding:0; margin-top:20px;">
+                        <li style="margin-bottom:10px;"><a href="../privacy.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li style="margin-bottom:10px;"><a href="../terms.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="../contact.php" style="color:#3b82f6; text-decoration:none;"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -569,9 +843,7 @@
             }
 
             function updateStats(w, h) {
-                // Estimate size (Rough calculation: Width * Height * Depth * Quality)
-                // JPG ~ 0.1 to 0.2 bytes per pixel depending on quality
-                // This is a rough UI estimation, not exact file system size
+                // Estimate size (Rough calculation)
                 const pixels = w * h;
                 const bpp = state.format === 'image/png' ? 0.6 : 0.15 * state.quality;
                 const estSize = (pixels * bpp) / 1024; // KB
@@ -654,7 +926,33 @@
                 link.href = canvas.toDataURL(state.format, state.quality);
                 link.click();
             });
+
+            // --- HELP MODAL LOGIC ---
+            const helpBtn = document.getElementById('helpBtnHeader');
+            const helpModal = document.getElementById('helpModal');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (helpBtn && helpModal) {
+                helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
         });
+
+        // Global function for modal tabs
+        function switchModalTab(tabId) {
+            document.querySelectorAll('.tab-content-modal').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn-modal').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('modal-tab-' + tabId).classList.add('active');
+
+            const btns = document.querySelectorAll('.tab-btn-modal');
+            if (tabId === 'guide') btns[0].classList.add('active');
+            if (tabId === 'modes') btns[1].classList.add('active');
+            if (tabId === 'privacy') btns[2].classList.add('active');
+        }
     </script>
 </body>
 

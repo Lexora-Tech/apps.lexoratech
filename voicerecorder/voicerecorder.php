@@ -4,7 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Voice Notes Pro | Lexora Workspace</title>
+
+    <title>Voice Notes Pro | Free Speech-to-Text Dictation Online</title>
+    <meta name="title" content="Voice Notes Pro | Free Speech-to-Text Dictation Online">
+    <meta name="description" content="A distraction-free, privacy-focused online voice dictation tool. Convert your speech to text instantly in multiple languages. Download your notes as TXT files for free.">
+    <meta name="keywords" content="voice to text online, speech to text free, online dictation tool, voice notes app, audio to text browser, lexora workspace">
+    <meta name="author" content="LexoraTech">
+    <link rel="canonical" href="https://apps.lexoratech.com/voicenotes/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lexoratech.com/voicenotes/">
+    <meta property="og:title" content="Voice Notes Pro | Free Speech-to-Text Dictation">
+    <meta property="og:description" content="A distraction-free, privacy-focused online voice dictation tool. Convert your speech to text instantly in multiple languages.">
+    <meta property="og:image" content="https://apps.lexoratech.com/assets/logo/og-voicenotes.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apps.lexoratech.com/voicenotes/">
+    <meta name="twitter:title" content="Voice Notes Pro | Free Speech-to-Text Dictation">
+    <meta name="twitter:description" content="A distraction-free, privacy-focused online voice dictation tool. Convert your speech to text instantly.">
+    <meta name="twitter:image" content="https://apps.lexoratech.com/assets/logo/og-voicenotes.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Voice Notes Pro",
+            "url": "https://apps.lexoratech.com/voicenotes/",
+            "description": "An advanced online utility for real-time speech-to-text dictation, featuring live word counts and local TXT exports.",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "featureList": [
+                "Real-time Speech Recognition",
+                "Multi-language Support",
+                "Live Word and Character Counts",
+                "Text-to-Speech Playback",
+                "Client-Side Processing (No server data storage)"
+            ],
+            "creator": {
+                "@type": "Organization",
+                "name": "LexoraTech",
+                "url": "https://lexoratech.com"
+            }
+        }
+    </script>
+
     <link rel="icon" href="../assets/logo/logo.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -40,6 +88,7 @@
             color: var(--text-main);
             height: 100vh;
             overflow: hidden;
+            /* Prevent scrolling for app feel */
             display: flex;
             flex-direction: column;
         }
@@ -77,6 +126,7 @@
             border-bottom: 1px solid var(--glass-border);
             background: rgba(5, 5, 5, 0.8);
             backdrop-filter: blur(10px);
+            flex-shrink: 0;
         }
 
         .nav-brand {
@@ -92,9 +142,10 @@
             color: var(--accent);
         }
 
-        .nav-brand span {
+        .nav-brand h1 {
             font-weight: 600;
             font-size: 1rem;
+            margin: 0;
         }
 
         .header-actions {
@@ -114,6 +165,7 @@
             align-items: center;
             gap: 6px;
             transition: 0.2s;
+            font-family: inherit;
         }
 
         .btn-sm:hover {
@@ -136,7 +188,7 @@
         .workspace {
             flex: 1;
             display: flex;
-            height: 100%;
+            height: calc(100vh - 70px);
             overflow: hidden;
         }
 
@@ -149,6 +201,7 @@
             flex-direction: column;
             gap: 30px;
             background: rgba(10, 10, 10, 0.4);
+            overflow-y: auto;
         }
 
         .setting-group h3 {
@@ -207,6 +260,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            padding-bottom: 120px;
         }
 
         .editor-content {
@@ -329,7 +383,7 @@
 
         /* Toast Notification */
         .toast {
-            position: absolute;
+            position: fixed;
             top: 90px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
@@ -349,6 +403,120 @@
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- HELP MODAL STYLES --- */
+        #helpModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            pointer-events: auto;
+        }
+
+        #helpModal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .help-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+            padding: 0;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .help-header {
+            position: sticky;
+            top: 0;
+            background: rgba(20, 20, 20, 0.98);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .help-body {
+            padding: 30px;
+            line-height: 1.7;
+        }
+
+        .help-body h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .help-body h3 {
+            color: var(--accent);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .help-body p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .guide-step i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .guide-step h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .help-modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .help-modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .help-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
         }
 
         @media (max-width: 850px) {
@@ -384,6 +552,7 @@
 
             .text-wrapper {
                 padding: 20px;
+                padding-bottom: 100px;
             }
 
             .editor-content {
@@ -402,25 +571,65 @@
 
 <body>
 
-    <div class="top-bar">
-        <a href="../index.php" class="nav-brand">
-            <i class="fas fa-chevron-left"></i> <span>Back</span>
-        </a>
-        <div class="header-actions">
-            <button class="btn-sm" id="clearBtn"><i class="fas fa-eraser"></i> Clear</button>
-            <button class="btn-sm btn-primary" id="saveBtn"><i class="fas fa-file-download"></i> Save .txt</button>
-        </div>
-    </div>
-
     <div class="ambient-light"></div>
     <div class="grid-bg"></div>
 
-    <div class="workspace">
+    <div id="helpModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle">
+        <div class="help-modal-content">
+            <div class="help-header">
+                <h2 id="helpModalTitle" style="margin:0; font-size:1.4rem; color:white;">User Guide & FAQ</h2>
+                <button id="closeHelp" class="icon-btn" aria-label="Close User Guide" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
+            <div class="help-body">
+                <p>Voice Notes Pro by LexoraTech is a privacy-first, distraction-free environment for converting your speech into text. Built utilizing the Web Speech API, it allows you to draft essays, emails, and brainstorms simply by speaking naturally into your microphone. Because the processing is handled directly by your browser, your sensitive audio data is never uploaded to external servers.</p>
+
+                <h3>How to Use Voice Notes Pro</h3>
+                <div class="guide-grid">
+                    <div class="guide-step">
+                        <i class="fas fa-globe"></i>
+                        <h4>1. Select Language</h4>
+                        <p>Use the left sidebar to choose your preferred dictation language. We support English, Spanish, French, Japanese, and more.</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-microphone"></i>
+                        <h4>2. Start Speaking</h4>
+                        <p>Click the large microphone icon at the bottom of the screen. Allow microphone permissions if prompted. The visualizer ring will pulse as it detects your voice.</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-edit"></i>
+                        <h4>3. Edit and Format</h4>
+                        <p>You can type directly into the editor to make corrections. Use the bottom controls to insert line breaks, toggle capitalization (Uppercase, lowercase, Sentence case), or listen to a read-aloud playback.</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-file-download"></i>
+                        <h4>4. Save Your Work</h4>
+                        <p>Monitor your progress using the live Word and Character counts. When finished, click "Save .txt" in the top right to download your notes instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <a href="../index.php" class="nav-brand" aria-label="Back to Lexora Workspace">
+            <i class="fas fa-chevron-left"></i>
+            <h1>Voice Notes Pro</h1>
+        </a>
+        <div class="header-actions">
+            <button class="btn-sm" id="openGuideBtn" aria-label="Open User Guide"><i class="fas fa-book"></i> Guide</button>
+            <button class="btn-sm" id="clearBtn" aria-label="Clear Editor"><i class="fas fa-eraser"></i> Clear</button>
+            <button class="btn-sm btn-primary" id="saveBtn" aria-label="Download as Text File"><i class="fas fa-file-download"></i> Save .txt</button>
+        </div>
+    </div>
+
+    <div class="workspace">
         <aside class="sidebar">
             <div class="setting-group">
                 <h3>Language</h3>
-                <select class="lang-select" id="langSelect">
+                <select class="lang-select" id="langSelect" aria-label="Select Dictation Language">
                     <option value="en-US">English (US)</option>
                     <option value="en-GB">English (UK)</option>
                     <option value="es-ES">Spanish</option>
@@ -451,39 +660,51 @@
 
         <main class="editor-stage">
             <div class="text-wrapper" id="textWrapper">
-                <div id="finalOutput" class="editor-content" contenteditable="true" placeholder="Tap the microphone to start speaking..."></div>
+                <div id="finalOutput" class="editor-content" contenteditable="true" aria-label="Dictation text editor" placeholder="Tap the microphone to start speaking..."></div>
             </div>
 
             <div class="control-dock">
-                <button class="dock-action" id="copyBtn" title="Copy Text">
+                <button class="dock-action" id="copyBtn" aria-label="Copy Text to Clipboard" title="Copy Text">
                     <i class="far fa-copy"></i>
                 </button>
-                <button class="dock-action" id="caseBtn" title="Toggle Case">
+                <button class="dock-action" id="caseBtn" aria-label="Toggle Text Case" title="Toggle Case">
                     <i class="fas fa-font"></i>
                 </button>
 
                 <div class="mic-wrapper">
                     <canvas id="micVis"></canvas>
-                    <button class="btn-mic" id="micBtn">
+                    <button class="btn-mic" id="micBtn" aria-label="Start or Stop Recording">
                         <i class="fas fa-microphone"></i>
                     </button>
                 </div>
 
-                <button class="dock-action" id="speakBtn" title="Read Aloud">
+                <button class="dock-action" id="speakBtn" aria-label="Read Text Aloud" title="Read Aloud">
                     <i class="fas fa-volume-up"></i>
                 </button>
-                <button class="dock-action" id="enterBtn" title="New Line">
+                <button class="dock-action" id="enterBtn" aria-label="Insert New Line" title="New Line">
                     <i class="fas fa-level-down-alt"></i>
                 </button>
             </div>
         </main>
-
     </div>
 
-    <div class="toast" id="toast">Copied to Clipboard!</div>
+    <div class="toast" id="toast" role="alert" aria-live="assertive">Copied to Clipboard!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- UI MODAL LOGIC ---
+            const helpModal = document.getElementById('helpModal');
+            const openGuideBtn = document.getElementById('openGuideBtn');
+            const closeHelp = document.getElementById('closeHelp');
+
+            if (openGuideBtn && helpModal) {
+                openGuideBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+                closeHelp.addEventListener('click', () => helpModal.classList.add('hidden'));
+                helpModal.addEventListener('click', (e) => {
+                    if (e.target === helpModal) helpModal.classList.add('hidden');
+                });
+            }
 
             // --- DOM ELEMENTS ---
             const micBtn = document.getElementById('micBtn');
@@ -535,16 +756,14 @@
                 const dataArray = new Uint8Array(bufferLength);
                 analyser.getByteFrequencyData(dataArray);
 
-                // Calculate average volume
                 let sum = 0;
                 for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
                 let avg = sum / bufferLength;
 
-                // Draw Ring
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
-                const radius = 32 + (avg / 5); // Pulsing radius
+                const radius = 32 + (avg / 5);
 
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
@@ -552,7 +771,6 @@
                 ctx.lineWidth = 4;
                 ctx.stroke();
 
-                // Inner glow
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius - 2, 0, 2 * Math.PI);
                 ctx.fillStyle = 'rgba(16, 185, 129, 0.1)';
@@ -569,7 +787,7 @@
                 recognition.onstart = () => {
                     micBtn.classList.add('active');
                     micBtn.innerHTML = '<i class="fas fa-stop"></i>';
-                    initAudio(); // Start visualizer
+                    initAudio();
                     micBtn.parentElement.classList.add('listening');
                 };
 
@@ -593,9 +811,7 @@
                         }
                     }
 
-                    // Append final text
                     if (finalTranscript) {
-                        // Remove interim span if exists
                         const existingInterim = document.getElementById('interimSpan');
                         if (existingInterim) existingInterim.remove();
 
@@ -603,7 +819,6 @@
                         updateStats();
                     }
 
-                    // Show interim
                     if (interimTranscript) {
                         const existingInterim = document.getElementById('interimSpan');
                         if (existingInterim) existingInterim.remove();
@@ -615,11 +830,10 @@
                         editor.appendChild(span);
                     }
 
-                    // Auto scroll
                     document.getElementById('textWrapper').scrollTop = document.getElementById('textWrapper').scrollHeight;
                 };
             } else {
-                alert("Speech API not supported in this browser. Please use Chrome.");
+                alert("Speech API not supported in this browser. Please use Chrome or Edge.");
             }
 
             // --- CONTROLS ---
@@ -632,7 +846,6 @@
                 }
             });
 
-            // Update Stats
             editor.addEventListener('input', updateStats);
 
             function updateStats() {
@@ -642,19 +855,16 @@
                 const words = text.trim().split(/\s+/).filter(w => w.length > 0);
                 wordCountEl.innerText = words.length;
 
-                // Avg reading speed 200 wpm
                 const minutes = Math.ceil(words.length / 200);
                 readTimeEl.innerText = minutes + 'm';
             }
 
-            // Copy
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(editor.innerText).then(() => {
                     showToast('Copied to Clipboard!');
                 });
             });
 
-            // Save .txt
             saveBtn.addEventListener('click', () => {
                 const blob = new Blob([editor.innerText], {
                     type: 'text/plain'
@@ -665,16 +875,14 @@
                 anchor.click();
             });
 
-            // Text to Speech
             speakBtn.addEventListener('click', () => {
                 if (!editor.innerText) return;
                 const utterance = new SpeechSynthesisUtterance(editor.innerText);
                 utterance.lang = langSelect.value;
-                speechSynthesis.speak(utterance);
+                window.speechSynthesis.speak(utterance);
                 showToast('Playing Audio...');
             });
 
-            // Clear
             clearBtn.addEventListener('click', () => {
                 if (confirm("Clear all text?")) {
                     editor.innerHTML = '';
@@ -682,11 +890,9 @@
                 }
             });
 
-            // Manual New Line
             enterBtn.addEventListener('click', () => {
                 editor.innerHTML += '<br><br>';
                 editor.focus();
-                // Move cursor to end (simplified)
                 const range = document.createRange();
                 range.selectNodeContents(editor);
                 range.collapse(false);
@@ -695,8 +901,7 @@
                 sel.addRange(range);
             });
 
-            // Toggle Case (Title / Sentence / Lower)
-            let caseMode = 0; // 0: Normal, 1: UPPER, 2: lower
+            let caseMode = 0;
             caseBtn.addEventListener('click', () => {
                 let text = editor.innerText;
                 if (caseMode === 0) {
@@ -708,7 +913,6 @@
                     caseMode = 2;
                     showToast('lowercase');
                 } else {
-                    // Sentence case (basic)
                     editor.innerText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
                     caseMode = 0;
                     showToast('Sentence case');
@@ -721,7 +925,6 @@
                 setTimeout(() => toast.classList.remove('show'), 2000);
             }
 
-            // Canvas resize logic
             window.addEventListener('resize', () => {
                 canvas.width = 90;
                 canvas.height = 90;
