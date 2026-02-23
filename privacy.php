@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Lexora Workspace</title>
-
+    <link rel="icon" href="assets/logo/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -427,7 +427,7 @@
     <nav class="glass-nav">
         <div class="nav-container">
             <a href="index.php" class="brand">
-                <!--  <div class="logo-box"><i class="fas fa-cube"></i></div> -->
+                <!--   <div class="logo-box"><i class="fas fa-cube"></i></div> -->
                 <span>Lexora Workspace</span>
             </a>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
@@ -535,15 +535,15 @@
             </div>
             <div class="footer-col">
                 <h4>Product</h4>
-                <a href="#">Features</a>
-                <a href="#">Changelog</a>
-                <a href="#">Roadmap</a>
+                <a href="features.php">Features</a>
+                <a href="changelog.php">Changelog</a>
+                <a href="roadmap.php">Roadmap</a>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
                 <a href="about.php">About</a>
+                <a href="careers.php">Careers</a>
                 <a href="contact.php">Contact</a>
-                <a href="#">Careers</a>
             </div>
             <div class="footer-col">
                 <h4>Legal</h4>
