@@ -321,12 +321,269 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
+            position: relative;
         }
 
         .icon-btn:hover {
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
             border-color: var(--text-muted);
+        }
+
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            border: 2px solid var(--bg-panel);
+            display: block;
+        }
+
+        /* --- NOTIFICATION DROPDOWN --- */
+        .dropdown-panel {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            width: 320px;
+            background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s var(--ease);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-header h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .clear-notifications {
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .clear-notifications:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .notification-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+
+        .notification-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notif-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .notif-icon.update {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .notif-icon.alert {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .notif-content h4 {
+            font-size: 0.9rem;
+            color: #fff;
+            margin: 0 0 4px 0;
+        }
+
+        .notif-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0 0 6px 0;
+            line-height: 1.4;
+        }
+
+        .notif-time {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        .empty-notifications {
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* --- HELP MODAL --- */
+        .help-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .help-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .help-modal {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .help-modal-overlay.active .help-modal {
+            transform: scale(1);
+        }
+
+        .help-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .help-modal-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: #fff;
+        }
+
+        .help-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .help-close-btn:hover {
+            color: #fff;
+        }
+
+        .help-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .help-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .help-item-content h4 {
+            color: #fff;
+            margin: 0 0 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .help-item-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .shortcut {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .shortcut kbd {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #fff;
+            font-family: inherit;
         }
 
         /* --- SEO HERO SECTION --- */
@@ -790,6 +1047,7 @@
                 font-size: 1.8rem;
             }
 
+            /* Premium Mobile Footer */
             .main-footer {
                 padding: 50px 24px 30px;
                 background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
@@ -913,18 +1171,54 @@
                     <input type="text" id="globalSearch" placeholder="Search 20+ tools... (Press /)">
                     <span class="shortcut-key">/</span>
                 </div>
-                <div class="header-actions">
-                    <button class="icon-btn"><i class="far fa-bell"></i></button>
-                    <button class="icon-btn"><i class="far fa-question-circle"></i></button>
+                <div class="header-actions" style="position: relative;">
+                    <button class="icon-btn" id="notifBtn" title="Notifications">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge" id="notifBadge"></span>
+                    </button>
+
+                    <button class="icon-btn" id="helpBtn" title="Help & Guide">
+                        <i class="far fa-question-circle"></i>
+                    </button>
+
+                    <div class="dropdown-panel" id="notifDropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <button class="clear-notifications" id="clearNotifs">Clear All</button>
+                        </div>
+                        <div class="notification-list" id="notifList">
+                            <div class="notification-item">
+                                <div class="notif-icon update"><i class="fas fa-rocket"></i></div>
+                                <div class="notif-content">
+                                    <h4>New Tool: Sketchpad!</h4>
+                                    <p>Try our infinite vector whiteboard for your next brainstorming session.</p>
+                                    <span class="notif-time">Just now</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notif-icon alert"><i class="fas fa-wrench"></i></div>
+                                <div class="notif-content">
+                                    <h4>System Maintenance</h4>
+                                    <p>Video processing tools will undergo brief maintenance at 2 AM EST.</p>
+                                    <span class="notif-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="empty-notifications" id="emptyNotifs">
+                            No new notifications
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-           
+            <input type="text" class="mobile-search" id="mobSearch" placeholder="Search tools..." style="display:none;">
 
             <div class="seo-hero">
                 <h1>Free Online Creator & Productivity Tools</h1>
                 <h2>Lexora Workspace provides 20+ powerful, browser-based utilities. Edit images, record your screen, format code, and boost your productivity without downloading any software.</h2>
             </div>
+
             <div id="design" class="category-header">
                 <span class="cat-title">Image Editing & Design</span>
             </div>
@@ -1344,6 +1638,36 @@
         </main>
     </div>
 
+    <div id="mainHelpModal" class="help-modal-overlay">
+        <div class="help-modal">
+            <div class="help-modal-header">
+                <h2>Quick Start Guide</h2>
+                <button class="help-close-btn" id="closeMainHelp"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="help-item">
+                <i class="fas fa-search"></i>
+                <div class="help-item-content">
+                    <h4>Global Search</h4>
+                    <p>Press the '/' key anywhere on the dashboard to instantly focus the search bar and find the tool you need.</p>
+                </div>
+            </div>
+
+            <div class="help-item">
+                <i class="fas fa-shield-alt"></i>
+                <div class="help-item-content">
+                    <h4>Privacy First</h4>
+                    <p>Almost all tools in Lexora run entirely in your web browser. This means your files, images, and code never leave your device.</p>
+                </div>
+            </div>
+
+            <div class="shortcut-grid">
+                <div class="shortcut">Search Tool <kbd>/</kbd></div>
+                <div class="shortcut">Close Modals <kbd>ESC</kbd></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -1361,7 +1685,6 @@
             menuBtn.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', toggleMenu);
 
-            // Show mobile search if screen is small
             if (window.innerWidth <= 768) {
                 mobSearch.style.display = 'block';
             }
@@ -1393,13 +1716,20 @@
                 });
             });
 
-            // 3. KEYBOARD SHORTCUT (/)
+            // 3. KEYBOARD SHORTCUT (/) & (ESC)
             document.addEventListener('keydown', (e) => {
+                // Search focus
                 if (e.key === '/') {
                     if (document.activeElement === document.getElementById('globalSearch') || document.activeElement === mobSearch) return;
                     e.preventDefault();
                     if (window.innerWidth > 768) document.getElementById('globalSearch').focus();
                     else mobSearch.focus();
+                }
+
+                // Close modals on escape
+                if (e.key === 'Escape') {
+                    document.getElementById('notifDropdown').classList.remove('active');
+                    document.getElementById('mainHelpModal').classList.remove('active');
                 }
             });
 
@@ -1409,7 +1739,7 @@
                 link.addEventListener('click', () => {
                     navLinks.forEach(n => n.classList.remove('active'));
                     link.classList.add('active');
-                    if (window.innerWidth <= 768) toggleMenu(); // Close menu on click
+                    if (window.innerWidth <= 768) toggleMenu();
                 });
             });
 
@@ -1419,6 +1749,59 @@
                 if (window.scrollY > 20) bar.classList.add('scrolled');
                 else bar.classList.remove('scrolled');
             });
+
+            // 6. NOTIFICATION DROPDOWN LOGIC
+            const notifBtn = document.getElementById('notifBtn');
+            const notifDropdown = document.getElementById('notifDropdown');
+            const notifBadge = document.getElementById('notifBadge');
+            const clearNotifs = document.getElementById('clearNotifs');
+            const notifList = document.getElementById('notifList');
+            const emptyNotifs = document.getElementById('emptyNotifs');
+
+            notifBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                notifDropdown.classList.toggle('active');
+                notifBadge.style.display = 'none'; // Hide red dot when opened
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!notifDropdown.contains(e.target) && e.target !== notifBtn) {
+                    notifDropdown.classList.remove('active');
+                }
+            });
+
+            // Prevent dropdown from closing when clicking inside it
+            notifDropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Clear Notifications
+            clearNotifs.addEventListener('click', () => {
+                notifList.style.display = 'none';
+                emptyNotifs.style.display = 'block';
+                notifBadge.style.display = 'none';
+            });
+
+            // 7. HELP MODAL LOGIC
+            const helpBtn = document.getElementById('helpBtn');
+            const mainHelpModal = document.getElementById('mainHelpModal');
+            const closeMainHelp = document.getElementById('closeMainHelp');
+
+            helpBtn.addEventListener('click', () => {
+                mainHelpModal.classList.add('active');
+            });
+
+            closeMainHelp.addEventListener('click', () => {
+                mainHelpModal.classList.remove('active');
+            });
+
+            mainHelpModal.addEventListener('click', (e) => {
+                if (e.target === mainHelpModal) {
+                    mainHelpModal.classList.remove('active');
+                }
+            });
+
         });
     </script>
 

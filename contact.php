@@ -26,8 +26,8 @@
     <nav class="glass-nav">
         <div class="nav-container">
             <a href="index.php" class="brand">
-                <div class="logo-box"><i class="fas fa-cube"></i></div>
-                <span>Lexora</span>
+            
+                <span>Lexora Workspace</span>
             </a>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="nav-links" id="navLinks">
