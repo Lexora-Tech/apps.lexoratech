@@ -222,7 +222,8 @@ body {
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 280px);
+    /* THIS WAS THE FIX: Changed from fixed 280px to auto-expanding */
+    grid-template-rows: minmax(280px, auto) minmax(280px, auto);
     gap: 20px;
 }
 

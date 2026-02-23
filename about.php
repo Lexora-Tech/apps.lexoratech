@@ -24,15 +24,13 @@
     <nav class="glass-nav">
         <div class="nav-container">
             <a href="index.php" class="brand">
-                
+                <!--   <div class="logo-box"><i class="fas fa-cube"></i></div> -->
                 <span>Lexora Workspace</span>
             </a>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="nav-links" id="navLinks">
-                <a href="#mission">Mission</a>
-                <a href="#values">Values</a>
-                <a href="#timeline">Journey</a>
-                <a href="#stack">Technology</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact</a>
                 <a href="index.php" class="btn-launch">Launch Workspace</a>
             </div>
         </div>
@@ -206,14 +204,14 @@
                 </div>
                 <div class="footer-col">
                     <h4>Product</h4>
-                    <a href="#">Features</a>
-                    <a href="#">Changelog</a>
-                    <a href="#">Roadmap</a>
+                    <a href="features.php">Features</a>
+                    <a href="changelog.php">Changelog</a>
+                    <a href="roadmap.php">Roadmap</a>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
                     <a href="about.php">About</a>
-                    <a href="#">Careers</a>
+                    <a href="careers.php">Careers</a>
                     <a href="contact.php">Contact</a>
                 </div>
                 <div class="footer-col">
