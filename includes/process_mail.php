@@ -209,10 +209,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 5. Send Email and Redirect
     if(mail($to, $subject, $htmlContent, $headers)) {
-        header("Location: contact.php?success=true");
+        header("Location: contact.php");
         exit;
     } else {
-        echo "Error sending message.";
+        echo "Error sending Message.";
     }
 }
 ?>
