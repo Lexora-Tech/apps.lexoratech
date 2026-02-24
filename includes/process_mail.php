@@ -209,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 5. Send Email and Redirect
     if(mail($to, $subject, $htmlContent, $headers)) {
-        header("Location: contact.php");
+    header("Location: https://apps.lexoratech.com/contact.php");
         exit;
     } else {
         echo "Error sending Message.";
